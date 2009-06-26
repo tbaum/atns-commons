@@ -5,4 +5,226 @@
     <artifactId>web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gwtVersion>1.6.4</gwtVersion>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>gwt-dev-windows</id>
+            <properties>
+                <platform>windows</platform>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+        </profile>
+        <profile>
+            <id>gwt-dev-mac</id>
+            <properties>
+                <platform>mac</platform>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+        </profile>
+        <profile>
+            <id>gwt-dev-linux</id>
+            <properties>
+                <platform>linux</platform>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <name>linux</name>
+                </os>
+            </activation>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>mareprint-web</finalName>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <encoding>UTF-8</encoding>
+                    <excludes>
+                        <exclude>javax/servlet/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!-- new maven gwt
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>1.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>         -->
+
+            <plugin>
+                <groupId>com.totsp.gwt</groupId>
+                <artifactId>maven-googlewebtoolkit2-plugin</artifactId>
+                <version>2.0-RC1</version>
+                <configuration>
+                    <logLevel>INFO</logLevel>
+                    <compileTargets>
+                        <value>mareprint.web.Mareprint</value>
+                    </compileTargets>
+
+                    <runTarget>Update.html</runTarget>
+                    <!-- <style>DETAILED</style>           -->
+                    <noServer>false</noServer>
+                    <extraJvmArgs>-Xmx512m</extraJvmArgs>
+                    <!--
+           <i18nConstantsNames>
+               <value>AppConstants</value>
+           </i18nConstantsNames>
+           <i18nMessagesNames>
+               <value>com.totsp.sample.client.AppMessages</value>
+           </i18nMessagesNames>         -->
+
+                    <gwtVersion>${gwtVersion}</gwtVersion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--
+                            <goal>mergewebxml</goal>    -->
+                            <goal>compile</goal>
+                            <!-- <goal>test</goal>     -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.google.gwt</groupId>
+                                    <artifactId>gwt-dev</artifactId>
+                                    <version>${gwtVersion}</version>
+                                    <classifier>${platform}-libs</classifier>
+                                    <type>zip</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${settings.localRepository}/com/google/gwt/gwt-dev/${gwtVersion}
+                                    </outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <!--
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-webmvc</artifactId>
+<version>2.5.6</version>
+</dependency>
+        -->
+
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>1.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+     <dependency>
+         <groupId>atns.ext</groupId>
+         <artifactId>gwteventservice</artifactId>
+         <version>1.0.1</version>
+     </dependency>   -->
+    </dependencies>
+
+
+    <repositories>
+        <!--
+   <repository>
+       <id>Codehaus Snapshots</id>
+       <url>http://snapshots.repository.codehaus.org/</url>
+       <snapshots>
+           <enabled>true</enabled>
+       </snapshots>
+       <releases>
+           <enabled>false</enabled>
+       </releases>
+   </repository>
+        -->
+
+        <repository>
+            <id>central</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://78.47.129.139:8180/repository/mirror</url>
+        </repository>
+        <repository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://78.47.129.139:8180/repository/internal</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <!--
+          <pluginRepository>
+              <id>Codehaus Snapshots</id>
+              <url>http://snapshots.repository.codehaus.org/</url>
+              <snapshots>
+                  <enabled>true</enabled>
+              </snapshots>
+              <releases>
+                  <enabled>true</enabled>
+               </releases>
+          </pluginRepository>
+        -->
+        <pluginRepository>
+            <id>central</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://78.47.129.139:8180/repository/mirror</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://78.47.129.139:8180/repository/internal</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
+
+ 
