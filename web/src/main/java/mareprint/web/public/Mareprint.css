@@ -5,3 +5,25 @@ body {
     font-size: small;
     margin: 8px;
 }
+
+.fileItem div {
+    padding: 3px;
+}
+
+.progressGauge {
+    border: 1px solid gray;
+    height: 13px;
+    padding: 1px !important;
+}
+
+.progressInner {
+    background: url("bar.png");
+    height: 13px;
+    padding: 0 !important;
+}
+
+.debugPanel {
+    color: #888888;
+    margin-top: 40px;
+    border: 1px solid #888888;
+}

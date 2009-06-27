@@ -1,12 +1,9 @@
 package mareprint.web.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.dom.client.DivElement;
+import static com.google.gwt.user.client.DOM.createDiv;
+import com.google.gwt.user.client.ui.HTML;
 import static com.google.gwt.user.client.ui.RootPanel.get;
 import static com.google.gwt.user.client.ui.RootPanel.getBodyElement;
 
@@ -21,34 +18,23 @@ public class Mareprint implements EntryPoint {
 // --------------------- Interface EntryPoint ---------------------
 
     public void onModuleLoad() {
-        final Button button = new Button("Click me!!");
-        final Label label = new Label();
+        final HTML debug = new HTML();
+        debug.addStyleName("debugPanel");
 
-        final SampleAppServiceAsync app = (SampleAppServiceAsync) GWT.create(SampleAppService.class);
+        DivElement placeHolder = createDiv().cast();
+        placeHolder.setId("swfupload");
+        getBodyElement().appendChild(placeHolder);
 
-        button.addClickHandler(new ClickHandler() {
-            public void onClick(final ClickEvent clickEvent) {
-                if (label.getText().equals("")) {
-                    app.getMessage("Hello, World!", new AsyncCallback<String>() {
-                        public void onSuccess(String s) {
-                            label.setText(s);
-                        }
 
-                        public void onFailure(Throwable throwable) {
-                            label.setText("Failed to receive answer from server!");
-                        }
-                    });
-                } else {
-                    label.setText("");
-                }
+        final UploadFilesComponent uploadFiles = new UploadFilesComponent(placeHolder) {
+            @Override protected void debug(final String s) {
+                debug.setHTML(s);
             }
-        });
+        };
 
-
-        get("slot1").add(button);
-        get("slot2").add(label);
+        get().add(uploadFiles);
+        get().add(debug);
 
         getBodyElement().removeChild(get("loading").getElement());
     }
 }
-

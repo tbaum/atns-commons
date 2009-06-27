@@ -19,4 +19,16 @@
         <url-pattern>/mareprint.web.Mareprint/SampleAppService</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>mareprint.web.server.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/mareprint.web.Mareprint/upload</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
