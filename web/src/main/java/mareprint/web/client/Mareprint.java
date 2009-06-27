@@ -1,82 +1,54 @@
 package mareprint.web.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import static com.google.gwt.user.client.ui.RootPanel.get;
+import static com.google.gwt.user.client.ui.RootPanel.getBodyElement;
 
 /**
  * @author tbaum
  * @since 26.06.2009
  */
 public class Mareprint implements EntryPoint {
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface EntryPoint ---------------------
 
     public void onModuleLoad() {
-        final Button button = new Button("Click me");
-
+        final Button button = new Button("Click me!!");
         final Label label = new Label();
 
-        button.addClickListener(new ClickListener() {
+        final SampleAppServiceAsync app = (SampleAppServiceAsync) GWT.create(SampleAppService.class);
 
-            public void onClick(Widget sender) {
-
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent clickEvent) {
                 if (label.getText().equals("")) {
+                    app.getMessage("Hello, World!", new AsyncCallback<String>() {
+                        public void onSuccess(String s) {
+                            label.setText(s);
+                        }
 
-                    SampleAppService.App.getInstance().getMessage("Hello, World!", new MyAsyncCallback(label));
-
+                        public void onFailure(Throwable throwable) {
+                            label.setText("Failed to receive answer from server!");
+                        }
+                    });
                 } else {
-
                     label.setText("");
-
                 }
-
             }
-
         });
 
-        // Assume that the host HTML has elements defined whose
 
-        // IDs are "slot1", "slot2".  In a real app, you probably would not want
+        get("slot1").add(button);
+        get("slot2").add(label);
 
-        // to hard-code IDs.  Instead, you could, for example, search for all
-
-        // elements with a particular CSS class and replace them with widgets.
-
-        //
-
-        RootPanel.get("slot1").add(button);
-
-        RootPanel.get("slot2").add(label);
-
-        // remove the loading message from the browser
-
-        com.google.gwt.user.client.Element loading = DOM.getElementById("loading");
-
-        DOM.removeChild(RootPanel.getBodyElement(), loading);
-    }
-
-    static class MyAsyncCallback implements AsyncCallback {
-
-        public void onSuccess(Object object) {
-
-            DOM.setInnerHTML(label.getElement(), (String) object);
-
-        }
-
-        public void onFailure(Throwable throwable) {
-
-            label.setText("Failed to receive answer from server!");
-
-        }
-
-        Label label;
-
-        public MyAsyncCallback(Label label) {
-
-            this.label = label;
-
-        }
-
+        getBodyElement().removeChild(get("loading").getElement());
     }
 }
 

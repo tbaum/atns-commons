@@ -65,7 +65,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- new maven gwt
+            <!-- new maven gwt 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -89,7 +89,7 @@
                         <value>mareprint.web.Mareprint</value>
                     </compileTargets>
 
-                    <runTarget>Update.html</runTarget>
+                    <runTarget>mareprint.web.Mareprint/Mareprint.html</runTarget>
                     <!-- <style>DETAILED</style>           -->
                     <noServer>false</noServer>
                     <extraJvmArgs>-Xmx512m</extraJvmArgs>
@@ -145,28 +145,37 @@
     </build>
 
     <dependencies>
-
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.4.3</version>
         </dependency>
-        <!--
-<dependency>
-<groupId>org.springframework</groupId>
-<artifactId>spring-webmvc</artifactId>
-<version>2.5.6</version>
-</dependency>
-        -->
-
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwtVersion}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
-            <version>1.6.4</version>
+            <version>${gwtVersion}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwtVersion}</version>
+            <classifier>${platform}-libs</classifier>
+            <type>zip</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwtVersion}</version>
+            <classifier>${platform}</classifier>
+            <scope>provided</scope>
+        </dependency>
         <!--
      <dependency>
          <groupId>atns.ext</groupId>
@@ -177,19 +186,6 @@
 
 
     <repositories>
-        <!--
-   <repository>
-       <id>Codehaus Snapshots</id>
-       <url>http://snapshots.repository.codehaus.org/</url>
-       <snapshots>
-           <enabled>true</enabled>
-       </snapshots>
-       <releases>
-           <enabled>false</enabled>
-       </releases>
-   </repository>
-        -->
-
         <repository>
             <id>central</id>
             <name>Archiva Managed Internal Repository</name>
@@ -202,18 +198,6 @@
         </repository>
     </repositories>
     <pluginRepositories>
-        <!--
-          <pluginRepository>
-              <id>Codehaus Snapshots</id>
-              <url>http://snapshots.repository.codehaus.org/</url>
-              <snapshots>
-                  <enabled>true</enabled>
-              </snapshots>
-              <releases>
-                  <enabled>true</enabled>
-               </releases>
-          </pluginRepository>
-        -->
         <pluginRepository>
             <id>central</id>
             <name>Archiva Managed Internal Repository</name>

@@ -6,13 +6,17 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+
+    <distributable/>
+
     <servlet>
         <servlet-name>sampleApp.SampleApp SampleAppService</servlet-name>
         <servlet-class>mareprint.web.server.SampleAppServiceImpl</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>sampleApp.SampleApp SampleAppService</servlet-name>
         <url-pattern>/mareprint.web.Mareprint/SampleAppService</url-pattern>
     </servlet-mapping>
+
 </web-app>

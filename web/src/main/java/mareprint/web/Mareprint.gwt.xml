@@ -5,6 +5,5 @@
     <inherits name='net.gfbridge.flashemul.FlashEmul'/>-->
 
     <entry-point class='mareprint.web.client.Mareprint'/>
-    <servlet path='/mareprint.web.Mareprint/SampleAppService' class='mareprint.web.server.SampleAppServiceImpl'/>
 
 </module>
