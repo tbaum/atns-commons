@@ -86,7 +86,7 @@
                 <configuration>
                     <logLevel>INFO</logLevel>
                     <compileTargets>
-                        <value>mareprint.web.Mareprint simpleupload/SimpleUpload</value>
+                        <value>mareprint.web.Mareprint</value>
                     </compileTargets>
 
                     <runTarget>mareprint.web.Mareprint/Mareprint.html</runTarget>
