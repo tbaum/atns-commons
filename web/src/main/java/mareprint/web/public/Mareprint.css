@@ -27,3 +27,31 @@ body {
     margin-top: 40px;
     border: 1px solid #888888;
 }
+
+.gwt-TextBox {
+    border: 1px solid gray;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    border: 1px solid red;
+    margin: 2px;
+    padding: 2px;
+    background: #ffdddd;
+    color: red;
+}
+
+.head1 {
+    margin: 0.5em 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.head2 {
+    margin: 0.5em 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}

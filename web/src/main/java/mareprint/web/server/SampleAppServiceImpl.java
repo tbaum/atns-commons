@@ -3,7 +3,7 @@ package mareprint.web.server;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import mareprint.web.client.SampleAppService;
 import mareprint.web.client.model.ServerUploadStatus;
-import static mareprint.web.server.UploadServlet.getServerUploadStatus;
+import static mareprint.web.server.upload.UploadServlet.getServerUploadStatus;
 
 
 public class SampleAppServiceImpl extends RemoteServiceServlet implements SampleAppService {
@@ -20,7 +20,9 @@ public class SampleAppServiceImpl extends RemoteServiceServlet implements Sample
         return "Client said: \"" + msg + "\" Server answered: \"Hi!\"";
     }
 
+
     public ServerUploadStatus getUploadStatus() {
+
         return getServerUploadStatus(this.getThreadLocalRequest());
     }
 }

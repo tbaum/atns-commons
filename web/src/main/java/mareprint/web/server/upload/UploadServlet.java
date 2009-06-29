@@ -1,8 +1,7 @@
-package mareprint.web.server;
+package mareprint.web.server.upload;
 
 import mareprint.web.client.model.ServerUploadStatus;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import static org.apache.commons.fileupload.servlet.ServletFileUpload.isMultipartContent;
@@ -11,10 +10,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static javax.servlet.http.HttpServletResponse.SC_OK;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.String.format;
-import static java.lang.System.currentTimeMillis;
+import java.nio.channels.FileChannel;
+import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -34,32 +40,25 @@ public class UploadServlet extends HttpServlet {
         }
         ServerUploadStatus status = getServerUploadStatus(request);
 
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload upload = new ServletFileUpload(factory);
+        final ProxyFileItemFactory fileItemFactory = new ProxyFileItemFactory(status, new DiskFileItemFactory());
+
+        ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
         upload.setSizeMax(500 * 1024 * 1024);
-
-        upload.setProgressListener(new ProgressListener() {
-            private long lastCall = -1;
-
-            public void update(long read, long length, int item) {
-                if (1000 + lastCall <= currentTimeMillis()) {
-                    lastCall = currentTimeMillis();
-                    System.err.println(format("item %d %dMB/%dMB %d%%", item, read / 1000, length / 1000, 100 * read / length));
-
-                }
-            }
-        });
 
         try {
             List<FileItem> items = upload.parseRequest(request);
-            System.err.println("got items");
-            for (FileItem item : items) {
-                if (item.isFormField()) {
-                    String name = item.getFieldName();
-                    String value = item.getString();
 
-                    System.err.println(format("'%s'='%s'\n", name, value));
-                } else {
+            PrintWriter out = response.getWriter();
+
+            boolean gotFile = false;
+
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
+
+                    if (gotFile)
+                        throw new ServletException("multiple files received");
+
+                    gotFile = true;
                     String fieldName = item.getFieldName();
                     String fileName = item.getName();
                     String contentType = item.getContentType();
@@ -70,9 +69,38 @@ public class UploadServlet extends HttpServlet {
 
                     File uploadedFile = File.createTempFile("upload", "bin");
                     item.write(uploadedFile);
+
+                    final String checksum = checksum(uploadedFile);
+                    String ud = System.getenv("UPLOAD_DIR");
+
+                    if (ud == null) ud = "/tmp/uploads";
+
+                    File uploadDir = new File(ud);
+
+
+                    final File dest = new File(uploadDir, checksum);
+                    dest.mkdirs();
+
+                    fileName = fileName.replaceAll("[^a-zA-Z0-9.-]+", "_");
+                    System.err.println("target dir:" + dest + " file:" + fileName);
+
+                    if (uploadedFile.renameTo(new File(dest, fileName))) {
+                        response.setStatus(SC_OK);
+                        response.setContentLength(checksum.length());
+                        out.print(checksum);
+                    } else {
+                        response.setStatus(SC_OK);
+                    }
                 }
             }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        } catch (ServletException e) {
+            e.printStackTrace();
+            throw e;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServletException(e);
         }
     }
@@ -86,5 +114,16 @@ public class UploadServlet extends HttpServlet {
             session.setAttribute(ServerUploadStatus.SESSION_ATTR_NAME, uploadStatus);
         }
         return uploadStatus;
+    }
+
+    private String checksum(final File uploadedFile) throws NoSuchAlgorithmException, IOException {
+        final FileChannel channel = new FileInputStream(uploadedFile).getChannel();
+        final MessageDigest md = MessageDigest.getInstance("SHA-1");
+        md.update(channel.map(READ_ONLY, 0, channel.size()));
+        StringBuilder buffer = new StringBuilder();
+        for (byte b : md.digest()) {
+            buffer.append(format("%02x", b));
+        }
+        return buffer.toString();
     }
 }

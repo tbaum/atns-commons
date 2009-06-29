@@ -9,6 +9,10 @@
 
     <distributable/>
 
+    <listener>
+        <listener-class>mareprint.web.server.SessionListner</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>sampleApp.SampleApp SampleAppService</servlet-name>
         <servlet-class>mareprint.web.server.SampleAppServiceImpl</servlet-class>
@@ -20,9 +24,22 @@
     </servlet-mapping>
 
 
+
+
+    <servlet>
+        <servlet-name>sessionId</servlet-name>
+        <servlet-class>mareprint.web.server.SessionIdServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>sessionId</servlet-name>
+        <url-pattern>/mareprint.web.Mareprint/locations</url-pattern>
+    </servlet-mapping>
+
+
     <servlet>
         <servlet-name>upload</servlet-name>
-        <servlet-class>mareprint.web.server.UploadServlet</servlet-class>
+        <servlet-class>mareprint.web.server.upload.UploadServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
