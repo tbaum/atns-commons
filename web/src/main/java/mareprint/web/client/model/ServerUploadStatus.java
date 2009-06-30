@@ -23,4 +23,15 @@ public class ServerUploadStatus implements Serializable {
         items.add(item);
         return item;
     }
+
+    public UploadItemStatus getByName(String name) {
+        for (UploadItemStatus item : items) {
+            if (item.matches(name)) return item;
+        }
+        return null;
+    }
+
+    public String toString() {
+        return ""+items.size()+" files \n"+items;
+    }
 }

@@ -1,6 +1,8 @@
 package mareprint.web.server.upload;
 
 import mareprint.web.client.model.ServerUploadStatus;
+import mareprint.web.client.model.UploadItemStatus;
+import mareprint.web.client.model.ImageInfo;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -40,6 +42,7 @@ public class UploadServlet extends HttpServlet {
         }
         ServerUploadStatus status = getServerUploadStatus(request);
 
+        System.err.println(status);
         final ProxyFileItemFactory fileItemFactory = new ProxyFileItemFactory(status, new DiskFileItemFactory());
 
         ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
@@ -86,8 +89,11 @@ public class UploadServlet extends HttpServlet {
 
                     if (uploadedFile.renameTo(new File(dest, fileName))) {
                         response.setStatus(SC_OK);
-                        response.setContentLength(checksum.length());
+                        final String infoString = getInfoString(status, item);
+                        response.setContentLength(checksum.length()+infoString.length());
                         out.print(checksum);
+                        out.print('\n');
+                        out.print(infoString);
                     } else {
                         response.setStatus(SC_OK);
                     }
@@ -103,6 +109,15 @@ public class UploadServlet extends HttpServlet {
             e.printStackTrace();
             throw new ServletException(e);
         }
+    }
+
+    private String getInfoString(ServerUploadStatus status, FileItem item) {
+        final String fileName = item.getName();
+        final UploadItemStatus uploadItemStatus = status.getByName(fileName);
+        if (uploadItemStatus==null) return "unknown status for "+fileName;
+        final ImageInfo imageInfo = uploadItemStatus.getImageInfo();
+        if (imageInfo==null) return "unknown image info for "+fileName;
+        return imageInfo.toString();
     }
 
     public static ServerUploadStatus getServerUploadStatus(final HttpServletRequest request) {

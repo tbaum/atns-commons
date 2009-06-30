@@ -18,6 +18,7 @@ public class FileUploadItemComponent extends HorizontalPanel {
     private final long size;
     private int progress;
     private String complete = null;
+    private String info = null;
     private boolean error = false;
     private HTML _progress;
     private SimplePanel _progressBar;
@@ -91,13 +92,17 @@ public class FileUploadItemComponent extends HorizontalPanel {
     public String getHashCode() {
         return complete;
     }
+    public String getInfo() {
+        return info;
+    }
 
     public boolean isCompleted() {
         return complete != null;
     }
 
-    public void setComplete(String sha) {
-        this.complete = sha;
+    public void setComplete(String serverData) {
+        this.complete = serverData.split("\n")[0];
+        this.info = serverData.split("\n")[1];
         this._status.setText("fertig");
         setProgress(100);
         material.setVisible(true);
@@ -117,5 +122,9 @@ public class FileUploadItemComponent extends HorizontalPanel {
 
     public void setStart() {
         this._status.setText("übertrage");
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

@@ -78,6 +78,9 @@ public class Mareprint implements EntryPoint {
         for (String s : fileFileUpload.getHashCodes()) {
             dbg += " got file --> " + s + "\n";
         }
+        for (String info : fileFileUpload.getFileInfos()) {
+            dbg += info+"\n";
+        }
 
         dbg += contactOk ? "contact ok\n" : "contact incomplete\n";
         dbg += addressOk ? "address ok\n" : "address incomplete\n";

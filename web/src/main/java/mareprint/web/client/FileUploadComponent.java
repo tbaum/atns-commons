@@ -83,7 +83,7 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
 
     public void onUploadError(final UploadErrorEvent uploadErrorEvent) {
         final File file = uploadErrorEvent.getFile();
-        final FileUploadItemComponent st = files.get(file.getId());
+        final FileUploadItemComponent st = getComponentById(file);
         if (st != null) {
             st.setError();
         }
@@ -98,9 +98,10 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
     public void onUploadProgress(final UploadProgressEvent uploadProgressEvent) {
         final File file = uploadProgressEvent.getFile();
         double progress = 100 * uploadProgressEvent.getBytesComplete() / uploadProgressEvent.getBytesTotal();
-        final FileUploadItemComponent st = files.get(file.getId());
+        final FileUploadItemComponent st = getComponentById(file);
         if (st != null) {
             st.setProgress((int) progress);
+            st.setInfo(file.getName()+" id "+file.getId()+" type "+file.getType());
         }
         //   validate();
     }
@@ -109,7 +110,7 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
 
     public void onUploadStart(final UploadStartEvent uploadStartEvent) {
         final File file = uploadStartEvent.getFile();
-        final FileUploadItemComponent st = files.get(file.getId());
+        final FileUploadItemComponent st = getComponentById(file);
         if (st != null) {
             st.setStart();
         }
@@ -121,7 +122,7 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
     public void onUploadSuccess(final UploadSuccessEvent uploadSuccessEvent) {
         final File file = uploadSuccessEvent.getFile();
 
-        final FileUploadItemComponent st = files.get(file.getId());
+        final FileUploadItemComponent st = getComponentById(file);
         if (st != null) {
             st.setComplete(uploadSuccessEvent.getServerData());
         }
@@ -129,6 +130,10 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
         startOrContinueUpload();
 
         validate();
+    }
+
+    private FileUploadItemComponent getComponentById(File file) {
+        return files.get(file.getId());
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -161,6 +166,19 @@ public class FileUploadComponent extends FormComponent implements FileQueuedHand
             if (fileUploadItemComponent.isCompleted()) {
                 result.add(fileUploadItemComponent.getHashCode());
             }
+        }
+        return result;
+    }
+
+    public List<String> getFileInfos() {
+        final List<String> result = new ArrayList<String>();
+
+        for (FileUploadItemComponent fileUploadItemComponent : files.values()) {
+            String info = fileUploadItemComponent.getInfo();
+            if (fileUploadItemComponent.isCompleted()) {
+                info += " completed: " + fileUploadItemComponent.getHashCode();
+            }
+            result.add(info);
         }
         return result;
     }
