@@ -29,6 +29,7 @@ class ProxyFileItemFactory implements FileItemFactory {
 
     public FileItem createItem(final String fieldName, final String contentType, final boolean isFormField, final String fileName) {
         final FileItem fileItem = delegate.createItem(fieldName, contentType, isFormField, fileName);
+        if (!fieldName.equals("Filedata")) return fileItem;
         final UploadItemStatus status = uploadStatus.createItem(fileName, contentType);
         return new ProxyFileItem(status, fileItem);
     }

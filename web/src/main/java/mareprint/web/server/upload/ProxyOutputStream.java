@@ -2,12 +2,10 @@ package mareprint.web.server.upload;
 
 import mareprint.web.client.model.UploadItemStatus;
 import mareprint.web.client.model.ImageInfo;
+import mareprint.web.server.image.BitmapImageParser;
 import mareprint.web.server.image.ImageParser;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
+import java.io.*;
 
 /**
  * @author tbaum
@@ -19,7 +17,7 @@ public class ProxyOutputStream extends OutputStream {
     private final UploadItemStatus status;
     private final OutputStream delegate;
     private ByteArrayOutputStream buffer=new ByteArrayOutputStream(BUFFER_SIZE);
-    private static final int BUFFER_SIZE = 1024*10;
+    private static final int BUFFER_SIZE = 1024*50;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -56,24 +54,12 @@ public class ProxyOutputStream extends OutputStream {
 
     private void checkData() {
         if (buffer.size()>=BUFFER_SIZE) {
-            final ByteArrayInputStream bis = new ByteArrayInputStream(buffer.toByteArray());
+            final InputStream bis = new ByteArrayInputStream(buffer.toByteArray());
             buffer=null;
-            final ImageParser parser = new ImageParser();
-            parser.setInput(bis);
-            if (parser.check()) {
-                final ImageInfo imageInfo = createImageInfo(parser);
-                status.setImageInfo(imageInfo);
-            }
+            ImageParser.Do.parse(bis, status);
         }
     }
 
-    private ImageInfo createImageInfo(ImageParser parser) {
-        final ImageInfo imageInfo = new ImageInfo(parser.getFormatName(), parser.getMimeType());
-        imageInfo.setSize(parser.getWidth(), parser.getHeight());
-        imageInfo.setPhysicalSize(parser.getPhysicalWidthInch(), parser.getPhysicalHeightInch());
-        imageInfo.setBitPerPixel(parser.getBitsPerPixel());
-        return imageInfo;
-    }
 
     public void write(final byte[] b) throws IOException {
         delegate.write(b);

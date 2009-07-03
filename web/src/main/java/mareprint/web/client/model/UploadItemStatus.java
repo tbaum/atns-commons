@@ -37,4 +37,20 @@ public class UploadItemStatus implements Serializable {
     public String toString() {
         return ""+fileName+" = "+contentType+" ("+imageInfo+")";
     }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public boolean hasExtension(String ext) {
+        return getFileName()!=null && getFileName().endsWith(ext);
+    }
+
+    public boolean isOctetStream() {
+        return getContentType().equals("application/octet-stream");
+    }
 }
