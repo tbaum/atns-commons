@@ -17,6 +17,7 @@ public class AdressComponent extends FormComponent {
     private final TextBox hnr = new TextBox();
     private final TextBox plz = new TextBox();
     private final TextBox ort = new TextBox();
+    private final TextBox land = new TextBox();
     private final String prefix;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -40,6 +41,9 @@ public class AdressComponent extends FormComponent {
         plz.setWidth("75px");
         ort.setWidth("220px");
         addRow("PLZ / Ort", plz, ort);
+        land.setWidth("300px");
+        land.setValue("DE");
+        addRow("Land",land);
 
         insertErrors();
 
@@ -48,6 +52,7 @@ public class AdressComponent extends FormComponent {
         restore(hnr, "_" + prefix + "3");
         restore(plz, "_" + prefix + "4");
         restore(ort, "_" + prefix + "5");
+        restore(land, "_" + prefix + "6");
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -58,20 +63,53 @@ public class AdressComponent extends FormComponent {
         trim(hnr);
         trim(plz);
         trim(ort);
+        trim(land);
 
         persist(name, "_" + prefix + "1");
         persist(strasse, "_" + prefix + "2");
         persist(hnr, "_" + prefix + "3");
         persist(plz, "_" + prefix + "4");
         persist(ort, "_" + prefix + "5");
+        persist(land, "_" + prefix + "6");
 
-        vaMin(name, "Name", 5);
-        vaMin(strasse, "Strasse", 3);
-        vaMin(hnr, "Hausnummer", 1);
+        validateMinLength(name, "Name", 5);
+        validateMinLength(strasse, "Strasse", 3);
+        validateMinLength(hnr, "Hausnummer", 1);
+        if (validateMinLength(land, "Land", 2)) {
+            validateIn(land, "Land", "DE","AT","CH");
+        }
 
-        if (vaLen(plz, "PLZ", 5))
-            vaReg(plz, "PLZ", "^[0-9]+$");
+        if (validateLength(plz, "PLZ", 5))
+            validateRegexp(plz, "PLZ", "^[0-9]+$");
 
-        vaMin(ort, "Ort", 5);
+        validateMinLength(ort, "Ort", 5);
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getFirma() {
+        return firma.getText();
+    }
+
+    public String getStrasse() {
+        return strasse.getText();
+    }
+
+    public String getHnr() {
+        return hnr.getText();
+    }
+
+    public String getPlz() {
+        return plz.getText();
+    }
+
+    public String getOrt() {
+        return ort.getText();
+    }
+
+    public String getLand() {
+        return land.getText();
     }
 }

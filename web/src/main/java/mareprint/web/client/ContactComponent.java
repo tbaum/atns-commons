@@ -48,8 +48,20 @@ public class ContactComponent extends FormComponent {
         persist(telefon, "_c2");
         persist(email, "_c3");
 
-        vaMin(name, "Name", 5);
-        if (vaMin(email, "Email", 1))
-            vaReg(email, "Email", "^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
+        validateMinLength(name, "Name", 5);
+        if (validateMinLength(email, "Email", 1))
+            validateRegexp(email, "Email", "^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getTelefon() {
+        return telefon.getText();
+    }
+
+    public String getEmail() {
+        return email.getText();
     }
 }

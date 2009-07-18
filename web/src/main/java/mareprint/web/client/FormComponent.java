@@ -12,6 +12,7 @@ import static mareprint.web.client.Util.horizontal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * @author tbaum
@@ -108,7 +109,7 @@ public abstract class FormComponent extends FlexTable implements ChangeHandler {
         if (err.size() == 1) {
             errors.setText("Bitte füllen Sie das Feld  " + err.get(0) + " aus!");
             errors.setVisible(true);
-        } else if (err.size() > 0) {
+        } else if (hasErrors()) {
             errors.setText("Bitte füllen Sie die Felder " + Util.join(err, ", ", " und ") + " aus!");
             errors.setVisible(true);
         } else {
@@ -128,8 +129,8 @@ public abstract class FormComponent extends FlexTable implements ChangeHandler {
         return t;
     }
 
-    protected boolean vaLen(final TextBox t, final String errorKey, final int min) {
-        return addError(t, errorKey, t.getText().length() != min);
+    protected boolean validateLength(final TextBox t, final String errorKey, final int lenght) {
+        return addError(t, errorKey, t.getText().length() != lenght);
     }
 
     protected boolean addError(final Widget t, final String errorKey, final boolean error) {
@@ -143,11 +144,15 @@ public abstract class FormComponent extends FlexTable implements ChangeHandler {
         }
     }
 
-    protected boolean vaMin(final TextBox t, final String errorKey, final int min) {
+    protected boolean validateMinLength(final TextBox t, final String errorKey, final int min) {
         return addError(t, errorKey, t.getText().length() < min);
     }
 
-    protected boolean vaReg(final TextBox t, final String o, final String regex) {
-        return addError(t, o, t.getText().replaceAll(regex, "").length() != 0);
+    protected boolean validateRegexp(final TextBox t, final String errorKey, final String regex) {
+        return addError(t, errorKey, t.getText().replaceAll(regex, "").length() != 0);
+    }
+    protected boolean validateIn(final TextBox t, final String errorKey, final String...values) {
+        final boolean ok = Arrays.asList(values).contains(t.getText());
+        return addError(t, errorKey, !ok);
     }
 }

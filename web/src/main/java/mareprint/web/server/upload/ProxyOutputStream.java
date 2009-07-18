@@ -1,8 +1,6 @@
 package mareprint.web.server.upload;
 
 import mareprint.web.client.model.UploadItemStatus;
-import mareprint.web.client.model.ImageInfo;
-import mareprint.web.server.image.BitmapImageParser;
 import mareprint.web.server.image.ImageParser;
 
 import java.io.*;
