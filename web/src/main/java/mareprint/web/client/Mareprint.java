@@ -21,6 +21,40 @@ public class Mareprint implements EntryPoint, ClickHandler {
 
     private static final String INVOICE_DELIVERY_TITLE = "Rechnungs- / Lieferanschrift";
     private static final String INVOICE_TITLE = "Rechnungsanschrift";
+
+    Button[] steps = new Button[]{
+            new Button("Upload", new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    visible(false, contact, invoiceAddress, deliveryAddressDiffers, deliveryAddress, payment);
+                    visible(true, fileFileUpload);
+                }
+            }),
+            new Button("Kontakt", new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, payment);
+                    visible(true, contact);
+                }
+            }),
+            new Button("Adressen", new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    visible(false, fileFileUpload, contact, payment);
+                    visible(true, invoiceAddress, deliveryAddressDiffers);
+                    if (deliveryAddressDiffers.getValue()) visible(true, deliveryAddress);
+                }
+            }),
+            new Button("Zahlung", new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, contact);
+                    visible(true, payment);
+                }
+            }),
+            new Button("Bestätigung", new ClickHandler() {
+                public void onClick(ClickEvent clickEvent) {
+                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, contact, payment);
+                    // todo summary
+                }
+            })
+    };
     private final Auftrag auftrag = new Auftrag();
     private final ContactComponent contact = new ContactComponent(this);
     private final AdressComponent invoiceAddress = new AdressComponent(this, "i", INVOICE_DELIVERY_TITLE);
@@ -31,50 +65,17 @@ public class Mareprint implements EntryPoint, ClickHandler {
     private final FileUploadComponent fileFileUpload = new FileUploadComponent(this);
     private final TextArea debug = new TextArea();
 
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface ClickHandler ---------------------
+
     public void onClick(ClickEvent clickEvent) {
         final Object source = clickEvent.getSource();
     }
 
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
 // --------------------- Interface EntryPoint ---------------------
 
-    Button[] steps = new Button[]{
-            new Button("Upload", new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-                    visible(false,contact, invoiceAddress, deliveryAddressDiffers, deliveryAddress, payment);
-                    visible(true, fileFileUpload);
-                }
-            }),
-            new Button("Kontakt", new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, payment);
-                    visible(true,contact);
-
-                }
-            }),
-            new Button("Adressen", new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-                    visible(false, fileFileUpload,contact, payment);
-                    visible(true,invoiceAddress, deliveryAddressDiffers);
-                    if (deliveryAddressDiffers.getValue()) visible(true,deliveryAddress);
-                }
-            }),
-            new Button("Zahlung", new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, contact);
-                    visible(true,payment);
-                }
-            }),
-            new Button("Bestätigung", new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-                    visible(false, fileFileUpload, invoiceAddress, deliveryAddressDiffers, deliveryAddress, contact,payment);
-                    // todo summary
-                }
-            })
-    };
 
     public void onModuleLoad() {
         final RootPanel rootPanel = get();
@@ -106,12 +107,6 @@ public class Mareprint implements EntryPoint, ClickHandler {
         getBodyElement().removeChild(get("loading").getElement());
 
         visible(false, contact, invoiceAddress, deliveryAddressDiffers, deliveryAddress, payment);
-    }
-
-    private void visible(boolean visible, Widget... widgets) {
-        for (Widget widget : widgets) {
-            widget.setVisible(visible);
-        }
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -155,5 +150,11 @@ public class Mareprint implements EntryPoint, ClickHandler {
     private void updateAdresse(AdressComponent addressComponent, Adresse addresse) {
         if (addressComponent.hasErrors()) return;
         addresse.update(addressComponent.getName(), addressComponent.getFirma(), addressComponent.getStrasse(), addressComponent.getHnr(), addressComponent.getOrt(), addressComponent.getPlz(), addressComponent.getLand());
+    }
+
+    private void visible(boolean visible, Widget... widgets) {
+        for (Widget widget : widgets) {
+            widget.setVisible(visible);
+        }
     }
 }

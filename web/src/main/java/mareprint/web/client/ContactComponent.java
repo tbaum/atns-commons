@@ -53,15 +53,15 @@ public class ContactComponent extends FormComponent {
             validateRegexp(email, "Email", "^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
     }
 
+    public String getEmail() {
+        return email.getText();
+    }
+
     public String getName() {
         return name.getText();
     }
 
     public String getTelefon() {
         return telefon.getText();
-    }
-
-    public String getEmail() {
-        return email.getText();
     }
 }

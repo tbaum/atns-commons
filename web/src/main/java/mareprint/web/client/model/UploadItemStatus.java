@@ -22,6 +22,16 @@ public class UploadItemStatus implements Serializable {
         System.err.println(this);
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
     public ImageInfo getImageInfo() {
         return imageInfo;
     }
@@ -30,27 +40,23 @@ public class UploadItemStatus implements Serializable {
         this.imageInfo = imageInfo;
     }
 
-    public boolean matches(String name) {
-        return this.fileName!=null && name!=null && fileName.equalsIgnoreCase(name);
-    }
+// ------------------------ CANONICAL METHODS ------------------------
 
     public String toString() {
-        return ""+fileName+" = "+contentType+" ("+imageInfo+")";
+        return "" + fileName + " = " + contentType + " (" + imageInfo + ")";
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
+// -------------------------- OTHER METHODS --------------------------
 
     public boolean hasExtension(String ext) {
-        return getFileName()!=null && getFileName().endsWith(ext);
+        return getFileName() != null && getFileName().endsWith(ext);
     }
 
     public boolean isOctetStream() {
         return getContentType().equals("application/octet-stream");
+    }
+
+    public boolean matches(String name) {
+        return this.fileName != null && name != null && fileName.equalsIgnoreCase(name);
     }
 }
