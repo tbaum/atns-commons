@@ -30,6 +30,19 @@
                     <jdkLevel>1.5</jdkLevel>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>javarebel-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -127,8 +140,8 @@
     <modules>
         <module>backend</module>
         <module>common</module>
-        <module>frontend</module>
-        <module>flex-upload</module>
+        <!--module>frontend</module>
+        <module>flex-upload</module-->
     </modules>
 
     <reporting>
@@ -178,7 +191,12 @@
             <id>snapshots</id>
             <name>Archiva Managed Snapshot Repository</name>
             <url>http://mvn.atns.de/repository/snapshots/</url>
-                  </pluginRepository>
+        </pluginRepository>
+        <pluginRepository>
+            <id>zt-repo</id>
+            <name>Zero turnaround repo</name>
+            <url>dav:http://repos.zeroturnaround.com/maven2</url>
+        </pluginRepository>
 
     </pluginRepositories>
 </project>
