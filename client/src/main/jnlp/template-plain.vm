@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" href="http://www.atns.de/shop/trayapp.jnlp"
+      codebase="http://www.atns.de/shop">
+  <information>
+    <title>MARE-PRINT</title>
+    <vendor>ATNS</vendor>
+    <homepage>http://www.mare-print.de</homepage>
+      <!--<description kind="one-line">$informationDescription</description>-->
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.6+" initial-heap-size="32m" max-heap-size="512m"/>
+    <nativelib href="resources/win32com.jar"/>
+    <nativelib href="resources/jintellitype.jar"/>
+    <jar href="jetty-server-7.0.0.RC6.jar"/>
+
+    $dependencies
+  </resources>
+  <application-desc main-class="de.atns.shop.tray.TrayApp">
+  </application-desc>
+</jnlp>

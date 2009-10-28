@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="de.atns.shop.tray.EnterWeightDialog">
+  <grid id="cbd77" binding="contentPane" layout-manager="FormLayout">
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;50px):grow"/>
+    <rowspec value="top:3dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="left:150px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:150px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:150px:noGrow"/>
+    <constraints>
+      <xy x="48" y="54" width="532" height="500"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="9950e" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="6" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Barcode:"/>
+        </properties>
+      </component>
+      <component id="2868" class="javax.swing.JTextField" binding="barcode">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="0" bottom="0" right="5" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="566c0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="6" left="5" bottom="0" right="0" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Shop / Lieferschein"/>
+        </properties>
+      </component>
+      <component id="ef82e" class="javax.swing.JTextField" binding="shopName">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="0" bottom="0" right="5" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <grid id="c5231" layout-manager="FormLayout">
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="top:1dlu:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="top:1dlu:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="top:1dlu:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="top:1dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <colspec value="fill:140px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="5" bottom="0" right="5"/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+        </properties>
+        <border type="line"/>
+        <children>
+          <component id="3470a" class="javax.swing.JTextField" binding="adressePlz">
+            <constraints>
+              <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="c41c4" class="javax.swing.JTextField" binding="adresseLand">
+            <constraints>
+              <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="44085" class="javax.swing.JTextField" binding="adresseAnrede">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="70a36" class="javax.swing.JTextField" binding="adresseFirma">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="9a0a6" class="javax.swing.JTextField" binding="adresseName">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="40561" class="javax.swing.JTextField" binding="adresseStrasse">
+            <constraints>
+              <grid row="6" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="ca8ba" class="javax.swing.JTextField" binding="adresseHnr">
+            <constraints>
+              <grid row="6" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="1cd9d" class="javax.swing.JTextField" binding="adresseOrt">
+            <constraints>
+              <grid row="8" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+            </properties>
+          </component>
+          <component id="4f172" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="6" left="5" bottom="0" right="0" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <text value="Lieferadresse"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="94766" layout-manager="FormLayout">
+        <rowspec value="center:d:grow"/>
+        <colspec value="fill:d:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <constraints>
+          <grid row="12" column="0" row-span="1" col-span="5" vsize-policy="1" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="9538f" layout-manager="FormLayout">
+            <rowspec value="center:d:grow"/>
+            <colspec value="fill:d:grow"/>
+            <colspec value="left:4dlu:noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="e7465" class="javax.swing.JButton" binding="buttonOK">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <text value="OK"/>
+                </properties>
+              </component>
+              <component id="5723f" class="javax.swing.JButton" binding="buttonCancel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <text value="Cancel"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <component id="e9e26" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="6" left="5" bottom="0" right="0" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Produkt / Routing"/>
+        </properties>
+      </component>
+      <component id="f3dff" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="6" left="5" bottom="0" right="0" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Gewicht"/>
+        </properties>
+      </component>
+      <component id="16c35" class="javax.swing.JTextField" binding="gewicht" custom-create="true">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <background color="-6684673"/>
+          <horizontalAlignment value="4"/>
+        </properties>
+      </component>
+      <component id="19a2a" class="javax.swing.JTextField" binding="lieferschein">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="0" bottom="0" right="5" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="f136f" class="javax.swing.JTextField" binding="produkt">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+      <component id="fded8" class="javax.swing.JTextField" binding="routing">
+        <constraints>
+          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="0" left="0" bottom="0" right="5" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

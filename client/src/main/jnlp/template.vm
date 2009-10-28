@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root version="2.0" xmlns:jsp="http://java.sun.com/JSP/Page">
+    <jsp:directive.page contentType="application/x-java-jnlp-file" language="java"/>
+    <jsp:output omit-xml-declaration="false"/>
+    <jsp:declaration><![CDATA[
+        public static String getContextPath(final HttpServletRequest request) {
+        final StringBuilder url = new StringBuilder();
+        final String scheme = request.getScheme();
+        final int port = request.getServerPort();
+
+        url.append(scheme);
+        url.append("://");
+        url.append(request.getServerName());
+
+        if (("http".equals(scheme) && port != 80) || ("https".equals(scheme) && port != 443)) {
+        url.append(":").append(port);
+        }
+
+        url.append(request.getContextPath());
+
+        if (url.charAt(url.length() - 1) != '/') {
+        url.append('/');
+        }
+
+        return url.toString();
+        }
+        ]]>
+    </jsp:declaration>
+    <jsp:body>
+        <jsp:element name="jnlp">
+            <jsp:attribute name="spec">1.0+</jsp:attribute>
+            <jsp:attribute name="href">$outputFile</jsp:attribute>
+            <jsp:attribute name="codebase"><jsp:expression>getContextPath(request)</jsp:expression>trayapp
+            </jsp:attribute>
+            <jsp:body>
+                <information>
+                    <title>ATNS.SHOP</title>
+                    <vendor>ATNS</vendor>
+                    <homepage>http://www.atns.de</homepage>
+                    <!--<description kind="one-line">$informationDescription</description>-->
+                </information>
+                <security>
+                    <all-permissions/>
+                </security>
+                <resources>
+                    <j2se version="1.6+" initial-heap-size="32m" max-heap-size="512m"/>
+                    <nativelib href="resources/win32com.jar"/>
+##                    <nativelib href="resources/rxtx-native-win32-2.2.jar"/>
+                    $dependencies
+                </resources>
+                <application-desc main-class="de.atns.shop.tray.TrayApp">
+                </application-desc>
+            </jsp:body>
+        </jsp:element>
+    </jsp:body>
+</jsp:root>
