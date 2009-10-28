@@ -111,12 +111,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.atns.mareprint</groupId>
-                <artifactId>common</artifactId>
-                <version>${version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.wideplay</groupId>
                 <artifactId>warp-persist</artifactId>
                 <version>2.0-SNAPSHOT</version>
@@ -306,33 +300,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<<<<<<< HEAD:pom.xml
-
-    <modules>
-        <module>backend</module>
-        <module>common</module>
-        <module>frontend</module>
-        <module>client</module>
-        <!--<module>flex-upload</module>-->
-    </modules>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>javancss-maven-plugin</artifactId>
-                <version>2.0-beta-2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.3</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
-=======
->>>>>>> bf933fa080c74cc14908aa9d73bf251ee93fd0df:pom.xml
     <repositories>
         <repository>
             <id>central</id>
