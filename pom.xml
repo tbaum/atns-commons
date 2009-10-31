@@ -54,13 +54,13 @@
                 <plugin>
                     <groupId>org.sonatype.flexmojos</groupId>
                     <artifactId>flexmojos-maven-plugin</artifactId>
-                    <version>3.4-SNAPSHOT</version>
+                    <version>3.4.2</version>
                     <extensions>true</extensions>
                     <configuration>
                         <sourceFile>FileUpload.as</sourceFile>
                         <defaultSizeHeight>24</defaultSizeHeight>
                         <defaultSizeWidth>82</defaultSizeWidth>
-                        <targetPlayer>${flash.player.version}</targetPlayer>
+                        <targetPlayer>10.0.32</targetPlayer>
                     </configuration>
                     <dependencies>
                         <dependency>
