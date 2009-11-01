@@ -49,18 +49,18 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
-                    <version>1.1</version>                   
+                    <version>1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.flexmojos</groupId>
                     <artifactId>flexmojos-maven-plugin</artifactId>
-                    <version>3.4-SNAPSHOT</version>
+                    <version>3.4.2</version>
                     <extensions>true</extensions>
                     <configuration>
                         <sourceFile>FileUpload.as</sourceFile>
                         <defaultSizeHeight>24</defaultSizeHeight>
                         <defaultSizeWidth>82</defaultSizeWidth>
-                        <targetPlayer>${flash.player.version}</targetPlayer>
+                        <targetPlayer>10.0.32</targetPlayer>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -88,6 +88,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>maven-jetty-plugin</artifactId>
+                    <version>6.1.10</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -201,6 +206,11 @@
                 <version>3.4.0.GA</version>
             </dependency>
             <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>3.4.0.GA</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>1.0</version>
@@ -306,6 +316,11 @@
                 <groupId>org.apache.avalon.framework</groupId>
                 <artifactId>avalon-framework-impl</artifactId>
                 <version>4.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.intellij</groupId>
+                <artifactId>forms_rt</artifactId>
+                <version>7.0.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
