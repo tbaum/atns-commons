@@ -72,11 +72,6 @@
                     </dependencies>
                 </plugin>
                 <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>6.1.10</version>
-                </plugin>
-                <plugin>
                     <groupId>org.codehaus.mojo.webstart</groupId>
                     <artifactId>webstart-maven-plugin</artifactId>
                     <version>0.9.10764</version>
@@ -279,6 +274,11 @@
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-servlet</artifactId>
+                <version>7.0.0.RC6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
                 <version>7.0.0.RC6</version>
             </dependency>
             <dependency>
