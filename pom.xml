@@ -91,8 +91,8 @@
                 </plugin>
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>6.1.10</version>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>7.0.0.v20091005</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -113,7 +113,6 @@
                 <artifactId>common</artifactId>
                 <version>${version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.wideplay</groupId>
                 <artifactId>warp-persist</artifactId>
@@ -321,6 +320,12 @@
                 <groupId>com.intellij</groupId>
                 <artifactId>forms_rt</artifactId>
                 <version>7.0.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>1.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
