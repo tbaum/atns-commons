@@ -15,6 +15,7 @@
     <modules>
         <module>backend</module>
         <module>common</module>
+        <module>common-security</module>
         <module>frontend</module>
         <module>trayapp</module>
         <!--<module>flex-upload</module>-->
@@ -106,6 +107,11 @@
             <dependency>
                 <groupId>de.atns.mareprint</groupId>
                 <artifactId>common</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.mareprint</groupId>
+                <artifactId>common-security</artifactId>
                 <version>${version}</version>
             </dependency>
             <dependency>
