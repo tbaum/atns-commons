@@ -332,11 +332,15 @@
                 <artifactId>barcode4j</artifactId>
                 <version>2.0</version>
             </dependency>
-
             <dependency>
                 <groupId>com.google.code.gwt-log</groupId>
                 <artifactId>gwt-log</artifactId>
                 <version>2.6.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.15</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
