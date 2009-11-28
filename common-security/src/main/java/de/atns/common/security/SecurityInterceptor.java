@@ -1,7 +1,5 @@
 package de.atns.common.security;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import de.atns.common.security.client.Secured;
 import de.atns.common.security.client.SecurityUser;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -14,12 +12,12 @@ import org.aopalliance.intercept.MethodInvocation;
 public class SecurityInterceptor implements MethodInterceptor {
 // ------------------------------ FIELDS ------------------------------
 
-    private Provider<SecurityUser> user;
+    private final SecurityScope securityScope;
 
-// --------------------- GETTER / SETTER METHODS ---------------------
+// --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public void setUser(final Provider<SecurityUser> user) {
-        this.user = user;
+    public SecurityInterceptor(final SecurityScope securityScope) {
+        this.securityScope = securityScope;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
@@ -29,8 +27,8 @@ public class SecurityInterceptor implements MethodInterceptor {
 
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Secured secured = invocation.getMethod().getAnnotation(Secured.class);
+        final SecurityUser user = securityScope.get(SecurityUser.class);
 
-        final SecurityUser user = this.user.get();
         if (user == null) {
             throw new NotLogginException();
         }

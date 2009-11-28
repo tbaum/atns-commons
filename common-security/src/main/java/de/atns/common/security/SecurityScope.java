@@ -52,7 +52,16 @@ public class SecurityScope implements Scope {
         values.remove();
     }
 
-    public <T> void seed(Key<T> key, T value) {
+    public <T> T get(Key<T> key) {
+        Map<Key<?>, Object> scopedObjects = getScopedObjectMap(key);
+        return (T) scopedObjects.get(key);
+    }
+
+    public <T> T get(Class<T> clazz) {
+        return get(Key.get(clazz));
+    }
+
+    public <T> void put(Key<T> key, T value) {
         Map<Key<?>, Object> scopedObjects = getScopedObjectMap(key);
         checkState(!scopedObjects.containsKey(key), "A value for the key %s was already seeded in this scope. " +
                 "Old value: %s New value: %s", key, scopedObjects.get(key), value);
@@ -67,8 +76,8 @@ public class SecurityScope implements Scope {
         return scopedObjects;
     }
 
-    public <T> void seed(Class<T> clazz, T value) {
-        seed(Key.get(clazz), value);
+    public <T> void put(Class<T> clazz, T value) {
+        put(Key.get(clazz), value);
     }
 }
  

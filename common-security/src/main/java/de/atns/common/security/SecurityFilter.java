@@ -1,7 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
-import com.google.inject.Key;
 import com.google.inject.Singleton;
 import de.atns.common.security.client.SecurityUser;
 
@@ -43,14 +42,18 @@ import static de.atns.common.security.AuthenticateFilter.SESSION_ATTR_NAME;
             final HttpSession session = ((HttpServletRequest) request).getSession(false);
             if (session != null) {
                 SecurityUser user = (SecurityUser) session.getAttribute(SESSION_ATTR_NAME);
-                securityScope.seed(Key.get(SecurityUser.class), user);
+                if (user != null) {
+                    securityScope.put(SecurityUser.class, user);
+                }
             }
             try {
                 chain.doFilter(request, response);
             } catch (NotInRoleException e) {
-                System.err.println(e);
+                /// TODO redirect-handler
+                throw new ServletException(e);
             } catch (NotLogginException e) {
-                System.err.println(e);
+                /// TODO redirect-handler               
+                throw new ServletException(e);
             }
         } finally {
             securityScope.exit();

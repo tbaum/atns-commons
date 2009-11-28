@@ -15,14 +15,11 @@ public class SecurityModule extends AbstractModule {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configure() {
-        SecurityScope batchScope = new SecurityScope();
-        bindScope(SecurityScoped.class, batchScope);
-        bind(SecurityScope.class).toInstance(batchScope);
-
-        final SecurityInterceptor securityInterceptor = new SecurityInterceptor();
-        requestInjection(securityInterceptor);
+        SecurityScope securityScope = new SecurityScope();
+        bindScope(SecurityScoped.class, securityScope);
+        bind(SecurityScope.class).toInstance(securityScope);
+        final SecurityInterceptor securityInterceptor = new SecurityInterceptor(securityScope);
         bindInterceptor(any(), annotatedWith(Secured.class), securityInterceptor);
-
         bind(SecurityUser.class).toProvider(SecurityUserSessionProvider.class);
     }
 }
