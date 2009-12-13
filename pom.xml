@@ -52,6 +52,7 @@
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>1.1</version>
                 </plugin>
+                <!--
                 <plugin>
                     <groupId>org.sonatype.flexmojos</groupId>
                     <artifactId>flexmojos-maven-plugin</artifactId>
@@ -72,6 +73,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                -->
                 <plugin>
                     <groupId>org.codehaus.mojo.webstart</groupId>
                     <artifactId>webstart-maven-plugin</artifactId>
@@ -230,6 +232,7 @@
                 <artifactId>commons-io</artifactId>
                 <version>1.4</version>
             </dependency>
+            <!--
             <dependency>
                 <groupId>com.adobe.flex.framework</groupId>
                 <artifactId>playerglobal</artifactId>
@@ -249,6 +252,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            -->
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
@@ -347,6 +351,11 @@
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>2.3.15</version>
+            </dependency>
+            <dependency>
+                <groupId>gwtupload</groupId>
+                <artifactId>gwtupload</artifactId>
+                <version>0.5.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
