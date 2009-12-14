@@ -18,7 +18,6 @@
         <module>common-security</module>
         <module>frontend</module>
         <module>trayapp</module>
-        <!--<module>flex-upload</module>-->
     </modules>
 
     <build>
@@ -52,28 +51,6 @@
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>1.1</version>
                 </plugin>
-                <!--
-                <plugin>
-                    <groupId>org.sonatype.flexmojos</groupId>
-                    <artifactId>flexmojos-maven-plugin</artifactId>
-                    <version>3.4.2</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <sourceFile>FileUpload.as</sourceFile>
-                        <defaultSizeHeight>24</defaultSizeHeight>
-                        <defaultSizeWidth>82</defaultSizeWidth>
-                        <targetPlayer>10.0.32</targetPlayer>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.adobe.flex</groupId>
-                            <artifactId>compiler</artifactId>
-                            <version>3.4.0.9271</version>
-                            <type>pom</type>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                -->
                 <plugin>
                     <groupId>org.codehaus.mojo.webstart</groupId>
                     <artifactId>webstart-maven-plugin</artifactId>
@@ -232,27 +209,6 @@
                 <artifactId>commons-io</artifactId>
                 <version>1.4</version>
             </dependency>
-            <!--
-            <dependency>
-                <groupId>com.adobe.flex.framework</groupId>
-                <artifactId>playerglobal</artifactId>
-                <version>3.4.0.9271</version>
-                <classifier>10</classifier>
-                <type>swc</type>
-            </dependency>
-            <dependency>
-                <groupId>com.adobe.flex.framework</groupId>
-                <artifactId>flex-framework</artifactId>
-                <version>3.4.0.9271</version>
-                <type>pom</type>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.adobe.flex.framework</groupId>
-                        <artifactId>playerglobal</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            -->
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
@@ -331,7 +287,6 @@
                 <artifactId>forms_rt</artifactId>
                 <version>7.0.3</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
