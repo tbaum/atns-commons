@@ -308,9 +308,9 @@
                 <version>2.3.15</version>
             </dependency>
             <dependency>
-                <groupId>gwtupload</groupId>
-                <artifactId>gwtupload</artifactId>
-                <version>0.5.5</version>
+                <groupId>atns.ext</groupId>
+                <artifactId>gwteventservice</artifactId>
+                <version>1.0.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
