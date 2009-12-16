@@ -1,13 +1,11 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import de.atns.common.security.client.SecurityUser;
-import de.atns.common.security.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -19,14 +17,15 @@ import java.io.IOException;
 public class AuthenticateFilter implements Filter {
 // ------------------------------ FIELDS ------------------------------
 
-    static final String SESSION_ATTR_NAME = "_SECURITY_USER";
-    private final Provider<UserService> userService;
+    static final String SESSION_USER = "_SECURITY_USER";
+    static final String SESSION_UUID = "_SECURITY_UUID";
+    private final SecurityService securityService;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public AuthenticateFilter(final Provider<UserService> userService) {
-        this.userService = userService;
+    public AuthenticateFilter(final SecurityService securityService) {
+        this.securityService = securityService;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
@@ -44,12 +43,18 @@ public class AuthenticateFilter implements Filter {
         final String path = req.getRequestURI();
 
         if (path.contains("_security_login")) {
-            final HttpSession session = req.getSession(true);
-            SecurityUser user = userService.get().findUser(req.getParameter("login"), req.getParameter("password"));
-            session.setAttribute(SESSION_ATTR_NAME, user);
+            final SecurityService.SecurityUserToken token = securityService.login(req.getParameter("login"),
+                    req.getParameter("password"));
+
+            req.getSession(true).setAttribute(SESSION_USER, token.getUser());
+            req.getSession(true).setAttribute(SESSION_UUID, token.getUuid().toString());
+            ((HttpServletResponse) response).setHeader("X-Authorization", token.getUuid().toString());
         } else if (path.contains("_security_logout")) {
-            final HttpSession session = req.getSession(true);
-            session.removeAttribute(SESSION_ATTR_NAME);
+            final HttpSession session = req.getSession(false);
+            if (session != null) {
+                session.removeAttribute(SESSION_USER);
+                session.removeAttribute(SESSION_UUID);
+            }
         }
         chain.doFilter(request, response);
     }
