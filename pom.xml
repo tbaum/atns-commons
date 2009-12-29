@@ -3,7 +3,7 @@
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
 
     <properties>
