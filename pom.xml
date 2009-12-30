@@ -13,11 +13,13 @@
 
     <modules>
         <module>backend</module>
+        <module>model</module>
         <module>common</module>
         <module>common-security</module>
         <module>common-web</module>
         <module>common-fileutils</module>
         <module>common-numbergenerator</module>
+        <module>common-config</module>
         <module>frontend</module>
         <module>trayapp</module>
     </modules>
@@ -105,23 +107,33 @@
             </dependency>
             <dependency>
                 <groupId>de.atns.mareprint</groupId>
+                <artifactId>model</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
                 <artifactId>common-security</artifactId>
-                <version>${version}</version>
+                <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>de.atns.mareprint</groupId>
+                <groupId>de.atns.common</groupId>
                 <artifactId>common-web</artifactId>
-                <version>${version}</version>
+                <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>de.atns.mareprint</groupId>
+                <groupId>de.atns.common</groupId>
                 <artifactId>common-numbergenerator</artifactId>
-                <version>${version}</version>
+                <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>de.atns.mareprint</groupId>
+                <groupId>de.atns.common</groupId>
                 <artifactId>common-fileutils</artifactId>
-                <version>${version}</version>
+                <version>1.0.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>common-config</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.wideplay</groupId>

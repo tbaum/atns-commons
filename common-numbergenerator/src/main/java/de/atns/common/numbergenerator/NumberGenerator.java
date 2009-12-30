@@ -18,8 +18,8 @@ import java.io.IOException;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public NumberGenerator(@OrderNumberDir final String orderNumberDir) {
-        this.orderNumberDir = new File(orderNumberDir);
+    @Inject public NumberGenerator(@OrderNumberDir final String numberDir) {
+        this.orderNumberDir = new File(numberDir);
         if (!this.orderNumberDir.exists()) {
             if (!this.orderNumberDir.mkdirs()) {
                 throw new RuntimeException("unable to create counter-dir");
@@ -27,7 +27,7 @@ import java.io.IOException;
         }
         if (this.orderNumberDir.listFiles().length == 0) {
             try {
-                if (!new File(orderNumberDir, "0").createNewFile()) {
+                if (!new File(numberDir, "0").createNewFile()) {
                     throw new RuntimeException("unable to create counter");
                 }
             } catch (IOException e) {
