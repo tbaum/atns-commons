@@ -1,7 +1,5 @@
 package de.atns.common.security.client;
 
-import de.atns.common.security.client.Secured;
-
 /**
  * @author tbaum
  * @since 27.11.2009
