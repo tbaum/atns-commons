@@ -3,4 +3,6 @@
 *.iws
 *.iml
 *.zip
+velocity.log
+velocity.log.*
 target
