@@ -52,7 +52,7 @@ public class SecurityScope implements Scope {
         values.remove();
     }
 
-    public <T> T get(Key<T> key) {
+    @SuppressWarnings("unchecked") public <T> T get(Key<T> key) {
         Map<Key<?>, Object> scopedObjects = getScopedObjectMap(key);
         return (T) scopedObjects.get(key);
     }

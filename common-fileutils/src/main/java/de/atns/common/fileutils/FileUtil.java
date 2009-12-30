@@ -51,4 +51,15 @@ public abstract class FileUtil {
             throw new RuntimeException("Unable to Load Properties from " + propertyFile, ex);
         }
     }
+
+    public static String getPathFromUuid(final int c, final String uuid) {
+        final String cleanUuid = uuid.replaceAll("[^0-9a-z-]", "");
+        final String cleanUuid2 = uuid.replaceAll("[^0-9a-z]", "");
+        final StringBuffer path = new StringBuffer();
+        for (int i = 0; i < c; i++) {
+            path.append(cleanUuid2.charAt(i)).append('/');
+        }
+        path.append(cleanUuid);
+        return path.toString();
+    }
 }
