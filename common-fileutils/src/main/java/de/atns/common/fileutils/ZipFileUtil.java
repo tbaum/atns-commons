@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -14,7 +16,8 @@ import java.util.zip.ZipFile;
 public class ZipFileUtil {
 // -------------------------- STATIC METHODS --------------------------
 
-    public static void extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter) throws IOException {
+    public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter) throws IOException {
+        List<File> extractedFiles = new LinkedList<File>();
         final Enumeration<? extends ZipEntry> entries = zipFile.entries();
         while (entries.hasMoreElements()) {
             final ZipEntry zipEntry = entries.nextElement();
@@ -28,7 +31,10 @@ public class ZipFileUtil {
                 if (!tempFile.renameTo(extractFile)) {
                     throw new IOException("Error renaming temp file " + tempFile + " to " + extractFile);
                 }
+
+                extractedFiles.add(extractFile);
             }
         }
+        return extractedFiles.toArray(new File[extractedFiles.size()]);
     }
 }
