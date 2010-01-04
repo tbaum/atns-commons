@@ -5,10 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
 import java.text.MessageFormat;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.zip.ZipFile;
 
 public abstract class FileUtil {
 // ------------------------------ FIELDS ------------------------------
@@ -32,14 +29,6 @@ public abstract class FileUtil {
                 return file.getName().matches(fileRegexp);
             }
         });
-    }
-
-    public static Collection<String> getFileNames(final File[] files) {
-        final Collection<String> fileNames = new HashSet<String>();
-        for (final File file : files) {
-            fileNames.add(file.getName());
-        }
-        return fileNames;
     }
 
     public static byte[] readFile(final File file) throws IOException {
@@ -71,17 +60,6 @@ public abstract class FileUtil {
         }
         path.append(cleanUuid);
         return path.toString();
-    }
-
-    public static void extractZipEntry(final ZipFile zipFile, final String entryName, final File targetDir) throws IOException {
-        final File extractFile = new File(targetDir, entryName);
-        final File tempFile = new File(targetDir, entryName + ".tmp");
-        tempFile.deleteOnExit();
-
-        copy(zipFile.getInputStream(zipFile.getEntry(entryName)), new FileOutputStream(tempFile));
-        if (!tempFile.renameTo(extractFile)) {
-            throw new IOException("Error renaming temp file " + tempFile + " to " + extractFile);
-        }
     }
 
     public static void copy(final InputStream inputStream, final OutputStream outputStream) throws IOException {
