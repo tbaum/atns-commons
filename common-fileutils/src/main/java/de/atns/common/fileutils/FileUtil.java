@@ -1,14 +1,24 @@
 package de.atns.common.fileutils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.*;
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Properties;
+import java.util.zip.ZipFile;
 
 public abstract class FileUtil {
+// ------------------------------ FIELDS ------------------------------
+
+    private static final Log LOG = LogFactory.getLog(FileUtil.class);
+    private static final int BUFFER_SIZE = 1024 * 10;
+
 // -------------------------- STATIC METHODS --------------------------
 
-    public static void setupDir(final File dir) {
+    public static void removeAndCreateDir(final File dir) {
         if (dir.exists()) {
             for (final File file : findFiles(dir, ".*")) {
                 file.delete();
@@ -61,5 +71,49 @@ public abstract class FileUtil {
         }
         path.append(cleanUuid);
         return path.toString();
+    }
+
+    public static void extractZipEntry(final ZipFile zipFile, final String entryName, final File targetDir) throws IOException {
+        final File extractFile = new File(targetDir, entryName);
+        final File tempFile = new File(targetDir, entryName + ".tmp");
+        tempFile.deleteOnExit();
+
+        copy(zipFile.getInputStream(zipFile.getEntry(entryName)), new FileOutputStream(tempFile));
+        if (!tempFile.renameTo(extractFile)) {
+            throw new IOException("Error renaming temp file " + tempFile + " to " + extractFile);
+        }
+    }
+
+    public static void copy(final InputStream inputStream, final OutputStream outputStream) throws IOException {
+        BufferedOutputStream bufferedOutputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        try {
+            bufferedInputStream = new BufferedInputStream(inputStream, BUFFER_SIZE);
+            bufferedOutputStream = new BufferedOutputStream(outputStream, BUFFER_SIZE);
+            final byte[] buffer = new byte[BUFFER_SIZE];
+            int count;
+            while ((count = bufferedInputStream.read(buffer)) != -1) {
+                bufferedOutputStream.write(buffer, 0, count);
+            }
+        } finally {
+            closeSilent(bufferedOutputStream);
+            closeSilent(bufferedInputStream);
+        }
+    }
+
+    public static void closeSilent(final Closeable closeable) {
+        closeSilent(closeable, null);
+    }
+
+    public static void closeSilent(final Closeable closeable, final String message) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                if (message != null) {
+                    LOG.error(MessageFormat.format(message, e.getMessage()));
+                }
+            }
+        }
     }
 }
