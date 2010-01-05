@@ -3,7 +3,7 @@
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
 
     <properties>
@@ -112,27 +112,27 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-security</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-web</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-numbergenerator</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-fileutils</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-config</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.wideplay</groupId>
