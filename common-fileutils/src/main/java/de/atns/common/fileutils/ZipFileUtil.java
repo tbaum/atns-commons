@@ -1,5 +1,8 @@
 package de.atns.common.fileutils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +17,10 @@ import java.util.zip.ZipFile;
  * @since 04.01.2010
  */
 public class ZipFileUtil {
+// ------------------------------ FIELDS ------------------------------
+
+    private static final Log LOG = LogFactory.getLog(ZipFileUtil.class);
+
 // -------------------------- STATIC METHODS --------------------------
 
     public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter) throws IOException {
@@ -23,6 +30,7 @@ public class ZipFileUtil {
             final ZipEntry zipEntry = entries.nextElement();
             final String entryName = zipEntry.getName();
             if (filter.accept(entryName)) {
+                LOG.debug("extracting " + entryName + " to " + targetDir);
                 final File extractFile = new File(targetDir, entryName);
                 final File tempFile = new File(targetDir, entryName + ".tmp");
                 tempFile.deleteOnExit();
