@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>common-web</artifactId>
     <groupId>de.atns.common</groupId>
-    <version>1.0.8</version>
+    <version>1.0.9-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
     <packaging>jar</packaging>
 
