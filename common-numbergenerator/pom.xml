@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>common-numbergenerator</artifactId>
     <groupId>de.atns.common</groupId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.7</version>
     <name>${groupId}:${artifactId}:${version}</name>
     <packaging>jar</packaging>
 
