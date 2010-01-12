@@ -49,7 +49,7 @@ import static de.atns.common.security.AuthenticateFilter.SESSION_UUID;
 
     private void authFromUuid(final String uuid) {
         if (uuid != null && !uuid.isEmpty()) {
-            final SecurityUserToken user = cache.get(UUID.fromString(uuid));
+            final SecurityUserToken user = cache.get(UUID.fromString(uuid.replaceAll("[^0-9a-z-]", "")));
             if (user != null) {
                 securityScope.put(SecurityUser.class, user.getUser());
             } else {
