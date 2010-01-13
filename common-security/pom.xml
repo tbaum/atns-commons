@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>common-security</artifactId>
     <groupId>de.atns.common</groupId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>${groupId}:${artifactId}:${version}</name>
     <packaging>jar</packaging>
 
