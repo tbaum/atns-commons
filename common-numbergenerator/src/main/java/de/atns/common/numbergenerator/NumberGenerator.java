@@ -37,14 +37,7 @@ import static java.lang.Long.parseLong;
             File[] f = d1.listFiles();
             if (f == null || f.length == 0) {
                 final File newFile = new File(d1, "0");
-                try {
-                    //noinspection ResultOfMethodCallIgnored
-                    newFile.getParentFile().mkdirs();
-                    //noinspection ResultOfMethodCallIgnored
-                    newFile.createNewFile();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                writeLine(newFile, "");
                 f = new File[]{newFile};
             }
             if (f.length > 1) {
@@ -94,6 +87,9 @@ import static java.lang.Long.parseLong;
 
     private void writeLine(final File file, final String prefix) {
         try {
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+
             PrintWriter f = new PrintWriter(file);
             f.println(prefix);
             f.close();
