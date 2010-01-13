@@ -11,5 +11,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @BindingAnnotation
 @Retention(RUNTIME)
 @Target(PARAMETER)
-public @interface OrderNumberDir {
+public @interface NumberDir {
 }
