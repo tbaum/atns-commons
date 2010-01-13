@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
@@ -10,18 +11,52 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <modules>
-        <module>backend</module>
-        <module>model</module>
-        <module>common</module>
-        <module>common-security</module>
-        <module>common-web</module>
-        <module>common-fileutils</module>
-        <module>common-numbergenerator</module>
-        <module>common-config</module>
-        <module>frontend</module>
-        <module>trayapp</module>
-    </modules>
+    <profiles>
+        <profile>
+            <id>frontend</id>
+            <modules>
+                <module>model</module>
+                <module>common</module>
+                <module>common-security</module>
+                <module>common-web</module>
+                <module>common-fileutils</module>
+                <module>common-numbergenerator</module>
+                <module>common-config</module>
+                <module>frontend</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>backoffice</id>
+            <modules>
+                <module>backend</module>
+                <module>model</module>
+                <module>common</module>
+                <module>common-security</module>
+                <module>common-web</module>
+                <module>common-fileutils</module>
+                <module>common-numbergenerator</module>
+                <module>common-config</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>both</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>backend</module>
+                <module>model</module>
+                <module>common</module>
+                <module>common-security</module>
+                <module>common-web</module>
+                <module>common-fileutils</module>
+                <module>common-numbergenerator</module>
+                <module>common-config</module>
+                <module>frontend</module>
+                <module>trayapp</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <scm>
         <connection>scm:git:ssh://git@git.atns.de/mareprint</connection>
