@@ -401,7 +401,7 @@
             <dependency>
                 <groupId>com.google.gwt.inject</groupId>
                 <artifactId>gin</artifactId>
-                <version>1.0.r117-20091006</version>
+                <version>1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
