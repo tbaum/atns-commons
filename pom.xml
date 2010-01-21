@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
@@ -391,6 +392,11 @@
                 <groupId>atns.ext</groupId>
                 <artifactId>gwteventservice</artifactId>
                 <version>1.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>atns.ext</groupId>
+                <artifactId>gwt-incubator</artifactId>
+                <version>1.6_1684</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gwtx</groupId>
