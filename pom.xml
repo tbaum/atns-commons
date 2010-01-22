@@ -395,8 +395,8 @@
             </dependency>
             <dependency>
                 <groupId>atns.ext</groupId>
-                <artifactId>gwt-incubator</artifactId>
-                <version>1.6_1684</version>
+                <artifactId>gwt-incubator-trunk</artifactId>
+                <version>0.0.-r1684</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gwtx</groupId>
