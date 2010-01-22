@@ -39,6 +39,12 @@ public class Configurator {
                 throw new RuntimeException(e);
             }
         }
-        return configProperties.getProperty(configName + "." + s);
+        return configProperties.getProperty(getPropertyName(s));
     }
+
+    public String getPropertyName(final String s) {
+        return configName + "." + s;
+    }
+
+
 }
