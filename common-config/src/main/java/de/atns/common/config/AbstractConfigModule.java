@@ -22,11 +22,16 @@ public abstract class AbstractConfigModule extends AbstractModule {
     protected void configure(final Class<? extends Annotation> annotation) {
         String name = annotation.getAnnotation(ConfigurationName.class).value();
 
-        final String prop = config.get(name);
-        if (prop == null) {
+        final String configValue = getConfigValue(name);
+        if (configValue != null) {
+            bindConstant().annotatedWith(annotation).to(configValue);
+        } else {
             LOG.warn("configuration value for '" + config.getPropertyName(name) + "' is null");
             bind(String.class).annotatedWith(annotation).toProvider(Providers.of((String) null));
-        } else
-            bindConstant().annotatedWith(annotation).to(prop);
+        }
+    }
+
+    protected String getConfigValue(final String name) {
+        return config.get(name);
     }
 }                                                   
