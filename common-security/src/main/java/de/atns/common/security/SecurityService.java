@@ -43,11 +43,11 @@ import static de.atns.common.security.AuthenticateFilter.SESSION_UUID;
             if (uuid != null && !uuid.isEmpty()) {
                 LOG.debug("using header-token " + uuid);
             }
-            authFromUuid(uuid);
+            authFromCookie(uuid);
         }
     }
 
-    private void authFromUuid(final String uuid) {
+    private void authFromCookie(final String uuid) {
         if (uuid != null && !uuid.isEmpty()) {
             final SecurityUserToken user = cache.get(UUID.fromString(uuid.replaceAll("[^0-9a-z-]", "")));
             if (user != null) {
@@ -69,7 +69,7 @@ import static de.atns.common.security.AuthenticateFilter.SESSION_UUID;
                     LOG.debug("using session-var " + uuid);
                 }
 
-                authFromUuid(uuid);
+                authFromCookie(uuid);
             }
         }
     }
