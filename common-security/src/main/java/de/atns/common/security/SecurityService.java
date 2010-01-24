@@ -56,7 +56,7 @@ import static de.atns.common.security.AuthenticateFilter.SESSION_UUID;
                 LOG.warn("no securit-token found in cache for " + uuid);
             }
         }
-    }
+    }                                        
 
     public void authFromSession(final ServletRequest request) {
         if (request instanceof HttpServletRequest) {
