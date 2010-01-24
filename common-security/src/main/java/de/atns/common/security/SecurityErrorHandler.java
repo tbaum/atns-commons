@@ -9,6 +9,9 @@ import java.util.List;
  * @since 24.01.2010
  */
 public interface SecurityErrorHandler {
-    void notLoggedIn();
+// -------------------------- OTHER METHODS --------------------------
+
     void notInRole(SecurityUser user, List<String> roles);
+
+    void notLoggedIn();
 }
