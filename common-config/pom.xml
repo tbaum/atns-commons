@@ -37,4 +37,29 @@
             <version>2.0.1</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://mvn.atns.de/repository/mirror</url>
+        </repository>
+        <repository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://mvn.atns.de/repository/internal</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://mvn.atns.de/repository/mirror</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://mvn.atns.de/repository/internal</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
