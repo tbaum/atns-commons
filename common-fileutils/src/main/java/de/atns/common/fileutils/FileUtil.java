@@ -24,11 +24,16 @@ public abstract class FileUtil {
     }
 
     public static File[] findFiles(final File dir, final String fileRegexp) {
-        return dir.listFiles(new FileFilter() {
+        final File[] files = dir.listFiles(new FileFilter() {
             public boolean accept(final File file) {
                 return file.getName().matches(fileRegexp);
             }
         });
+        if (files == null) {
+            LOG.error("unable to read '" + dir + "'");
+            return new File[0];
+        }
+        return files;
     }
 
     public static byte[] readFile(final File file) throws IOException {
