@@ -11,6 +11,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <scm>
+        <connection>scm:git:ssh://git@git.atns.de/mareprint</connection>
+        <url>scm:git:ssh://git@git.atns.de/mareprint</url>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
