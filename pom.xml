@@ -3,12 +3,13 @@
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.5-SNAPSHOT</version>
+    <version>1.2.7-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 
     <profiles>
         <profile>
@@ -146,27 +147,27 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-security</artifactId>
-                <version>1.2.5-SNAPSHOT</version>
+                <version>1.2.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-web</artifactId>
-                <version>1.2.5-SNAPSHOT</version>
+                <version>1.2.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-numbergenerator</artifactId>
-                <version>1.2.5-SNAPSHOT</version>
+                <version>1.2.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-fileutils</artifactId>
-                <version>1.2.5-SNAPSHOT</version>
+                <version>1.2.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-config</artifactId>
-                <version>1.2.5-SNAPSHOT</version>
+                <version>1.2.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.wideplay</groupId>
@@ -366,11 +367,6 @@
                 <groupId>com.intellij</groupId>
                 <artifactId>forms_rt</artifactId>
                 <version>7.0.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.5</version>
             </dependency>
             <dependency>
                 <groupId>net.sf.barcode4j</groupId>
