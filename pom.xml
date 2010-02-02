@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.atns.mareprint</groupId>
     <artifactId>parent</artifactId>
@@ -28,7 +29,10 @@
         <profile>
             <id>backoffice</id>
             <modules>
+                <module>trayapp</module>
+                <module>trayapp-jnlp</module>
                 <module>backend</module>
+                <!-- <module>backend-war</module> -->
                 <module>model</module>
                 <module>common</module>
                 <module>common-security</module>
@@ -44,7 +48,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
+                <module>trayapp</module>
+                <module>trayapp-jnlp</module>
                 <module>backend</module>
+                <!-- <module>backend-war</module> -->
                 <module>model</module>
                 <module>common</module>
                 <module>common-security</module>
@@ -53,7 +60,6 @@
                 <module>common-numbergenerator</module>
                 <module>common-config</module>
                 <module>frontend</module>
-                <module>trayapp</module>
             </modules>
         </profile>
     </profiles>
@@ -106,14 +112,6 @@
                     <groupId>org.codehaus.mojo.webstart</groupId>
                     <artifactId>webstart-maven-plugin</artifactId>
                     <version>1.0-alpha-2</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>jnlp</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
@@ -135,39 +133,34 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.atns.mareprint</groupId>
-                <artifactId>common</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.mareprint</groupId>
-                <artifactId>model</artifactId>
+                <groupId>de.atns.common</groupId>
+                <artifactId>common-config</artifactId>
                 <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-security</artifactId>
-                <version>1.2.7-SNAPSHOT</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-web</artifactId>
-                <version>1.2.7-SNAPSHOT</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-numbergenerator</artifactId>
-                <version>1.2.7-SNAPSHOT</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>common-fileutils</artifactId>
-                <version>1.2.7-SNAPSHOT</version>
+                <version>${version}</version>
             </dependency>
             <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>common-config</artifactId>
-                <version>1.2.7-SNAPSHOT</version>
+                <groupId>org.codehaus.mojo.webstart</groupId>
+                <artifactId>webstart-jnlp-servlet</artifactId>
+                <version>1.0-6.0-02_ea_b02</version>
             </dependency>
             <dependency>
                 <groupId>com.wideplay</groupId>
