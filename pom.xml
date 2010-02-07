@@ -69,4 +69,12 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <name>Archiva Managed Internal Repository</name>
+            <url>http://mvn.atns.de/repository/internal</url>
+        </repository>
+    </repositories>
 </project>
