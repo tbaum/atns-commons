@@ -11,6 +11,7 @@ public class TimeoutCache<K, V> {
 
     private final long ttl;
     private final Map<K, V> cache = new HashMap<K, V>();
+    private final Map<K, AccessTime> accessMap = new HashMap<K, AccessTime>();
     private final SortedSet<AccessTime> lastAccess = new TreeSet<AccessTime>();
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -46,9 +47,19 @@ public class TimeoutCache<K, V> {
 
     public void put(final K k, final V v) {
         synchronized (this) {
+            removeAccess(k);
             cache.put(k, v);
-            lastAccess.add(new AccessTime(k));
+            final AccessTime time = new AccessTime(k);
+            accessMap.put(k, time);
+            lastAccess.add(time);
             flushCache();
+        }
+    }
+
+    private void removeAccess(final K key) {
+        AccessTime t = accessMap.remove(key);
+        if (t != null) {
+            lastAccess.remove(t);
         }
     }
 
@@ -57,20 +68,10 @@ public class TimeoutCache<K, V> {
             for (Map.Entry<K, V> kvEntry : cache.entrySet()) {
                 if (kvEntry.getValue().equals(v)) {
                     cache.remove(kvEntry.getKey());
-                    removeAccess(kvEntry);
+                    removeAccess(kvEntry.getKey());
                 }
             }
             flushCache();
-        }
-    }
-
-    private void removeAccess(final Map.Entry<K, V> kvEntry) {
-        Iterator<AccessTime> iterator = lastAccess.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().key.equals(kvEntry.getKey())) {
-                iterator.remove();
-                return;
-            }
         }
     }
 
@@ -93,7 +94,7 @@ public class TimeoutCache<K, V> {
             @SuppressWarnings({"unchecked"})
             final AccessTime that = (AccessTime) o;
 
-            return key.equals(that.key) && time.equals(that.time);
+            return key.equals(that.key);
         }
 
         @Override

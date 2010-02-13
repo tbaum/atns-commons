@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 
@@ -40,6 +39,40 @@ public class CacheTest {
         cache.put(KEY_2, ENTRY_2);
         time++;
         cache.put(KEY_3, ENTRY_3);
+    }
+
+    @Test
+    public void testCacheRefresh() {
+        Assert.assertEquals(ENTRY_1, cache.get(KEY_1));
+        Assert.assertEquals(ENTRY_2, cache.get(KEY_2));
+        Assert.assertEquals(ENTRY_3, cache.get(KEY_3));
+
+        time++;
+        Assert.assertEquals(ENTRY_1, cache.get(KEY_1));
+        Assert.assertEquals(ENTRY_2, cache.get(KEY_2));
+        Assert.assertEquals(ENTRY_3, cache.get(KEY_3));
+
+        cache.put(KEY_1, ENTRY_1);
+
+        time++;
+        Assert.assertEquals(ENTRY_1, cache.get(KEY_1));
+        Assert.assertEquals(ENTRY_2, cache.get(KEY_2));
+        Assert.assertEquals(ENTRY_3, cache.get(KEY_3));
+
+        time++;
+        Assert.assertEquals(ENTRY_1, cache.get(KEY_1));
+        assertNull(cache.get(KEY_2));
+        Assert.assertEquals(ENTRY_3, cache.get(KEY_3));
+
+        time++;
+        Assert.assertEquals(ENTRY_1, cache.get(KEY_1));
+        assertNull(cache.get(KEY_2));
+        assertNull(cache.get(KEY_3));
+
+        time++;
+        assertNull(cache.get(KEY_1));
+        assertNull(cache.get(KEY_2));
+        assertNull(cache.get(KEY_3));
     }
 
     @Test
