@@ -43,10 +43,11 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
         });
 
         printWriter.close();
-        final String function = status[0] == SC_OK ? "jsonResponse" : "jsonErrorResponse";
+        final String function = status[0] == SC_OK ? "ok" : "error";
 
         ((HttpServletResponse) response).setStatus(SC_OK);
-        response.getWriter().write(function + "(" + JSON.toString(new String(bos.toByteArray())) + ");");
+        final String json = "{ status:\"" + function + "\", result:" + new String(bos.toByteArray()) + "}";
+        response.getWriter().write(request.getParameter("callback") + "(" + json + ");");
     }
 
     @Override public void destroy() {
