@@ -9,9 +9,23 @@ import static com.google.inject.multibindings.Multibinder.newSetBinder;
  * @since 13.02.2010
  */
 public abstract class ScheduleModule extends AbstractModule {
+// ------------------------------ FIELDS ------------------------------
+
+    private boolean bindScheduler = false;
+
 // -------------------------- OTHER METHODS --------------------------
+
+    @Override protected final void configure() {
+        configureScheduler();
+        if (bindScheduler) {
+            bind(Scheduler.class).asEagerSingleton();
+        }
+    }
+
+    protected abstract void configureScheduler();
 
     protected void schedule(final ScheduledTask scheduledTask) {
         newSetBinder(binder(), ScheduledTask.class).addBinding().toInstance(scheduledTask);
+        bindScheduler = true;
     }
 }

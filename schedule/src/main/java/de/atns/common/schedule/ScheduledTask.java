@@ -5,6 +5,7 @@ package de.atns.common.schedule;
  * @since 13.02.2010
  */
 public class ScheduledTask {
+
 // ------------------------------ FIELDS ------------------------------
 
     private final Long delay;
@@ -19,6 +20,14 @@ public class ScheduledTask {
 
     public static ScheduledTask task(final long period, Class<? extends Runnable> targetClass) {
         return new ScheduledTask(0, period, targetClass);
+    }
+
+    public static ScheduledTask repeatingTask(long period) {
+        return task().repeating(period);
+    }
+
+    public ScheduledTask repeating(long period) {
+        return new ScheduledTask(delay, period, targetClass);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -46,10 +55,6 @@ public class ScheduledTask {
 // -------------------------- OTHER METHODS --------------------------
 
     public ScheduledTask delay(long delay) {
-        return new ScheduledTask(delay, period, targetClass);
-    }
-
-    public ScheduledTask repeating(long period) {
         return new ScheduledTask(delay, period, targetClass);
     }
 

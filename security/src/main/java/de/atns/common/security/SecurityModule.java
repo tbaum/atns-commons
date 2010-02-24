@@ -14,7 +14,7 @@ import static com.google.inject.matcher.Matchers.any;
 public abstract class SecurityModule<USER extends SecurityUser> extends AbstractModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override public void configure() {
+    @Override public final void configure() {
         SecurityScope securityScope = new SecurityScope();
         bindScope(SecurityScoped.class, securityScope);
         bind(SecurityScope.class).toInstance(securityScope);
