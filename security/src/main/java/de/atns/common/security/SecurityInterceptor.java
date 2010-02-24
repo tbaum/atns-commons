@@ -34,7 +34,7 @@ public class SecurityInterceptor implements MethodInterceptor {
         }
 
         if (!user.hasAccessTo(secured)) {
-            throw new NotInRoleException(invocation.getMethod(),secured);
+            throw new NotInRoleException(invocation.getMethod(), secured);
         }
 
         return invocation.proceed();

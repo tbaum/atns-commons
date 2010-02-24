@@ -22,7 +22,7 @@ public abstract class AbstractConfigModule extends AbstractModule {
     protected void configure(final Class<? extends Annotation> annotation) {
         String name = annotation.getAnnotation(ConfigurationName.class).value();
 
-        final String configValue = getConfigValue(name);
+        final String configValue = value(name);
         if (configValue != null) {
             bindConstant().annotatedWith(annotation).to(configValue);
         } else {
@@ -31,7 +31,7 @@ public abstract class AbstractConfigModule extends AbstractModule {
         }
     }
 
-    protected String getConfigValue(final String name) {
+    protected String value(final String name) {
         return config.get(name);
     }
 }                                                   
