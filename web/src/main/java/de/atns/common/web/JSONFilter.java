@@ -3,6 +3,8 @@ package de.atns.common.web;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ajax.JSON;
 
 import javax.servlet.*;
@@ -20,6 +22,7 @@ import java.util.Map;
 @Singleton public class JSONFilter implements Filter {
 // ------------------------------ FIELDS ------------------------------
 
+    private static final Log LOG = LogFactory.getLog(JSONFilter.class);
     private final Provider<Result> result;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -46,7 +49,7 @@ import java.util.Map;
             chain.doFilter(request, response);
             printWriter.write(result.get().toJSON());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e, e);
             ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             printWriter.write(mapException(e));
         }
