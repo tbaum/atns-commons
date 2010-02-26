@@ -1,7 +1,7 @@
 package de.atns.common.security;
 
-import de.atns.common.security.client.Secured;
-import de.atns.common.security.client.SecurityUser;
+import de.atns.common.security.Secured;
+import de.atns.common.security.SecurityUser;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 

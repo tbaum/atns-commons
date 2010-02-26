@@ -1,8 +1,8 @@
 package de.atns.common.security;
 
 import com.google.inject.AbstractModule;
-import de.atns.common.security.client.Secured;
-import de.atns.common.security.client.SecurityUser;
+import de.atns.common.security.Secured;
+import de.atns.common.security.SecurityUser;
 
 import static com.google.inject.matcher.Matchers.annotatedWith;
 import static com.google.inject.matcher.Matchers.any;

@@ -3,7 +3,7 @@ package de.atns.common.security;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.cache.TimeoutCache;
-import de.atns.common.security.client.SecurityUser;
+import de.atns.common.security.SecurityUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

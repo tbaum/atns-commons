@@ -1,7 +1,7 @@
 package de.atns.common.security;
 
 import com.google.inject.ImplementedBy;
-import de.atns.common.security.client.SecurityUser;
+import de.atns.common.security.SecurityUser;
 
 import java.util.UUID;
 

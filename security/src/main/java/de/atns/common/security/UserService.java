@@ -1,6 +1,6 @@
 package de.atns.common.security;
 
-import de.atns.common.security.client.SecurityUser;
+import de.atns.common.security.SecurityUser;
 
 /**
  * @author tbaum
