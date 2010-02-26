@@ -17,6 +17,7 @@
         <module>cache</module>
         <module>config</module>
         <module>fileutils</module>
+        <module>gwt</module>
         <module>numbergenerator</module>
         <module>schedule</module>
         <module>security</module>
