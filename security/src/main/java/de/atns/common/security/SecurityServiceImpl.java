@@ -3,7 +3,6 @@ package de.atns.common.security;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.cache.TimeoutCache;
-import de.atns.common.security.SecurityUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -48,6 +47,10 @@ import static java.util.UUID.randomUUID;
         return null;
     }
 
+    public SecurityUser currentUser() {
+        return securityScope.get(SecurityUser.class);
+    }
+
     public UUID login(final String login, final String password) {
         LOG.debug("login user=" + login);
         final SecurityUser user = userService.findUser(login, password);
@@ -62,7 +65,7 @@ import static java.util.UUID.randomUUID;
     }
 
     public SecurityUser logout() {
-        SecurityUser user = securityScope.get(SecurityUser.class);
+        SecurityUser user = currentUser();
         cache.removeValue(user);
         return user;
     }

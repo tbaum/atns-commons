@@ -1,7 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.ImplementedBy;
-import de.atns.common.security.SecurityUser;
 
 import java.util.UUID;
 
@@ -13,9 +12,11 @@ import java.util.UUID;
 public interface SecurityService {
 // -------------------------- OTHER METHODS --------------------------
 
-    public SecurityUser authenticate(final UUID uuid);
+    SecurityUser authenticate(UUID uuid);
 
-    public UUID login(final String login, final String password);
+    SecurityUser currentUser();
 
-    public SecurityUser logout();
+    UUID login(String login, String password);
+
+    SecurityUser logout();
 }
