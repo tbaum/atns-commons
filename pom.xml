@@ -10,7 +10,7 @@
     <parent>
         <groupId>de.atns.maven</groupId>
         <artifactId>defaults</artifactId>
-        <version>1.0</version>
+        <version>1.2</version>
     </parent>
 
     <modules>
@@ -18,6 +18,8 @@
         <module>config</module>
         <module>fileutils</module>
         <module>gwt</module>
+        <module>gwt-dispatch</module>
+        <module>gwt-presenter</module>
         <module>numbergenerator</module>
         <module>schedule</module>
         <module>security</module>
@@ -68,6 +70,16 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>web</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>gwt-dispatch</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>gwt-presenter</artifactId>
                 <version>${version}</version>
             </dependency>
 
