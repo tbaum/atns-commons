@@ -1,4 +1,4 @@
-package de.atns.common.gwt;
+package de.atns.common.gwt.client;
 
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
  * @author mwolter
  * @since 08.01.2010
  */
-abstract class EnterKeyPressHandler implements KeyPressHandler {
+public abstract class EnterKeyPressHandler implements KeyPressHandler {
 // ------------------------ INTERFACE METHODS ------------------------
 
 
