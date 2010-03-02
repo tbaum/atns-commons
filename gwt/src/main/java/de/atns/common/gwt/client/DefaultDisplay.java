@@ -1,4 +1,4 @@
-package de.atns.common.gwt;
+package de.atns.common.gwt.client;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.*;
@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.*;
 import static com.google.gwt.dom.client.Style.BorderStyle.SOLID;
 import static com.google.gwt.dom.client.Style.Position.ABSOLUTE;
 import static com.google.gwt.dom.client.Style.Unit.PX;
-import static de.atns.common.gwt.GwtUtil.flowPanel;
+import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 
 /**
  * @author tbaum

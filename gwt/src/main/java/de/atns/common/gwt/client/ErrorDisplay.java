@@ -1,4 +1,4 @@
-package de.atns.common.gwt;
+package de.atns.common.gwt.client;
 
 import net.customware.gwt.presenter.client.Display;
 

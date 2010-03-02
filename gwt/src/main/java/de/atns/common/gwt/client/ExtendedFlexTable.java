@@ -1,4 +1,4 @@
-package de.atns.common.gwt;
+package de.atns.common.gwt.client;
 
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
