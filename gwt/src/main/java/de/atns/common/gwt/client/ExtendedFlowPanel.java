@@ -41,18 +41,25 @@ public class ExtendedFlowPanel {
     public ExtendedFlowPanel add(Widget widget) {
         panel.add(widget);
         count++;
-        panel.getWidget(count - 1).getElement().getStyle().setDisplay(Style.Display.INLINE);
+        setStyle();
         return this;
     }
 
-    public ExtendedFlowPanel addStyle(String styleName) {
-        panel.getWidget(count - 1).addStyleName(styleName);
-        return this;
+    private void setStyle() {
+        panel.getWidget(count - 1).getElement().getStyle().setDisplay(Style.Display.INLINE_BLOCK);
+        panel.getWidget(count - 1).getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
+        panel.getWidget(count - 1).getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
     }
 
     public ExtendedFlowPanel add(Object text) {
         panel.add(GwtUtil.createLabel(text != null ? text.toString() : ""));
         count++;
+        setStyle();
+        return this;
+    }
+
+    public ExtendedFlowPanel addStyle(String styleName) {
+        panel.getWidget(count - 1).addStyleName(styleName);
         return this;
     }
 
@@ -71,8 +78,8 @@ public class ExtendedFlowPanel {
         return this;
     }
 
-    public ExtendedFlowPanel widthPX(int w) {
-        panel.getWidget(count - 1).setWidth(w + "px");
+    public ExtendedFlowPanel setPadding(final int padding) {
+        this.padding = padding;
         return this;
     }
 
@@ -81,8 +88,8 @@ public class ExtendedFlowPanel {
         return this;
     }
 
-    public ExtendedFlowPanel setPadding(final int padding) {
-        this.padding = padding;
+    public ExtendedFlowPanel widthPX(int w) {
+        panel.getWidget(count - 1).setWidth(w + "px");
         return this;
     }
 }

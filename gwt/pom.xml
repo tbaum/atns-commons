@@ -48,6 +48,12 @@
             <artifactId>gwt-dispatch</artifactId>
             <version>1.0.0</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.inject</groupId>
+                    <artifactId>guice</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
