@@ -6,5 +6,8 @@
     <inherits name="com.google.gwt.user.Debug"/>
     <inherits name="com.google.gwt.core.Core"/>
     <inherits name="com.google.gwt.dom.DOM"/>
+    <inherits name="com.google.gwt.user.ClippedImage"/>
+    <inherits name="net.customware.gwt.presenter.Presenter"/>
+    <inherits name="net.customware.gwt.dispatch.Dispatch"/>
     <source path="gwt"/>
 </module>
