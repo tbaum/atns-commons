@@ -8,6 +8,8 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
 
+
+
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.INLINE;
 import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
@@ -17,13 +19,14 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
  * @author mwolter
  * @since 19.11.2009 20:03:32
  */
-public class GwtUtil {
+@SuppressWarnings({"ALL"}) public class GwtUtil {
 // ------------------------------ FIELDS ------------------------------
 
     public static final Command NOOP = new Command() {
         @Override public void execute() {
         }
     };
+
 
 // -------------------------- STATIC METHODS --------------------------
 
@@ -133,6 +136,57 @@ public class GwtUtil {
         return image;
     }
 
+    public static Button createDeleteButton(final String text, final ClickHandler deleteHandler) {
+        final Button deleteButton = new Button("Löschen");
+
+        deleteButton.addClickHandler(new ClickHandler() {
+            @Override public void onClick(final ClickEvent event) {
+
+                final DialogBox dialogBox = new DialogBox(false, true);
+                dialogBox.setText("Löschen bestätigen");
+
+                FlowPanel flowPanel = new FlowPanel();
+
+                final Label w = new Label(text, true);
+                w.addStyleName("heading");
+                w.getElement().getStyle().setPadding(15, Style.Unit.PX);
+                flowPanel.add(w);
+
+
+
+                Button cancelButton = new Button("Abbrechen");
+                cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
+
+                final ClickHandler clickHandler = new ClickHandler() {
+                    @Override public void onClick(final ClickEvent event) {
+                        dialogBox.hide();
+                    }
+                };
+
+                
+                Button delButton = new Button("Löschen");
+                delButton.addClickHandler(deleteHandler);
+                delButton.addClickHandler(clickHandler);
+                cancelButton.addClickHandler(clickHandler);
+
+                flowPanel.add(delButton);
+                flowPanel.add(cancelButton);
+
+                dialogBox.add(flowPanel);
+                flowPanel.setWidth("500px");
+
+                flowPanel.getElement().getStyle().setProperty("textAlign", "center");
+                flowPanel.getElement().getStyle().setProperty("paddingBottom", "10px");
+
+                dialogBox.setGlassEnabled(true);
+                dialogBox.center();
+                dialogBox.show();
+
+            }
+        });
+
+        return deleteButton;
+    }
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {
