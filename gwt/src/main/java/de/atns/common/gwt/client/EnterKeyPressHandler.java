@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
  * @author mwolter
  * @since 08.01.2010
  */
-abstract class EnterKeyPressHandler implements KeyPressHandler {
+public abstract class EnterKeyPressHandler implements KeyPressHandler {
 // ------------------------ INTERFACE METHODS ------------------------
 
 

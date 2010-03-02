@@ -1,0 +1,43 @@
+package de.atns.common.gwt.server;
+
+import ch.lambdaj.function.convert.Converter;
+import net.customware.gwt.dispatch.server.ActionHandler;
+import net.customware.gwt.dispatch.server.ExecutionContext;
+import net.customware.gwt.dispatch.shared.Action;
+import net.customware.gwt.dispatch.shared.ActionException;
+import net.customware.gwt.dispatch.shared.Result;
+
+/**
+ * @author tbaum
+ * @since 12.02.2010
+ */
+public abstract class ConvertingActionHandler<A extends Action<R>, R extends Result, S>
+        implements ActionHandler<A, R> {
+// ------------------------------ FIELDS ------------------------------
+
+    private final Converter<S, R> converter;
+
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    protected ConvertingActionHandler(final Converter<S, R> converter) {
+        this.converter = converter;
+    }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface ActionHandler ---------------------
+
+    @Override    //TODO  @Transactional
+    public final R execute(final A action, final ExecutionContext executionContext) throws ActionException {
+        return converter.convert(executeInternal(action, executionContext));
+    }
+
+    @Override
+    public void rollback(final A action, final R result, final ExecutionContext context) {
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public abstract S executeInternal(final A action, final ExecutionContext executionContext) throws ActionException;
+}
