@@ -9,7 +9,6 @@ import net.customware.gwt.presenter.client.Display;
 public interface ErrorDisplay extends Display {
 // -------------------------- OTHER METHODS --------------------------
 
-    void showError(Throwable originalCaught);
-
-    void hideError();
+    void setErrorVisible(boolean visible);
+    void showError(String text);
 }
