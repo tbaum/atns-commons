@@ -17,7 +17,6 @@ public class ListPresentation<E extends Serializable> implements Result {
     private boolean moreResults;
     private int start;
     private int total;
-    private int pageRange;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -29,18 +28,13 @@ public class ListPresentation<E extends Serializable> implements Result {
         this.moreResults = moreResults;
     }
 
-    public ListPresentation(final Collection<E> list, final int start, final int total, final int pageRange) {
-        this.pageRange = pageRange;
+    public ListPresentation(final Collection<E> list, final int start, final int total) {
         this.list = new ArrayList<E>(list);
         this.start = start;
         this.total = total;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
-
-    public int getPageRange() {
-        return pageRange;
-    }
 
     public int getStart() {
         return start;

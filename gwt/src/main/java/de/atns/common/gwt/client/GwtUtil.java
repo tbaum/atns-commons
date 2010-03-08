@@ -124,6 +124,10 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return createLabel(text, null, false);
     }
 
+    public static Label createLabel(final String text, final boolean inline) {
+        return createLabel(text, null, inline);
+    }
+
     public static Label createLabel(final String text, final String style) {
         return createLabel(text, style, false);
     }

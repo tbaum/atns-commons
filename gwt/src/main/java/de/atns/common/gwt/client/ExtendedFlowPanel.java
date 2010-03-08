@@ -21,8 +21,39 @@ public class ExtendedFlowPanel {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static ExtendedFlowPanel extendedFlowPanel() {
-        return new ExtendedFlowPanel();
+    public static ExtendedFlowPanel extendedFlowPanel(Widget... items) {
+        final ExtendedFlowPanel flowPanel = new ExtendedFlowPanel();
+        for (Widget item : items) {
+            flowPanel.add(item);
+        }
+        return flowPanel;
+    }
+
+    public static ExtendedFlowPanel extendedFlowPanel(int padding, Widget... items) {
+        final ExtendedFlowPanel flowPanel = extendedFlowPanel();
+        flowPanel.setPadding(padding);
+        for (Widget item : items) {
+            flowPanel.add(item);
+        }
+        return flowPanel;
+    }
+
+    public ExtendedFlowPanel setPadding(final int padding) {
+        this.padding = padding;
+        return this;
+    }
+
+    public ExtendedFlowPanel add(Widget widget) {
+        panel.add(widget);
+        count++;
+        updateStyle(widget);
+        return this;
+    }
+
+    private void updateStyle(final Widget widget) {
+        widget.getElement().getStyle().setDisplay(Style.Display.INLINE_BLOCK);
+        widget.getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
+        widget.getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -38,24 +69,8 @@ public class ExtendedFlowPanel {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public ExtendedFlowPanel add(Widget widget) {
-        panel.add(widget);
-        count++;
-        setStyle();
-        return this;
-    }
-
-    private void setStyle() {
-        panel.getWidget(count - 1).getElement().getStyle().setDisplay(Style.Display.INLINE_BLOCK);
-        panel.getWidget(count - 1).getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
-        panel.getWidget(count - 1).getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
-    }
-
     public ExtendedFlowPanel add(Object text) {
-        panel.add(GwtUtil.createLabel(text != null ? text.toString() : ""));
-        count++;
-        setStyle();
-        return this;
+        return add(GwtUtil.createLabel(text != null ? text.toString() : ""));
     }
 
     public ExtendedFlowPanel addStyle(String styleName) {
@@ -75,11 +90,6 @@ public class ExtendedFlowPanel {
         panel.add(widget);
         count++;
         panel.getWidget(count - 1).getElement().getStyle().setDisplay(BLOCK);
-        return this;
-    }
-
-    public ExtendedFlowPanel setPadding(final int padding) {
-        this.padding = padding;
         return this;
     }
 

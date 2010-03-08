@@ -28,6 +28,6 @@ public class ListConverter<F extends Serializable, T extends Serializable> imple
 
     @Override
     public ListPresentation<T> convert(final ListPresentation<F> result) {
-        return new ListPresentation<T>(Lambda.convert(result.getEntries(), converter), result.getStart(), result.getTotal(), result.getPageRange());
+        return new ListPresentation<T>(Lambda.convert(result.getEntries(), converter), result.getStart(), result.getTotal());
     }
 }
