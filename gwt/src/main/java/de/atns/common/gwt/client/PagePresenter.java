@@ -16,7 +16,7 @@ import net.customware.gwt.presenter.client.EventBus;
  * @author tbaum
  * @since 24.10.2009
  */
-@Singleton public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display> {
+public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final int PAGING = 2;
