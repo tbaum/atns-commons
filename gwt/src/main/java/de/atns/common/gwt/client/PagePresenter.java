@@ -52,6 +52,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
             }
         }));
         createLenghtButtons();
+        startEntry = 0;
     }
 
 
