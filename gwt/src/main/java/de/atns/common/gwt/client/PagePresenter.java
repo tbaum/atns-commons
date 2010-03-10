@@ -29,6 +29,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     @Inject
     public PagePresenter(final Display display, final EventBus bus) {
         super(display, bus);
+        createLenghtButtons();
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -51,7 +52,6 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
                 createButtons(total, start);
             }
         }));
-        createLenghtButtons();
     }
 
 
