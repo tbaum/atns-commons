@@ -16,6 +16,7 @@
     <modules>
         <module>cache</module>
         <module>config</module>
+        <module>dao</module>
         <module>fileutils</module>
         <module>gwt</module>
         <module>gwt-dispatch</module>
@@ -50,6 +51,11 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>cache</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>dao</artifactId>
                 <version>${version}</version>
             </dependency>
             <dependency>
