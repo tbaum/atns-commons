@@ -25,27 +25,27 @@ public class ServerDispatchModule extends AbstractModule {
     private Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass;
 
     public ServerDispatchModule() {
-        this( GuiceDispatch.class, DefaultActionHandlerRegistry.class );
+        this(GuiceDispatch.class, DefaultActionHandlerRegistry.class);
     }
 
-    public ServerDispatchModule( Class<? extends Dispatch> dispatchClass ) {
-        this( dispatchClass, DefaultActionHandlerRegistry.class );
+    public ServerDispatchModule(Class<? extends Dispatch> dispatchClass) {
+        this(dispatchClass, DefaultActionHandlerRegistry.class);
     }
 
-    public ServerDispatchModule( Class<? extends Dispatch> dispatchClass,
-                                 Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass ) {
+    public ServerDispatchModule(Class<? extends Dispatch> dispatchClass,
+                                Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass) {
         this.dispatchClass = dispatchClass;
         this.actionHandlerRegistryClass = actionHandlerRegistryClass;
     }
 
     @Override
     protected final void configure() {
-        bind( ActionHandlerRegistry.class ).to( getActionHandlerRegistryClass() ).in( Singleton.class );
-        bind( Dispatch.class ).to( getDispatchClass() );
+        bind(ActionHandlerRegistry.class).to(getActionHandlerRegistryClass()).in(Singleton.class);
+        bind(Dispatch.class).to(getDispatchClass());
 
         // This will bind registered handlers to the registry.
-        if ( InstanceActionHandlerRegistry.class.isAssignableFrom( getActionHandlerRegistryClass() ) )
-            requestStaticInjection( ActionHandlerLinker.class );
+        if (InstanceActionHandlerRegistry.class.isAssignableFrom(getActionHandlerRegistryClass()))
+            requestStaticInjection(ActionHandlerLinker.class);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ServerDispatchModule extends AbstractModule {
      * in an {@link Injector}.
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals(Object obj) {
         return obj instanceof ServerDispatchModule;
     }
 

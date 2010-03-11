@@ -4,8 +4,6 @@ import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.Scope;
 
-import static com.google.inject.servlet.ServletScopes.REQUEST;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**

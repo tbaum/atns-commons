@@ -7,7 +7,7 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
     private static Type<PlaceRequestHandler> TYPE;
 
     public static Type<PlaceRequestHandler> getType() {
-        if ( TYPE == null )
+        if (TYPE == null)
             TYPE = new Type<PlaceRequestHandler>();
         return TYPE;
     }
@@ -16,18 +16,18 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
 
     private final boolean fromHistory;
 
-    public PlaceRequestEvent( PlaceRequest request ) {
-        this( request, false );
+    public PlaceRequestEvent(PlaceRequest request) {
+        this(request, false);
     }
 
-    PlaceRequestEvent( PlaceRequest request, boolean fromHistory ) {
+    PlaceRequestEvent(PlaceRequest request, boolean fromHistory) {
         this.request = request;
         this.fromHistory = fromHistory;
     }
 
     @Override
-    protected void dispatch( PlaceRequestHandler handler ) {
-        handler.onPlaceRequest( this );
+    protected void dispatch(PlaceRequestHandler handler) {
+        handler.onPlaceRequest(this);
     }
 
     @Override

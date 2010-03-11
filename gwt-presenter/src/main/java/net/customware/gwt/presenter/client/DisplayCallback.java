@@ -7,51 +7,49 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * automatically call the {@link Display#startProcessing()} and
  * {@link Display#stopProcessing()} methods to inform the display that work is
  * being done.
- * 
+ *
  * @author David Peterson
- * 
  * @param <T> The type to return.
  */
 public abstract class DisplayCallback<T> implements AsyncCallback<T> {
 
     private final Display display;
 
-    public DisplayCallback( Display display ) {
+    public DisplayCallback(Display display) {
         this.display = display;
         display.startProcessing();
     }
 
-    public void onSuccess( T value ) {
+    public void onSuccess(T value) {
         try {
-            handleSuccess( value );
+            handleSuccess(value);
         } finally {
-            reset( null );
+            reset(null);
         }
 
     }
 
     /**
      * This method is called when the call returns successfully.
-     * 
+     *
      * @param value The returned value.
      */
-    protected abstract void handleSuccess( T value );
+    protected abstract void handleSuccess(T value);
 
-    public void onFailure( Throwable e ) {
+    public void onFailure(Throwable e) {
         try {
-            handleFailure( e );
+            handleFailure(e);
         } finally {
-            reset( e );
+            reset(e);
         }
     }
 
     /**
-     * 
      * @param e
      */
-    protected abstract void handleFailure( Throwable e );
+    protected abstract void handleFailure(Throwable e);
 
-    protected void reset( Throwable e ) {
+    protected void reset(Throwable e) {
         display.stopProcessing();
     }
 

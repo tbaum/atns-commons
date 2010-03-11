@@ -18,15 +18,6 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
     private final FlowPanel errorPanel = new FlowPanel();
     private final Label errorLabel = GwtUtil.createLabel("", "errorPanelText");
 
-    @Override public void showError(final String text) {
-        errorPanel.setVisible(true);
-        errorLabel.setText(text);
-    }
-
-    @Override public void setErrorVisible(final boolean visible) {
-        errorPanel.setVisible(visible);
-    }
-
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected DefaultDisplay() {
@@ -73,20 +64,20 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
         loader.setVisible(false);
     }
 
+// --------------------- Interface ErrorDisplay ---------------------
+
+    @Override public void setErrorVisible(final boolean visible) {
+        errorPanel.setVisible(visible);
+    }
+
+    @Override public void showError(final String text) {
+        errorPanel.setVisible(true);
+        errorLabel.setText(text);
+    }
+
 // --------------------- Interface WidgetDisplay ---------------------
 
     public Widget asWidget() {
         return this;
-    }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    public void setVisibleError() {
-        errorPanel.setVisible(false);
-    }
-
-    public void showError(final Throwable originalCaught) {
-        errorPanel.setVisible(true);
-        errorLabel.setText("Fehler! " + originalCaught.getMessage());
     }
 }

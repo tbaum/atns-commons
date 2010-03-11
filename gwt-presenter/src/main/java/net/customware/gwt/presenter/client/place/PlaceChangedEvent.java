@@ -7,29 +7,28 @@ import com.google.gwt.event.shared.GwtEvent;
  * {@link PlaceRequestEvent}). This allows the {@link PlaceManager} to keep
  * track of the current location. Other classes may, but will typically not need
  * to, implement {@link PlaceChangedHandler} to be informed of manual changes.
- * 
+ *
  * @author David Peterson
- * 
  */
 public class PlaceChangedEvent extends GwtEvent<PlaceChangedHandler> {
 
     private static Type<PlaceChangedHandler> TYPE;
 
     public static Type<PlaceChangedHandler> getType() {
-        if ( TYPE == null )
+        if (TYPE == null)
             TYPE = new Type<PlaceChangedHandler>();
         return TYPE;
     }
 
     private final PlaceRequest request;
 
-    public PlaceChangedEvent( PlaceRequest request ) {
+    public PlaceChangedEvent(PlaceRequest request) {
         this.request = request;
     }
 
     @Override
-    protected void dispatch( PlaceChangedHandler handler ) {
-        handler.onPlaceChange( this );
+    protected void dispatch(PlaceChangedHandler handler) {
+        handler.onPlaceChange(this);
     }
 
     @Override

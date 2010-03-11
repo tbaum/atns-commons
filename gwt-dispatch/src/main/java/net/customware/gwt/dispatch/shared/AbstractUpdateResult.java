@@ -3,11 +3,10 @@ package net.customware.gwt.dispatch.shared;
 /**
  * Provides support for simple update response which contain both the old value
  * and new value.
- * 
+ *
  * @author David Peterson
- * 
  * @param <T>
- *            The value type.
+ * The value type.
  */
 public abstract class AbstractUpdateResult<T> implements Result {
     private T oldValue;
@@ -21,14 +20,14 @@ public abstract class AbstractUpdateResult<T> implements Result {
     protected AbstractUpdateResult() {
     }
 
-    public AbstractUpdateResult( T oldValue, T newValue ) {
+    public AbstractUpdateResult(T oldValue, T newValue) {
         this.oldValue = oldValue;
         this.newValue = newValue;
     }
 
     /**
      * The previous value.
-     * 
+     *
      * @return The old value.
      */
     public T getOld() {
@@ -37,7 +36,7 @@ public abstract class AbstractUpdateResult<T> implements Result {
 
     /**
      * The new/current value.
-     * 
+     *
      * @return The new value.
      */
     public T getNew() {

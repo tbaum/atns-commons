@@ -32,7 +32,7 @@ public class SecureDispatchModule extends AbstractDispatchModule {
      * implementation, using the {@link net.customware.gwt.dispatch.client.DefaultExceptionHandler}.
      */
     public SecureDispatchModule() {
-        this( DefaultExceptionHandler.class );
+        this(DefaultExceptionHandler.class);
     }
 
     /**
@@ -41,14 +41,14 @@ public class SecureDispatchModule extends AbstractDispatchModule {
      *
      * @param exceptionHandlerType The {@link ExceptionHandler} implementation class.
      */
-    public SecureDispatchModule( Class<? extends ExceptionHandler> exceptionHandlerType ) {
-        super( exceptionHandlerType );
+    public SecureDispatchModule(Class<? extends ExceptionHandler> exceptionHandlerType) {
+        super(exceptionHandlerType);
     }
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync( ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor ) {
-        return new SecureDispatchAsync( exceptionHandler, secureSessionAccessor );
+    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor) {
+        return new SecureDispatchAsync(exceptionHandler, secureSessionAccessor);
     }
 
 }

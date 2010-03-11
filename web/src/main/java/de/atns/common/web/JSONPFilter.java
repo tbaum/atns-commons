@@ -1,7 +1,6 @@
 package de.atns.common.web;
 
 import com.google.inject.Singleton;
-import org.eclipse.jetty.util.ajax.JSON;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

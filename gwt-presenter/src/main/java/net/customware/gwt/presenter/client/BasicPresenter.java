@@ -1,13 +1,12 @@
 package net.customware.gwt.presenter.client;
 
-import java.util.List;
-
+import com.google.gwt.event.shared.HandlerRegistration;
 import net.customware.gwt.presenter.client.place.Place;
 import net.customware.gwt.presenter.client.place.PlaceRequest;
 import net.customware.gwt.presenter.client.place.PlaceRequestEvent;
 import net.customware.gwt.presenter.client.place.PlaceRequestHandler;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import java.util.List;
 
 public abstract class BasicPresenter<D extends Display> implements Presenter {
 
@@ -25,7 +24,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
 
     private boolean bound = false;
 
-    public BasicPresenter( D display, EventBus eventBus ) {
+    public BasicPresenter(D display, EventBus eventBus) {
         this.display = display;
         this.eventBus = eventBus;
     }
@@ -33,17 +32,17 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     public void bind() {
         onBind();
 
-        if ( getPlace() != null ) {
-            registerHandler( eventBus.addHandler( PlaceRequestEvent.getType(), new PlaceRequestHandler() {
+        if (getPlace() != null) {
+            registerHandler(eventBus.addHandler(PlaceRequestEvent.getType(), new PlaceRequestHandler() {
 
-                public void onPlaceRequest( PlaceRequestEvent event ) {
+                public void onPlaceRequest(PlaceRequestEvent event) {
                     Place place = getPlace();
-                    if ( place != null && place.equals( event.getRequest().getPlace() ) ) {
-                        BasicPresenter.this.onPlaceRequest( event.getRequest() );
+                    if (place != null && place.equals(event.getRequest().getPlace())) {
+                        BasicPresenter.this.onPlaceRequest(event.getRequest());
                         revealDisplay();
                     }
                 }
-            } ) );
+            }));
         }
         bound = true;
     }
@@ -52,16 +51,15 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * Any {@link HandlerRegistration}s added will be removed when
      * {@link #unbind()} is called. This provides a handy way to track event
      * handler registrations when binding and unbinding.
-     * 
-     * @param handlerRegistration
-     *            The registration.
+     *
+     * @param handlerRegistration The registration.
      */
-    protected void registerHandler( HandlerRegistration handlerRegistration ) {
-        handlerRegistrations.add( handlerRegistration );
+    protected void registerHandler(HandlerRegistration handlerRegistration) {
+        handlerRegistrations.add(handlerRegistration);
     }
 
     public void unbind() {
-        for ( HandlerRegistration reg : handlerRegistrations ) {
+        for (HandlerRegistration reg : handlerRegistrations) {
             reg.removeHandler();
         }
         handlerRegistrations.clear();
@@ -87,7 +85,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     /**
      * Checks if the presenter has been bound. Will be set to false after a call
      * to {@link #unbind()}.
-     * 
+     *
      * @return The current bound status.
      */
     public boolean isBound() {
@@ -96,7 +94,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
 
     /**
      * Returns the display for the presenter.
-     * 
+     *
      * @return The display.
      */
     public D getDisplay() {
@@ -109,7 +107,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
 
     /**
      * The {@link Place} that represents this Presenter.
-     * 
+     *
      * @return The presenter's place.
      */
     public abstract Place getPlace();
@@ -117,11 +115,10 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     /**
      * This method is called when a {@link PlaceRequestEvent} occurs that
      * matches with the value from {@link #getPlace()}.
-     * 
-     * @param request
-     *            The request.
+     *
+     * @param request The request.
      */
-    protected abstract void onPlaceRequest( PlaceRequest request );
+    protected abstract void onPlaceRequest(PlaceRequest request);
 
     /**
      * Triggers a {@link PresenterRevealedEvent}. Subclasses should override
@@ -129,7 +126,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * perform extra operations when being revealed.
      */
     public void revealDisplay() {
-        eventBus.fireEvent( new PresenterRevealedEvent( this ) );
+        eventBus.fireEvent(new PresenterRevealedEvent(this));
     }
 
 }

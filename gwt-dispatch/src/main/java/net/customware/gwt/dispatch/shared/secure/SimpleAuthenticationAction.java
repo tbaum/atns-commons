@@ -5,7 +5,7 @@ import net.customware.gwt.dispatch.shared.Action;
 /**
  * A simple username/password authentication request. If successful, a session
  * has been created and a {@link SecureSessionResult} is returned.
- * 
+ *
  * @author David Peterson
  */
 public class SimpleAuthenticationAction implements Action<SecureSessionResult> {
@@ -16,7 +16,7 @@ public class SimpleAuthenticationAction implements Action<SecureSessionResult> {
     SimpleAuthenticationAction() {
     }
 
-    public SimpleAuthenticationAction( String username, String password ) {
+    public SimpleAuthenticationAction(String username, String password) {
         this.username = username;
         this.password = password;
     }

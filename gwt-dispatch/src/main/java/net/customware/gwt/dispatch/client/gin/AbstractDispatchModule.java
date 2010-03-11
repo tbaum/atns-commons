@@ -12,12 +12,12 @@ import net.customware.gwt.dispatch.client.ExceptionHandler;
 public class AbstractDispatchModule extends AbstractGinModule {
     protected final Class<? extends ExceptionHandler> exceptionHandlerType;
 
-    public AbstractDispatchModule( Class<? extends ExceptionHandler> exceptionHandlerType ) {
+    public AbstractDispatchModule(Class<? extends ExceptionHandler> exceptionHandlerType) {
         this.exceptionHandlerType = exceptionHandlerType;
     }
 
     @Override
     protected void configure() {
-        bind( ExceptionHandler.class ).to( exceptionHandlerType );
+        bind(ExceptionHandler.class).to(exceptionHandlerType);
     }
 }

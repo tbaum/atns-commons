@@ -21,5 +21,5 @@ public interface ExceptionHandler {
      * @param e The exception.
      * @return The status after execution.
      */
-    Status onFailure( Throwable e );
+    Status onFailure(Throwable e);
 }

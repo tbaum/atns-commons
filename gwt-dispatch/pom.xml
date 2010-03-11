@@ -32,7 +32,7 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
-    
+
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
             <artifactId>gin</artifactId>
@@ -47,6 +47,6 @@
             <groupId>com.google.code.gwt-log</groupId>
             <artifactId>gwt-log</artifactId>
         </dependency>
-     
+
     </dependencies>
 </project>

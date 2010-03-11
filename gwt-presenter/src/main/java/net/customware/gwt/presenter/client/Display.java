@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package net.customware.gwt.presenter.client;
 

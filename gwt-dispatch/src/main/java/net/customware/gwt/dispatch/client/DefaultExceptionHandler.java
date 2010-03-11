@@ -17,7 +17,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
      * @param e The exception.
      * @return The status.
      */
-    public Status onFailure( Throwable e ) {
+    public Status onFailure(Throwable e) {
         return Status.CONTINUE;
     }
 }

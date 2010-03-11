@@ -25,18 +25,18 @@ public class StandardDispatchModule extends AbstractDispatchModule {
      * implementation, using the {@link net.customware.gwt.dispatch.client.DefaultExceptionHandler}.
      */
     public StandardDispatchModule() {
-        this( DefaultExceptionHandler.class );
+        this(DefaultExceptionHandler.class);
     }
 
 
-    public StandardDispatchModule( Class<? extends ExceptionHandler> exceptionHandlerType ) {
-        super( exceptionHandlerType );
+    public StandardDispatchModule(Class<? extends ExceptionHandler> exceptionHandlerType) {
+        super(exceptionHandlerType);
     }
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync( ExceptionHandler exceptionHandler ) {
-        return new StandardDispatchAsync( exceptionHandler );
+    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler) {
+        return new StandardDispatchAsync(exceptionHandler);
     }
 
 }

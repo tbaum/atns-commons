@@ -17,7 +17,7 @@ public interface Presenter {
 
     /**
      * Returns the {@link Display} for the current presenter.
-     * 
+     *
      * @return The display.
      */
     Display getDisplay();

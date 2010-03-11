@@ -8,7 +8,7 @@ public class InvalidSessionException extends ServiceException {
         super();
     }
 
-    public InvalidSessionException( String message ) {
-        super( message );
+    public InvalidSessionException(String message) {
+        super(message);
     }
 }

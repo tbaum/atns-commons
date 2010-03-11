@@ -35,7 +35,7 @@ public class SecureSessionResult implements Result {
     SecureSessionResult() {
     }
 
-    public SecureSessionResult( String sessionId ) {
+    public SecureSessionResult(String sessionId) {
         this.sessionId = sessionId;
     }
 

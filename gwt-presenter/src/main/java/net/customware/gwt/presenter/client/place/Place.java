@@ -3,11 +3,11 @@ package net.customware.gwt.presenter.client.place;
 public class Place {
     private final String id;
 
-    public Place( Class<?> type ) {
-        this( getPlaceName( type ) );
+    public Place(Class<?> type) {
+        this(getPlaceName(type));
     }
 
-    public Place( String value ) {
+    public Place(String value) {
         this.id = value;
     }
 
@@ -16,10 +16,10 @@ public class Place {
     }
 
     @Override
-    public boolean equals( Object o ) {
-        if ( o instanceof Place ) {
-            Place place = ( Place ) o;
-            return id.equals( place.id );
+    public boolean equals(Object o) {
+        if (o instanceof Place) {
+            Place place = (Place) o;
+            return id.equals(place.id);
         }
         return false;
     }
@@ -36,45 +36,43 @@ public class Place {
 
     /**
      * Returns a new request for this place.
-     * 
+     *
      * @return The new {@link PlaceRequest}.
      */
     public PlaceRequest request() {
-        return new PlaceRequest( this );
+        return new PlaceRequest(this);
     }
 
     /**
      * A convenience method for calling {@link #request()}.with( name, id ).
-     * 
-     * @param name
-     *            The parameter name.
-     * @param id
-     *            The parameter id.
+     *
+     * @param name The parameter name.
+     * @param id   The parameter id.
      * @return
      */
-    public PlaceRequest requestWith( String name, String value ) {
-        return new PlaceRequest( this ).with( name, value );
+    public PlaceRequest requestWith(String name, String value) {
+        return new PlaceRequest(this).with(name, value);
     }
 
-    private static String getPlaceName( Class<?> type ) {
-        String id = getSimpleName( type );
+    private static String getPlaceName(Class<?> type) {
+        String id = getSimpleName(type);
 
         Class<?> supertype = type.getSuperclass();
-        if ( supertype != null ) {
-            String stId = getSimpleName( supertype );
-            if ( id.endsWith( stId ) )
-                id = id.substring( 0, id.length() - stId.length() );
+        if (supertype != null) {
+            String stId = getSimpleName(supertype);
+            if (id.endsWith(stId))
+                id = id.substring(0, id.length() - stId.length());
         }
 
         return id;
 
     }
 
-    private static String getSimpleName( Class<?> type ) {
+    private static String getSimpleName(Class<?> type) {
         String id = type.getName();
-        int lastDot = id.lastIndexOf( '.' );
-        if ( lastDot > -1 )
-            id = id.substring( lastDot + 1 );
+        int lastDot = id.lastIndexOf('.');
+        if (lastDot > -1)
+            id = id.substring(lastDot + 1);
 
         return id;
     }

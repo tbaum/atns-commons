@@ -11,16 +11,16 @@ import net.customware.gwt.dispatch.server.guice.GuiceDispatch;
  */
 public final class DispatchUtil {
 
-  private static final DefaultActionHandlerRegistry REGISTRY
-      = new DefaultActionHandlerRegistry();
+    private static final DefaultActionHandlerRegistry REGISTRY
+            = new DefaultActionHandlerRegistry();
 
-  private static final Dispatch DISPATCH = new GuiceDispatch( REGISTRY );
+    private static final Dispatch DISPATCH = new GuiceDispatch(REGISTRY);
 
-  public static void registerHandler( ActionHandler<?, ?> handler ) {
-    REGISTRY.addHandler( handler );
-  }
+    public static void registerHandler(ActionHandler<?, ?> handler) {
+        REGISTRY.addHandler(handler);
+    }
 
-  public static Dispatch getDispatch() {
-    return DISPATCH;
-  }
+    public static Dispatch getDispatch() {
+        return DISPATCH;
+    }
 }

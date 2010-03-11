@@ -10,7 +10,7 @@ public class DefaultEventBus extends HandlerManager implements EventBus {
 
     @Inject
     public DefaultEventBus() {
-        super( null );
+        super(null);
     }
 
 }

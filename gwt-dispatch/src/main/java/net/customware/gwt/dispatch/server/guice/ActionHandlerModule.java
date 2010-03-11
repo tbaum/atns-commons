@@ -31,13 +31,13 @@ import net.customware.gwt.dispatch.shared.Result;
 public abstract class ActionHandlerModule extends AbstractModule {
 
     private static class ActionHandlerMapImpl<A extends Action<R>, R extends Result> implements
-        ActionHandlerMap<A, R> {
+            ActionHandlerMap<A, R> {
 
         private final Class<A> actionClass;
 
         private final Class<? extends ActionHandler<A, R>> handlerClass;
 
-        public ActionHandlerMapImpl( Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass ) {
+        public ActionHandlerMapImpl(Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
             this.actionClass = actionClass;
             this.handlerClass = handlerClass;
         }
@@ -55,7 +55,7 @@ public abstract class ActionHandlerModule extends AbstractModule {
     @Override
     protected final void configure() {
         // This will only get installed once due to equals/hashCode override.
-        install( new ServerDispatchModule() );
+        install(new ServerDispatchModule());
 
         configureHandlers();
     }
@@ -72,10 +72,10 @@ public abstract class ActionHandlerModule extends AbstractModule {
      * @param actionClass  The action class.
      * @param handlerClass The handler class.
      */
-    protected <A extends Action<R>, R extends Result> void bindHandler( Class<A> actionClass,
-                                                                        Class<? extends ActionHandler<A, R>> handlerClass ) {
-        bind( ActionHandlerMap.class ).annotatedWith( UniqueAnnotations.create() ).toInstance(
-            new ActionHandlerMapImpl<A, R>( actionClass, handlerClass ) );
+    protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass,
+                                                                       Class<? extends ActionHandler<A, R>> handlerClass) {
+        bind(ActionHandlerMap.class).annotatedWith(UniqueAnnotations.create()).toInstance(
+                new ActionHandlerMapImpl<A, R>(actionClass, handlerClass));
     }
 
 }
