@@ -22,5 +22,7 @@ import net.customware.gwt.dispatch.shared.ServiceException;
  */
 @RemoteServiceRelativePath("dispatch")
 public interface StandardDispatchService extends RemoteService {
-    Result execute( Action<?> action ) throws ActionException, ServiceException;
+// -------------------------- OTHER METHODS --------------------------
+
+    <R extends Result> R execute(Action<R> action) throws ActionException, ServiceException;
 }

@@ -18,39 +18,47 @@ import net.customware.gwt.dispatch.shared.secure.InvalidSessionException;
  * @author David Peterson
  */
 public class SecureDispatchAsync extends AbstractDispatchAsync {
+// ------------------------------ FIELDS ------------------------------
 
-    private static final SecureDispatchServiceAsync realService = GWT.create( SecureDispatchService.class );
+    private static final SecureDispatchServiceAsync realService = GWT.create(SecureDispatchService.class);
 
     private final SecureSessionAccessor secureSessionAccessor;
 
-    public SecureDispatchAsync( ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor ) {
-        super( exceptionHandler );
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    public SecureDispatchAsync(ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor) {
+        super(exceptionHandler);
         this.secureSessionAccessor = secureSessionAccessor;
     }
 
-    public <A extends Action<R>, R extends Result> void execute( final A action, final AsyncCallback<R> callback ) {
+// ------------------------ INTERFACE METHODS ------------------------
 
+
+// --------------------- Interface DispatchAsync ---------------------
+
+    public <R extends Result> void execute(final Action<R> action, final AsyncCallback<R> callback) {
         String sessionId = secureSessionAccessor.getSessionId();
 
-        realService.execute( sessionId, action, new AsyncCallback<Result>() {
-            public void onFailure( Throwable caught ) {
-                SecureDispatchAsync.this.onFailure( action, caught, callback );
+        realService.execute(sessionId, action, new AsyncCallback<R>() {
+            public void onFailure(Throwable caught) {
+                SecureDispatchAsync.this.onFailure(action, caught, callback);
             }
 
             @SuppressWarnings({"unchecked"})
-            public void onSuccess( Result result ) {
+            public void onSuccess(R result) {
                 // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
-                SecureDispatchAsync.this.onSuccess( action, (R) result, callback );
+                SecureDispatchAsync.this.onSuccess(action, result, callback);
             }
-        } );
+        });
     }
 
-    protected <A extends Action<R>, R extends Result> void onFailure( A action, Throwable caught, final AsyncCallback<R> callback ) {
-        if ( caught instanceof InvalidSessionException ) {
+// -------------------------- OTHER METHODS --------------------------
+
+    protected <R extends Result> void onFailure(Action<R> action, Throwable caught, final AsyncCallback<R> callback) {
+        if (caught instanceof InvalidSessionException) {
             secureSessionAccessor.clearSessionId();
         }
 
-        super.onFailure( action, caught, callback );
-
+        super.onFailure(action, caught, callback);
     }
 }

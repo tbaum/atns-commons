@@ -17,25 +17,31 @@ import net.customware.gwt.dispatch.shared.Result;
  * @author David Peterson
  */
 public class StandardDispatchAsync extends AbstractDispatchAsync {
+// ------------------------------ FIELDS ------------------------------
 
-    private static final StandardDispatchServiceAsync realService = GWT.create( StandardDispatchService.class );
+    private static final StandardDispatchServiceAsync realService = GWT.create(StandardDispatchService.class);
 
-    public StandardDispatchAsync( ExceptionHandler exceptionHandler ) {
-        super( exceptionHandler );
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    public StandardDispatchAsync(ExceptionHandler exceptionHandler) {
+        super(exceptionHandler);
     }
 
-    public <A extends Action<R>, R extends Result> void execute( final A action, final AsyncCallback<R> callback ) {
-        realService.execute( action, new AsyncCallback<Result>() {
-            public void onFailure( Throwable caught ) {
-                StandardDispatchAsync.this.onFailure( action, caught, callback );
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface DispatchAsync ---------------------
+
+    public <R extends Result> void execute(final Action<R> action, final AsyncCallback<R> callback) {
+        realService.execute(action, new AsyncCallback<R>() {
+            public void onFailure(Throwable caught) {
+                StandardDispatchAsync.this.onFailure(action, caught, callback);
             }
 
             @SuppressWarnings({"unchecked"})
-            public void onSuccess( Result result ) {
-                StandardDispatchAsync.this.onSuccess( action, (R) result, callback );
+            public void onSuccess(R result) {
+                StandardDispatchAsync.this.onSuccess(action, result, callback);
             }
-        } );
+        });
     }
-
-
 }
