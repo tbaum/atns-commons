@@ -10,5 +10,6 @@ public interface ErrorDisplay extends Display {
 // -------------------------- OTHER METHODS --------------------------
 
     void setErrorVisible(boolean visible);
+
     void showError(String text);
 }
