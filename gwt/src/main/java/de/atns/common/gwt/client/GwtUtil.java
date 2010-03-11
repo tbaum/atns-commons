@@ -4,7 +4,10 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
 import org.cobogw.gwt.user.client.ui.Button;
@@ -138,53 +141,15 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return image;
     }
 
-    public static Button createDeleteButton(final String text, final ClickHandler deleteHandler) {
-        final Button deleteButton = new Button("Löschen");
 
-        deleteButton.addClickHandler(new ClickHandler() {
-            @Override public void onClick(final ClickEvent event) {
-                final DialogBox dialogBox = new DialogBox(false, true);
-                dialogBox.setText("Löschen bestätigen");
+    public static FlowPanel createFieldSet(String legend, Widget content) {
+        Element fieldset = DOM.createFieldSet();
+        fieldset.setInnerHTML("<legend>" + legend + "</legend>");
+        DOM.appendChild(fieldset, content.getElement());
 
-                FlowPanel flowPanel = new FlowPanel();
-
-                final Label w = new Label(text, true);
-                w.addStyleName("heading");
-                w.getElement().getStyle().setPadding(15, Style.Unit.PX);
-                flowPanel.add(w);
-
-
-                Button cancelButton = new Button("Abbrechen");
-                cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
-
-                final ClickHandler clickHandler = new ClickHandler() {
-                    @Override public void onClick(final ClickEvent event) {
-                        dialogBox.hide();
-                    }
-                };
-
-
-                Button delButton = new Button("Löschen");
-                delButton.addClickHandler(deleteHandler);
-                delButton.addClickHandler(clickHandler);
-                cancelButton.addClickHandler(clickHandler);
-
-                flowPanel.add(delButton);
-                flowPanel.add(cancelButton);
-
-                dialogBox.add(flowPanel);
-                flowPanel.setWidth("500px");
-
-                flowPanel.getElement().getStyle().setProperty("textAlign", "center");
-                flowPanel.getElement().getStyle().setProperty("paddingBottom", "10px");
-
-                dialogBox.setGlassEnabled(true);
-                dialogBox.center();
-                dialogBox.show();
-            }
-        });
-
-        return deleteButton;
+        FlowPanel flowPanel = new FlowPanel();
+        DOM.appendChild(flowPanel.getElement(), fieldset);
+        return flowPanel;
     }
 
 // -------------------------- ENUMERATIONS --------------------------
@@ -192,4 +157,5 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
     public enum DivBoxColor {
         WEISS, BLAU
     }
+
 }
