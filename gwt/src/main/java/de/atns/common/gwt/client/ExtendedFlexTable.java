@@ -69,6 +69,11 @@ public class ExtendedFlexTable {
         return this;
     }
 
+    public ExtendedFlexTable height(final int height) {
+        table.getFlexCellFormatter().setHeight(row, col - 1, height + "px");
+        return this;
+    }
+
     public ExtendedFlexTable nextRow() {
         return nextRow(false);
     }

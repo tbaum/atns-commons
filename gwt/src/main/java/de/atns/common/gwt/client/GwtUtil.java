@@ -7,8 +7,7 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
-
-
+import org.cobogw.gwt.user.client.ui.Button;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.INLINE;
@@ -26,7 +25,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         @Override public void execute() {
         }
     };
-
 
 // -------------------------- STATIC METHODS --------------------------
 
@@ -126,6 +124,10 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return createLabel(text, null, false);
     }
 
+    public static Label createLabel(final String text, final boolean inline) {
+        return createLabel(text, null, inline);
+    }
+
     public static Label createLabel(final String text, final String style) {
         return createLabel(text, style, false);
     }
@@ -141,7 +143,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
 
         deleteButton.addClickHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
-
                 final DialogBox dialogBox = new DialogBox(false, true);
                 dialogBox.setText("Löschen bestätigen");
 
@@ -153,7 +154,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
                 flowPanel.add(w);
 
 
-
                 Button cancelButton = new Button("Abbrechen");
                 cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
 
@@ -163,7 +163,7 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
                     }
                 };
 
-                
+
                 Button delButton = new Button("Löschen");
                 delButton.addClickHandler(deleteHandler);
                 delButton.addClickHandler(clickHandler);
@@ -181,12 +181,12 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
                 dialogBox.setGlassEnabled(true);
                 dialogBox.center();
                 dialogBox.show();
-
             }
         });
 
         return deleteButton;
     }
+
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {

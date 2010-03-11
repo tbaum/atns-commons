@@ -1,6 +1,7 @@
 package de.atns.common.gwt.server;
 
 import ch.lambdaj.function.convert.Converter;
+import com.wideplay.warp.persist.Transactional;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
 import net.customware.gwt.dispatch.shared.Action;
@@ -15,7 +16,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         implements ActionHandler<A, R> {
 // ------------------------------ FIELDS ------------------------------
 
-    private final Converter<S, R> converter;
+    protected final Converter<S, R> converter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -28,7 +29,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
 // --------------------- Interface ActionHandler ---------------------
 
-    @Override    //TODO  @Transactional
+    @Override @Transactional
     public final R execute(final A action, final ExecutionContext executionContext) throws ActionException {
         return converter.convert(executeInternal(action, executionContext));
     }

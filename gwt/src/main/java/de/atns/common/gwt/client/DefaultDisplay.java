@@ -6,7 +6,6 @@ import com.google.gwt.user.client.ui.*;
 import static com.google.gwt.dom.client.Style.BorderStyle.SOLID;
 import static com.google.gwt.dom.client.Style.Position.ABSOLUTE;
 import static com.google.gwt.dom.client.Style.Unit.PX;
-import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 
 /**
  * @author tbaum
@@ -18,6 +17,15 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
     private final FlowPanel loader = GwtUtil.flowPanel(new Image("spinner.gif"));
     private final FlowPanel errorPanel = new FlowPanel();
     private final Label errorLabel = GwtUtil.createLabel("", "errorPanelText");
+
+    @Override public void showError(final String text) {
+        errorPanel.setVisible(true);
+        errorLabel.setText(text);
+    }
+
+    @Override public void setErrorVisible(final boolean visible) {
+        errorPanel.setVisible(visible);
+    }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -65,20 +73,20 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
         loader.setVisible(false);
     }
 
-// --------------------- Interface ErrorDisplay ---------------------
-
-    @Override public void showError(final Throwable originalCaught) {
-        errorPanel.setVisible(true);
-        errorLabel.setText("Fehler! " + originalCaught.getMessage());
-    }
-
-    @Override public void hideError() {
-        errorPanel.setVisible(false);
-    }
-
 // --------------------- Interface WidgetDisplay ---------------------
 
     public Widget asWidget() {
         return this;
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public void setVisibleError() {
+        errorPanel.setVisible(false);
+    }
+
+    public void showError(final Throwable originalCaught) {
+        errorPanel.setVisible(true);
+        errorLabel.setText("Fehler! " + originalCaught.getMessage());
     }
 }

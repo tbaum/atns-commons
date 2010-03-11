@@ -9,5 +9,7 @@
     <inherits name="com.google.gwt.user.ClippedImage"/>
     <inherits name="net.customware.gwt.presenter.Presenter"/>
     <inherits name="net.customware.gwt.dispatch.Dispatch"/>
-    <source path="gwt"/>
+    <inherits name="org.cobogw.gwt.user.Button"/>
+    <source path="client"/>
+    <source path="event"/>
 </module>
