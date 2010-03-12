@@ -8,7 +8,7 @@
     <inherits name="com.google.gwt.dom.DOM"/>
     <inherits name="com.google.gwt.user.ClippedImage"/>
     <inherits name="net.customware.gwt.presenter.Presenter"/>
-    <inherits name="net.customware.gwt.dispatch.Dispatch"/>
+    <inherits name="de.atns.common.dispatch.Dispatch"/>
     <inherits name="org.cobogw.gwt.user.Button"/>
     <source path="client"/>
     <source path="event"/>

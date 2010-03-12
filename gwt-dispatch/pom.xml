@@ -47,6 +47,10 @@
             <groupId>com.google.code.gwt-log</groupId>
             <artifactId>gwt-log</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.guice.extensions</groupId>
+            <artifactId>guice-multibindings</artifactId>
+        </dependency>
 
     </dependencies>
 </project>

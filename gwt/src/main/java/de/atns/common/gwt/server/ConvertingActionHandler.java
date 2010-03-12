@@ -2,11 +2,10 @@ package de.atns.common.gwt.server;
 
 import ch.lambdaj.function.convert.Converter;
 import com.wideplay.warp.persist.Transactional;
-import net.customware.gwt.dispatch.server.ActionHandler;
-import net.customware.gwt.dispatch.server.ExecutionContext;
-import net.customware.gwt.dispatch.shared.Action;
-import net.customware.gwt.dispatch.shared.ActionException;
-import net.customware.gwt.dispatch.shared.Result;
+import de.atns.common.dispatch.client.ActionException;
+import de.atns.common.dispatch.client.Result;
+import de.atns.common.dispatch.server.ActionHandler;
+import de.atns.common.dispatch.client.Action;
 
 /**
  * @author tbaum
@@ -24,21 +23,12 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         this.converter = converter;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override @Transactional
-    public final R execute(final A action, final ExecutionContext executionContext) throws ActionException {
-        return converter.convert(executeInternal(action, executionContext));
-    }
-
-    @Override
-    public void rollback(final A action, final R result, final ExecutionContext context) {
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
-    public abstract S executeInternal(final A action, final ExecutionContext executionContext) throws ActionException;
+    @Override @Transactional
+    public final R execute(final A action) throws ActionException {
+        return converter.convert(executeInternal(action));
+    }
+
+    public abstract S executeInternal(final A action) throws ActionException;
 }
