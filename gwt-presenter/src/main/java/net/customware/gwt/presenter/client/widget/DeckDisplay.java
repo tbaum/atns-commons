@@ -31,4 +31,8 @@ public class DeckDisplay extends DeckPanel implements WidgetContainerDisplay {
         // Do nothing...
     }
 
+    public void reset() {
+        // Do nothing...
+    }
+
 }
