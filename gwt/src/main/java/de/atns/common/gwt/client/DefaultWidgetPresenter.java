@@ -32,6 +32,10 @@ public abstract class DefaultWidgetPresenter<D extends WidgetDisplay> extends Wi
         return null;
     }
 
+    @Override protected void reset() {
+        display.reset();
+    }
+
     @Override protected void onBind() {
     }
 

@@ -59,6 +59,9 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     }
 
     public void unbind() {
+
+        reset();
+
         for (HandlerRegistration reg : handlerRegistrations) {
             reg.removeHandler();
         }
@@ -68,6 +71,8 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
 
         bound = false;
     }
+
+    protected abstract void reset();
 
     /**
      * This method is called when binding the presenter. Any additional bindings
