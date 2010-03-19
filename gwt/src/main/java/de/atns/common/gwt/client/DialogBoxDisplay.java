@@ -1,5 +1,6 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -11,6 +12,8 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import org.cobogw.gwt.user.client.ui.Button;
+
+import static com.google.gwt.dom.client.Style.Unit.PX;
 
 /**
  * @author mwolter
@@ -26,12 +29,13 @@ public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogB
 
     protected DialogBoxDisplay() {
         super();
-        dialogBox.setGlassEnabled(true);
         cancelButton.addClickHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 hideDialogBox();
             }
         });
+        cancelButton.getElement().getStyle().setMarginLeft(5, PX);
+        cancelButton.getElement().getStyle().setMarginRight(5, PX);
     }
 
     @Override public void hideDialogBox() {
