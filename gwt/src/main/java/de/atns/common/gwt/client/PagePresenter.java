@@ -28,7 +28,13 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     @Inject
     public PagePresenter(final Display display, final EventBus bus) {
         super(display, bus);
-        createLenghtButtons();
+        registerHandler(this.display.addLengthButton(new ChangeHandler() {
+            @Override public void onChange(final ChangeEvent event) {
+                range = PagePresenter.this.display.selectedRange();
+                startEntry = (startEntry / range) * range;
+                parentPresenter.updateList();
+            }
+        }, range, 20, 50, 100));
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -51,10 +57,8 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
                 createButtons(total, start);
             }
         }));
-        createLenghtButtons();
         startEntry = 0;
     }
-
 
 // -------------------------- OTHER METHODS --------------------------
 
@@ -97,11 +101,9 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     private void createLenghtButtons() {
         registerHandler(display.addLengthButton(new ChangeHandler() {
             @Override public void onChange(final ChangeEvent event) {
-
                 range = display.selectedRange();
                 startEntry = (startEntry / range) * range;
                 parentPresenter.updateList();
-
             }
         }, range, 20, 50, 100));
     }
@@ -112,12 +114,6 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
 
     public int getPageRange() {
         return range;
-    }
-
-    @Override protected void onBind() {
-    }
-
-    @Override protected void onUnbind() {
     }
 
 // -------------------------- INNER CLASSES --------------------------
