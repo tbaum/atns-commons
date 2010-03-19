@@ -145,9 +145,11 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         Element fieldset = DOM.createFieldSet();
         fieldset.setInnerHTML("<legend>" + legend + "</legend>");
         DOM.appendChild(fieldset, content.getElement());
+        fieldset.getStyle().setMargin(0, Style.Unit.PX);
 
         FlowPanel flowPanel = new FlowPanel();
         DOM.appendChild(flowPanel.getElement(), fieldset);
+
         return flowPanel;
     }
 
