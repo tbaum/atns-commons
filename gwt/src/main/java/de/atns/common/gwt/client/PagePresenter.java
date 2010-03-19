@@ -51,10 +51,12 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     public void bind() {
         registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
             @Override public void onUpdate(final PageUpdateEvent updateEvent) {
-                int total = updateEvent.getTotal();
-                int start = updateEvent.getStart();
-                display.reset();
-                createButtons(total, start);
+                if (parentPresenter.equals(updateEvent.getPresenter())) {
+                    int total = updateEvent.getTotal();
+                    int start = updateEvent.getStart();
+                    display.reset();
+                    createButtons(total, start);
+                }
             }
         }));
         startEntry = 0;

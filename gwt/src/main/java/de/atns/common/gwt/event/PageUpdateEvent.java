@@ -1,6 +1,7 @@
 package de.atns.common.gwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import de.atns.common.gwt.client.ListPresenter;
 
 /**
  * @author tbaum
@@ -11,15 +12,21 @@ public class PageUpdateEvent extends GwtEvent<PageUpdateEventHandler> {
 
     private int total;
     private int start;
+    private ListPresenter presenter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public PageUpdateEvent(final int total, final int start) {
+    public PageUpdateEvent(final ListPresenter presenter, final int total, final int start) {
         this.total = total;
         this.start = start;
+        this.presenter = presenter;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
+
+    public ListPresenter getPresenter() {
+        return presenter;
+    }
 
     public int getStart() {
         return start;
@@ -37,7 +44,6 @@ public class PageUpdateEvent extends GwtEvent<PageUpdateEventHandler> {
     }
 
     @Override
-
     public Type<PageUpdateEventHandler> getAssociatedType() {
         return PageUpdateEventHandler.TYPE;
     }
