@@ -10,7 +10,7 @@
     <parent>
         <groupId>de.atns.maven</groupId>
         <artifactId>defaults</artifactId>
-        <version>1.4</version>
+        <version>1.5</version>
     </parent>
 
     <modules>
