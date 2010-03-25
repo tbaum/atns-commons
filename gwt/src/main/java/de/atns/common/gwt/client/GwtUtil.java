@@ -5,8 +5,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
 import org.cobogw.gwt.user.client.ui.Button;
@@ -122,10 +120,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return anchor(text, historyLink, null);
     }
 
-    public static Label createLabel(final String text) {
-        return createLabel(text, null, false);
-    }
-
     public static Label createLabel(final String text, final boolean inline) {
         return createLabel(text, null, inline);
     }
@@ -140,17 +134,8 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return image;
     }
 
-
-    public static FlowPanel createFieldSet(String legend, Widget content) {
-        Element fieldset = DOM.createFieldSet();
-        fieldset.setInnerHTML("<legend>" + legend + "</legend>");
-        DOM.appendChild(fieldset, content.getElement());
-        fieldset.getStyle().setMargin(0, Style.Unit.PX);
-
-        FlowPanel flowPanel = new FlowPanel();
-        DOM.appendChild(flowPanel.getElement(), fieldset);
-
-        return flowPanel;
+    public static Label createLabel(final String text) {
+        return createLabel(text, null, false);
     }
 
 // -------------------------- ENUMERATIONS --------------------------
@@ -158,5 +143,4 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
     public enum DivBoxColor {
         WEISS, BLAU
     }
-
 }

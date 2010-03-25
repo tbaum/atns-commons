@@ -1,11 +1,8 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.user.client.Command;
 import com.google.inject.Inject;
 import net.customware.gwt.presenter.client.EventBus;
-import net.customware.gwt.presenter.client.place.Place;
-import net.customware.gwt.presenter.client.place.PlaceRequest;
-import net.customware.gwt.presenter.client.widget.WidgetDisplay;
-import net.customware.gwt.presenter.client.widget.WidgetPresenter;
 
 /**
  * @author tbaum
@@ -16,9 +13,17 @@ public abstract class DialogBoxWidgetPresenter<D extends DialogBoxDisplayInterfa
 
     @Inject public DialogBoxWidgetPresenter(D display, EventBus eventBus) {
         super(display, eventBus);
+        display.setDialogBoxCloseCommand(new Command() {
+            @Override public void execute() {
+                unbind();
+            }
+        });
     }
 
-    @Override protected void onUnbind() {
-        display.hideDialogBox();
+    @Override public void unbind() {
+        super.unbind();
+        if (display.isShowing()) {
+            display.hideDialogBox();
+        }
     }
 }
