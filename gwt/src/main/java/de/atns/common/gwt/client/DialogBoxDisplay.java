@@ -1,6 +1,5 @@
 package de.atns.common.gwt.client;
 
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -10,7 +9,6 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
-import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import org.cobogw.gwt.user.client.ui.Button;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
@@ -66,13 +64,20 @@ public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogB
         dialogBox.setWidget(widget);
     }
 
-    @Override public void showDialogBox(final Command command) {
+    @Override public void showDialogBox() {
         dialogBox.center();
         dialogBox.show();
+    }
+
+    @Override public void setDialogBoxCloseCommand(final Command command) {
         dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
             @Override public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
                 command.execute();
             }
         });
+    }
+
+    @Override public boolean isShowing() {
+        return dialogBox.isShowing();
     }
 }

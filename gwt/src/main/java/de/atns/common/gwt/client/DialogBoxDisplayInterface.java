@@ -24,5 +24,9 @@ public interface DialogBoxDisplayInterface extends WidgetDisplay {
 
     void setDialogBoxContent(String titel, Widget widget);
 
-    void showDialogBox(Command command);
+    void showDialogBox();
+
+    void setDialogBoxCloseCommand(Command command);
+
+    boolean isShowing();
 }
