@@ -74,6 +74,15 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return code != KEY_BACKSPACE && code != KEY_ENTER && code != KEY_TAB && code != KEY_DELETE;
     }
 
+    public static boolean checkArrorKeys(final KeyPressEvent pressEvent) {
+        char code = pressEvent.getCharCode();
+        return code != KEY_LEFT && code != KEY_RIGHT;
+    }
+
+    public static boolean checkTelefonSymbol(final char code) {
+        return !(Character.isDigit(code) || code == '+');
+    }
+
     static CheckBox checkBox(final String label, final String style) {
         final CheckBox checkBox = new CheckBox(label, true);
         checkBox.addStyleName(style);
@@ -140,7 +149,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         return image;
     }
 
-
     public static FlowPanel createFieldSet(String legend, Widget content) {
         Element fieldset = DOM.createFieldSet();
         fieldset.setInnerHTML("<legend>" + legend + "</legend>");
@@ -158,5 +166,4 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
     public enum DivBoxColor {
         WEISS, BLAU
     }
-
 }
