@@ -80,4 +80,10 @@ public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogB
     @Override public boolean isShowing() {
         return dialogBox.isShowing();
     }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public void setGlassEnabled(boolean enabled) {
+        dialogBox.setGlassEnabled(enabled);
+    }
 }
