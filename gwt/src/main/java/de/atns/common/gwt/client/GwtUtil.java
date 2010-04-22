@@ -164,6 +164,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {
-        WEISS, BLAU
+        WEISS, BLAU, ROT
     }
 }
