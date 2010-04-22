@@ -23,7 +23,7 @@ public class GuiceStandardDispatchServlet extends RemoteServiceServlet implement
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface DispatchService ---------------------
+// --------------------- Interface DispatchServiceAsync ---------------------
 
     public Result execute(Action<Result> action) throws ActionException, ServiceException {
         try {
@@ -39,7 +39,7 @@ public class GuiceStandardDispatchServlet extends RemoteServiceServlet implement
             return findHandler(action).execute(action);
         } catch (RuntimeException e) {
             log("Exception while executing " + action.getClass().getName() + ": " + e.getMessage(), e);
-            throw new ServiceException(e.getClass() + " " + e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
