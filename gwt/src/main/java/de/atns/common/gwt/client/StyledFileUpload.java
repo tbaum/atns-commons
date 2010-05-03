@@ -28,8 +28,8 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public StyledFileUpload(final String text, final int width, final int height) {
-        final Button label = new Button();
-        label.setText(text);
+        final Button label = new Button(text);
+        final FlowPanel flowPanel = GwtUtil.flowPanel(fileUpload, label);
 
         final Style style1 = label.getElement().getStyle();
         style1.setPosition(ABSOLUTE);
@@ -47,15 +47,13 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
         style2.setHeight(height, PX);
         style2.setWidth(width, PX);
 
-        final Style style3 = getElement().getStyle();
+        final Style style3 = flowPanel.getElement().getStyle();
         style3.setPosition(RELATIVE);
         style3.setCursor(POINTER);
         style3.setHeight(height, PX);
         style3.setOverflow(HIDDEN);
         style3.setWidth(width, PX);
 
-
-        final FlowPanel flowPanel = GwtUtil.flowPanel(fileUpload, label);
         initWidget(flowPanel);
     }
 
