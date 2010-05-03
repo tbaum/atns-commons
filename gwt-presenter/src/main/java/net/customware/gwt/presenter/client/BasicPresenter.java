@@ -55,6 +55,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * @param handlerRegistration The registration.
      */
     protected void registerHandler(HandlerRegistration handlerRegistration) {
+        assert handlerRegistration != null;
         handlerRegistrations.add(handlerRegistration);
     }
 
