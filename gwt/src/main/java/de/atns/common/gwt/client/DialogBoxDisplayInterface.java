@@ -1,8 +1,9 @@
 package de.atns.common.gwt.client;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 import org.cobogw.gwt.user.client.ui.Button;
@@ -26,7 +27,7 @@ public interface DialogBoxDisplayInterface extends WidgetDisplay {
 
     void showDialogBox();
 
-    void setDialogBoxCloseCommand(Command command);
+    HandlerRegistration addDialogBoxCloseCommand(CloseHandler<PopupPanel> handler);
 
     boolean isShowing();
 }
