@@ -22,7 +22,7 @@ public class PlaceManager implements ValueChangeHandler<String>, PlaceChangedHan
         eventBus.addHandler(PlaceChangedEvent.getType(), this);
     }
 
-    public void onValueChange(ValueChangeEvent<String> event) {
+    @Override public void onValueChange(ValueChangeEvent<String> event) {
         try {
             eventBus.fireEvent(new PlaceRequestEvent(PlaceRequest.fromString(event.getValue()), true));
         } catch (PlaceParsingException e) {
@@ -30,7 +30,7 @@ public class PlaceManager implements ValueChangeHandler<String>, PlaceChangedHan
         }
     }
 
-    public void onPlaceChange(PlaceChangedEvent event) {
+    @Override public void onPlaceChange(PlaceChangedEvent event) {
         newPlace(event.getRequest());
     }
 
@@ -38,7 +38,7 @@ public class PlaceManager implements ValueChangeHandler<String>, PlaceChangedHan
         History.newItem(request.toString(), false);
     }
 
-    public void onPlaceRequest(PlaceRequestEvent event) {
+    @Override public void onPlaceRequest(PlaceRequestEvent event) {
         if (!event.isFromHistory()) {
             newPlace(event.getRequest());
         }

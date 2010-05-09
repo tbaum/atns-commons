@@ -20,7 +20,7 @@ public abstract class DisplayCallback<T> implements AsyncCallback<T> {
         display.startProcessing();
     }
 
-    public void onSuccess(T value) {
+    @Override public void onSuccess(T value) {
         try {
             handleSuccess(value);
         } finally {
@@ -36,7 +36,7 @@ public abstract class DisplayCallback<T> implements AsyncCallback<T> {
      */
     protected abstract void handleSuccess(T value);
 
-    public void onFailure(Throwable e) {
+    @Override public void onFailure(Throwable e) {
         try {
             handleFailure(e);
         } finally {

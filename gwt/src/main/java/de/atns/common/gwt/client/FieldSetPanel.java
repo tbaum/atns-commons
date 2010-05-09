@@ -45,7 +45,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
 
 // --------------------- Interface InsertPanel ---------------------
 
-    public void insert(Widget w, int beforeIndex) {
+    @Override public void insert(Widget w, int beforeIndex) {
         insert(w, getElement(), beforeIndex, true);
     }
 
@@ -93,7 +93,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
             }
         }
 
-        public void insert(Widget w, int beforeIndex) {
+        @Override public void insert(Widget w, int beforeIndex) {
             insert(w, getElement(), beforeIndex, true);
         }
     }

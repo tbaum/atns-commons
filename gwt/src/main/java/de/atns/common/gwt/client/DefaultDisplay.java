@@ -56,11 +56,11 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
 
 // --------------------- Interface Display ---------------------
 
-    public void startProcessing() {
+    @Override public void startProcessing() {
         loader.setVisible(true);
     }
 
-    public void stopProcessing() {
+    @Override public void stopProcessing() {
         loader.setVisible(false);
     }
 
@@ -80,7 +80,7 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
 
 // --------------------- Interface WidgetDisplay ---------------------
 
-    public Widget asWidget() {
+    @Override public Widget asWidget() {
         return this;
     }
 }

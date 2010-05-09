@@ -48,7 +48,7 @@ public abstract class WidgetContainerPresenter<T extends WidgetContainerDisplay>
         }
 
         eventBus.addHandler(PresenterRevealedEvent.getType(), new PresenterRevealedHandler() {
-            public void onPresenterRevealed(PresenterRevealedEvent event) {
+            @Override public void onPresenterRevealed(PresenterRevealedEvent event) {
                 if (presenters.contains(event.getPresenter())) {
                     showPresenter((WidgetPresenter<?>) event.getPresenter());
                     revealDisplay();
@@ -80,7 +80,7 @@ public abstract class WidgetContainerPresenter<T extends WidgetContainerDisplay>
         }
     }
 
-    public void refreshDisplay() {
+    @Override public void refreshDisplay() {
         if (currentPresenter != null)
             currentPresenter.refreshDisplay();
     }

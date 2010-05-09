@@ -32,7 +32,7 @@ public class ActionForwardInterceptor implements MethodInterceptor {
 
 // --------------------- Interface MethodInterceptor ---------------------
 
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
+    @Override public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Object result = invocation.proceed();
 
         final Method method = invocation.getMethod();

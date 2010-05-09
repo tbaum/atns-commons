@@ -23,7 +23,7 @@ public abstract class DefaultWidgetPresenter<D extends WidgetDisplay> extends Wi
 
 // --------------------- Interface Presenter ---------------------
 
-    public void refreshDisplay() {
+    @Override public void refreshDisplay() {
     }
 
 // -------------------------- OTHER METHODS --------------------------

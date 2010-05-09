@@ -61,7 +61,7 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
+    @Override public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
         return fileUpload.addChangeHandler(handler);
     }
 

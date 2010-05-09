@@ -25,7 +25,7 @@ public class GuiceStandardDispatchServlet extends RemoteServiceServlet implement
 
 // --------------------- Interface DispatchServiceAsync ---------------------
 
-    public Result execute(Action<Result> action) throws ActionException, ServiceException {
+    @Override public Result execute(Action<Result> action) throws ActionException, ServiceException {
         try {
 /*        DefaultExecutionContext ctx = new DefaultExecutionContext(this);
         try {

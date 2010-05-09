@@ -14,9 +14,9 @@ public class LocalServletScopes {
 // ------------------------------ FIELDS ------------------------------
 
     public static final Scope LOCAL_REQUEST = new Scope() {
-        public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
+        @Override public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
             return new Provider<T>() {
-                public T get() {
+                @Override public T get() {
                     final HttpServletRequest request = GuiceFilter.getRequest();
                     //noinspection SynchronizationOnLocalVariableOrMethodParameter
                     synchronized (request) {

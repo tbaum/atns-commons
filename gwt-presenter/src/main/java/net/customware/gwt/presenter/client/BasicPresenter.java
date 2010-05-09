@@ -29,13 +29,13 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
         this.eventBus = eventBus;
     }
 
-    public void bind() {
+    @Override public void bind() {
         onBind();
 
         if (getPlace() != null) {
             registerHandler(eventBus.addHandler(PlaceRequestEvent.getType(), new PlaceRequestHandler() {
 
-                public void onPlaceRequest(PlaceRequestEvent event) {
+                @Override public void onPlaceRequest(PlaceRequestEvent event) {
                     Place place = getPlace();
                     if (place != null && place.equals(event.getRequest().getPlace())) {
                         BasicPresenter.this.onPlaceRequest(event.getRequest());
@@ -59,7 +59,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
         handlerRegistrations.add(handlerRegistration);
     }
 
-    public void unbind() {
+    @Override public void unbind() {
 
         reset();
 
@@ -103,7 +103,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      *
      * @return The display.
      */
-    public D getDisplay() {
+    @Override public D getDisplay() {
         return display;
     }
 
@@ -131,7 +131,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * this method and call <code>super.revealDisplay()</code> if they need to
      * perform extra operations when being revealed.
      */
-    public void revealDisplay() {
+    @Override public void revealDisplay() {
         eventBus.fireEvent(new PresenterRevealedEvent(this));
     }
 

@@ -48,7 +48,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
 
 // --------------------- Interface Presenter ---------------------
 
-    public void bind() {
+    @Override public void bind() {
         registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
             @Override public void onUpdate(final PageUpdateEvent updateEvent) {
                 if (parentPresenter.equals(updateEvent.getPresenter())) {
@@ -121,7 +121,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay {
-        void reset();
+        @Override void reset();
 
         HandlerRegistration addSeitenButton(int site, ClickHandler clickHandler, boolean active);
 

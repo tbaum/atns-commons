@@ -25,7 +25,7 @@ public abstract class FileUtil {
 
     public static File[] findFiles(final File dir, final String fileRegexp) {
         final File[] files = dir.listFiles(new FileFilter() {
-            public boolean accept(final File file) {
+            @Override public boolean accept(final File file) {
                 return file.getName().matches(fileRegexp);
             }
         });
