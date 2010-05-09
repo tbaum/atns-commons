@@ -20,6 +20,7 @@
         <module>gwt</module>
         <module>gwt-dispatch</module>
         <module>gwt-presenter</module>
+        <module>json</module>
         <module>numbergenerator</module>
         <module>schedule</module>
         <module>security</module>
