@@ -2,10 +2,8 @@ package de.atns.common.gwt.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -69,12 +67,8 @@ public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogB
         dialogBox.show();
     }
 
-    @Override public void setDialogBoxCloseCommand(final Command command) {
-        dialogBox.addCloseHandler(new CloseHandler<PopupPanel>() {
-            @Override public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
-                command.execute();
-            }
-        });
+    @Override public HandlerRegistration addDialogBoxCloseCommand(final CloseHandler<PopupPanel> handler) {
+        return dialogBox.addCloseHandler(handler);
     }
 
     @Override public boolean isShowing() {

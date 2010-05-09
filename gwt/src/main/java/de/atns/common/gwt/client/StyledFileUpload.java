@@ -24,12 +24,13 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 // ------------------------------ FIELDS ------------------------------
 
     private final FileUpload fileUpload = new FileUpload();
+    private Button label;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public StyledFileUpload(final String text, final int width, final int height) {
-        final Button label = new Button();
-        label.setText(text);
+        label = new Button(text);
+        final FlowPanel flowPanel = GwtUtil.flowPanel(fileUpload, label);
 
         final Style style1 = label.getElement().getStyle();
         style1.setPosition(ABSOLUTE);
@@ -47,27 +48,27 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
         style2.setHeight(height, PX);
         style2.setWidth(width, PX);
 
-        final Style style3 = getElement().getStyle();
+        final Style style3 = flowPanel.getElement().getStyle();
         style3.setPosition(RELATIVE);
         style3.setCursor(POINTER);
         style3.setHeight(height, PX);
         style3.setOverflow(HIDDEN);
         style3.setWidth(width, PX);
 
-
-        final FlowPanel flowPanel = GwtUtil.flowPanel(fileUpload, label);
         initWidget(flowPanel);
     }
 
-// -------------------------- OTHER METHODS --------------------------
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface HasChangeHandlers ---------------------
 
     @Override public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
         return fileUpload.addChangeHandler(handler);
     }
 
-    public String getFilename() {
-        return fileUpload.getFilename();
-    }
+// --------------------- Interface HasName ---------------------
+
 
     @Override public void setName(final String name) {
         fileUpload.setName(name);
@@ -75,5 +76,15 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 
     @Override public String getName() {
         return fileUpload.getName();
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public String getFilename() {
+        return fileUpload.getFilename();
+    }
+
+    public void setText(final String text) {
+        label.setText(text);
     }
 }
