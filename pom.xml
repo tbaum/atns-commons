@@ -18,10 +18,12 @@
         <module>classutils</module>
         <module>config</module>
         <module>dao</module>
+        <module>dao-mail</module>
         <module>fileutils</module>
         <module>gwt</module>
         <module>gwt-dispatch</module>
         <module>gwt-presenter</module>
+        <module>image</module>
         <module>json</module>
         <module>numbergenerator</module>
         <module>schedule</module>
@@ -63,6 +65,11 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>dao</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>image</artifactId>
                 <version>${version}</version>
             </dependency>
             <dependency>
@@ -115,6 +122,16 @@
                 <groupId>com.googlecode.lambdaj</groupId>
                 <artifactId>lambdaj</artifactId>
                 <version>2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>1.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
