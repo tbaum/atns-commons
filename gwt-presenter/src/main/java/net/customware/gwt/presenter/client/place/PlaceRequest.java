@@ -39,6 +39,7 @@ public class PlaceRequest {
         return place;
     }
 
+    @SuppressWarnings("unchecked")
     public Set<String> getParameterNames() {
         if (params != null) {
             return params.keySet();

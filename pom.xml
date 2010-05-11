@@ -18,7 +18,6 @@
         <module>classutils</module>
         <module>config</module>
         <module>dao</module>
-        <module>dao-mail</module>
         <module>fileutils</module>
         <module>gwt</module>
         <module>gwt-dispatch</module>
