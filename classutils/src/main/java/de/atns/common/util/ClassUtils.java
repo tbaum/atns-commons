@@ -1,4 +1,4 @@
-package de.atns.common.classutils;
+package de.atns.common.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

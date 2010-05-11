@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static de.atns.common.classutils.ConstructorRef.lookupContructor;
+import static de.atns.common.util.ConstructorRef.lookupContructor;
 import static org.hibernate.FetchMode.JOIN;
 import static org.hibernate.criterion.DetachedCriteria.forClass;
 import static org.hibernate.criterion.Restrictions.eq;

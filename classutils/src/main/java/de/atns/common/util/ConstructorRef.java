@@ -1,11 +1,11 @@
-package de.atns.common.classutils;
+package de.atns.common.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Constructor;
 
-import static de.atns.common.classutils.ClassUtils.convertToRuntimeException;
+import static de.atns.common.util.ClassUtils.convertToRuntimeException;
 import static java.util.Arrays.asList;
 
 /**
