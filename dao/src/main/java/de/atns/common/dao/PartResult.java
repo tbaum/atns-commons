@@ -16,17 +16,17 @@ public class PartResult<TYPE extends Serializable> implements Serializable {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends Serializable> PartResult<T> createPartResult(PartResult<T> p, final Collection<T> result) {
+    public static <T extends Serializable> PartResult<T> createPartResult(PartResult<? extends T> p, final Collection<? extends T> result) {
         return new PartResult<T>(p.start, p.total, result);
     }
 
-    public static <T extends Serializable> PartResult<T> createPartResult(final int start, final int total, final Collection<T> result) {
+    public static <T extends Serializable> PartResult<T> createPartResult(final int start, final int total, final Collection<? extends T> result) {
         return new PartResult<T>(start, total, result);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private PartResult(final int start, final int total, final Collection<TYPE> elements) {
+    private PartResult(final int start, final int total, final Collection<? extends TYPE> elements) {
         this.start = start;
         this.total = total;
         this.items = Collections.unmodifiableList(new ArrayList<TYPE>(elements));
