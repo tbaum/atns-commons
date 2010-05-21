@@ -4,8 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.*;
 import org.hibernate.criterion.*;
-import static org.hibernate.criterion.Projections.*;
-import static org.hibernate.criterion.Restrictions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -16,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.hibernate.criterion.Projections.*;
+import static org.hibernate.criterion.Restrictions.*;
 
 /**
  * @author Thomas Baum
@@ -106,7 +107,9 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
             final Criterion expression;
             if (e.getValue() instanceof Criterion) {
                 expression = (Criterion) e.getValue();
-            } else if (e.getValue() instanceof Long) {
+            } else if (e.getValue() instanceof Number) {
+                expression = eq(e.getKey(), e.getValue());
+            } else if (e.getValue() instanceof Boolean) {
                 expression = eq(e.getKey(), e.getValue());
             } else {
                 expression = ilike(e.getKey(), String.valueOf(e.getValue()), MatchMode.ANYWHERE);
