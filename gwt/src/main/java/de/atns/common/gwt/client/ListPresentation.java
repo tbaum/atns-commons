@@ -1,8 +1,8 @@
 package de.atns.common.gwt.client;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.shared.Result;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author tbaum
  * @since 12.02.2010
  */
-public class ListPresentation<E extends IsSerializable> implements Result {
+public class ListPresentation<E extends Serializable> implements Result {
 // ------------------------------ FIELDS ------------------------------
 
     private ArrayList<E> list;

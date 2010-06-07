@@ -24,12 +24,21 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         this.converter = converter;
     }
 
-// -------------------------- OTHER METHODS --------------------------
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface ActionHandler ---------------------
 
     @Override @Transactional
     public final R execute(final A action, ExecutionContext context) throws ActionException {
         return converter.convert(executeInternal(action));
     }
+
+    @Override
+    public void rollback(final A action, final R result, final ExecutionContext context) {
+    }
+
+// -------------------------- OTHER METHODS --------------------------
 
     public abstract S executeInternal(final A action) throws ActionException;
 }
