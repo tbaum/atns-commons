@@ -13,9 +13,4 @@ public interface Display {
      * Indicate to the display that processing has completed.
      */
     void stopProcessing();
-
-    /**
-     * Indicate to the display that resetting needs to be done.
-     */
-    void reset();
 }

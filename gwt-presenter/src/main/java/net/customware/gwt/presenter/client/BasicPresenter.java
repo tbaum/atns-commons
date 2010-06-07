@@ -22,20 +22,18 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
 
     private List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
 
-    private boolean bound = false;
-
     public BasicPresenter(D display, EventBus eventBus) {
         this.display = display;
         this.eventBus = eventBus;
     }
 
-    @Override public void bind() {
+    public void bind() {
         onBind();
 
-        if (getPlace() != null) {
+        if (getPlace() != null)
             registerHandler(eventBus.addHandler(PlaceRequestEvent.getType(), new PlaceRequestHandler() {
 
-                @Override public void onPlaceRequest(PlaceRequestEvent event) {
+                public void onPlaceRequest(PlaceRequestEvent event) {
                     Place place = getPlace();
                     if (place != null && place.equals(event.getRequest().getPlace())) {
                         BasicPresenter.this.onPlaceRequest(event.getRequest());
@@ -43,8 +41,6 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
                     }
                 }
             }));
-        }
-        bound = true;
     }
 
     /**
@@ -55,25 +51,17 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * @param handlerRegistration The registration.
      */
     protected void registerHandler(HandlerRegistration handlerRegistration) {
-        assert handlerRegistration != null;
         handlerRegistrations.add(handlerRegistration);
     }
 
-    @Override public void unbind() {
-
-        reset();
-
+    public void unbind() {
         for (HandlerRegistration reg : handlerRegistrations) {
             reg.removeHandler();
         }
         handlerRegistrations.clear();
 
         onUnbind();
-
-        bound = false;
     }
-
-    protected abstract void reset();
 
     /**
      * This method is called when binding the presenter. Any additional bindings
@@ -89,21 +77,11 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     protected abstract void onUnbind();
 
     /**
-     * Checks if the presenter has been bound. Will be set to false after a call
-     * to {@link #unbind()}.
-     *
-     * @return The current bound status.
-     */
-    public boolean isBound() {
-        return bound;
-    }
-
-    /**
      * Returns the display for the presenter.
      *
      * @return The display.
      */
-    @Override public D getDisplay() {
+    public D getDisplay() {
         return display;
     }
 
@@ -125,14 +103,4 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      * @param request The request.
      */
     protected abstract void onPlaceRequest(PlaceRequest request);
-
-    /**
-     * Triggers a {@link PresenterRevealedEvent}. Subclasses should override
-     * this method and call <code>super.revealDisplay()</code> if they need to
-     * perform extra operations when being revealed.
-     */
-    @Override public void revealDisplay() {
-        eventBus.fireEvent(new PresenterRevealedEvent(this));
-    }
-
 }

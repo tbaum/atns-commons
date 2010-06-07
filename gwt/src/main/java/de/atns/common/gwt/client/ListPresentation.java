@@ -1,7 +1,7 @@
 package de.atns.common.gwt.client;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-import de.atns.common.dispatch.client.Result;
+import net.customware.gwt.dispatch.shared.Result;
 
 import java.util.ArrayList;
 import java.util.Collection;

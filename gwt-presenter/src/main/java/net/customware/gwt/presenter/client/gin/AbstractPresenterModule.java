@@ -2,7 +2,6 @@ package net.customware.gwt.presenter.client.gin;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
-import com.google.inject.Singleton;
 import net.customware.gwt.presenter.client.Display;
 import net.customware.gwt.presenter.client.Presenter;
 
@@ -24,7 +23,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
      */
     protected <D extends Display> void bindPresenter(Class<? extends Presenter> presenter, Class<D> display,
                                                      Class<? extends D> displayImpl) {
-        bind(presenter).in(Singleton.class);
+        bind(presenter);
         bindDisplay(display, displayImpl);
     }
 

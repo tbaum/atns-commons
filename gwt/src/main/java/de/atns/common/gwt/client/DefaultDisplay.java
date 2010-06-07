@@ -64,8 +64,9 @@ public abstract class DefaultDisplay extends Composite implements ErrorWidgetDis
         loader.setVisible(false);
     }
 
-    @Override public void reset() {
-    }
+    //  TODO api change
+    // @Override public void reset() {
+    // }
 
 // --------------------- Interface ErrorDisplay ---------------------
 

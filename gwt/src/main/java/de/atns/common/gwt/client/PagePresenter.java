@@ -54,7 +54,9 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
                 if (parentPresenter.equals(updateEvent.getPresenter())) {
                     int total = updateEvent.getTotal();
                     int start = updateEvent.getStart();
-                    display.reset();
+
+                    //TODO api change
+                    // display.reset();
                     createButtons(total, start);
                 }
             }
@@ -121,7 +123,8 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay {
-        @Override void reset();
+        //TODO api change
+        //   @Override void reset();
 
         HandlerRegistration addSeitenButton(int site, ClickHandler clickHandler, boolean active);
 

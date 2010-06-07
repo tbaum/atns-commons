@@ -48,9 +48,10 @@ public class PageView extends DefaultDisplay implements PagePresenter.Display {
 
 // --------------------- Interface Display ---------------------
 
-    @Override public void reset() {
-        leftPanel.clear();
-    }
+    //TODO api change
+    //  @Override public void reset() {
+    //       leftPanel.clear();
+    //  }
 
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {

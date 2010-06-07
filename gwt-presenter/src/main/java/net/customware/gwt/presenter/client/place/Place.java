@@ -46,8 +46,8 @@ public class Place {
     /**
      * A convenience method for calling {@link #request()}.with( name, id ).
      *
-     * @param name The parameter name.
-     * @param id   The parameter id.
+     * @param name  The parameter name.
+     * @param value The parameter id.
      * @return
      */
     public PlaceRequest requestWith(String name, String value) {

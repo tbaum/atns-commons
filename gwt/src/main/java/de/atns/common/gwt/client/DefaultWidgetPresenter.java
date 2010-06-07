@@ -26,14 +26,13 @@ public abstract class DefaultWidgetPresenter<D extends WidgetDisplay> extends Wi
     @Override public void refreshDisplay() {
     }
 
+    @Override public void revealDisplay() {
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override public Place getPlace() {
         return null;
-    }
-
-    @Override protected void reset() {
-        display.reset();
     }
 
     @Override protected void onBind() {
