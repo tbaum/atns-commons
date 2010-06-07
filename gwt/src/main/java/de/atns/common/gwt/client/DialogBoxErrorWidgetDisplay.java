@@ -15,7 +15,7 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
  * @author mwolter
  * @since 18.03.2010 14:30:10
  */
-public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogBoxDisplayInterface {
+public abstract class DialogBoxErrorWidgetDisplay extends DefaultErrorWidgetDisplay implements DialogBoxDisplayInterface {
 // ------------------------------ FIELDS ------------------------------
 
     private final DialogBox dialogBox = new DialogBox(true, false);
@@ -23,7 +23,7 @@ public abstract class DialogBoxDisplay extends DefaultDisplay implements DialogB
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    protected DialogBoxDisplay() {
+    protected DialogBoxErrorWidgetDisplay() {
         super();
         cancelButton.addClickHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {

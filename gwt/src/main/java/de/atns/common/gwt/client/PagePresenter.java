@@ -43,32 +43,44 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
         return startEntry;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
+// -------------------------- OTHER METHODS --------------------------
 
+    public void bind(ListPresenter parentPresenter) {
+        this.parentPresenter = parentPresenter;
+        bind();
+    }
 
-// --------------------- Interface Presenter ---------------------
+    private void createLenghtButtons() {
+        registerHandler(display.addLengthButton(new ChangeHandler() {
+            @Override public void onChange(final ChangeEvent event) {
+                range = display.selectedRange();
+                startEntry = (startEntry / range) * range;
+                parentPresenter.updateList();
+            }
+        }, range, 20, 50, 100));
+    }
 
-    @Override public void bind() {
+    public void firstPage() {
+        startEntry = 0;
+    }
+
+    public int getPageRange() {
+        return range;
+    }
+
+    @Override public void onBindInternal() {
         registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
             @Override public void onUpdate(final PageUpdateEvent updateEvent) {
                 if (parentPresenter.equals(updateEvent.getPresenter())) {
                     int total = updateEvent.getTotal();
                     int start = updateEvent.getStart();
 
-                    //TODO api change
-                    // display.reset();
+                    display.reset();
                     createButtons(total, start);
                 }
             }
         }));
         startEntry = 0;
-    }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    public void bind(ListPresenter parentPresenter) {
-        this.parentPresenter = parentPresenter;
-        bind();
     }
 
     private void createButtons(final int total, int start) {
@@ -102,29 +114,10 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
         registerHandler(display.addSeitenButton(startX, new PageClickHandler(startX, range), start == startX));
     }
 
-    private void createLenghtButtons() {
-        registerHandler(display.addLengthButton(new ChangeHandler() {
-            @Override public void onChange(final ChangeEvent event) {
-                range = display.selectedRange();
-                startEntry = (startEntry / range) * range;
-                parentPresenter.updateList();
-            }
-        }, range, 20, 50, 100));
-    }
-
-    public void firstPage() {
-        startEntry = 0;
-    }
-
-    public int getPageRange() {
-        return range;
-    }
-
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay {
-        //TODO api change
-        //   @Override void reset();
+        void reset();
 
         HandlerRegistration addSeitenButton(int site, ClickHandler clickHandler, boolean active);
 

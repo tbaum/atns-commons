@@ -18,7 +18,7 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public class PageView extends DefaultDisplay implements PagePresenter.Display {
+public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     private final ListBox rangeBox = new ListBox();
@@ -48,10 +48,9 @@ public class PageView extends DefaultDisplay implements PagePresenter.Display {
 
 // --------------------- Interface Display ---------------------
 
-    //TODO api change
-    //  @Override public void reset() {
-    //       leftPanel.clear();
-    //  }
+    @Override public void reset() {
+        leftPanel.clear();
+    }
 
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {

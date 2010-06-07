@@ -35,7 +35,18 @@ public abstract class DefaultWidgetPresenter<D extends WidgetDisplay> extends Wi
         return null;
     }
 
-    @Override protected void onBind() {
+    @Override protected final void onBind() {
+        if (display instanceof ErrorWidgetDisplay) {
+            ((ErrorWidgetDisplay) display).resetErrors();
+        }
+        if (display instanceof DefaultWidgetDisplay) {
+            ((DefaultWidgetDisplay) display).reset();
+        }
+
+        onBindInternal();
+    }
+
+    protected void onBindInternal() {
     }
 
     @Override protected void onPlaceRequest(final PlaceRequest request) {
