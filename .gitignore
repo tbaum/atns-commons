@@ -6,3 +6,5 @@
 velocity.log
 velocity.log.*
 target
+tomcat
+release.properties
