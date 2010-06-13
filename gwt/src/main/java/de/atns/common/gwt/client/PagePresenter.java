@@ -6,8 +6,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
-import de.atns.common.gwt.event.PageUpdateEvent;
-import de.atns.common.gwt.event.PageUpdateEventHandler;
+import de.atns.common.gwt.client.event.PageUpdateEvent;
+import de.atns.common.gwt.client.event.PageUpdateEventHandler;
 import net.customware.gwt.presenter.client.EventBus;
 
 

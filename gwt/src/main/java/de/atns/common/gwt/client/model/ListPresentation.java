@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client;
+package de.atns.common.gwt.client.model;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.shared.Result;
@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author tbaum
  * @since 12.02.2010
  */
-public class ListPresentation<E extends IsSerializable> implements Result {
+public class ListPresentation<E extends IsSerializable> implements Result, IsSerializable {
 // ------------------------------ FIELDS ------------------------------
 
     private ArrayList<E> list;

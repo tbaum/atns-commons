@@ -4,7 +4,7 @@ import ch.lambdaj.Lambda;
 import ch.lambdaj.function.convert.Converter;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.dao.PartResult;
-import de.atns.common.gwt.client.ListPresentation;
+import de.atns.common.gwt.client.model.ListPresentation;
 
 import java.io.Serializable;
 
