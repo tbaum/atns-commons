@@ -13,4 +13,6 @@
     <inherits name="net.customware.gwt.dispatch.Dispatch"/>
     <inherits name="org.cobogw.gwt.user.Button"/>
     <inherits name="com.allen_sauer.gwt.log.gwt-log"/>
+
+    <source path="client"/>
 </module>
