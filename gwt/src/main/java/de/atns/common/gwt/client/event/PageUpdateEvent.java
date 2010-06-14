@@ -1,4 +1,4 @@
-package de.atns.common.gwt.event;
+package de.atns.common.gwt.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import de.atns.common.gwt.client.ListPresenter;

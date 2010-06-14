@@ -28,6 +28,8 @@
         <module>schedule</module>
         <module>security</module>
         <module>web</module>
+        <module>mail</module>
+        <module>template</module>
     </modules>
 
     <scm>
@@ -99,6 +101,11 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>gwt-presenter</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>template</artifactId>
                 <version>${version}</version>
             </dependency>
         </dependencies>

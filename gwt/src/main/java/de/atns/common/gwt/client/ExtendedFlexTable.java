@@ -18,16 +18,19 @@ public class ExtendedFlexTable {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static ExtendedFlexTable table() {
-        return new ExtendedFlexTable();
+    public static ExtendedFlexTable table(String... styles) {
+        return new ExtendedFlexTable(styles);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private ExtendedFlexTable() {
+    private ExtendedFlexTable(String... styles) {
         table.setCellPadding(0);
         table.setCellSpacing(0);
         table.setBorderWidth(1);
+        for (String style : styles) {
+            table.addStyleName(style);
+        }
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -85,8 +88,18 @@ public class ExtendedFlexTable {
         return this;
     }
 
+    public ExtendedFlexTable rowspan(final int rowspan) {
+        table.getFlexCellFormatter().setRowSpan(row, col - 1, rowspan);
+        return this;
+    }
+
     public ExtendedFlexTable width(int w) {
         table.getFlexCellFormatter().setWidth(row, col - 1, w + "px");
+        return this;
+    }
+
+    public ExtendedFlexTable widthPC(int w) {
+        table.getFlexCellFormatter().setWidth(row, col - 1, w + "%");
         return this;
     }
 }
