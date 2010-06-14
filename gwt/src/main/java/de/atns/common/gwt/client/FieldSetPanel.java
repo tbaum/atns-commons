@@ -25,6 +25,10 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         this(new Label(text), content);
     }
 
+    public FieldSetPanel(String text, ExtendedFlowPanel content) {
+        this(text, content.getPanel());
+    }
+
     public FieldSetPanel(Widget legend, Widget content) {
         legendPanel = new LegendPanel();
         setElement(DOM.createFieldSet());
