@@ -4,4 +4,6 @@
 <module>
     <inherits name="com.google.gwt.jsonp.Jsonp"/>
     <inherits name="com.google.gwt.json.JSON"/>
+
+    <source path="client"/>
 </module>
