@@ -62,6 +62,9 @@
             <groupId>de.atns.common</groupId>
             <artifactId>gwt</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.code.gwt-crypto</groupId>
+            <artifactId>gwt-crypto</artifactId>
+        </dependency>
     </dependencies>
 </project>
