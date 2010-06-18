@@ -1,10 +1,8 @@
 package net.customware.gwt.dispatch.shared;
 
-import net.customware.gwt.dispatch.server.Dispatch;
-
 /**
- * These are thrown by {@link Dispatch#execute(Action)} if there is a
- * problem executing a particular {@link Action}.
+ * These are thrown by {@link net.customware.gwt.dispatch.server.Dispatch#execute(net.customware.gwt.dispatch.shared.Action)} if there is a
+ * problem executing a particular {@link net.customware.gwt.dispatch.shared.Action}.
  *
  * @author David Peterson
  */

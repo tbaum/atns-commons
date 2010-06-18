@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client.event;
+package de.atns.common.security.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -7,13 +7,12 @@ import com.google.gwt.event.shared.GwtEvent;
  * @author tbaum
  * @since 24.10.2009
  */
-public interface LogoutEventHandler extends EventHandler {
+public interface LoginEventHandler extends EventHandler {
 // ------------------------------ FIELDS ------------------------------
 
-    GwtEvent.Type<LogoutEventHandler> TYPE = new GwtEvent.Type<LogoutEventHandler>();
+    GwtEvent.Type<LoginEventHandler> TYPE = new GwtEvent.Type<LoginEventHandler>();
 
 // -------------------------- OTHER METHODS --------------------------
 
-    void onLogout(LogoutEvent logoutEvent);
+    void onLogin(LoginEvent event);
 }
-

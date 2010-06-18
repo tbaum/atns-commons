@@ -1,6 +1,6 @@
-package de.atns.common.gwt.client.action;
+package de.atns.common.security.client.action;
 
-import de.atns.common.gwt.client.model.UserPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
 /**

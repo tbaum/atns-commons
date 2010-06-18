@@ -1,11 +1,13 @@
-package de.atns.common.gwt.client;
+package de.atns.common.security.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import de.atns.common.gwt.client.action.CheckSession;
-import de.atns.common.gwt.client.event.LogoutEvent;
-import de.atns.common.gwt.client.event.ServerStatusEvent;
-import de.atns.common.gwt.client.event.ServerStatusEventHandler;
-import de.atns.common.gwt.client.model.UserPresentation;
+import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
+import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.security.client.action.CheckSession;
+import de.atns.common.security.client.event.LogoutEvent;
+import de.atns.common.security.client.event.ServerStatusEvent;
+import de.atns.common.security.client.event.ServerStatusEventHandler;
+import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 

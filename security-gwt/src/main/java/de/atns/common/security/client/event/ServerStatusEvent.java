@@ -1,7 +1,7 @@
-package de.atns.common.gwt.client.event;
+package de.atns.common.security.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import de.atns.common.gwt.client.model.UserPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 /**
  * @author tbaum
@@ -20,7 +20,8 @@ public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
     }
 
     public ServerStatusEvent(final UserPresentation user) {
-        this(user != null ? ServerStatusEventHandler.ServerStatus.AVAILABLE : ServerStatusEventHandler.ServerStatus.NO_LOGIN, user);
+        this(user != null && user.isValid() ? ServerStatusEventHandler.ServerStatus.AVAILABLE
+                : ServerStatusEventHandler.ServerStatus.NO_LOGIN, user);
     }
 
     private ServerStatusEvent(final ServerStatusEventHandler.ServerStatus status, final UserPresentation user) {

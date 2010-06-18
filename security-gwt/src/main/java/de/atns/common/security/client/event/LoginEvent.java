@@ -1,20 +1,20 @@
-package de.atns.common.gwt.client.event;
+package de.atns.common.security.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import de.atns.common.gwt.client.model.UserPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 /**
  * @author tbaum
  * @since 07.12.2009
  */
-public class LogoutEvent extends GwtEvent<LogoutEventHandler> {
+public class LoginEvent extends GwtEvent<LoginEventHandler> {
 // ------------------------------ FIELDS ------------------------------
 
     private final UserPresentation user;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public LogoutEvent(final UserPresentation user) {
+    public LoginEvent(final UserPresentation user) {
         this.user = user;
     }
 
@@ -27,12 +27,12 @@ public class LogoutEvent extends GwtEvent<LogoutEventHandler> {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
-    protected void dispatch(final LogoutEventHandler handler) {
-        handler.onLogout(this);
+    protected void dispatch(final LoginEventHandler handler) {
+        handler.onLogin(this);
     }
 
     @Override
-    public Type<LogoutEventHandler> getAssociatedType() {
-        return LogoutEventHandler.TYPE;
+    public Type<LoginEventHandler> getAssociatedType() {
+        return LoginEventHandler.TYPE;
     }
 }

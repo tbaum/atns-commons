@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client.model;
+package de.atns.common.security.client.model;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.shared.Result;

@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client.event;
+package de.atns.common.security.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
