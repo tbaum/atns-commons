@@ -10,10 +10,4 @@
     <inherits name="com.googlecode.gwt.crypto.Crypto"/>
 
     <source path="client"/>
-    <!--
-    <source path="security">
-        <include name="Secured.java"/>
-        <include name="SecurityUser.java"/>
-    </source>
-     -->
 </module>
