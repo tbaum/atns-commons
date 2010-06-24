@@ -1,6 +1,5 @@
 package de.atns.common.security.client;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -17,6 +16,8 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 import net.customware.gwt.presenter.client.place.Place;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author tbaum
@@ -25,6 +26,7 @@ import net.customware.gwt.presenter.client.place.Place;
 @Singleton public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
+    private static final Logger LOG = Logger.getLogger(LoginPresenter.class.getName());
     private final DispatchAsync dispatcher;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -61,7 +63,7 @@ import net.customware.gwt.presenter.client.place.Place;
                     try {
                         Cookies.setCookie("l", CryptoUtil.encrypt(l) + ":" + CryptoUtil.encrypt(p));
                     } catch (InvalidCipherTextException e) {
-                        Log.debug(e.getMessage());
+                        LOG.log(Level.FINE, e.getMessage(), e);
                     }
                 } else {
                     Cookies.removeCookie("l");

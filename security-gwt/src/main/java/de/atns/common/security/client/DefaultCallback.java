@@ -11,7 +11,8 @@ import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 
-import static com.allen_sauer.gwt.log.client.Log.debug;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author tbaum
@@ -19,6 +20,8 @@ import static com.allen_sauer.gwt.log.client.Log.debug;
  */
 public abstract class DefaultCallback<T> implements AsyncCallback<T> {
 // ------------------------------ FIELDS ------------------------------
+
+    private static final Logger LOG = Logger.getLogger(DefaultCallback.class.getName());
 
     private static final ErrorWidgetDisplay nullDisplay = new DefaultErrorWidgetDisplay() {
         @Override public void reset() {
@@ -48,17 +51,17 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
 // --------------------- Interface AsyncCallback ---------------------
 
     @Override public void onFailure(final Throwable originalCaught) {
-        debug("check session in callback");
+        LOG.log(Level.FINE, "check session in callback");
         display.showError(originalCaught.getMessage());
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
             @Override public void onFailure(final Throwable caught) {
-                debug("failed-checksession", caught);
+                LOG.log(Level.FINE, "failed-checksession", caught);
                 eventBus.fireEvent(new ServerStatusEvent(ServerStatusEventHandler.ServerStatus.UNAVAILABLE));
                 finish();
             }
 
             @Override public void onSuccess(final UserPresentation result) {
-                debug("success-checksession");
+                LOG.log(Level.FINE, "success-checksession");
                 eventBus.fireEvent(!result.isValid() ? new LogoutEvent(null) : new ServerStatusEvent(result));
                 finish();
             }
@@ -71,7 +74,7 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
     }
 
     @Override public void onSuccess(final T result) {
-        debug("success-call " + getClass());
+        LOG.log(Level.FINE, "success-call " + getClass());
         // eventBus.fireEvent(AVAILABLE);
         callback(result);
         display.setErrorVisible(false);
@@ -85,6 +88,6 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
 
 
     public void callbackError(final Throwable caught) {
-        debug("error " + getClass(), caught);
+        LOG.log(Level.FINE, "error " + getClass(), caught);
     }
 }
