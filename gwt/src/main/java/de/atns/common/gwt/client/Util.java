@@ -4,6 +4,7 @@ import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -11,6 +12,8 @@ import java.util.Map;
  * @since 13.06.2010
  */
 public class Util {
+// -------------------------- STATIC METHODS --------------------------
+
     public static Double parseDouble(final String text, final Double defaultValue) {
         if (text != null && !text.isEmpty()) {
             try {
@@ -77,5 +80,9 @@ public class Util {
             nameTextBox.setText(newValue1);
         }
         return newValue1;
+    }
+
+    public static BigDecimal parseBigDecimal(final String text, final BigDecimal defaultValue) {
+        return text.isEmpty() ? defaultValue : new BigDecimal(text);
     }
 }
