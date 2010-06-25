@@ -22,6 +22,7 @@
         <module>gwt</module>
         <module>gwt-dispatch</module>
         <module>gwt-presenter</module>
+        <module>gwt-security</module>
         <module>image</module>
         <module>json</module>
         <module>numbergenerator</module>
@@ -30,7 +31,6 @@
         <module>web</module>
         <module>mail</module>
         <module>template</module>
-        <module>security-gwt</module>
     </modules>
 
     <scm>
