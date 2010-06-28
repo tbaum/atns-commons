@@ -50,6 +50,10 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         });
     }
 
+    protected <T> T get(final Session session, final Class<T> clazz, final long id) {
+        return (T) session.get(clazz, id);
+    }
+
     public Filter getHibernateFilter(final String filterName) {
         return getHibernateTemplate().enableFilter(filterName);
     }
