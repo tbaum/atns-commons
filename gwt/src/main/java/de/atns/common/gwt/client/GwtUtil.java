@@ -3,7 +3,6 @@ package de.atns.common.gwt.client;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -14,7 +13,6 @@ import org.cobogw.gwt.user.client.ui.Button;
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.INLINE;
 import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
-import static com.google.gwt.event.dom.client.KeyCodes.*;
 
 /**
  * @author mwolter
@@ -67,16 +65,6 @@ import static com.google.gwt.event.dom.client.KeyCodes.*;
         lu.add(inhalt);
 
         return ro;
-    }
-
-    public static boolean checkNeutraleTasten(final KeyPressEvent event) {
-        final char code = event.getCharCode();
-        return code != KEY_BACKSPACE && code != KEY_ENTER && code != KEY_TAB && code != KEY_DELETE;
-    }
-
-    public static boolean checkArrorKeys(final KeyPressEvent pressEvent) {
-        char code = pressEvent.getCharCode();
-        return code != KEY_LEFT && code != KEY_RIGHT;
     }
 
     public static boolean checkTelefonSymbol(final char code) {
