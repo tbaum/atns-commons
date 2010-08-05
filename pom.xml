@@ -3,7 +3,7 @@
     <groupId>de.atns.common</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.1</version>
+    <version>1.4.2-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
 
     <parent>
