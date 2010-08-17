@@ -1,4 +1,4 @@
-package de.atns.faeth.model.model;
+package de.atns.common.dao;
 
 import javax.persistence.*;
 import java.io.Serializable;

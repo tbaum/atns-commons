@@ -1,9 +1,9 @@
 package de.atns.common.security.model;
 
+import de.atns.common.dao.BaseObject;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.util.StringUtils;
-import de.atns.faeth.model.model.BaseObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
