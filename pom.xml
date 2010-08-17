@@ -30,6 +30,7 @@
         <module>web</module>
         <module>mail</module>
         <module>template</module>
+        <module>gwt-security-gui</module>
     </modules>
 
     <scm>
@@ -48,71 +49,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>config</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>gwt</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>classutils</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>cache</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>dao</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>image</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>numbergenerator</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>fileutils</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>security</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>web</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>gwt-dispatch</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>gwt-presenter</artifactId>
-                <version>${version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>template</artifactId>
-                <version>${version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.google.code.gwt-crypto</groupId>
                 <artifactId>gwt-crypto</artifactId>

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>gwt</artifactId>
     <name>${groupId}:${artifactId}:${version}</name>
@@ -39,14 +40,17 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-presenter</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-dispatch</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt.inject</groupId>

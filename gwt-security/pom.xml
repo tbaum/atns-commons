@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
         <groupId>de.atns.common</groupId>
@@ -38,14 +39,17 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-presenter</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-dispatch</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
@@ -55,10 +59,12 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>security</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt</artifactId>
+            <version>1.4.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gwt-crypto</groupId>
