@@ -1,6 +1,6 @@
 package de.atns.common.security.model;
 
-public interface DefaultRolles {
+public interface DefaultRoles {
 // ------------------------------ FIELDS ------------------------------
 
     public static final String ADMIN = "ADMIN";

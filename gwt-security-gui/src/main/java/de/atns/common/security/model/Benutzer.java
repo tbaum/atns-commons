@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 
+import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static java.util.Arrays.asList;
 
 @Entity
@@ -77,7 +78,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
     public boolean isAdmin() {
-        return contains(getRolle(), DefaultRolles.ADMIN);
+        return contains(getRolle(), ADMIN);
     }
 
     private boolean contains(final String[] required, final String rolle) {
