@@ -5,7 +5,7 @@ import com.google.inject.Provider;
 import com.wideplay.warp.persist.Transactional;
 import de.atns.common.gwt.client.model.EmptyResult;
 import de.atns.common.security.Secured;
-import de.atns.common.security.model.DefaultRolles;
+import de.atns.common.security.model.DefaultRoles;
 import de.atns.common.util.SHA1;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.model.Benutzer;
@@ -43,7 +43,7 @@ public class BenutzerUpdateHandler implements ActionHandler<BenutzerUpdate, Empt
         return BenutzerUpdate.class;
     }
 
-    @Transactional @Secured(DefaultRolles.ADMIN)
+    @Transactional @Secured(DefaultRoles.ADMIN)
     public EmptyResult execute(final BenutzerUpdate action, ExecutionContext context) throws ActionException {
         final EntityManager em = this.em.get();
 

@@ -16,7 +16,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import javax.persistence.EntityManager;
 
 import static de.atns.common.util.SHA1.createSHA1Code;
-import static de.atns.common.security.model.DefaultRolles.ADMIN;
+import static de.atns.common.security.model.DefaultRoles.ADMIN;
 
 
 /**
