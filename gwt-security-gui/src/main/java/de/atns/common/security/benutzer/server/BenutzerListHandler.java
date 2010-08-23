@@ -19,6 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static de.atns.common.dao.PartResult.createPartResult;
@@ -57,7 +58,7 @@ public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, L
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Transactional @Secured @Override
+    @Override @Secured @Transactional
     public PartResult<Benutzer> executeInternal(final BenutzerList action) throws ActionException {
         final EntityManager em = this.em.get();
 
