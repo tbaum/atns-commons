@@ -29,10 +29,8 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
 // --------------------- Interface ActionHandler ---------------------
 
-    //TODO @Transactional does not work ???
-
     @Override @Transactional
-    public final R execute(final A action, ExecutionContext context) throws ActionException {
+    public R execute(final A action, ExecutionContext context) throws ActionException {
         return converter.convert(executeInternal(action));
     }
 
