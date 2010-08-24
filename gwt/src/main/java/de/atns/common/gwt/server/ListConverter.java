@@ -18,9 +18,15 @@ public class ListConverter<F extends Serializable, T extends IsSerializable>
 
     private Converter<F, T> converter;
 
+// -------------------------- STATIC METHODS --------------------------
+
+    public static <F extends Serializable, T extends IsSerializable> ListConverter<F, T> listConverter(final Converter<F, T> converter) {
+        return new ListConverter<F, T>(converter);
+    }
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public ListConverter(final Converter<F, T> converter) {
+    private ListConverter(final Converter<F, T> converter) {
         this.converter = converter;
     }
 

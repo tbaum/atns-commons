@@ -7,7 +7,6 @@ import com.wideplay.warp.persist.Transactional;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.server.ConvertingActionHandler;
-import de.atns.common.gwt.server.ListConverter;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
@@ -19,10 +18,10 @@ import org.apache.commons.logging.LogFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static de.atns.common.dao.PartResult.createPartResult;
+import static de.atns.common.gwt.server.ListConverter.listConverter;
 
 
 /**
@@ -39,7 +38,7 @@ public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, L
 
     @Inject
     public BenutzerListHandler(final Provider<EntityManager> em) {
-        super(new ListConverter<Benutzer, MitarbeiterPresentation>(new Converter<Benutzer, MitarbeiterPresentation>() {
+        super(listConverter(new Converter<Benutzer, MitarbeiterPresentation>() {
             @Override public MitarbeiterPresentation convert(final Benutzer mitarbeiter) {
                 return new MitarbeiterPresentation(mitarbeiter.getLogin(), mitarbeiter.isAdmin());
             }
