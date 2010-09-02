@@ -25,6 +25,7 @@ public abstract class DialogBoxErrorWidgetDisplay extends DefaultErrorWidgetDisp
 
     protected DialogBoxErrorWidgetDisplay() {
         super();
+        setGlassEnabled(true);
         cancelButton.addClickHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 hideDialogBox();
