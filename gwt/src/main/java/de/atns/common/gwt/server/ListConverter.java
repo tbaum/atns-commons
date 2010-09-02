@@ -26,7 +26,7 @@ public class ListConverter<F extends Serializable, T extends IsSerializable>
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private ListConverter(final Converter<F, T> converter) {
+    protected ListConverter(final Converter<F, T> converter) {
         this.converter = converter;
     }
 
