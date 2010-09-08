@@ -76,7 +76,7 @@ public class NumberBox extends Composite implements HasValue<Number>, ValueChang
     private void setValue(Number oldNumber, Number number, boolean fireEvents) {
         numberValue = number;
         format.reset(this, false);
-        box.setText(format.format(this, number));
+        box.setValue(format.format(this, number));
 
         if (fireEvents) {
             NumberChangeEvent.fireIfNotEqualNumbers(this, oldNumber, number);

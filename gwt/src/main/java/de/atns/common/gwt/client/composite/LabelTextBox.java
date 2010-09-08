@@ -89,7 +89,7 @@ public class LabelTextBox extends Composite implements /*TODO HasFocus, */ HasVa
     }
 
     public void setValue(final String text) {
-        textBox.setText(text);
+        textBox.setValue(text);
         updateLabelState();
     }
 

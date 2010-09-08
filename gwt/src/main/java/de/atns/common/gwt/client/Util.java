@@ -68,7 +68,7 @@ public class Util {
         final String currentValue1 = nameTextBox.getText();
         final String newValue1 = currentValue1.trim().toLowerCase();
         if (!currentValue1.equals(newValue1)) {
-            nameTextBox.setText(newValue1);
+            nameTextBox.setValue(newValue1);
         }
         return newValue1;
     }
@@ -77,7 +77,7 @@ public class Util {
         final String currentValue1 = nameTextBox.getText();
         final String newValue1 = currentValue1.trim();
         if (!currentValue1.equals(newValue1)) {
-            nameTextBox.setText(newValue1);
+            nameTextBox.setValue(newValue1);
         }
         return newValue1;
     }
