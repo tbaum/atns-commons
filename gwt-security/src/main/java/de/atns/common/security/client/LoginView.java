@@ -23,7 +23,7 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
     private final Button login;
     private final TextBox username;
     private final PasswordTextBox password;
-    private final CheckBox remember;
+    private final CheckBox automatic;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -37,7 +37,7 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
         password.setWidth("150px");
         password.addKeyUpHandler(this);
 
-        remember = new CheckBox("speichern");
+        automatic = new CheckBox("automatisch anmelden");
 
         login = new Button("Anmelden");
         login.addStyleName("notloading");
@@ -59,7 +59,7 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
         grid.getCellFormatter().addStyleName(2, 0, "form-label");
         grid.setWidget(2, 1, password);
 
-        grid.setWidget(3, 1, remember);
+        grid.setWidget(3, 1, automatic);
 
         grid.getElement().getStyle().setProperty("margin", "auto");
 
@@ -116,12 +116,12 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
         updateLoginButton();
     }
 
-    @Override public boolean rememberValue() {
-        return remember.getValue();
+    @Override public boolean automaticLogin() {
+        return automatic.getValue();
     }
 
     @Override public void rememberValue(boolean v) {
-        remember.setValue(v);
+        automatic.setValue(v);
     }
 
     @Override public String usernameValue() {

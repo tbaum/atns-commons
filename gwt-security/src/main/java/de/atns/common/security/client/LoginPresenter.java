@@ -3,7 +3,9 @@ package de.atns.common.security.client;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
@@ -56,35 +58,44 @@ import java.util.logging.Logger;
 
         registerHandler(display.addLoginClick(new ClickHandler() {
             @Override public void onClick(final ClickEvent clickEvent) {
-                final String l = display.usernameValue();
-                final String p = display.passwordValue();
-
-                if (display.rememberValue()) {
-                    try {
-                        Cookies.setCookie("l", CryptoUtil.encrypt(l) + ":" + CryptoUtil.encrypt(p));
-                    } catch (InvalidCipherTextException e) {
-                        LOG.log(Level.FINE, e.getMessage(), e);
-                    }
-                } else {
-                    Cookies.removeCookie("l");
-                }
-
-                dispatcher.execute(new UserLogin(l, p),
-                        new DefaultCallback<UserPresentation>(dispatcher, eventBus, display) {
-                            @Override public void callback(final UserPresentation user) {
-                                eventBus.fireEvent(new ServerStatusEvent(user));
-                            }
-                        });
+                doLogin(display.usernameValue(), display.passwordValue());
             }
         }));
 
         try {
             String[] s = Cookies.getCookie("l").split(":");
-            display.usernameValue(CryptoUtil.decrypt(s[0]));
-            display.passwordValue(CryptoUtil.decrypt(s[1]));
+            final String username = CryptoUtil.decrypt(s[0]);
+            display.usernameValue(username);
+            final String password = CryptoUtil.decrypt(s[1]);
+            display.passwordValue(password);
             display.rememberValue(true);
+
+            DeferredCommand.addCommand(new Command() {
+                @Override public void execute() {
+                    doLogin(username, password);
+                }
+            });
         } catch (Exception ignore) {
         }
+    }
+
+    private void doLogin(final String login, final String password) {
+        if (display.automaticLogin()) {
+            try {
+                Cookies.setCookie("l", CryptoUtil.encrypt(login) + ":" + CryptoUtil.encrypt(password));
+            } catch (InvalidCipherTextException e) {
+                LOG.log(Level.FINE, e.getMessage(), e);
+            }
+        } else {
+            Cookies.removeCookie("l");
+        }
+
+        dispatcher.execute(new UserLogin(login, password),
+                new DefaultCallback<UserPresentation>(dispatcher, eventBus, display) {
+                    @Override public void callback(final UserPresentation user) {
+                        eventBus.fireEvent(new ServerStatusEvent(user));
+                    }
+                });
     }
 
 // -------------------------- INNER CLASSES --------------------------
@@ -96,7 +107,7 @@ import java.util.logging.Logger;
 
         void passwordValue(String s);
 
-        boolean rememberValue();
+        boolean automaticLogin();
 
         void rememberValue(boolean v);
 
