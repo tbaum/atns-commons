@@ -33,8 +33,8 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T> DefaultCallback<T> defaultCallback(final DispatchAsync dispatcher, final EventBus bus,
-                                                         final Callback<T> call) {
+    public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
+                                                  final Callback<T> call) {
         return new DefaultCallback<T>(dispatcher, bus, null) {
             @Override public void callback(final T result) {
                 call.callback(result);
