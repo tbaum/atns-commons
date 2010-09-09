@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author tbaum
  * @since 24.10.2009
  */
-public abstract class DefaultCallback<T> implements AsyncCallback<T> {
+public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Logger LOG = Logger.getLogger(DefaultCallback.class.getName());
@@ -31,12 +31,33 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
     private final EventBus eventBus;
     private final ErrorWidgetDisplay display;
 
+// -------------------------- STATIC METHODS --------------------------
+
+    public static <T> DefaultCallback<T> defaultCallback(final DispatchAsync dispatcher, final EventBus bus,
+                                                         final Callback<T> call) {
+        return new DefaultCallback<T>(dispatcher, bus) {
+            @Override public void callback(final T result) {
+                call.callback(result);
+            }
+        };
+    }
+
+    public static <T> DefaultCallback<T> defaultCallback(final DispatchAsync dispatcher, final EventBus bus,
+                                                         final ErrorWidgetDisplay display, final Callback<T> call) {
+        return new DefaultCallback<T>(dispatcher, bus, display) {
+            @Override public void callback(final T result) {
+                call.callback(result);
+            }
+        };
+    }
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public DefaultCallback(final DispatchAsync dispatcher, final EventBus bus) {
+    private DefaultCallback(final DispatchAsync dispatcher, final EventBus bus) {
         this(dispatcher, bus, null);
     }
 
+    @Deprecated
     public DefaultCallback(final DispatchAsync dispatcher, final EventBus bus, final ErrorWidgetDisplay display) {
         this.dispatcher = dispatcher;
         this.eventBus = bus;
@@ -82,12 +103,14 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T> {
         display.stopProcessing();
     }
 
-// -------------------------- OTHER METHODS --------------------------
+// --------------------- Interface Callback ---------------------
 
     public abstract void callback(T result);
 
+// -------------------------- OTHER METHODS --------------------------
 
     public void callbackError(final Throwable caught) {
         LOG.log(Level.FINE, "error " + getClass(), caught);
     }
 }
+
