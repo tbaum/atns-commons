@@ -35,15 +35,15 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
     public static <T> DefaultCallback<T> defaultCallback(final DispatchAsync dispatcher, final EventBus bus,
                                                          final Callback<T> call) {
-        return new DefaultCallback<T>(dispatcher, bus) {
+        return new DefaultCallback<T>(dispatcher, bus, null) {
             @Override public void callback(final T result) {
                 call.callback(result);
             }
         };
     }
 
-    public static <T> DefaultCallback<T> defaultCallback(final DispatchAsync dispatcher, final EventBus bus,
-                                                         final ErrorWidgetDisplay display, final Callback<T> call) {
+    public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
+                                                  final ErrorWidgetDisplay display, final Callback<T> call) {
         return new DefaultCallback<T>(dispatcher, bus, display) {
             @Override public void callback(final T result) {
                 call.callback(result);
@@ -53,12 +53,7 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private DefaultCallback(final DispatchAsync dispatcher, final EventBus bus) {
-        this(dispatcher, bus, null);
-    }
-
-    @Deprecated
-    public DefaultCallback(final DispatchAsync dispatcher, final EventBus bus, final ErrorWidgetDisplay display) {
+    private DefaultCallback(final DispatchAsync dispatcher, final EventBus bus, final ErrorWidgetDisplay display) {
         this.dispatcher = dispatcher;
         this.eventBus = bus;
         this.display = display != null ? display : nullDisplay;

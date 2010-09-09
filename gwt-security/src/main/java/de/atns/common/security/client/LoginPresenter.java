@@ -21,6 +21,8 @@ import net.customware.gwt.presenter.client.place.Place;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static de.atns.common.security.client.DefaultCallback.callback;
+
 /**
  * @author tbaum
  * @since 24.10.2009
@@ -91,11 +93,11 @@ import java.util.logging.Logger;
         }
 
         dispatcher.execute(new UserLogin(login, password),
-                new DefaultCallback<UserPresentation>(dispatcher, eventBus, display) {
+                callback(dispatcher, eventBus, display, new Callback<UserPresentation>() {
                     @Override public void callback(final UserPresentation user) {
                         eventBus.fireEvent(new ServerStatusEvent(user));
                     }
-                });
+                }));
     }
 
 // -------------------------- INNER CLASSES --------------------------

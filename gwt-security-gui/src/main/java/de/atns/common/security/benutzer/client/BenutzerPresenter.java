@@ -9,14 +9,16 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.*;
 import de.atns.common.gwt.client.event.PageUpdateEvent;
 import de.atns.common.gwt.client.model.ListPresentation;
-import de.atns.common.security.client.DefaultCallback;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
 import de.atns.common.security.benutzer.client.model.MitarbeiterFilter;
 import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
+import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
+
+import static de.atns.common.security.client.DefaultCallback.callback;
 
 
 /**
@@ -75,7 +77,7 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 
     @Override public void updateList() {
         dispatcher.execute(new BenutzerList(display.getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange()),
-                new DefaultCallback<ListPresentation<MitarbeiterPresentation>>(dispatcher, eventBus, display) {
+                callback(dispatcher, eventBus, display, new Callback<ListPresentation<MitarbeiterPresentation>>() {
                     @Override public void callback(final ListPresentation<MitarbeiterPresentation> result) {
                         display.clearList();
                         if (result.getEntries().isEmpty()) {
@@ -91,7 +93,7 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
                         }
                         eventBus.fireEvent(new PageUpdateEvent(BenutzerPresenter.this, result.getTotal(), result.getStart()));
                     }
-                });
+                }));
     }
 
 // -------------------------- INNER CLASSES --------------------------

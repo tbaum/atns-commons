@@ -9,11 +9,13 @@ import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.gwt.client.model.EmptyResult;
-import de.atns.common.security.client.DefaultCallback;
 import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
+import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
+
+import static de.atns.common.security.client.DefaultCallback.callback;
 
 
 /**
@@ -42,12 +44,12 @@ public class BenutzerChangePasswordPresenter extends DialogBoxWidgetPresenter<Be
         registerHandler(display.addSafeHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 dispatcher.execute(new BenutzerChangePassword(display.getPassword()),
-                        new DefaultCallback<EmptyResult>(dispatcher, eventBus, display) {
+                        callback(dispatcher, eventBus, display, new Callback<EmptyResult>() {
                             @Override public void callback(final EmptyResult result) {
                                 eventBus.fireEvent(new BenutzerUpdateEvent(null));
                                 display.hideDialogBox();
                             }
-                        });
+                        }));
             }
         }));
         display.showDialogBox();
