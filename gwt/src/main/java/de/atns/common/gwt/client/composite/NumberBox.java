@@ -147,6 +147,20 @@ public class NumberBox extends Composite implements HasValue<Number>, ValueChang
         box.setFocus(true);
     }
 
+// -------------------------- OTHER METHODS --------------------------
+
+    public HandlerRegistration addKeyDownHandler(final KeyDownHandler handler) {
+        return box.addKeyDownHandler(handler);
+    }
+
+    public HandlerRegistration addKeyPressHandler(final KeyPressHandler handler) {
+        return box.addKeyPressHandler(handler);
+    }
+
+    public HandlerRegistration addKeyUpHandler(final KeyUpHandler handler) {
+        return box.addKeyUpHandler(handler);
+    }
+
 // -------------------------- INNER CLASSES --------------------------
 
     public static class DefaultFormat implements NumberBox.Format {
