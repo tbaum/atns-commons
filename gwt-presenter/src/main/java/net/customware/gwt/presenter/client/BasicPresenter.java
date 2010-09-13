@@ -8,6 +8,8 @@ import net.customware.gwt.presenter.client.place.PlaceRequestHandler;
 
 import java.util.List;
 
+import static java.util.Collections.addAll;
+
 public abstract class BasicPresenter<D extends Display> implements Presenter {
 
     /**
@@ -50,8 +52,8 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
      *
      * @param handlerRegistration The registration.
      */
-    protected void registerHandler(HandlerRegistration handlerRegistration) {
-        handlerRegistrations.add(handlerRegistration);
+    protected void registerHandler(HandlerRegistration... handlerRegistration) {
+        addAll(handlerRegistrations, handlerRegistration);
     }
 
     public void unbind() {
