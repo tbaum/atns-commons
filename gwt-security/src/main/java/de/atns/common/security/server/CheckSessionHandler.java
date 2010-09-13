@@ -6,9 +6,9 @@ import de.atns.common.security.SecurityUser;
 import de.atns.common.security.UserProvider;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.model.UserPresentation;
-import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
+import net.customware.gwt.dispatch.shared.ActionException;
 
 import java.util.UUID;
 
@@ -43,8 +43,11 @@ public class CheckSessionHandler implements ActionHandler<CheckSession, UserPres
     public final UserPresentation execute(final CheckSession action, ExecutionContext context) throws ActionException {
         final SecurityUser user = this.user.get();
         final UUID token = securityFilter.getAuthToken();
-
-        return new UserPresentation(user != null ? user.getLogin() : null, token != null ? token.toString() : null);
+        if (user == null || token == null) {
+            return new UserPresentation();
+        } else {
+            return new UserPresentation(user.getLogin(), token.toString());
+        }
     }
 
     @Override
