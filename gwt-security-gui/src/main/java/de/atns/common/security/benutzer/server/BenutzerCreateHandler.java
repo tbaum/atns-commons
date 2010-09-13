@@ -55,7 +55,7 @@ public class BenutzerCreateHandler implements ActionHandler<BenutzerCreate, Crea
         } catch (RuntimeException e) {
             if (e.getCause() instanceof ConstraintViolationException) {
                 LOG.warn(e, e);
-                throw new RuntimeException("Mitarbeiter mit diesem Login existiert bereits.");
+                throw new RuntimeException("Benutzer mit diesem Login existiert bereits.");
             }
             throw e;
         }

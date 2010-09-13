@@ -88,8 +88,8 @@ public class BenutzerCreateView extends DialogBoxErrorWidgetDisplay implements B
         });
 
 
-        setDialogBoxContent("Mitarbeiter - Anlegen", flowPanel(
-                new FieldSetPanel("Mitarbeiter", extendedFlowPanel()
+        setDialogBoxContent("Benutzer - Anlegen", flowPanel(
+                new FieldSetPanel("Benutzer", extendedFlowPanel()
                         .add("Login").widthPX(120).add(login).newLine()
                         .add("Admin").widthPX(120).add(admin).newLine()
                         .add("Email").widthPX(120).add(email).newLine()

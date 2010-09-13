@@ -11,7 +11,7 @@ import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.gwt.client.model.EmptyResult;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
-import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
@@ -27,7 +27,7 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 // ------------------------------ FIELDS ------------------------------
 
     private final DispatchAsync dispatcher;
-    private MitarbeiterPresentation presentation;
+    private BenutzerPresentation presentation;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -39,7 +39,7 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void bind(final MitarbeiterPresentation presentation) {
+    public void bind(final BenutzerPresentation presentation) {
         this.presentation = presentation;
         bind();
     }
@@ -69,7 +69,7 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay, DialogBoxDisplayInterface {
-        public void setData(MitarbeiterPresentation p);
+        public void setData(BenutzerPresentation p);
 
         public HandlerRegistration addSafeHandler(ClickHandler handler);
 

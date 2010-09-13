@@ -39,7 +39,7 @@ public class AdminDummyDataCreator {
 
     public boolean hasDefaultAdmin() {
         try {
-            repository.mitarbeiterByLogin("admin");
+            repository.benutzerByLogin("admin");
             return true;
         } catch (NoResultException e) {
             return false;

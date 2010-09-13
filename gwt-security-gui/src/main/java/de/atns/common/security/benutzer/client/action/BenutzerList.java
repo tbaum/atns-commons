@@ -1,8 +1,8 @@
 package de.atns.common.security.benutzer.client.action;
 
 import de.atns.common.gwt.client.model.ListPresentation;
-import de.atns.common.security.benutzer.client.model.MitarbeiterFilter;
-import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
+import de.atns.common.gwt.client.model.StandardFilter;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
 
@@ -10,10 +10,10 @@ import net.customware.gwt.dispatch.shared.Action;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerList implements Action<ListPresentation<MitarbeiterPresentation>> {
+public class BenutzerList implements Action<ListPresentation<BenutzerPresentation>> {
 // ------------------------------ FIELDS ------------------------------
 
-    private MitarbeiterFilter filter;
+    private StandardFilter filter;
     private int startEntry;
     private int pageRange;
 
@@ -22,7 +22,7 @@ public class BenutzerList implements Action<ListPresentation<MitarbeiterPresenta
     protected BenutzerList() {
     }
 
-    public BenutzerList(final MitarbeiterFilter filter, final int startEntry, final int pageRange) {
+    public BenutzerList(final StandardFilter filter, final int startEntry, final int pageRange) {
         this.filter = filter;
         this.startEntry = startEntry;
         this.pageRange = pageRange;
@@ -30,7 +30,7 @@ public class BenutzerList implements Action<ListPresentation<MitarbeiterPresenta
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public MitarbeiterFilter getFilter() {
+    public StandardFilter getFilter() {
         return filter;
     }
 

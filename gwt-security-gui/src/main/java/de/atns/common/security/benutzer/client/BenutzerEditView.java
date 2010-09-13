@@ -12,8 +12,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
 import de.atns.common.gwt.client.DialogBoxErrorWidgetDisplay;
 import de.atns.common.gwt.client.FieldSetPanel;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.shared.ApplicationState;
-import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
 import org.cobogw.gwt.user.client.ui.Button;
 
 import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
@@ -80,7 +80,7 @@ public class BenutzerEditView extends DialogBoxErrorWidgetDisplay implements Ben
 
 
         setDialogBoxContent("Details", flowPanel(
-                new FieldSetPanel("Mitarbeiter", extendedFlowPanel()
+                new FieldSetPanel("Benutzer", extendedFlowPanel()
                         .add("Login").widthPX(120).add(login).newLine()
                         .add("Admin").widthPX(120).add(admin).newLine()
                         .add("Email").widthPX(120).add(email).newLine()
@@ -117,7 +117,7 @@ public class BenutzerEditView extends DialogBoxErrorWidgetDisplay implements Ben
         updButton();
     }
 
-    public void setData(MitarbeiterPresentation p) {
+    public void setData(BenutzerPresentation p) {
         login.setValue(p.getLogin());
         //TODO  email.setValue(p.getEmail());
         admin.setValue(p.isAdmin());

@@ -11,8 +11,8 @@ import com.google.inject.Inject;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.PagePresenter;
-import de.atns.common.security.benutzer.client.model.MitarbeiterFilter;
-import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
+import de.atns.common.gwt.client.model.StandardFilter;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import org.cobogw.gwt.user.client.ui.Button;
 
 import static de.atns.common.gwt.client.ExtendedFlexTable.table;
@@ -52,7 +52,7 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
 
         formPanel.add(getLoader());
 
-        final Label w1 = new Label("Mitarbeiter - Übersicht:");
+        final Label w1 = new Label("Benutzer - Übersicht:");
         w1.addStyleName("heading");
         formPanel.add(w1);
 
@@ -97,27 +97,26 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
 
 // --------------------- Interface Display ---------------------
 
-
     @Override public HandlerRegistration forSuche(final ClickHandler clickHandler) {
         return suche.addClickHandler(clickHandler);
     }
 
-    @Override public MitarbeiterFilter getFilter() {
-        return new MitarbeiterFilter(parseString(text));
+    @Override public StandardFilter getFilter() {
+        return new StandardFilter(text.getValue());
     }
 
     @Override public void addEmptyRow() {
-        auftraege.cell("- keine Mitarbeiter gefunden -").colspan(12).
+        auftraege.cell("- keine Benutzer gefunden -").colspan(12).
                 nextRow();
     }
 
-    public HandlerRegistration addRow(final MitarbeiterPresentation g, final ClickHandler editHandler) {
+    public HandlerRegistration addRow(final BenutzerPresentation g, final ClickHandler editHandler) {
         Button edit = new Button("Bearbeiten");
 
         auftraege
                 .cell(g.getLogin())
                 .cell(g.isAdmin() ? "Admin" : "Nutzer")
-                        //  .cell(g.getEmail())
+                .cell(g.getEmail())
                 .cell(flowPanel(edit))
                 .nextRow();
 
@@ -141,12 +140,5 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     public void reset() {
         text.setValue("");
         status.setSelectedIndex(0);
-    }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    private String parseString(final TextBox text) {
-        String s = text.getValue();
-        return s.isEmpty() ? null : s;
     }
 }

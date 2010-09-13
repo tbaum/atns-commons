@@ -23,6 +23,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     private String rollen;
 
+    private String email;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected Benutzer() {
@@ -34,6 +36,14 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
 
     @Override public String getLogin() {
         return login;

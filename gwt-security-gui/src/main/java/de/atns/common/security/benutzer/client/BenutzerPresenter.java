@@ -9,11 +9,11 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.*;
 import de.atns.common.gwt.client.event.PageUpdateEvent;
 import de.atns.common.gwt.client.model.ListPresentation;
+import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
-import de.atns.common.security.benutzer.client.model.MitarbeiterFilter;
-import de.atns.common.security.benutzer.client.model.MitarbeiterPresentation;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
@@ -77,13 +77,13 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 
     @Override public void updateList() {
         dispatcher.execute(new BenutzerList(display.getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange()),
-                callback(dispatcher, eventBus, display, new Callback<ListPresentation<MitarbeiterPresentation>>() {
-                    @Override public void callback(final ListPresentation<MitarbeiterPresentation> result) {
+                callback(dispatcher, eventBus, display, new Callback<ListPresentation<BenutzerPresentation>>() {
+                    @Override public void callback(final ListPresentation<BenutzerPresentation> result) {
                         display.clearList();
                         if (result.getEntries().isEmpty()) {
                             display.addEmptyRow();
                         } else {
-                            for (final MitarbeiterPresentation g : result.getEntries()) {
+                            for (final BenutzerPresentation g : result.getEntries()) {
                                 registerHandler(display.addRow(g, new ClickHandler() {
                                     @Override public void onClick(final ClickEvent event) {
                                         editPresenter.bind(g);
@@ -101,11 +101,11 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
     public static interface Display extends ErrorWidgetDisplay {
         HandlerRegistration forSuche(ClickHandler clickHandler);
 
-        MitarbeiterFilter getFilter();
+        StandardFilter getFilter();
 
         void addEmptyRow();
 
-        HandlerRegistration addRow(MitarbeiterPresentation auftrag, ClickHandler edit);
+        HandlerRegistration addRow(BenutzerPresentation auftrag, ClickHandler edit);
 
         void reset();
 
