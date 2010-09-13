@@ -7,6 +7,8 @@ import net.customware.gwt.dispatch.server.ExecutionContext;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.Result;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author tbaum
@@ -16,6 +18,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         implements ActionHandler<A, R> {
 // ------------------------------ FIELDS ------------------------------
 
+    private static final Log LOG = LogFactory.getLog(ConvertingActionHandler.class);
     protected final Converter<S, R> converter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -31,7 +34,9 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
     @Override @Transactional
     public R execute(final A action, ExecutionContext context) throws ActionException {
-        return converter.convert(executeInternal(action));
+        final S result = executeInternal(action);
+        if (LOG.isDebugEnabled()) LOG.debug(result);
+        return converter.convert(result);
     }
 
     @Override
