@@ -14,13 +14,15 @@ public class BenutzerPresentation implements Result, IsSerializable {
     private String login;
     private boolean admin;
     private String email;
+    private long id;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected BenutzerPresentation() {
     }
 
-    public BenutzerPresentation(final String login, final boolean admin, final String email) {
+    public BenutzerPresentation(final long id, final String login, final boolean admin, final String email) {
+        this.id = id;
         this.login = login;
         this.admin = admin;
         this.email = email;
@@ -30,6 +32,10 @@ public class BenutzerPresentation implements Result, IsSerializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getLogin() {

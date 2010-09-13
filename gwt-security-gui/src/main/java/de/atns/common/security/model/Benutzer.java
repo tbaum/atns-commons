@@ -30,9 +30,10 @@ public class Benutzer extends BaseObject implements SecurityUser {
     protected Benutzer() {
     }
 
-    public Benutzer(final String login, final String passwort) {
+    public Benutzer(final String login, final String passwort, final String email) {
         this.login = login;
         this.passwort = passwort;
+        this.email = email;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------

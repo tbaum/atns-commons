@@ -13,6 +13,7 @@ import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
+import de.atns.common.security.benutzer.client.gin.BenutzerInjector;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
@@ -32,64 +33,64 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
     private final DispatchAsync dispatcher;
     private final BenutzerEditPresenter editPresenter;
     private final PagePresenter pagePresenter;
+    private final BenutzerInjector injector;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public BenutzerPresenter(final Display display, final EventBus bus, final DispatchAsync dispatcher,
-                             final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter) {
+                             final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter, final BenutzerInjector injector) {
         super(display, bus);
         this.dispatcher = dispatcher;
         this.pagePresenter = pagePresenter;
         this.editPresenter = editPresenter;
+        this.injector = injector;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
     @Override protected void onBindInternal() {
-        registerHandler(eventBus.addHandler(BenutzerUpdateEventHandler.TYPE, new BenutzerUpdateEventHandler() {
-            @Override public void onUpdate(final BenutzerUpdateEvent event) {
-                updateList();
-            }
-        }));
+        registerHandler(eventBus.addHandler(BenutzerUpdateEventHandler.TYPE,
+                new BenutzerUpdateEventHandler() {
+                    @Override public void onUpdate(final BenutzerUpdateEvent event) {
+                        updateList();
+                    }
+                }));
 
         registerHandler(display.forSuche(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 updateList();
             }
         }));
-
-        final EnterKeyPressHandler pressHandler = new EnterKeyPressHandler() {
+        registerHandler(display.forPressEnter(new EnterKeyPressHandler() {
             @Override protected void onEnterPressed() {
                 updateList();
             }
-        };
+        }));
 
-        for (HandlerRegistration registration : display.forPressEnter(pressHandler)) {
-            registerHandler(registration);
-        }
+        registerHandler(display.forNeu(new ClickHandler() {
+            @Override public void onClick(final ClickEvent event) {
+                injector.getBenutzerCreatePresenter().bind();
+            }
+        }));
 
         pagePresenter.bind(this);
-        display.showPagePresenter(pagePresenter.getDisplay());
+        display.setPagePresenter(pagePresenter);
 
         updateList();
     }
 
     @Override public void updateList() {
-        dispatcher.execute(new BenutzerList(display.getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange()),
+        dispatcher.execute(display.getData(),
                 callback(dispatcher, eventBus, display, new Callback<ListPresentation<BenutzerPresentation>>() {
                     @Override public void callback(final ListPresentation<BenutzerPresentation> result) {
-                        display.clearList();
-                        if (result.getEntries().isEmpty()) {
-                            display.addEmptyRow();
-                        } else {
-                            for (final BenutzerPresentation g : result.getEntries()) {
-                                registerHandler(display.addRow(g, new ClickHandler() {
-                                    @Override public void onClick(final ClickEvent event) {
-                                        editPresenter.bind(g);
-                                    }
-                                }));
-                            }
+                        display.reset();
+                        for (final BenutzerPresentation g : result.getEntries()) {
+                            registerHandler(display.addRow(g, new ClickHandler() {
+                                @Override public void onClick(final ClickEvent event) {
+                                    editPresenter.bind(g);
+                                }
+                            }));
                         }
                         eventBus.fireEvent(new PageUpdateEvent(BenutzerPresenter.this, result.getTotal(), result.getStart()));
                     }
@@ -99,20 +100,18 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay {
+        HandlerRegistration forNeu(ClickHandler clickHandler);
+
         HandlerRegistration forSuche(ClickHandler clickHandler);
 
         StandardFilter getFilter();
 
-        void addEmptyRow();
-
         HandlerRegistration addRow(BenutzerPresentation auftrag, ClickHandler edit);
 
-        void reset();
-
-        void clearList();
-
-        void showPagePresenter(final PagePresenter.Display presenter);
+        void setPagePresenter(final PagePresenter presenter);
 
         HandlerRegistration[] forPressEnter(KeyPressHandler pressHandler);
+
+        BenutzerList getData();
     }
 }

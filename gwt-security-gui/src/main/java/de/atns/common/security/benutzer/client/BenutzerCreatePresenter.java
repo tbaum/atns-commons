@@ -8,9 +8,9 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
-import de.atns.common.gwt.client.model.CreateResult;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
+import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
@@ -41,17 +41,12 @@ public class BenutzerCreatePresenter extends DialogBoxWidgetPresenter<BenutzerCr
     @Override protected void onBindInternal() {
         display.reset();
 
-        registerHandler(display.addSafeHandler(new ClickHandler() {
+        registerHandler(display.forSafe(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
-                final String email = display.getEmail();
-                final String pass = display.getPasswort();
-                final boolean admin = display.isAdmin();
-                final String login = display.getLogin();
-
-                dispatcher.execute(new BenutzerCreate(admin, login, pass, email),
-                        callback(dispatcher, eventBus, display, new Callback<CreateResult>() {
-                            @Override public void callback(final CreateResult result) {
-                                eventBus.fireEvent(new BenutzerUpdateEvent(login));
+                dispatcher.execute(BenutzerCreatePresenter.this.display.getData(),
+                        callback(dispatcher, eventBus, display, new Callback<BenutzerPresentation>() {
+                            @Override public void callback(final BenutzerPresentation result) {
+                                eventBus.fireEvent(new BenutzerUpdateEvent(result));
                                 display.hideDialogBox();
                             }
                         }));
@@ -63,14 +58,8 @@ public class BenutzerCreatePresenter extends DialogBoxWidgetPresenter<BenutzerCr
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay, DialogBoxDisplayInterface {
-        public HandlerRegistration addSafeHandler(ClickHandler handler);
+        HandlerRegistration forSafe(ClickHandler handler);
 
-        String getEmail();
-
-        String getPasswort();
-
-        boolean isAdmin();
-
-        String getLogin();
+        BenutzerCreate getData();
     }
 }

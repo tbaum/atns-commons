@@ -8,7 +8,6 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
-import de.atns.common.gwt.client.model.EmptyResult;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
@@ -47,17 +46,13 @@ import static de.atns.common.security.client.DefaultCallback.callback;
     @Override protected void onBindInternal() {
         display.setData(presentation);
 
-        registerHandler(display.addSafeHandler(new ClickHandler() {
+        registerHandler(display.forSafe(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
-                final String login = presentation.getLogin();
-                final String email = display.getEmail();
-                final String pass = display.getPasswort();
-                final boolean admin = display.isAdmin();
-
-                dispatcher.execute(new BenutzerUpdate(admin, login, email, pass),
-                        callback(dispatcher, eventBus, display, new Callback<EmptyResult>() {
-                            @Override public void callback(final EmptyResult result) {
-                                eventBus.fireEvent(new BenutzerUpdateEvent(login));
+                final BenutzerUpdate update = BenutzerEditPresenter.this.display.getData();
+                dispatcher.execute(update,
+                        callback(dispatcher, eventBus, display, new Callback<BenutzerPresentation>() {
+                            @Override public void callback(final BenutzerPresentation result) {
+                                eventBus.fireEvent(new BenutzerUpdateEvent(result));
                                 display.hideDialogBox();
                             }
                         }));
@@ -69,14 +64,10 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay, DialogBoxDisplayInterface {
-        public void setData(BenutzerPresentation p);
+        void setData(BenutzerPresentation p);
 
-        public HandlerRegistration addSafeHandler(ClickHandler handler);
+        HandlerRegistration forSafe(ClickHandler handler);
 
-        String getEmail();
-
-        String getPasswort();
-
-        boolean isAdmin();
+        BenutzerUpdate getData();
     }
 }

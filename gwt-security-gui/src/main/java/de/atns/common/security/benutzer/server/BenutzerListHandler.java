@@ -1,6 +1,5 @@
 package de.atns.common.security.benutzer.server;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Inject;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
@@ -14,6 +13,7 @@ import net.customware.gwt.dispatch.shared.ActionException;
 
 import static de.atns.common.dao.PartResult.createPartResult;
 import static de.atns.common.gwt.server.ListConverter.listConverter;
+import static de.atns.common.security.benutzer.server.BenutzerPresentationConverter.BENUTZER_CONVERTER;
 import static de.atns.common.security.model.DefaultRoles.ADMIN;
 
 
@@ -30,11 +30,7 @@ public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, L
 
     @Inject
     public BenutzerListHandler(final BenutzerRepository repository) {
-        super(listConverter(new Converter<Benutzer, BenutzerPresentation>() {
-            @Override public BenutzerPresentation convert(final Benutzer benutzer) {
-                return new BenutzerPresentation(benutzer.getLogin(), benutzer.isAdmin(), benutzer.getEmail());
-            }
-        }));
+        super(listConverter(BENUTZER_CONVERTER));
         this.repository = repository;
     }
 

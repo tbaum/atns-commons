@@ -5,6 +5,7 @@
 
     <inherits name="de.atns.common.gwt.Gwt"/>
     <inherits name="de.atns.common.security.Security"/>
+    <inherits name="de.atns.common.security.Shared"/>
 
     <source path="client"/>
 </module>
