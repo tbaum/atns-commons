@@ -16,7 +16,7 @@ public class ListConverter<F extends Serializable, T extends IsSerializable>
         implements Converter<PartResult<F>, ListPresentation<T>> {
 // ------------------------------ FIELDS ------------------------------
 
-    private Converter<F, T> converter;
+    private final Converter<F, T> converter;
 
 // -------------------------- STATIC METHODS --------------------------
 
