@@ -45,4 +45,11 @@ public class PartResult<TYPE extends Serializable> implements Serializable {
     public int getTotal() {
         return total;
     }
+
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "PartResult{" +
+                "start=" + start + ", total=" + total + ", items.size=" + items.size() + '}';
+    }
 }
