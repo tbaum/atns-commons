@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    private long id;
 
     @Version
     private long version;
@@ -25,7 +25,7 @@ import static javax.persistence.GenerationType.IDENTITY;
         return createTimestamp;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
