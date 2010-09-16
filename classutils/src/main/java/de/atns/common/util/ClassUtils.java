@@ -65,6 +65,17 @@ public class ClassUtils {
         }
     }
 
+    public static <T> T getField(Object target, Field field) {
+        try {
+            field.setAccessible(true);
+            return (T) field.get(target);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Error getting field " + field, e);
+        } catch (ClassCastException e) {
+            throw new RuntimeException("Error getting field " + field, e);
+        }
+    }
+
     public static <BEAN> BEAN newInstance(final Class<BEAN> aClass) {
         try {
             return aClass.newInstance();
