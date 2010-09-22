@@ -2,6 +2,7 @@ package de.atns.common.gwt.server;
 
 import ch.lambdaj.Lambda;
 import ch.lambdaj.function.convert.Converter;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @author mwolter
  * @since 26.02.2010 16:15:44
  */
-public class ListConverter<F extends Serializable, T extends Serializable>
+public class ListConverter<F extends Serializable, T extends Serializable & IsSerializable>
         implements Converter<PartResult<F>, ListPresentation<T>> {
 // ------------------------------ FIELDS ------------------------------
 
@@ -19,7 +20,7 @@ public class ListConverter<F extends Serializable, T extends Serializable>
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <F extends Serializable, T extends Serializable> ListConverter<F, T> listConverter(
+    public static <F extends Serializable, T extends Serializable & IsSerializable> ListConverter<F, T> listConverter(
             final Converter<F, T> converter) {
         return new ListConverter<F, T>(converter);
     }
