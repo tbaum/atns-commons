@@ -1,5 +1,6 @@
 package net.customware.gwt.dispatch.shared;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.server.Dispatch;
 
 import java.io.Serializable;
@@ -11,5 +12,5 @@ import java.io.Serializable;
  * @param <R> The {@link Result} type.
  * @author David Peterson
  */
-public interface Action<R extends Result> extends Serializable {
+public interface Action<R extends Result> extends IsSerializable {
 }
