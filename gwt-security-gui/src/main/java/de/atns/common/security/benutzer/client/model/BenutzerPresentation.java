@@ -3,12 +3,13 @@ package de.atns.common.security.benutzer.client.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.shared.Result;
 
+import java.io.Serializable;
 
 /**
  * @author tbaum
  * @since 11.02.2010
  */
-public class BenutzerPresentation implements Result, IsSerializable {
+public class BenutzerPresentation implements Result, Serializable, IsSerializable {
 // ------------------------------ FIELDS ------------------------------
 
     private String login;
