@@ -1,13 +1,20 @@
-package de.atns.common.gwt.client;
+package de.atns.common.crud.client;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.inject.Inject;
+import de.atns.common.crud.client.event.LoadListEventHandler;
+import de.atns.common.gwt.client.DefaultWidgetPresenter;
+import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.event.PageUpdateEvent;
 import de.atns.common.gwt.client.event.PageUpdateEventHandler;
+import de.atns.common.gwt.client.model.ListPresentation;
 import net.customware.gwt.presenter.client.EventBus;
 
 
@@ -50,14 +57,17 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
         bind();
     }
 
-    private void createLenghtButtons() {
-        registerHandler(display.addLengthButton(new ChangeHandler() {
-            @Override public void onChange(final ChangeEvent event) {
-                range = display.selectedRange();
-                startEntry = (startEntry / range) * range;
-                parentPresenter.updateList();
+    public <T extends IsSerializable> void bind(final ListPresenter parentPresenter,
+                                                final GwtEvent.Type<LoadListEventHandler<T>> type) {
+        bind(parentPresenter);
+        registerHandler(eventBus.addHandler(type, new LoadListEventHandler<T>() {
+            @Override public void onLoad(final ListPresentation<T> result, final Object source) {
+                if (parentPresenter.equals(source)) {
+                    display.reset();
+                    createButtons(result.getTotal(), result.getStart());
+                }
             }
-        }, range, 20, 50, 100));
+        }));
     }
 
     public void firstPage() {
@@ -71,12 +81,10 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     @Override public void onBindInternal() {
         registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
             @Override public void onUpdate(final PageUpdateEvent updateEvent) {
-                if (parentPresenter.equals(updateEvent.getPresenter())) {
-                    int total = updateEvent.getTotal();
-                    int start = updateEvent.getStart();
-
+                final ListPresenter source = updateEvent.getPresenter();
+                if (parentPresenter.equals(source)) {
                     display.reset();
-                    createButtons(total, start);
+                    createButtons(updateEvent.getTotal(), updateEvent.getStart());
                 }
             }
         }));

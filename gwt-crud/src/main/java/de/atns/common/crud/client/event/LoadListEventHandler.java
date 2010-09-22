@@ -11,5 +11,5 @@ import de.atns.common.gwt.client.model.ListPresentation;
 public interface LoadListEventHandler<E extends IsSerializable> extends EventHandler {
 // -------------------------- OTHER METHODS --------------------------
 
-    void onLoad(ListPresentation<E> event);
+    void onLoad(ListPresentation<E> event, Object source);
 }

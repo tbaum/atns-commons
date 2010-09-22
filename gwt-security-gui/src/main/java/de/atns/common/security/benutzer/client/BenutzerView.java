@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
-import de.atns.common.gwt.client.PagePresenter;
+import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;

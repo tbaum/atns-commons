@@ -3,11 +3,16 @@ package de.atns.common.security.benutzer.client;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import de.atns.common.gwt.client.*;
-import de.atns.common.gwt.client.event.PageUpdateEvent;
+import de.atns.common.crud.client.PagePresenter;
+import de.atns.common.crud.client.event.LoadListEventHandler;
+import de.atns.common.gwt.client.DefaultWidgetPresenter;
+import de.atns.common.gwt.client.EnterKeyPressHandler;
+import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
@@ -15,11 +20,10 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
 import de.atns.common.security.benutzer.client.gin.BenutzerInjector;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 
-import static de.atns.common.security.client.DefaultCallback.callback;
+import static de.atns.common.crud.client.event.LoadListEvent.eventCallback;
 
 
 /**
@@ -29,6 +33,9 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 @Singleton
 public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.Display> implements ListPresenter {
 // ------------------------------ FIELDS ------------------------------
+
+    public static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> TYPE =
+            new GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>>();
 
     private final DispatchAsync dispatcher;
     private final BenutzerEditPresenter editPresenter;
@@ -75,28 +82,31 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
             }
         }));
 
-        pagePresenter.bind(this);
+        registerHandler(eventBus.addHandler(TYPE, new LoadListEventHandler<BenutzerPresentation>() {
+            @Override public void onLoad(final ListPresentation<BenutzerPresentation> result, final Object source) {
+                display.reset();
+                for (final BenutzerPresentation g : result.getEntries()) {
+                    registerHandler(display.addRow(g, new ClickHandler() {
+                        @Override public void onClick(final ClickEvent event) {
+                            editPresenter.bind(g);
+                        }
+                    }));
+                }
+            }
+        }));
+
+        pagePresenter.bind(this, TYPE);
         display.setPagePresenter(pagePresenter);
 
         updateList();
     }
 
     @Override public void updateList() {
-        dispatcher.execute(display.getData(),
-                callback(dispatcher, eventBus, display, new Callback<ListPresentation<BenutzerPresentation>>() {
-                    @Override public void callback(final ListPresentation<BenutzerPresentation> result) {
-                        display.reset();
-                        for (final BenutzerPresentation g : result.getEntries()) {
-                            registerHandler(display.addRow(g, new ClickHandler() {
-                                @Override public void onClick(final ClickEvent event) {
-                                    editPresenter.bind(g);
-                                }
-                            }));
-                        }
-                        eventBus.fireEvent(
-                                new PageUpdateEvent(BenutzerPresenter.this, result.getTotal(), result.getStart()));
-                    }
-                }));
+        dispatcher.execute(display.getData(), eventCallback(dispatcher, eventBus, display, TYPE, this));
+    }
+
+    @Override protected void onUnbind() {
+        pagePresenter.unbind();
     }
 
 // -------------------------- INNER CLASSES --------------------------
