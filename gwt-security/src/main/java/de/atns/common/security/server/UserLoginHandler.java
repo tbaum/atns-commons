@@ -6,9 +6,9 @@ import de.atns.common.security.SecurityUser;
 import de.atns.common.security.UserProvider;
 import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.model.UserPresentation;
-import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
+import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

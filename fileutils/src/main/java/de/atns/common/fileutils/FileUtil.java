@@ -20,7 +20,9 @@ public abstract class FileUtil {
             for (final File file : findFiles(dir, ".*")) {
                 file.delete();
             }
-        } else dir.mkdirs();
+        } else {
+            dir.mkdirs();
+        }
     }
 
     public static File[] findFiles(final File dir, final String fileRegexp) {
@@ -41,7 +43,9 @@ public abstract class FileUtil {
         final FileInputStream fis = new FileInputStream(file);
         int rd;
         final byte[] buf = new byte[4096];
-        while ((rd = fis.read(buf)) > 0) p.write(buf, 0, rd);
+        while ((rd = fis.read(buf)) > 0) {
+            p.write(buf, 0, rd);
+        }
 
         return p.toByteArray();
     }

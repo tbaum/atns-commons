@@ -31,9 +31,13 @@ public class MailUtilImpl implements MailUtil {
 // --------------------- Interface MailUtil ---------------------
 
     @Transactional
-    public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient, final String bccRecipient,
-                                 final MailTemplate template, final Map<String, Object> context, final EmailResource... attachments) {
-        if (template == null) throw new IllegalArgumentException("missing template");
+    public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
+                                 final String bccRecipient,
+                                 final MailTemplate template, final Map<String, Object> context,
+                                 final EmailResource... attachments) {
+        if (template == null) {
+            throw new IllegalArgumentException("missing template");
+        }
 
         final String sender = template.getSenderEmail();
         final String senderName = template.getSenderName();

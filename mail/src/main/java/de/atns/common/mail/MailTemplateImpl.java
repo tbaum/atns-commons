@@ -15,11 +15,13 @@ public class MailTemplateImpl implements MailTemplate {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public MailTemplateImpl(final String senderEmail, final String senderName, final String subject, final String text) {
+    public MailTemplateImpl(final String senderEmail, final String senderName, final String subject,
+                            final String text) {
         this(senderEmail, senderName, subject, text, null);
     }
 
-    public MailTemplateImpl(final String senderEmail, final String senderName, final String subject, final String text, final String html) {
+    public MailTemplateImpl(final String senderEmail, final String senderName, final String subject, final String text,
+                            final String html) {
         this.html = html;
         this.text = text;
         this.senderName = senderName;

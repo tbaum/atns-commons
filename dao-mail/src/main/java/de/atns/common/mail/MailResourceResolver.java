@@ -49,7 +49,9 @@ public class MailResourceResolver {
             int pos = str.length();
             for (final String s : new String[]{")", "\"", "'", " ", "\n", "\r", "\t"}) {
                 final int p = str.indexOf(s, found);
-                if (p > -1) pos = Math.min(pos, p);
+                if (p > -1) {
+                    pos = Math.min(pos, p);
+                }
             }
             final String adr = str.substring(found, pos);
             found = pos + 1;

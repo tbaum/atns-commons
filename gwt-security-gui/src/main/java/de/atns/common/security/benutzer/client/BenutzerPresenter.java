@@ -39,7 +39,8 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 
     @Inject
     public BenutzerPresenter(final Display display, final EventBus bus, final DispatchAsync dispatcher,
-                             final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter, final BenutzerInjector injector) {
+                             final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter,
+                             final BenutzerInjector injector) {
         super(display, bus);
         this.dispatcher = dispatcher;
         this.pagePresenter = pagePresenter;
@@ -92,7 +93,8 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
                                 }
                             }));
                         }
-                        eventBus.fireEvent(new PageUpdateEvent(BenutzerPresenter.this, result.getTotal(), result.getStart()));
+                        eventBus.fireEvent(
+                                new PageUpdateEvent(BenutzerPresenter.this, result.getTotal(), result.getStart()));
                     }
                 }));
     }

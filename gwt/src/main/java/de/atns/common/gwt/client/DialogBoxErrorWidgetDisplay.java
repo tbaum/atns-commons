@@ -15,7 +15,8 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
  * @author mwolter
  * @since 18.03.2010 14:30:10
  */
-public abstract class DialogBoxErrorWidgetDisplay extends DefaultErrorWidgetDisplay implements DialogBoxDisplayInterface {
+public abstract class DialogBoxErrorWidgetDisplay extends DefaultErrorWidgetDisplay
+        implements DialogBoxDisplayInterface {
 // ------------------------------ FIELDS ------------------------------
 
     private final DialogBox dialogBox = new DialogBox(false, false);

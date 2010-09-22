@@ -38,7 +38,8 @@ public class AtnsNamingStrategy extends DefaultNamingStrategy implements NamingS
     }
 
     @Override
-    public String collectionTableName(final String s, final String s1, final String s2, final String s3, final String s4) {
+    public String collectionTableName(final String s, final String s1, final String s2, final String s3,
+                                      final String s4) {
         return super.collectionTableName(s, s1, s2, s3, s4);
     }
 

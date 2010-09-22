@@ -26,7 +26,8 @@ import static org.hibernate.criterion.DetachedCriteria.forClass;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
-public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends ExtendedHibernateDaoSupport implements GenericManager<TYPE> {
+public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends ExtendedHibernateDaoSupport
+        implements GenericManager<TYPE> {
 // ------------------------------ FIELDS ------------------------------
 
     @Autowired(required = true) @Qualifier("lockManager")
@@ -61,11 +62,13 @@ public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends Exte
 
     @Override @Transactional(readOnly = true, propagation = REQUIRES_NEW)
     public Collection<TYPE> loadAll(final Date lastModifiedTimestamp) {
-        return findByCriteria(forClass(getDataClass()).add(Restrictions.ge("lastUpdateTimestamp", lastModifiedTimestamp)));
+        return findByCriteria(
+                forClass(getDataClass()).add(Restrictions.ge("lastUpdateTimestamp", lastModifiedTimestamp)));
     }
 
     @Override @Transactional(readOnly = true, propagation = REQUIRES_NEW)
-    public PartResult<TYPE> loadAll(final Map<String, Object> filter, final int start, final int max, final String sort, final boolean asc) {
+    public PartResult<TYPE> loadAll(final Map<String, Object> filter, final int start, final int max, final String sort,
+                                    final boolean asc) {
         final Class<? extends TYPE> dataClass = GenericManagerImpl.this.getDataClass();
         final PartResult<TYPE> result = executeCallback(new HibernateCallback() {
             @Override public Object doInHibernate(final Session session) throws HibernateException, SQLException {

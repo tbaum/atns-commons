@@ -29,7 +29,9 @@ public class Forwarder {
 
     public void forward(String target) throws ServletException, IOException {
         final String ctxPath = request.getContextPath();
-        if (target.startsWith(ctxPath)) target = target.substring(ctxPath.length());
+        if (target.startsWith(ctxPath)) {
+            target = target.substring(ctxPath.length());
+        }
         request.getRequestDispatcher(target).forward(request, response);
     }
 

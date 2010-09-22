@@ -4,14 +4,10 @@ import de.atns.common.dao.ExtendedHibernateDaoSupport;
 import de.atns.common.dao.NonReturningHibernateCallback;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import static org.hibernate.criterion.Restrictions.isNull;
-
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
-import static org.springframework.transaction.annotation.Propagation.REQUIRED;
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +15,9 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static org.hibernate.criterion.Restrictions.isNull;
+import static org.springframework.transaction.annotation.Propagation.REQUIRED;
 
 @Service("mailUtil")
 public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUtil {
@@ -49,15 +48,19 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
 
     @Override @Transactional(propagation = Propagation.REQUIRED)
     public MessagePreparator sendMail(final String recipient, final String recipientName,
-                                      final MailTemplate template, final Map<String, Object> context, final MailResource... res) {
+                                      final MailTemplate template, final Map<String, Object> context,
+                                      final MailResource... res) {
         return sendMail(recipient, recipientName, null, template, context, res);
     }
 
     @Override @Transactional(propagation = Propagation.REQUIRED)
     public MessagePreparator sendMail(final String recipient, final String recipientName, final String bccRecipient,
-                                      final MailTemplate template, final Map<String, Object> context, final MailResource... attachments) {
+                                      final MailTemplate template, final Map<String, Object> context,
+                                      final MailResource... attachments) {
 
-        if (template == null) throw new IllegalArgumentException("missing template");
+        if (template == null) {
+            throw new IllegalArgumentException("missing template");
+        }
 
         final String sender = template.getSenderEmail();
         final String senderName = template.getSenderName();
@@ -92,7 +95,9 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
             executeCallback(new NonReturningHibernateCallback() {
                 @Override
                 protected void executeInHibernate(final Session session) throws HibernateException, SQLException {
-                    final List<MessagePreparator> unsent = (List<MessagePreparator>) session.createCriteria(MessagePreparator.class).add(Restrictions.isNull("sent")).list();
+                    final List<MessagePreparator> unsent =
+                            (List<MessagePreparator>) session.createCriteria(MessagePreparator.class)
+                                    .add(Restrictions.isNull("sent")).list();
                     for (final MessagePreparator p : unsent) {
                         try {
                             mailSender.send(p);

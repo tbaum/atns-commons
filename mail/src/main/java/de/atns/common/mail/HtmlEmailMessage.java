@@ -46,7 +46,8 @@ import static org.hibernate.annotations.CascadeType.ALL;
                             final String subject, final String text,
                             final String html, final EmailResource... resources
     ) {
-        this(sender, senderName, recipient, recipientName, cc, bcc, subject, text, new EmailResource[0], html, resources);
+        this(sender, senderName, recipient, recipientName, cc, bcc, subject, text, new EmailResource[0], html,
+                resources);
     }
 
     public HtmlEmailMessage(final String sender, final String senderName,
@@ -68,7 +69,8 @@ import static org.hibernate.annotations.CascadeType.ALL;
                         createAlternativePart(html));
     }
 
-    private MimeMultipart createRelatedPart(final String html, final List<EmailResource> resources) throws MessagingException {
+    private MimeMultipart createRelatedPart(final String html, final List<EmailResource> resources)
+            throws MessagingException {
         final MimeMultipart relatedPart = new MimeMultipart("related");
 
         final MimeBodyPart alternativePart = new MimeBodyPart();
@@ -80,7 +82,8 @@ import static org.hibernate.annotations.CascadeType.ALL;
         return relatedPart;
     }
 
-    private String addResourceParts(String newHtmlBody, final List<EmailResource> resources, final MimeMultipart relatedPart) throws MessagingException {
+    private String addResourceParts(String newHtmlBody, final List<EmailResource> resources,
+                                    final MimeMultipart relatedPart) throws MessagingException {
         final Set<String> resId = new TreeSet<String>();
         int i = 1;
 
@@ -94,7 +97,8 @@ import static org.hibernate.annotations.CascadeType.ALL;
         return newHtmlBody;
     }
 
-    private static MimeBodyPart createResourcePart(final EmailResource resource, final String resourceId) throws MessagingException {
+    private static MimeBodyPart createResourcePart(final EmailResource resource, final String resourceId)
+            throws MessagingException {
         final MimeBodyPart resourcePart = new MimeBodyPart();
         final byte[] data = resource.getData();
 

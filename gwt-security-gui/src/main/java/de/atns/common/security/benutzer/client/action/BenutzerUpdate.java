@@ -22,7 +22,8 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
     public BenutzerUpdate() {
     }
 
-    public BenutzerUpdate(final long id, final boolean admin, final String login, final String passwort, final String email) {
+    public BenutzerUpdate(final long id, final boolean admin, final String login, final String passwort,
+                          final String email) {
         this.id = id;
         this.admin = admin;
         this.login = login;

@@ -19,9 +19,13 @@ public class JsonpResult<R extends JavaScriptObject> extends JavaScriptObject {
         return getStatus().equals("error") ? (Error) getResult() : null;
     }
 
-    private native R getResult() /*-{ return this.result; }-*/;
+    private native R getResult() /*-{
+        return this.result;
+    }-*/;
 
-    private native String getStatus() /*-{ return this.status; }-*/;
+    private native String getStatus() /*-{
+        return this.status;
+    }-*/;
 
     public final R result() {
         return getStatus().equals("ok") ? getResult() : null;
@@ -33,8 +37,12 @@ public class JsonpResult<R extends JavaScriptObject> extends JavaScriptObject {
         protected Error() {
         }
 
-        public final native String getMessage() /*-{ return this.message; }-*/;
+        public final native String getMessage() /*-{
+            return this.message;
+        }-*/;
 
-        public final native JsArrayString getStacktrace() /*-{ return this.stacktrace; }-*/;
+        public final native JsArrayString getStacktrace() /*-{
+            return this.stacktrace;
+        }-*/;
     }
 }

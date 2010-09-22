@@ -2,7 +2,6 @@ package de.atns.common.mail;
 
 import de.atns.common.util.ImageInfo;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

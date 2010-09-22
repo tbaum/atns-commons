@@ -83,7 +83,9 @@ public class ExtendedFlexTable {
 
     public ExtendedFlexTable nextRow(boolean noadd) {
         row++;
-        if (noadd) rowx++;
+        if (noadd) {
+            rowx++;
+        }
         col = 0;
         return this;
     }

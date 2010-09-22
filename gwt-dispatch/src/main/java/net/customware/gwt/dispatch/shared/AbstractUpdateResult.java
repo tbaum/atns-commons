@@ -4,9 +4,8 @@ package net.customware.gwt.dispatch.shared;
  * Provides support for simple update response which contain both the old value
  * and new value.
  *
+ * @param <T> The value type.
  * @author David Peterson
- * @param <T>
- * The value type.
  */
 public abstract class AbstractUpdateResult<T> implements Result {
     private T oldValue;

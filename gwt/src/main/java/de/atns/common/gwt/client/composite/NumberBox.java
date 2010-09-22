@@ -14,7 +14,8 @@ import java.math.BigDecimal;
  * @author tbaum
  * @since 08.09.2010
  */
-public class NumberBox extends Composite implements HasValue<Number>, ValueChangeHandler<Number>, Focusable, HasEnabled {
+public class NumberBox extends Composite
+        implements HasValue<Number>, ValueChangeHandler<Number>, Focusable, HasEnabled {
 // ------------------------------ FIELDS ------------------------------
 
     public static final String DEFAULT_STYLENAME = "gwt-NumberBox";

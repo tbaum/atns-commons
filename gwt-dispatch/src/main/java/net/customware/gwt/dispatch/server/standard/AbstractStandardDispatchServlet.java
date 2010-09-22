@@ -22,7 +22,9 @@ public abstract class AbstractStandardDispatchServlet extends RemoteServiceServl
 // --------------------- Interface StandardDispatchServiceAsync ---------------------
 
     public Result execute(Action<?> action) throws DispatchException {
-        if (LOG.isDebugEnabled()) LOG.debug("executing: " + action);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("executing: " + action);
+        }
         try {
             return getDispatch().execute(action);
         } catch (RuntimeException e) {

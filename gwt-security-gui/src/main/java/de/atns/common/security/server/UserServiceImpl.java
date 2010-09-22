@@ -33,8 +33,9 @@ import javax.persistence.NoResultException;
 
     @Override public Benutzer findUser(final String login, final String pass) {
         Benutzer user = refreshUser(login);
-        if (user == null)
+        if (user == null) {
             return null;
+        }
 
         if (user.getPasswort().equals(SHA1.createSHA1Code(pass))) {
             LOG.info("login succeeded");

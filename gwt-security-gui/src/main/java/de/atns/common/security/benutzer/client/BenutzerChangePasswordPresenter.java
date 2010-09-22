@@ -31,7 +31,8 @@ public class BenutzerChangePasswordPresenter extends DialogBoxWidgetPresenter<Be
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerChangePasswordPresenter(final BenutzerChangePasswordPresenter.Display display, final EventBus bus, final DispatchAsync dispatcher) {
+    public BenutzerChangePasswordPresenter(final BenutzerChangePasswordPresenter.Display display, final EventBus bus,
+                                           final DispatchAsync dispatcher) {
         super(display, bus);
         this.dispatcher = dispatcher;
     }

@@ -250,7 +250,8 @@ public class ImageInfo {
      */
     private static final String[] MIME_TYPE_STRINGS =
             {"image/jpeg", "image/gif", "image/png", "image/bmp", "image/pcx",
-                    "image/iff", "image/ras", "image/x-portable-bitmap", "image/x-portable-graymap", "image/x-portable-pixmap",
+                    "image/iff", "image/ras", "image/x-portable-bitmap", "image/x-portable-graymap",
+                    "image/x-portable-pixmap",
                     "image/psd"};
 
     private int width;

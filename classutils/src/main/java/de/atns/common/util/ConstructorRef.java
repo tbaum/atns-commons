@@ -24,8 +24,7 @@ public class ConstructorRef<TYPE> {
         try {
             final Constructor<TYPE> constructor = clazz.getConstructor(args);
             return new ConstructorRef<TYPE>(constructor);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException("unable to lookup constructor for args " + asList(args), e);
         }
     }
@@ -33,7 +32,9 @@ public class ConstructorRef<TYPE> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     private ConstructorRef(final Constructor<TYPE> constructor) {
-        if (constructor == null) throw new IllegalArgumentException("no constructor given");
+        if (constructor == null) {
+            throw new IllegalArgumentException("no constructor given");
+        }
         this.constructor = constructor;
     }
 

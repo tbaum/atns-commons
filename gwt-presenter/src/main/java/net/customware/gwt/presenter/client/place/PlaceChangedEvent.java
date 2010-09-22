@@ -15,8 +15,9 @@ public class PlaceChangedEvent extends GwtEvent<PlaceChangedHandler> {
     private static Type<PlaceChangedHandler> TYPE;
 
     public static Type<PlaceChangedHandler> getType() {
-        if (TYPE == null)
+        if (TYPE == null) {
             TYPE = new Type<PlaceChangedHandler>();
+        }
         return TYPE;
     }
 

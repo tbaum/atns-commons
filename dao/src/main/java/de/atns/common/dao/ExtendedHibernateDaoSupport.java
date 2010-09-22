@@ -43,7 +43,8 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
     protected <TYPE> List<TYPE> findByCriteria(final DetachedCriteria detachedCriteria) {
         return (List<TYPE>) getHibernateTemplate().execute(new HibernateCallback() {
             @Override public Object doInHibernate(final Session session) throws HibernateException, SQLException {
-                final Criteria criteria = detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).getExecutableCriteria(session);
+                final Criteria criteria = detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                        .getExecutableCriteria(session);
                 //criteria.setCacheable(true);
                 return criteria.list();
             }
@@ -64,7 +65,10 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         return (TYPE) getHibernateTemplate().load(dataClass, id);
     }
 
-    protected <TYPE extends Serializable> PartResult<TYPE> loadAll(final Session session, final Map<String, Object> filter, final int start, final int max, final String sort, final boolean asc, final Class<? extends TYPE> dataClass) {
+    protected <TYPE extends Serializable> PartResult<TYPE> loadAll(final Session session,
+                                                                   final Map<String, Object> filter, final int start,
+                                                                   final int max, final String sort, final boolean asc,
+                                                                   final Class<? extends TYPE> dataClass) {
         final Criteria criteria = createFilteredListCriteria(session, filter, dataClass);
         criteria.setProjection(Projections.countDistinct("id"));
 
@@ -103,7 +107,9 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         return PartResult.createPartResult(start, count, results);
     }
 
-    protected <TYPE extends Serializable> Criteria createFilteredListCriteria(final Session session, final Map<String, Object> filter, final Class<? extends TYPE> dataClass) {
+    protected <TYPE extends Serializable> Criteria createFilteredListCriteria(final Session session,
+                                                                              final Map<String, Object> filter,
+                                                                              final Class<? extends TYPE> dataClass) {
         final Criteria criteria = session.createCriteria(dataClass);
 
         Criterion filterCriterion = null;
@@ -132,7 +138,8 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
     protected <TYPE> TYPE loadByCriteria(final DetachedCriteria detachedCriteria) {
         return (TYPE) getHibernateTemplate().execute(new HibernateCallback() {
             @Override public Object doInHibernate(final Session session) throws HibernateException, SQLException {
-                final Criteria criteria = detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).getExecutableCriteria(session);
+                final Criteria criteria = detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                        .getExecutableCriteria(session);
                 //criteria.setCacheable(true);
                 return criteria.uniqueResult();
             }

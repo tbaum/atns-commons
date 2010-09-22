@@ -31,7 +31,8 @@ public class BenutzerCreatePresenter extends DialogBoxWidgetPresenter<BenutzerCr
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerCreatePresenter(final BenutzerCreatePresenter.Display display, final EventBus bus, final DispatchAsync dispatcher) {
+    public BenutzerCreatePresenter(final BenutzerCreatePresenter.Display display, final EventBus bus,
+                                   final DispatchAsync dispatcher) {
         super(display, bus);
         this.dispatcher = dispatcher;
     }

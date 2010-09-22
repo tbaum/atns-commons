@@ -7,8 +7,9 @@ public class PlaceRequestEvent extends GwtEvent<PlaceRequestHandler> {
     private static Type<PlaceRequestHandler> TYPE;
 
     public static Type<PlaceRequestHandler> getType() {
-        if (TYPE == null)
+        if (TYPE == null) {
             TYPE = new Type<PlaceRequestHandler>();
+        }
         return TYPE;
     }
 

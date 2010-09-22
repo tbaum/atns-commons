@@ -28,7 +28,8 @@ public enum NumberPeriood {
             case MONTH:
                 return format("%02d%02d", c.get(Calendar.YEAR) % 100, c.get(Calendar.MONTH) + 1);
             case DAY:
-                return format("%02d%02d%2d", c.get(Calendar.YEAR) % 100, c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH) + 1);
+                return format("%02d%02d%2d", c.get(Calendar.YEAR) % 100, c.get(Calendar.MONTH) + 1,
+                        c.get(Calendar.DAY_OF_MONTH) + 1);
         }
         return "";
     }

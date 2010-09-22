@@ -63,8 +63,7 @@ public class EmailSenderTask implements Runnable {
                     }
 
                     transaction.commit();
-                }
-                finally {
+                } finally {
                     if (transaction.isActive()) {
                         transaction.rollback();
                     }

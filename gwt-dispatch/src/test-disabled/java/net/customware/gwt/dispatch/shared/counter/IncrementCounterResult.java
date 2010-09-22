@@ -6,11 +6,13 @@ public class IncrementCounterResult implements Result {
     private int amount;
     private int current;
 
-    /** For serialization only. */
+    /**
+     * For serialization only.
+     */
     IncrementCounterResult() {
     }
 
-    public IncrementCounterResult( int amount, int current ) {
+    public IncrementCounterResult(int amount, int current) {
         this.amount = amount;
         this.current = current;
     }

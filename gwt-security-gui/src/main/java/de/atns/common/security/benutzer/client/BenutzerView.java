@@ -31,7 +31,7 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     private final Button neu = new Button("Neuer Benutzer");
     private final Button suche = new Button("Suchen");
     private final TextBox text = new TextBox();
-//    private final ListBox status = new ListBox();
+    //    private final ListBox status = new ListBox();
     private final FlowPanel pagePresenterPanel = new FlowPanel();
     private boolean containsEmptyRow;
     private PagePresenter pagePresenter;
@@ -115,7 +115,9 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     }
 
     public HandlerRegistration addRow(final BenutzerPresentation g, final ClickHandler editHandler) {
-        if (containsEmptyRow) clearList();
+        if (containsEmptyRow) {
+            clearList();
+        }
         final Button edit = new Button("Bearbeiten");
         table
                 .cell(g.getLogin())

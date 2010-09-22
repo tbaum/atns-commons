@@ -49,7 +49,9 @@ public class Util {
 
     public static <E extends Enum> E parseEnum(final ListBox listBox, Class<E> enumClass) {
         final int index = listBox.getSelectedIndex();
-        if (index > listBox.getItemCount() || index < 0) return null;
+        if (index > listBox.getItemCount() || index < 0) {
+            return null;
+        }
         final String s = listBox.getValue(index);
         return "".equals(s) ? null : (E) (Enum.valueOf(enumClass, s));
     }

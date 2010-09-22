@@ -22,7 +22,8 @@ import static de.atns.common.security.benutzer.server.BenutzerPresentationConver
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerChangePasswordHandler extends ConvertingActionHandler<BenutzerChangePassword, BenutzerPresentation, Benutzer> {
+public class BenutzerChangePasswordHandler
+        extends ConvertingActionHandler<BenutzerChangePassword, BenutzerPresentation, Benutzer> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(BenutzerChangePasswordHandler.class);

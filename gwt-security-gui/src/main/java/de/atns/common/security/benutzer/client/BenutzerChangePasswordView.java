@@ -18,7 +18,8 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerChangePasswordView extends DialogBoxErrorWidgetDisplay implements BenutzerChangePasswordPresenter.Display {
+public class BenutzerChangePasswordView extends DialogBoxErrorWidgetDisplay
+        implements BenutzerChangePasswordPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     private final Button speichern = new Button("Speichern");

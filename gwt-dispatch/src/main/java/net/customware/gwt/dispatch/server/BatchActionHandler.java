@@ -28,10 +28,11 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
                 result = context.execute(a);
             } catch (Exception e) {
                 DispatchException de = null;
-                if (e instanceof DispatchException)
+                if (e instanceof DispatchException) {
                     de = (DispatchException) e;
-                else
+                } else {
                     de = new ServiceException(e);
+                }
 
                 if (onException == OnException.ROLLBACK) {
                     throw de;

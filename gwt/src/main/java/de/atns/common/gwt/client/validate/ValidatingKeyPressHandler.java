@@ -19,7 +19,9 @@ public abstract class ValidatingKeyPressHandler implements KeyPressHandler {
     @Override public void onKeyPress(final KeyPressEvent event) {
         // erlaube cursor, control, meta-tasten ....
         if (event.isAltKeyDown() || event.isControlKeyDown() || event.isMetaKeyDown() ||
-                event.getNativeEvent().getKeyCode() != 0) return;
+                event.getNativeEvent().getKeyCode() != 0) {
+            return;
+        }
 
         if (!isValid(event)) {
             Object source = event.getSource();

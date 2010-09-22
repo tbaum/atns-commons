@@ -23,8 +23,9 @@ public abstract class AbstractDispatch implements Dispatch {
         public <A extends Action<R>, R extends Result> R execute(A action, boolean allowRollback)
                 throws DispatchException {
             R result = dispatch.doExecute(action, this);
-            if (allowRollback)
+            if (allowRollback) {
                 actionResults.add(new ActionResult<A, R>(action, result));
+            }
             return result;
         }
 
@@ -68,8 +69,9 @@ public abstract class AbstractDispatch implements Dispatch {
     private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler(A action)
             throws UnsupportedActionException {
         ActionHandler<A, R> handler = getHandlerRegistry().findHandler(action);
-        if (handler == null)
+        if (handler == null) {
             throw new UnsupportedActionException(action);
+        }
 
         return handler;
     }

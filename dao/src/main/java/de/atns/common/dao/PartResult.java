@@ -16,11 +16,13 @@ public class PartResult<TYPE extends Serializable> implements Serializable {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends Serializable> PartResult<T> createPartResult(PartResult<? extends T> p, final Collection<? extends T> result) {
+    public static <T extends Serializable> PartResult<T> createPartResult(PartResult<? extends T> p,
+                                                                          final Collection<? extends T> result) {
         return new PartResult<T>(p.start, p.total, result);
     }
 
-    public static <T extends Serializable> PartResult<T> createPartResult(final int start, final int total, final Collection<? extends T> result) {
+    public static <T extends Serializable> PartResult<T> createPartResult(final int start, final int total,
+                                                                          final Collection<? extends T> result) {
         return new PartResult<T>(start, total, result);
     }
 

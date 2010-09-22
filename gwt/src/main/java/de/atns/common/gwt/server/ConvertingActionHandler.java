@@ -35,7 +35,9 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
     @Override @Transactional
     public R execute(final A action, ExecutionContext context) throws ActionException {
         final S result = executeInternal(action);
-        if (LOG.isDebugEnabled()) LOG.debug(result);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(result);
+        }
         return converter.convert(result);
     }
 

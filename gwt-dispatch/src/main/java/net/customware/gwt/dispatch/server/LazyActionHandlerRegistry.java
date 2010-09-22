@@ -44,8 +44,9 @@ public class LazyActionHandlerRegistry implements ClassActionHandlerRegistry {
             Class<? extends ActionHandler<?, ?>> handlerClass = handlerClasses.get(action.getClass());
             if (handlerClass != null) {
                 handler = createInstance(handlerClass);
-                if (handler != null)
+                if (handler != null) {
                     handlers.put(handler.getActionType(), handler);
+                }
             }
         }
 

@@ -38,7 +38,8 @@ public class LockManagerImpl<TYPE extends LongIdObject> implements LockManager<T
                         if (lockState.isTimeout()) {
                             toRemove.add(lockState);
                             if (LOG.isDebugEnabled()) {
-                                LOG.debug(MessageFormat.format("removing Lock {0}{1}", lockState, lockState.getLockObject()));
+                                LOG.debug(MessageFormat
+                                        .format("removing Lock {0}{1}", lockState, lockState.getLockObject()));
                             }
                         }
                     }

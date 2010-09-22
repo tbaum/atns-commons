@@ -30,8 +30,9 @@ public class PlaceRequest {
     private PlaceRequest(PlaceRequest req, String name, String value) {
         this.place = req.place;
         this.params = new java.util.HashMap<String, String>();
-        if (req.params != null)
+        if (req.params != null) {
             this.params.putAll(req.params);
+        }
         this.params.put(name, value);
     }
 
@@ -51,11 +52,13 @@ public class PlaceRequest {
     public String getParameter(String key, String defaultValue) {
         String value = null;
 
-        if (params != null)
+        if (params != null) {
             value = params.get(key);
+        }
 
-        if (value == null)
+        if (value == null) {
             value = defaultValue;
+        }
         return value;
     }
 
@@ -76,13 +79,15 @@ public class PlaceRequest {
     public boolean equals(Object obj) {
         if (obj instanceof PlaceRequest) {
             PlaceRequest req = (PlaceRequest) obj;
-            if (!req.equals(req.place))
+            if (!req.equals(req.place)) {
                 return false;
+            }
 
-            if (params == null)
+            if (params == null) {
                 return req.params == null;
-            else
+            } else {
                 return params.equals(req.params);
+            }
         }
         return false;
     }
@@ -131,9 +136,10 @@ public class PlaceRequest {
             String[] paramTokens = paramsChunk.split(PARAM_PATTERN);
             for (String paramToken : paramTokens) {
                 String[] param = paramToken.split(VALUE_PATTERN);
-                if (param.length != 2)
+                if (param.length != 2) {
                     throw new PlaceParsingException("Bad parameter: Parameters require a single '"
                             + VALUE_SEPARATOR + "' between the key and value.");
+                }
                 req = req.with(unescape(param[0]), unescape(param[1]));
             }
         }

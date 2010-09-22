@@ -1,21 +1,19 @@
 package de.atns.common.mail;
 
 import org.hibernate.annotations.Cascade;
-import static org.hibernate.annotations.CascadeType.ALL;
 import org.springframework.mail.MailPreparationException;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import javax.activation.DataHandler;
-import javax.mail.*;
-import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
-import javax.persistence.*;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import static java.util.Arrays.asList;
 import java.util.Collection;
 import java.util.Date;
+
+import static java.util.Arrays.asList;
+import static org.hibernate.annotations.CascadeType.ALL;
 
 /**
  * User: tbaum
@@ -221,7 +219,8 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
         for (final MailResource attachment : attachments) {
             final MimeBodyPart imagePart = new MimeBodyPart();
             imagePart.setDisposition(Part.ATTACHMENT);
-            imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
+            imagePart.setDataHandler(
+                    new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
             imagePart.setFileName(attachment.getName());
             imagePart.setContentID("<" + attachment.getName() + ">");
             root.addBodyPart(imagePart);

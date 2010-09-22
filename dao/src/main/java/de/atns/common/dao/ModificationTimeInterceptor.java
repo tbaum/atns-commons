@@ -133,7 +133,8 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    private boolean updateProperty(final Object[] state, final String[] propertyNames, final String name, final Object value) {
+    private boolean updateProperty(final Object[] state, final String[] propertyNames, final String name,
+                                   final Object value) {
         for (int i = 0; i < propertyNames.length; i++) {
             if (name.equals(propertyNames[i])) {
                 state[i] = value;

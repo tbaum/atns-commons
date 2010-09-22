@@ -55,8 +55,12 @@ public class LongIdObjectImpl implements LongIdObject, Serializable {
     @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass"})
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
 
         // TODO what was this for?
         //    final Class myClass = Utils.getOriginalClass(this);
@@ -81,8 +85,9 @@ public class LongIdObjectImpl implements LongIdObject, Serializable {
 
     @Override
     public int hashCode() {
-        if (isNew())
+        if (isNew()) {
             return super.hashCode();
+        }
 
         return (int) (id ^ (id >>> 32));
     }

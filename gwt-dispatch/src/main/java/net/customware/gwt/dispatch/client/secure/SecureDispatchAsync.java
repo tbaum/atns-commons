@@ -45,7 +45,8 @@ public class SecureDispatchAsync extends AbstractDispatchAsync {
     }
 
     @Override
-    protected <A extends Action<R>, R extends Result> void onFailure(A action, Throwable caught, final AsyncCallback<R> callback) {
+    protected <A extends Action<R>, R extends Result> void onFailure(A action, Throwable caught,
+                                                                     final AsyncCallback<R> callback) {
         if (caught instanceof InvalidSessionException) {
             secureSessionAccessor.clearSessionId();
         }

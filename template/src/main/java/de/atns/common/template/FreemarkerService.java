@@ -61,10 +61,14 @@ public class FreemarkerService {
 
     private HashMap<String, Object> createMap(final Map<String, ? extends Object> inputMap, final Object[] inputs) {
         final HashMap<String, Object> values = new HashMap<String, Object>();
-        if (inputMap != null) values.putAll(inputMap);
+        if (inputMap != null) {
+            values.putAll(inputMap);
+        }
         if (inputs != null) {
             for (final Object value : inputs) {
-                if (value != null) values.put(value.getClass().getSimpleName(), value);
+                if (value != null) {
+                    values.put(value.getClass().getSimpleName(), value);
+                }
             }
         }
         return values;

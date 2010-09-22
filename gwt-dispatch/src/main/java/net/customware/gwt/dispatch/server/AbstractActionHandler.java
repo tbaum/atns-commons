@@ -9,11 +9,9 @@ import net.customware.gwt.dispatch.shared.Result;
  * handler. It's arguable if this is any simpler than just implementing the
  * {@link ActionHandler} and its {@link #getActionType()} directly.
  *
+ * @param <A> The {@link Action} implementation.
+ * @param <R> The {@link Result} implementation.
  * @author David Peterson
- * @param <A>
- * The {@link Action} implementation.
- * @param <R>
- * The {@link Result} implementation.
  */
 public abstract class AbstractActionHandler<A extends Action<R>, R extends Result> implements ActionHandler<A, R> {
 

@@ -70,7 +70,9 @@ public class Benutzer extends BaseObject implements SecurityUser {
         }
 
         for (String rolle : getRolle()) {
-            if (contains(required, rolle)) return true;
+            if (contains(required, rolle)) {
+                return true;
+            }
         }
 
         return false;
@@ -94,7 +96,9 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     private boolean contains(final String[] required, final String rolle) {
         for (String s : required) {
-            if (s.equals(rolle)) return true;
+            if (s.equals(rolle)) {
+                return true;
+            }
         }
         return false;
     }

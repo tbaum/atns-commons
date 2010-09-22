@@ -23,7 +23,8 @@ public class ZipFileUtil {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter) throws IOException {
+    public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter)
+            throws IOException {
         List<File> extractedFiles = new LinkedList<File>();
         final Enumeration<? extends ZipEntry> entries = zipFile.entries();
         while (entries.hasMoreElements()) {

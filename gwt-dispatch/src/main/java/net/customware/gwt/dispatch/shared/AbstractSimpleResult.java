@@ -9,9 +9,8 @@ package net.customware.gwt.dispatch.shared;
  * constructor with a single value for normal use. It is recommended that the
  * empty constructor is private or package-private.
  *
+ * @param <T> The value type.
  * @author David Peterson
- * @param <T>
- * The value type.
  */
 public abstract class AbstractSimpleResult<T> implements Result {
 

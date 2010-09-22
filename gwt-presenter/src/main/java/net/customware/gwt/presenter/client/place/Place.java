@@ -60,8 +60,9 @@ public class Place {
         Class<?> supertype = type.getSuperclass();
         if (supertype != null) {
             String stId = getSimpleName(supertype);
-            if (id.endsWith(stId))
+            if (id.endsWith(stId)) {
                 id = id.substring(0, id.length() - stId.length());
+            }
         }
 
         return id;
@@ -71,8 +72,9 @@ public class Place {
     private static String getSimpleName(Class<?> type) {
         String id = type.getName();
         int lastDot = id.lastIndexOf('.');
-        if (lastDot > -1)
+        if (lastDot > -1) {
             id = id.substring(lastDot + 1);
+        }
 
         return id;
     }

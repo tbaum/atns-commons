@@ -32,7 +32,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
     public void bind() {
         onBind();
 
-        if (getPlace() != null)
+        if (getPlace() != null) {
             registerHandler(eventBus.addHandler(PlaceRequestEvent.getType(), new PlaceRequestHandler() {
 
                 public void onPlaceRequest(PlaceRequestEvent event) {
@@ -43,6 +43,7 @@ public abstract class BasicPresenter<D extends Display> implements Presenter {
                     }
                 }
             }));
+        }
     }
 
     /**

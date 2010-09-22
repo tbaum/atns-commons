@@ -22,7 +22,9 @@ public abstract class AbstractSecureDispatchServlet extends RemoteServiceServlet
 // --------------------- Interface SecureDispatchServiceAsync ---------------------
 
     public Result execute(String sessionId, Action<?> action) throws DispatchException {
-        if (LOG.isDebugEnabled()) LOG.debug("executing: " + action);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("executing: " + action);
+        }
         try {
             if (getSessionValidator().isValid(sessionId, getThreadLocalRequest())) {
                 return getDispatch().execute(action);

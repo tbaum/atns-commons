@@ -47,7 +47,8 @@ public class SecureDispatchModule extends AbstractDispatchModule {
 
     @Provides
     @Singleton
-    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor) {
+    protected DispatchAsync provideDispatchAsync(ExceptionHandler exceptionHandler,
+                                                 SecureSessionAccessor secureSessionAccessor) {
         return new SecureDispatchAsync(exceptionHandler, secureSessionAccessor);
     }
 

@@ -41,7 +41,8 @@ public abstract class GenericManagerDeleteFlagImpl<TYPE extends LongIdObject & D
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
-    public PartResult<TYPE> loadAll(final Map<String, Object> filter, final int start, final int max, final String sort, final boolean asc) {
+    public PartResult<TYPE> loadAll(final Map<String, Object> filter, final int start, final int max, final String sort,
+                                    final boolean asc) {
         enableDeleteFilter();
         return super.loadAll(filter, start, max, sort, asc);
     }

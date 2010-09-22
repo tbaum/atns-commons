@@ -21,17 +21,17 @@ public interface BenutzerRepository {
 
     @Finder(query = "SELECT count(distinct b) FROM Benutzer b ") int countAllBenutzer();
 
-    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER)
-    int countBenutzer(@Named("aLogin") String name);
+    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER) int countBenutzer(
+            @Named("aLogin") String name);
 
 
-    @Finder(query = "SELECT distinct b FROM Benutzer b order by b.login")
-    List<Benutzer> findAllBenutzer(@FirstResult int start, @MaxResults int paging);
+    @Finder(query = "SELECT distinct b FROM Benutzer b order by b.login") List<Benutzer> findAllBenutzer(
+            @FirstResult int start, @MaxResults int paging);
 
 
     @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login")
     List<Benutzer> findBenutzer(@Named("aLogin") String name, @FirstResult int start, @MaxResults int paging);
 
-    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin")
-    Benutzer benutzerByLogin(@Named("aLogin") String login);
+    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin") Benutzer benutzerByLogin(
+            @Named("aLogin") String login);
 }

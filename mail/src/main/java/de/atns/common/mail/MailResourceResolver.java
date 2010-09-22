@@ -6,14 +6,14 @@ import org.apache.commons.logging.LogFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import static java.lang.String.format;
-
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.String.format;
 
 /**
  * User: tbaum
@@ -51,7 +51,9 @@ public class MailResourceResolver {
             int pos = str.length();
             for (final String s : new String[]{")", "\"", "'", " ", "\n", "\r", "\t"}) {
                 final int p = str.indexOf(s, found);
-                if (p > -1) pos = Math.min(pos, p);
+                if (p > -1) {
+                    pos = Math.min(pos, p);
+                }
             }
             final String adr = str.substring(found, pos);
             found = pos + 1;
@@ -67,7 +69,7 @@ public class MailResourceResolver {
             }
         }
         strx.append(str.substring(start));
-        return new ResolvedMail( toArray(EmailResource.class, result.values()), strx.toString());
+        return new ResolvedMail(toArray(EmailResource.class, result.values()), strx.toString());
     }
 
     protected EmailResource createResource(final String adr, final Map<String, Object> context) throws IOException {

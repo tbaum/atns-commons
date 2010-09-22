@@ -11,7 +11,8 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
  * @author mwolter
  * @since 10.05.2010 11:34:05
  */
-public abstract class GenericManagerNamedImpl<TYPE extends LongIdObject & NameFieldObject> extends GenericManagerImpl<TYPE> {
+public abstract class GenericManagerNamedImpl<TYPE extends LongIdObject & NameFieldObject>
+        extends GenericManagerImpl<TYPE> {
 // -------------------------- OTHER METHODS --------------------------
 
     @Transactional(readOnly = true, propagation = REQUIRES_NEW)

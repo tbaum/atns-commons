@@ -182,7 +182,8 @@ public class EmailMessage implements Serializable {
         for (final EmailResource attachment : attachments) {
             final MimeBodyPart imagePart = new MimeBodyPart();
             imagePart.setDisposition(ATTACHMENT);
-            imagePart.setDataHandler(new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
+            imagePart.setDataHandler(
+                    new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
             imagePart.setFileName(attachment.getName());
             imagePart.setContentID("<" + attachment.getName() + ">");
             root.addBodyPart(imagePart);

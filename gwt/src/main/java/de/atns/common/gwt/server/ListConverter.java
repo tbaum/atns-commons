@@ -2,7 +2,6 @@ package de.atns.common.gwt.server;
 
 import ch.lambdaj.Lambda;
 import ch.lambdaj.function.convert.Converter;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 
@@ -20,7 +19,8 @@ public class ListConverter<F extends Serializable, T extends Serializable>
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <F extends Serializable, T extends Serializable> ListConverter<F, T> listConverter(final Converter<F, T> converter) {
+    public static <F extends Serializable, T extends Serializable> ListConverter<F, T> listConverter(
+            final Converter<F, T> converter) {
         return new ListConverter<F, T>(converter);
     }
 

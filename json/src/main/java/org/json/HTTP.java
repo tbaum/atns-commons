@@ -28,13 +28,16 @@ import java.util.Iterator;
 
 /**
  * Convert an HTTP header to a JSONObject and back.
+ *
  * @author JSON.org
  * @version 2008-09-18
  */
 public class HTTP {
 // ------------------------------ FIELDS ------------------------------
 
-    /** Carriage return/line feed. */
+    /**
+     * Carriage return/line feed.
+     */
     public static final String CRLF = "\r\n";
 
 // -------------------------- STATIC METHODS --------------------------
@@ -66,15 +69,16 @@ public class HTTP {
      * ...}</pre>
      * It does no further checking or conversion. It does not parse dates.
      * It does not do '%' transforms on URLs.
+     *
      * @param string An HTTP header string.
      * @return A JSONObject containing the elements and attributes
-     * of the XML string.
+     *         of the XML string.
      * @throws JSONException
      */
     public static JSONObject toJSONObject(final String string) throws JSONException {
-        final JSONObject     o = new JSONObject();
-        final HTTPTokener    x = new HTTPTokener(string);
-        final String         t;
+        final JSONObject o = new JSONObject();
+        final HTTPTokener x = new HTTPTokener(string);
+        final String t;
 
         t = x.nextToken();
         if (t.toUpperCase().startsWith("HTTP")) {
@@ -118,14 +122,15 @@ public class HTTP {
      * }</pre>
      * Any other members of the JSONObject will be output as HTTP fields.
      * The result will end with two CRLF pairs.
+     *
      * @param o A JSONObject
      * @return An HTTP header string.
      * @throws JSONException if the object does not contain enough
-     *  information.
+     *                       information.
      */
     public static String toString(final JSONObject o) throws JSONException {
-        final Iterator     keys = o.keys();
-        String       s;
+        final Iterator keys = o.keys();
+        String s;
         final StringBuffer sb = new StringBuffer();
         if (o.has("Status-Code") && o.has("Reason-Phrase")) {
             sb.append(o.getString("HTTP-Version"));
@@ -147,9 +152,9 @@ public class HTTP {
         sb.append(CRLF);
         while (keys.hasNext()) {
             s = keys.next().toString();
-            if (!s.equals("HTTP-Version")      && !s.equals("Status-Code") &&
+            if (!s.equals("HTTP-Version") && !s.equals("Status-Code") &&
                     !s.equals("Reason-Phrase") && !s.equals("Method") &&
-                    !s.equals("Request-URI")   && !o.isNull(s)) {
+                    !s.equals("Request-URI") && !o.isNull(s)) {
                 sb.append(s);
                 sb.append(": ");
                 sb.append(o.getString(s));

@@ -45,8 +45,9 @@ public class PlaceManager implements ValueChangeHandler<String>, PlaceChangedHan
     }
 
     public void fireCurrentPlace() {
-        if (History.getToken() != null)
+        if (History.getToken() != null) {
             History.fireCurrentHistoryState();
+        }
     }
 
 }

@@ -10,7 +10,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 import javax.mail.util.ByteArrayDataSource;
-import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -78,7 +77,8 @@ import static java.util.Arrays.asList;
                         createAlternativePart(html));
     }
 
-    private MimeMultipart createRelatedPart(final String html, final List<MailResource> resources) throws MessagingException {
+    private MimeMultipart createRelatedPart(final String html, final List<MailResource> resources)
+            throws MessagingException {
         final MimeMultipart relatedPart = new MimeMultipart("related");
 
         final MimeBodyPart alternativePart = new MimeBodyPart();
@@ -90,7 +90,8 @@ import static java.util.Arrays.asList;
         return relatedPart;
     }
 
-    private String addResourceParts(String newHtmlBody, final List<MailResource> resources, final MimeMultipart relatedPart) throws MessagingException {
+    private String addResourceParts(String newHtmlBody, final List<MailResource> resources,
+                                    final MimeMultipart relatedPart) throws MessagingException {
         final Set<String> resId = new TreeSet<String>();
         int i = 1;
 
@@ -104,7 +105,8 @@ import static java.util.Arrays.asList;
         return newHtmlBody;
     }
 
-    private static MimeBodyPart createResourcePart(final MailResource resource, final String resourceId) throws MessagingException {
+    private static MimeBodyPart createResourcePart(final MailResource resource, final String resourceId)
+            throws MessagingException {
         final MimeBodyPart resourcePart = new MimeBodyPart();
         final byte[] data = resource.getData();
 

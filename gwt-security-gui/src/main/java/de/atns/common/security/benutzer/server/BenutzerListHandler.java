@@ -21,7 +21,8 @@ import static de.atns.common.security.model.DefaultRoles.ADMIN;
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, ListPresentation<BenutzerPresentation>, PartResult<Benutzer>> {
+public class BenutzerListHandler
+        extends ConvertingActionHandler<BenutzerList, ListPresentation<BenutzerPresentation>, PartResult<Benutzer>> {
 // ------------------------------ FIELDS ------------------------------
 
     private final BenutzerRepository repository;

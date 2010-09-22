@@ -19,7 +19,8 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
         this.exceptionHandler = exceptionHandler;
     }
 
-    protected <A extends Action<R>, R extends Result> void onFailure(A action, Throwable caught, final AsyncCallback<R> callback) {
+    protected <A extends Action<R>, R extends Result> void onFailure(A action, Throwable caught,
+                                                                     final AsyncCallback<R> callback) {
         if (exceptionHandler != null && exceptionHandler.onFailure(caught) == ExceptionHandler.Status.STOP) {
             return;
         }
@@ -27,7 +28,8 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
         callback.onFailure(caught);
     }
 
-    protected <A extends Action<R>, R extends Result> void onSuccess(A action, R result, final AsyncCallback<R> callback) {
+    protected <A extends Action<R>, R extends Result> void onSuccess(A action, R result,
+                                                                     final AsyncCallback<R> callback) {
         callback.onSuccess(result);
     }
 

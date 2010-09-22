@@ -92,8 +92,9 @@ public class BatchResult implements Result, Iterable<Result> {
      */
     public <T extends Result> T getResult(int i, Class<T> type) {
         Object result = results.get(i);
-        if (result != null && type.getName().equals(result.getClass().getName()))
+        if (result != null && type.getName().equals(result.getClass().getName())) {
             return (T) result;
+        }
         return null;
     }
 

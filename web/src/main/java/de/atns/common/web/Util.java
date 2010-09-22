@@ -9,7 +9,8 @@ import java.util.Map;
 public class Util {
 // -------------------------- STATIC METHODS --------------------------
 
-    public static String extractParameter(final Map<String, String[]> params, final String field, final String defaultValue) {
+    public static String extractParameter(final Map<String, String[]> params, final String field,
+                                          final String defaultValue) {
         final String[] values = params.get(field);
         return values == null ? defaultValue : values[0];
     }

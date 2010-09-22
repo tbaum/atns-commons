@@ -28,7 +28,8 @@ public class FilterTemplate {
         return fc;
     }
 
-    public static <F, E extends F> List<E> filterBack(final List<E> original, final List<E> modified, final Filter<F> filter) {
+    public static <F, E extends F> List<E> filterBack(final List<E> original, final List<E> modified,
+                                                      final Filter<F> filter) {
         final List<E> all = new ArrayList<E>(original);
         final List<E> ret = new ArrayList<E>(original.size());
         for (final E r : modified) {
@@ -43,7 +44,8 @@ public class FilterTemplate {
         return ret;
     }
 
-    public static <F, E extends F> Set<E> filterBack(final Set<E> original, final Set<E> modified, final Filter<F> filter) {
+    public static <F, E extends F> Set<E> filterBack(final Set<E> original, final Set<E> modified,
+                                                     final Filter<F> filter) {
         final Set<E> all = new HashSet<E>(original);
         final Set<E> ret = new HashSet<E>(original.size());
         for (final E r : modified) {

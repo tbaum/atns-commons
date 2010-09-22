@@ -15,7 +15,8 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author mwolter
  * @since 29.10.2009 11:20:03
  */
-public class LabelTextBox extends Composite implements /*TODO HasFocus, */ HasValue<String>, FocusHandler, BlurHandler, KeyUpHandler {
+public class LabelTextBox extends Composite
+        implements /*TODO HasFocus, */ HasValue<String>, FocusHandler, BlurHandler, KeyUpHandler {
 // ------------------------------ FIELDS ------------------------------
 
     private TextBox textBox = new TextBox();
