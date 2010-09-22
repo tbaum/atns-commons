@@ -18,6 +18,7 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 import net.customware.gwt.presenter.client.place.Place;
 
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,7 +85,9 @@ import static de.atns.common.security.client.DefaultCallback.callback;
     private void doLogin(final String login, final String password) {
         if (display.automaticLogin()) {
             try {
-                Cookies.setCookie("l", CryptoUtil.encrypt(login) + ":" + CryptoUtil.encrypt(password));
+                final String value = CryptoUtil.encrypt(login) + ":" + CryptoUtil.encrypt(password);
+                final Date expires = new Date(new Date().getTime() + (1000L * 60 * 60 * 24 * 365));
+                Cookies.setCookie("l", value, expires);
             } catch (InvalidCipherTextException e) {
                 LOG.log(Level.FINE, e.getMessage(), e);
             }
