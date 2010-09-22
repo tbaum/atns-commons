@@ -19,6 +19,7 @@
         <module>dao</module>
         <module>fileutils</module>
         <module>gwt</module>
+        <module>gwt-crud</module>
         <module>gwt-dispatch</module>
         <module>gwt-presenter</module>
         <module>gwt-security</module>
