@@ -1,9 +1,10 @@
 package de.atns.common.security.client;
 
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -17,7 +18,7 @@ import static com.google.gwt.event.dom.client.KeyCodes.KEY_ENTER;
  * @author tbaum
  * @since 24.10.2009
  */
-public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandler, LoginPresenter.Display {
+public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyPressHandler, LoginPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     private final Button login;
@@ -30,12 +31,12 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
     @Inject public LoginView(@ApplicationName final String appName) {
         username = new TextBox();
         username.setWidth("150px");
-        username.addKeyUpHandler(this);
+        username.addKeyPressHandler(this);
         username.setFocus(true);
 
         password = new PasswordTextBox();
         password.setWidth("150px");
-        password.addKeyUpHandler(this);
+        password.addKeyPressHandler(this);
 
         automatic = new CheckBox("automatisch anmelden");
 
@@ -89,19 +90,6 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
 
 // --------------------- Interface Display ---------------------
 
-    @Override public void startProcessing() {
-        login.addStyleName("loading");
-        login.setEnabled(false);
-        username.setEnabled(false);
-        password.setEnabled(false);
-    }
-
-    @Override public void stopProcessing() {
-        login.removeStyleName("loading");
-        updateLoginButton();
-        username.setEnabled(true);
-        password.setEnabled(true);
-    }
 
     @Override public HandlerRegistration addLoginClick(final ClickHandler clickHandler) {
         return login.addClickHandler(clickHandler);
@@ -133,12 +121,36 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
         updateLoginButton();
     }
 
-// --------------------- Interface KeyUpHandler ---------------------
+// --------------------- Interface ErrorWidgetDisplay ---------------------
 
-    @Override public void onKeyUp(final KeyUpEvent event) {
+    @Override public void reset() {
+        username.setValue("");
+        password.setValue("");
+        updateLoginButton();
+    }
+
+    @Override public void startProcessing() {
+        login.addStyleName("loading");
+        login.setEnabled(false);
+        username.setEnabled(false);
+        password.setEnabled(false);
+    }
+
+    @Override public void stopProcessing() {
+        login.removeStyleName("loading");
+        updateLoginButton();
+        username.setEnabled(true);
+        password.setEnabled(true);
+    }
+
+// --------------------- Interface KeyPressHandler ---------------------
+
+    @Override public void onKeyPress(final KeyPressEvent event) {
         updateLoginButton();
 
-        if (event.getNativeKeyCode() == KEY_ENTER) {
+        final NativeEvent nativeEvent = event.getNativeEvent();
+        final int keyCode = nativeEvent.getKeyCode();
+        if (keyCode == KEY_ENTER) {
             if (event.getSource().equals(username)) {
                 password.setFocus(true);
             } else if (event.getSource().equals(password)) {
@@ -147,11 +159,5 @@ public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyUpHandl
                 }
             }
         }
-    }
-
-    @Override public void reset() {
-        username.setValue("");
-        password.setValue("");
-        updateLoginButton();
     }
 }

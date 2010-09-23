@@ -7,6 +7,8 @@
     <inherits name="org.cobogw.gwt.user.Button"/>
     <inherits name="de.atns.common.gwt.Gwt"/>
     <inherits name="com.googlecode.gwt.crypto.Crypto"/>
+    <inherits name="net.customware.gwt.presenter.Presenter"/>
+    <inherits name="net.customware.gwt.presenter.Presenter"/>
 
     <source path="client"/>
 </module>

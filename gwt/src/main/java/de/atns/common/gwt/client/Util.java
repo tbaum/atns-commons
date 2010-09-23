@@ -47,6 +47,7 @@ public class Util {
         return defaultValue;
     }
 
+    @SuppressWarnings({"unchecked"})
     public static <E extends Enum> E parseEnum(final ListBox listBox, Class<E> enumClass) {
         final int index = listBox.getSelectedIndex();
         if (index > listBox.getItemCount() || index < 0) {

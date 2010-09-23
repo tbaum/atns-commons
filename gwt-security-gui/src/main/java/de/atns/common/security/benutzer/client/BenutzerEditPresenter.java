@@ -11,7 +11,7 @@ import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import de.atns.common.security.client.Callback;
+import de.atns.common.gwt.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 

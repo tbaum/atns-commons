@@ -1,6 +1,7 @@
 package de.atns.common.security.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import de.atns.common.gwt.client.Callback;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.security.client.action.CheckSession;

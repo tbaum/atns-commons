@@ -9,6 +9,7 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
+import de.atns.common.gwt.client.Callback;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.security.client.action.UserLogin;
@@ -16,7 +17,6 @@ import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
-import net.customware.gwt.presenter.client.place.Place;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -41,19 +41,7 @@ import static de.atns.common.security.client.DefaultCallback.callback;
         this.dispatcher = dispatcher;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Presenter ---------------------
-
-    @Override public void refreshDisplay() {
-    }
-
 // -------------------------- OTHER METHODS --------------------------
-
-    @Override public Place getPlace() {
-        return null;
-    }
 
     @Override
     protected void onBindInternal() {

@@ -16,4 +16,8 @@ public interface ErrorWidgetDisplay extends WidgetDisplay {
     void setErrorVisible(boolean visible);
 
     void showError(String text);
+
+    void startProcessing();
+
+    void stopProcessing();
 }

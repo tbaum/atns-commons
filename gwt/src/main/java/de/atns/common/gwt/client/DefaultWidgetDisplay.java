@@ -5,13 +5,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
-import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 
 import static com.google.gwt.dom.client.Style.BorderStyle.SOLID;
 import static com.google.gwt.dom.client.Style.Position.ABSOLUTE;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 
-public abstract class DefaultWidgetDisplay extends Composite implements WidgetDisplay {
+public abstract class DefaultWidgetDisplay extends Composite implements ErrorWidgetDisplay {
 // ------------------------------ FIELDS ------------------------------
 
     private final FlowPanel loader = GwtUtil.flowPanel(new Image("spinner.gif"));
@@ -40,7 +39,9 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface Display ---------------------
+// --------------------- Interface ErrorWidgetDisplay ---------------------
+
+    public abstract void reset();
 
     @Override public void startProcessing() {
         loader.setVisible(true);
@@ -55,8 +56,4 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
     @Override public Widget asWidget() {
         return this;
     }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    public abstract void reset();
 }

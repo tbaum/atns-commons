@@ -65,6 +65,7 @@ public class ClassUtils {
         }
     }
 
+    @SuppressWarnings({"unchecked"})
     public static <T> T getField(Object target, Field field) {
         try {
             field.setAccessible(true);

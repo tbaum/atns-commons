@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
-import de.atns.common.security.client.Callback;
+import de.atns.common.gwt.client.Callback;
 import de.atns.common.security.client.DefaultCallback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;

@@ -5,13 +5,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import de.atns.common.gwt.client.Callback;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.presenter.client.EventBus;
 
