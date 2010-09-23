@@ -4,11 +4,12 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>de.atns.common</groupId>
-        <version>1.4.2-SNAPSHOT</version>
+        <version>1.4.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <artifactId>gwt-crud</artifactId>
+    <name>${groupId}:${artifactId}:${version}</name>
 
     <build>
         <plugins>
@@ -38,23 +39,23 @@
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
-            <artifactId>gwt-security</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-presenter</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>gwt-security</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-dispatch</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
@@ -65,7 +66,7 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

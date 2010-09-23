@@ -3,7 +3,7 @@
     <groupId>de.atns.common</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>1.4.3-SNAPSHOT</version>
     <name>${groupId}:${artifactId}:${version}</name>
 
     <parent>
@@ -23,6 +23,7 @@
         <module>gwt-dispatch</module>
         <module>gwt-presenter</module>
         <module>gwt-security</module>
+        <module>gwt-security-gui</module>
         <module>image</module>
         <module>json</module>
         <module>numbergenerator</module>
@@ -31,7 +32,6 @@
         <module>web</module>
         <module>mail</module>
         <module>template</module>
-        <module>gwt-security-gui</module>
     </modules>
 
     <scm>

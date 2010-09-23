@@ -5,11 +5,12 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>de.atns.common</groupId>
-        <version>1.4.2-SNAPSHOT</version>
+        <version>1.4.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>gwt-security-gui</artifactId>
+    <name>${groupId}:${artifactId}:${version}</name>
+
     <build>
         <plugins>
             <plugin>
@@ -34,12 +35,17 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-security</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-crud</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>security</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>

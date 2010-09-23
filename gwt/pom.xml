@@ -8,7 +8,7 @@
     <parent>
         <groupId>de.atns.common</groupId>
         <artifactId>parent</artifactId>
-        <version>1.4.2-SNAPSHOT</version>
+        <version>1.4.3-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -40,17 +40,17 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-presenter</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>gwt-dispatch</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.gwt.inject</groupId>
