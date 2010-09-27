@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeSet version="1.0">
+    <node uin="N-tdsqjuegcgckco-ui1pux">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="Device"/>
+    </node>
+    <node uin="N-tdsqjuegcgclhwfwkcoi">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="SwingGUIRenderDevice"/>
+        <property name="mod__extends" value="BufferedImageRendererDevice"/>
+        <link uin="Lfwefh6egcgclhwxo42fq">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="BufferedImageRendererDevice"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgclhwfwkcoi" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgcnwpa97kk9" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcgcn1gtvj9bz">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="ZPLNetworkPrinterDevice"/>
+        <property name="mod__extends" value="device.Device"/>
+        <link uin="Lfwefh6egcgcn1g-vqo57z">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="device.Device"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgcn1gtvj9bz" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgckco-ui1pux" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcgmnptnvdujc">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgcn1gtvj9bz" role="Client"/>
+            <participant referencedUin="design:node:::-tdsqjuegcfznyc-ns491g" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcgcnwpa97kk9">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="BufferedImageRendererDevice"/>
+        <property name="mod__extends" value="device.Device"/>
+        <link uin="Lfwefh6egcgcnwpy0mp9y">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="device.Device"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgcnwpa97kk9" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgckco-ui1pux" role="Supplier"/>
+        </link>
+    </node>
+</nodeSet>

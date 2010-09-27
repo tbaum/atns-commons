@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Together XML Project-->
+<project>
+  <property category="config" name="option.confirmation.shortcut.delete.choice" value="shortcut"/>
+  <property category="config" name="option.model.createStandaloneDesignElements" value="false"/>
+  <property category="config" name="options.umlVersion" value="20"/>
+  <property category="config" name="print.copies" value="1"/>
+  <property category="config" name="print.margin.bottom" value=".3"/>
+  <property category="config" name="print.margin.left" value=".3"/>
+  <property category="config" name="print.margin.right" value=".3"/>
+  <property category="config" name="print.margin.top" value=".3"/>
+  <property category="config" name="print.orientation" value="landscape"/>
+  <property category="config" name="print.preview.scale" value="100"/>
+  <property category="config" name="print.range.all" value="true"/>
+  <property category="config" name="print.range.pages" value=""/>
+  <property category="config" name="print.send.to" value="-1"/>
+  <property category="config" name="print.size" value="A4"/>
+  <property category="config" name="print.zoom" value="50%"/>
+  <property category="path" name="DocPath" value="doc"/>
+  <property category="personality" name="personality" value="com.togethersoft.modules.primetimebridge.personality.UML14Personality "/>
+  <property category="sys" name="DefaultDiagram" value="diagrams"/>
+  <property category="sys" name="Diagram" value="diagrams"/>
+  <property category="sys" name="WorkingDirectory" value="."/>
+  <property category="together" name="language" value="design"/>
+</project>

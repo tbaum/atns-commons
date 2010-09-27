@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeSet version="1.0">
+    <node uin="N-tdsqjuegcfhgqo-h5k6g8">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="AbstractElement"/>
+        <property name="mod__extends" value="Element"/>
+        <link uin="Lfwefh6egcfhgqo8ql2jl">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="Element"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgqo-h5k6g8" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgsuen2cp5" role="Supplier"/>
+        </link>
+        <node uin="Nhnimszegcfp16ufhbjc7">
+            <property name="$name" value="rot"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="Rotation"/>
+        </node>
+        <node uin="Nhnimszegcfhgqo-v3zzt4">
+            <property name="$name" value="y"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="double"/>
+        </node>
+        <node uin="Nhnimszegcfhgqo-kjb7xj">
+            <property name="$name" value="x"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="double"/>
+        </node>
+    </node>
+    <node uin="N-tdsqjuegcfhgr4kh5qba">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="DocumentElement"/>
+        <property name="mod__extends" value="Element"/>
+        <link uin="Lfwefh6egcfhgr4qefg4r">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="Element"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgr4kh5qba" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgsuen2cp5" role="Supplier"/>
+        </link>
+        <node uin="Nhnimszegcfhgr4vusirr">
+            <property name="$name" value="width"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod_Visibility" value="$private"/>
+            <property name="mod__type" value="double"/>
+        </node>
+        <node uin="Nhnimszegcfhgr4d3isj3">
+            <property name="$name" value="height"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod_Visibility" value="$private"/>
+            <property name="mod__type" value="double"/>
+        </node>
+        <node uin="Ntq87glegcfhgr49rtjgh">
+            <property name="$name" value="addElement"/>
+            <property name="$metaclass" value="Operation20"/>
+            <property name="$language" value="design"/>
+        </node>
+    </node>
+    <node uin="N-tdsqjuegcfhgse4d19d4">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="BarcodeElement"/>
+        <property name="mod__extends" value="document.AbstractElement"/>
+        <link uin="Lfwefh6egcfhgse-ve12kp">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="document.AbstractElement"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgse4d19d4" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgqo-h5k6g8" role="Supplier"/>
+        </link>
+        <node uin="Nhnimszegcfhgse9guvem">
+            <property name="$name" value="barcode"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="string"/>
+        </node>
+        <node uin="Nhnimszegcfhgsehndlaq">
+            <property name="$name" value="modulo"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="double"/>
+        </node>
+        <node uin="Nhnimszegcfhgse-4dju5w">
+            <property name="$name" value="height"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="double"/>
+        </node>
+    </node>
+    <node uin="N-tdsqjuegcfhgsuen2cp5">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="Element"/>
+        <link uin="L-4dc66egcfhgsu-26l0mk">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <property name="aggregation" value=""/>
+            <property name="composition" value=""/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgsuen2cp5" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgr4kh5qba" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfhgta-ndw5vc">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="ImageElement"/>
+        <property name="mod__extends" value="document.AbstractElement"/>
+        <link uin="Lfwefh6egcfhgtar57yrq">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="document.AbstractElement"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgta-ndw5vc" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgqo-h5k6g8" role="Supplier"/>
+        </link>
+        <node uin="Nhnimszegcfhgta-eby02w">
+            <property name="$name" value="image"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="Image"/>
+        </node>
+        <node uin="Nhnimszegcfhgta-esqa80">
+            <property name="$name" value="scale"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="dboule"/>
+        </node>
+    </node>
+    <node uin="N-tdsqjuegcgduizd4pynf">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="TextElement"/>
+        <property name="mod__extends" value="document.AbstractElement"/>
+        <link uin="Lfwefh6egcgduizid8mz8">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="document.AbstractElement"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcgduizd4pynf" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgqo-h5k6g8" role="Supplier"/>
+        </link>
+        <node uin="Nhnimszegcgduiz-39b8ws">
+            <property name="$name" value="text"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="string"/>
+        </node>
+        <node uin="Nhnimszegcgduizry0rtr">
+            <property name="$name" value="size"/>
+            <property name="$metaclass" value="Property20"/>
+            <property name="$language" value="design"/>
+            <property name="mod__type" value="double"/>
+        </node>
+    </node>
+</nodeSet>

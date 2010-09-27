@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeSet version="1.0">
+    <view uin="V1hexuhegcgcg2l8dmg5a">
+        <property name="$defaultDiagram" value="true"/>
+        <property name="$metaclass" value="ClassDiagram20"/>
+        <property name="$defaultDiagram" value=""/>
+        <property name="@__options" value="toolbar.group.#DEFAULT.expanded = true &#xA;toolbar.buttonRunCount = 2 &#xA;option.layout.recursive = false &#xA;toolbar.group.pattern.expanded = true &#xA;toolbar.group.ocl.expanded = true &#xA;toolbar.group.note.expanded = true &#xA;scrollX = 0 &#xA;scrollY = 0 &#xA;zoomFactor = 1.0 &#xA;"/>
+        <reference referencedUin="design:node:::N-tdsqjuegcgcnwpa97kk9">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="bounds" value="240,160,184,93"/>
+            <reference referencedUin="design:link:::Lfwefh6egcgcnwpy0mp9y:N-tdsqjuegcgcnwpa97kk9">
+                <property name="@location_set_by_user" value="false"/>
+                <property name="sourceAnchor" value="290,160"/>
+                <property name="bendpoints" value=""/>
+                <property name="targetAnchor" value="290,120"/>
+            </reference>
+        </reference>
+        <reference referencedUin="design:view:::V1hexuheg276ard-s5va5q">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="bounds" value="145,272,86,154"/>
+        </reference>
+        <reference referencedUin="design:node:::N-tdsqjuegcgckco-ui1pux">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="bounds" value="143,10,197,110"/>
+            <property name="bounds_setted_by_user" value="true"/>
+        </reference>
+        <reference referencedUin="design:node:::N-tdsqjuegcgclhwfwkcoi">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="bounds" value="240,300,180,80"/>
+            <property name="bounds_setted_by_user" value="true"/>
+            <reference referencedUin="design:link:::Lfwefh6egcgclhwxo42fq:N-tdsqjuegcgclhwfwkcoi">
+                <property name="@location_set_by_user" value="false"/>
+                <property name="sourceAnchor" value="311,300"/>
+                <property name="bendpoints" value=""/>
+                <property name="targetAnchor" value="311,253"/>
+            </reference>
+        </reference>
+        <reference referencedUin="design:node:::N-tdsqjuegcgcn1gtvj9bz">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="bounds" value="40,160,156,93"/>
+            <reference referencedUin="design:link:::Lfwefh6egcgcn1g-vqo57z:N-tdsqjuegcgcn1gtvj9bz">
+                <property name="@location_set_by_user" value="false"/>
+                <property name="sourceAnchor" value="169,160"/>
+                <property name="bendpoints" value=""/>
+                <property name="targetAnchor" value="169,120"/>
+            </reference>
+        </reference>
+    </view>
+</nodeSet>

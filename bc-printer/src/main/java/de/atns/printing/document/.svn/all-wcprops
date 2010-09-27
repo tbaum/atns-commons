@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document
+END
+Mode.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/atns/!svn/ver/119/printlib/TRUNK/src/main/java/de/atns/printing/document/Mode.java
+END
+DocumentElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document/DocumentElement.java
+END
+BarcodeElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document/BarcodeElement.java
+END
+Element.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/atns/!svn/ver/119/printlib/TRUNK/src/main/java/de/atns/printing/document/Element.java
+END
+ImageElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document/ImageElement.java
+END
+AbstractElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document/AbstractElement.java
+END
+TextElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/document/TextElement.java
+END

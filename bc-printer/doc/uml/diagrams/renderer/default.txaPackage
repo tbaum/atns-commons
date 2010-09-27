@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeSet version="1.0">
+    <node uin="N-tdsqjuegcfv4s7-rdl97a">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="RendererFactory"/>
+        <node uin="Ntq87glegcfv4s72wvulr">
+            <property name="$name" value="renderDocument"/>
+            <property name="$metaclass" value="Operation20"/>
+            <property name="$language" value="design"/>
+            <node uin="N-5kd6yfegcfv4s7d4vd2e">
+                <property name="$name" value="d"/>
+                <property name="$metaclass" value="Parameter"/>
+                <property name="mod__typeReferencedElement" value="design:node:::N-tdsqjuegcfhgr4kh5qba"/>
+                <property name="mod__type" value="document.DocumentElement"/>
+            </node>
+        </node>
+        <node uin="Ntq87glegcfv4s7zhp553">
+            <property name="$name" value="getRenderer"/>
+            <property name="$metaclass" value="Operation20"/>
+            <property name="$language" value="design"/>
+            <node uin="N-5kd6yfegcfv4s7azuxiq">
+                <property name="$name" value="e"/>
+                <property name="$metaclass" value="Parameter"/>
+                <property name="mod__typeReferencedElement" value="design:node:::N-tdsqjuegcfhgsuen2cp5"/>
+                <property name="mod__type" value="document.Element"/>
+            </node>
+        </node>
+        <node uin="Ntq87glegcfv4s79ntg6u">
+            <property name="$name" value="getDocumentRenderer"/>
+            <property name="$metaclass" value="Operation20"/>
+            <property name="$language" value="design"/>
+        </node>
+        <link uin="L-4dc66egcggqzuosz04e">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfv4s7-rdl97a" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfhgsuen2cp5" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcgjcc3q2om01">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfv4s7-rdl97a" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvslu-9c7it" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfvjoo8rxgvq">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="AbstractDocumentRenderer"/>
+        <property name="mod__extends" value="DocumentRenderer"/>
+        <link uin="Lfwefh6egcfvjoo-1now0n">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="DocumentRenderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvjoo8rxgvq" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvslu-9c7it" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfvl9yy4ue9a">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="AbstractRenderer"/>
+        <property name="mod__extends" value="Renderer"/>
+        <link uin="Lfwefh6egcfvl9y1tkzsv">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="Renderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvl9yy4ue9a" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfywsh-mht96b" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfvslu-9c7it">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="DocumentRenderer"/>
+        <property name="mod__extends" value="Renderer"/>
+        <link uin="Lfwefh6egcfvslucamf5w">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="Renderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvslu-9c7it" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfywsh-mht96b" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfwtr36re081">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="AbstractRendererFactory"/>
+        <property name="mod__extends" value="renderer.RendererFactory"/>
+        <link uin="Lfwefh6egcfwtr3rr0ysq">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.RendererFactory"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfwtr36re081" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfv4s7-rdl97a" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfywsh-mht96b">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="Renderer"/>
+        <node uin="Ntq87glegcfywshyr1p3g">
+            <property name="$name" value="render"/>
+            <property name="$metaclass" value="Operation20"/>
+            <property name="$language" value="design"/>
+            <node uin="N-5kd6yfegcfywsh-f093h2">
+                <property name="$name" value="e"/>
+                <property name="$metaclass" value="Parameter"/>
+                <property name="mod__typeReferencedElement" value="design:node:::N-tdsqjuegcfhgsuen2cp5"/>
+                <property name="mod__type" value="document.Element"/>
+            </node>
+        </node>
+        <link uin="L-4dc66egcfywsh-ot8yh0">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfywsh-mht96b" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfv4s7-rdl97a" role="Supplier"/>
+        </link>
+    </node>
+</nodeSet>

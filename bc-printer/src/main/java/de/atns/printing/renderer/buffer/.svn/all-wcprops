@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer
+END
+DocumentRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer/DocumentRenderer.java
+END
+BarcodeRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer/BarcodeRenderer.java
+END
+ImageRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer/ImageRenderer.java
+END
+TextRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer/TextRenderer.java
+END
+RendererFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/atns/!svn/ver/204/printlib/TRUNK/src/main/java/de/atns/printing/renderer/buffer/RendererFactory.java
+END

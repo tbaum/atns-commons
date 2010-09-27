@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodeSet version="1.0">
+    <node uin="N-tdsqjuegcfujha-ivddmb">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="RendererFactoryImpl"/>
+        <property name="mod__extends" value="renderer.AbstractRendererFactory"/>
+        <link uin="Lfwefh6egcfujhacc1f7">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.AbstractRendererFactory"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-ivddmb" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfwtr36re081" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcfujha-bz7zpu">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-ivddmb" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-rpege1" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcfujha-w3mrs3">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-ivddmb" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-qvsfbl" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcfujhae2ippz">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-ivddmb" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-upvnxn" role="Supplier"/>
+        </link>
+        <link uin="L-4dc66egcfujhae4pfmj">
+            <property name="$metaclass" value="KernelAssociation20"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-ivddmb" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujhaqb5i2d" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfujha-rpege1">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="DocumentRendererImpl"/>
+        <property name="mod__extends" value="renderer.AbstractDocumentRenderer"/>
+        <link uin="Lfwefh6egcfujhal8dvq3">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.AbstractDocumentRenderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-rpege1" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvjoo8rxgvq" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfujhaqb5i2d">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="BarcodeRenderer"/>
+        <property name="mod__extends" value="renderer.AbstractRenderer"/>
+        <link uin="Lfwefh6egcfujha-wjym16">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.AbstractRenderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujhaqb5i2d" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvl9yy4ue9a" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfujha-qvsfbl">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="TextRenderer"/>
+        <property name="mod__extends" value="renderer.AbstractRenderer"/>
+        <link uin="Lfwefh6egcfujhaxordkz">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.AbstractRenderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-qvsfbl" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvl9yy4ue9a" role="Supplier"/>
+        </link>
+    </node>
+    <node uin="N-tdsqjuegcfujha-upvnxn">
+        <property name="$metaclass" value="Class20"/>
+        <property name="$language" value="design"/>
+        <property name="$name" value="ImageRenderer"/>
+        <property name="mod__extends" value="renderer.AbstractRenderer"/>
+        <link uin="Lfwefh6egcfujha-dmnp7j">
+            <property name="$metaclass" value="Generalization20"/>
+            <property name="mod__cachedBaseName" value="renderer.AbstractRenderer"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfujha-upvnxn" role="Client"/>
+            <participant referencedUin="design:node:::N-tdsqjuegcfvl9yy4ue9a" role="Supplier"/>
+        </link>
+    </node>
+</nodeSet>
