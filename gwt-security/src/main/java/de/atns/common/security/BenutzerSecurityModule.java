@@ -1,7 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.AbstractModule;
-import de.atns.common.security.benutzer.BenutzerActionHandlerModule;
 import de.atns.common.security.server.DummyDataCreator;
 import de.atns.common.security.server.UserServiceImpl;
 import net.customware.gwt.dispatch.server.guice.ActionHandlerModule;
@@ -31,13 +30,7 @@ public class BenutzerSecurityModule extends SecurityModule {
             }
         });
 
-        install(new ActionHandlerModule() {
-            @Override protected void configureHandlers() {
-                install(new SecurityActionHandlerModule());
-                install(new BenutzerActionHandlerModule());
-
-            }
-        });
+        install(new SecurityActionHandlerModule());
 
     }
 }

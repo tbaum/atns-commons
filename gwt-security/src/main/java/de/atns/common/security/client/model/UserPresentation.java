@@ -34,6 +34,15 @@ public class UserPresentation implements Result, IsSerializable {
         return login;
     }
 
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "UserPresentation{" +
+                "login='" + login + '\'' +
+                ", authToken='" + authToken + '\'' +
+                '}';
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     public boolean isValid() {

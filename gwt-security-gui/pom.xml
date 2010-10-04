@@ -38,8 +38,9 @@
             <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
+            <groupId>de.atns.common</groupId>
+            <artifactId>gwt-security</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

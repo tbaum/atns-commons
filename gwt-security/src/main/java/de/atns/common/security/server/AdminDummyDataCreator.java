@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.wideplay.warp.persist.Transactional;
 import de.atns.common.security.model.Benutzer;
+import de.atns.common.security.model.DefaultRoles;
 import de.atns.common.util.SHA1;
 
 import javax.persistence.EntityManager;
@@ -33,7 +34,7 @@ public class AdminDummyDataCreator {
 
     @Transactional public void createDefaultAdmin() {
         Benutzer admin = new Benutzer("admin", SHA1.createSHA1Code("admin"), "");
-        admin.addRolle(ADMIN);
+        admin.addRolle(DefaultRoles.ADMIN);
         entityManager.get().merge(admin);
     }
 
