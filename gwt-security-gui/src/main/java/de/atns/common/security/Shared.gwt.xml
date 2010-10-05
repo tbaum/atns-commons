@@ -3,5 +3,6 @@
         "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="de.atns.common.security.Security"/>
+    <source path="client"/>
     <source path="shared"/>
 </module>

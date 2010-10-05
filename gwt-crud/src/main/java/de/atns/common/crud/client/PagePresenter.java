@@ -7,7 +7,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.google.inject.Inject;
 import de.atns.common.crud.client.event.LoadListEventHandler;
 import de.atns.common.gwt.client.DefaultWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
@@ -15,7 +14,6 @@ import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.event.PageUpdateEvent;
 import de.atns.common.gwt.client.event.PageUpdateEventHandler;
 import de.atns.common.gwt.client.model.ListPresentation;
-import net.customware.gwt.presenter.client.EventBus;
 
 
 /**
@@ -29,20 +27,6 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
     private ListPresenter parentPresenter;
     private int startEntry = 0;
     private int range = 20;
-
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public PagePresenter(final Display display, final EventBus bus) {
-        super(display, bus);
-        registerHandler(this.display.addLengthButton(new ChangeHandler() {
-            @Override public void onChange(final ChangeEvent event) {
-                range = PagePresenter.this.display.selectedRange();
-                startEntry = (startEntry / range) * range;
-                parentPresenter.updateList();
-            }
-        }, range, 20, 50, 100));
-    }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
@@ -61,34 +45,14 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
                                                 final GwtEvent.Type<LoadListEventHandler<T>> type) {
         bind(parentPresenter);
         registerHandler(eventBus.addHandler(type, new LoadListEventHandler<T>() {
-            @Override public void onLoad(final ListPresentation<T> result, final Object source) {
+            @Override
+            public void onLoad(final ListPresentation<T> result, final Object source) {
                 if (parentPresenter.equals(source)) {
                     display.reset();
                     createButtons(result.getTotal(), result.getStart());
                 }
             }
         }));
-    }
-
-    public void firstPage() {
-        startEntry = 0;
-    }
-
-    public int getPageRange() {
-        return range;
-    }
-
-    @Override public void onBindInternal() {
-        registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
-            @Override public void onUpdate(final PageUpdateEvent updateEvent) {
-                final ListPresenter source = updateEvent.getPresenter();
-                if (parentPresenter.equals(source)) {
-                    display.reset();
-                    createButtons(updateEvent.getTotal(), updateEvent.getStart());
-                }
-            }
-        }));
-        startEntry = 0;
     }
 
     private void createButtons(final int total, int start) {
@@ -122,6 +86,40 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
         registerHandler(display.addSeitenButton(startX, new PageClickHandler(startX, range), start == startX));
     }
 
+    public void firstPage() {
+        startEntry = 0;
+    }
+
+    public int getPageRange() {
+        return range;
+    }
+
+    @Override
+    public void onBind() {
+        super.onBind();
+
+        registerHandler(this.display.addLengthButton(new ChangeHandler() {
+            @Override
+            public void onChange(final ChangeEvent event) {
+                range = PagePresenter.this.display.selectedRange();
+                startEntry = (startEntry / range) * range;
+                parentPresenter.updateList();
+            }
+        }, range, 20, 50, 100));
+
+        registerHandler(eventBus.addHandler(PageUpdateEventHandler.TYPE, new PageUpdateEventHandler() {
+            @Override
+            public void onUpdate(final PageUpdateEvent updateEvent) {
+                final ListPresenter source = updateEvent.getPresenter();
+                if (parentPresenter.equals(source)) {
+                    display.reset();
+                    createButtons(updateEvent.getTotal(), updateEvent.getStart());
+                }
+            }
+        }));
+        startEntry = 0;
+    }
+
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends ErrorWidgetDisplay {
@@ -145,7 +143,8 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
             this.range = range;
         }
 
-        @Override public void onClick(final ClickEvent event) {
+        @Override
+        public void onClick(final ClickEvent event) {
             startEntry = (startX - 1) * range;
             parentPresenter.updateList();
         }

@@ -6,7 +6,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
 import de.atns.common.gwt.client.Callback;
@@ -15,8 +14,6 @@ import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
-import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -28,27 +25,22 @@ import static de.atns.common.security.client.DefaultCallback.callback;
  * @author tbaum
  * @since 24.10.2009
  */
-@Singleton public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Display> {
+@Singleton
+public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Logger LOG = Logger.getLogger(LoginPresenter.class.getName());
-    private final DispatchAsync dispatcher;
-
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject public LoginPresenter(final LoginView display, final EventBus bus, final DispatchAsync dispatcher) {
-        super(display, bus);
-        this.dispatcher = dispatcher;
-    }
 
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
-    protected void onBindInternal() {
+    protected void onBind() {
+        super.onBind();
         display.showDialogBox();
 
         registerHandler(display.addLoginClick(new ClickHandler() {
-            @Override public void onClick(final ClickEvent clickEvent) {
+            @Override
+            public void onClick(final ClickEvent clickEvent) {
                 doLogin(display.usernameValue(), display.passwordValue());
             }
         }));
@@ -62,7 +54,8 @@ import static de.atns.common.security.client.DefaultCallback.callback;
             display.rememberValue(true);
 
             DeferredCommand.addCommand(new Command() {
-                @Override public void execute() {
+                @Override
+                public void execute() {
                     doLogin(username, password);
                 }
             });
@@ -85,7 +78,8 @@ import static de.atns.common.security.client.DefaultCallback.callback;
 
         dispatcher.execute(new UserLogin(login, password),
                 callback(dispatcher, eventBus, display, new Callback<UserPresentation>() {
-                    @Override public void callback(final UserPresentation user) {
+                    @Override
+                    public void callback(final UserPresentation user) {
                         eventBus.fireEvent(new ServerStatusEvent(user));
                     }
                 }));

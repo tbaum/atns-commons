@@ -20,8 +20,6 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
 import de.atns.common.security.benutzer.client.gin.BenutzerInjector;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
 
 import static de.atns.common.crud.client.event.LoadListEvent.eventCallback;
 
@@ -37,7 +35,6 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
     public static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> TYPE =
             new GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>>();
 
-    private final DispatchAsync dispatcher;
     private final BenutzerEditPresenter editPresenter;
     private final PagePresenter pagePresenter;
     private final BenutzerInjector injector;
@@ -45,11 +42,8 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerPresenter(final Display display, final EventBus bus, final DispatchAsync dispatcher,
-                             final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter,
+    public BenutzerPresenter(final PagePresenter pagePresenter, final BenutzerEditPresenter editPresenter,
                              final BenutzerInjector injector) {
-        super(display, bus);
-        this.dispatcher = dispatcher;
         this.pagePresenter = pagePresenter;
         this.editPresenter = editPresenter;
         this.injector = injector;
@@ -57,37 +51,45 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override protected void onBindInternal() {
+    @Override
+    protected void onBind() {
+        super.onBind();
         registerHandler(eventBus.addHandler(BenutzerUpdateEventHandler.TYPE,
                 new BenutzerUpdateEventHandler() {
-                    @Override public void onUpdate(final BenutzerUpdateEvent event) {
+                    @Override
+                    public void onUpdate(final BenutzerUpdateEvent event) {
                         updateList();
                     }
                 }));
 
         registerHandler(display.forSuche(new ClickHandler() {
-            @Override public void onClick(final ClickEvent event) {
+            @Override
+            public void onClick(final ClickEvent event) {
                 updateList();
             }
         }));
         registerHandler(display.forPressEnter(new EnterKeyPressHandler() {
-            @Override protected void onEnterPressed() {
+            @Override
+            protected void onEnterPressed() {
                 updateList();
             }
         }));
 
         registerHandler(display.forNeu(new ClickHandler() {
-            @Override public void onClick(final ClickEvent event) {
+            @Override
+            public void onClick(final ClickEvent event) {
                 injector.getBenutzerCreatePresenter().bind();
             }
         }));
 
         registerHandler(eventBus.addHandler(TYPE, new LoadListEventHandler<BenutzerPresentation>() {
-            @Override public void onLoad(final ListPresentation<BenutzerPresentation> result, final Object source) {
+            @Override
+            public void onLoad(final ListPresentation<BenutzerPresentation> result, final Object source) {
                 display.reset();
                 for (final BenutzerPresentation g : result.getEntries()) {
                     registerHandler(display.addRow(g, new ClickHandler() {
-                        @Override public void onClick(final ClickEvent event) {
+                        @Override
+                        public void onClick(final ClickEvent event) {
                             editPresenter.bind(g);
                         }
                     }));
@@ -101,11 +103,14 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
         updateList();
     }
 
-    @Override public void updateList() {
+    @Override
+    public void updateList() {
         dispatcher.execute(display.getData(), eventCallback(dispatcher, eventBus, display, TYPE, this));
     }
 
-    @Override protected void onUnbind() {
+    @Override
+    protected void onUnbind() {
+        super.onUnbind();
         pagePresenter.unbind();
     }
 

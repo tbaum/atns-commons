@@ -25,7 +25,8 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
     private static final Logger LOG = Logger.getLogger(DefaultCallback.class.getName());
 
     private static final ErrorWidgetDisplay nullDisplay = new DefaultErrorWidgetDisplay() {
-        @Override public void reset() {
+        @Override
+        public void reset() {
         }
     };
     private final DispatchAsync dispatcher;
@@ -36,8 +37,9 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
     public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
                                                   final Callback<T> call) {
-        return new DefaultCallback<T>(dispatcher, bus, null) {
-            @Override public void callback(final T result) {
+        return new DefaultCallback<T>(dispatcher, bus) {
+            @Override
+            public void callback(final T result) {
                 call.callback(result);
             }
         };
@@ -45,8 +47,9 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
     public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
                                                   final ErrorWidgetDisplay display, final Callback<T> call) {
-        return new DefaultCallback<T>(dispatcher, bus, display) {
-            @Override public void callback(final T result) {
+        return new DefaultCallback<T>(display, dispatcher, bus) {
+            @Override
+            public void callback(final T result) {
                 call.callback(result);
             }
         };
@@ -54,11 +57,15 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private DefaultCallback(final DispatchAsync dispatcher, final EventBus bus, final ErrorWidgetDisplay display) {
-        this.dispatcher = dispatcher;
-        this.eventBus = bus;
-        this.display = display != null ? display : nullDisplay;
+    private DefaultCallback(final DispatchAsync dispatchAsync, final EventBus eventBus) {
+        this(nullDisplay, dispatchAsync, eventBus);
+    }
 
+    private DefaultCallback(final ErrorWidgetDisplay display, final DispatchAsync dispatchAsync,
+                            final EventBus eventBus) {
+        this.dispatcher = dispatchAsync;
+        this.eventBus = eventBus;
+        this.display = display;
         this.display.startProcessing();
     }
 
@@ -67,17 +74,20 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
 
 // --------------------- Interface AsyncCallback ---------------------
 
-    @Override public void onFailure(final Throwable originalCaught) {
+    @Override
+    public void onFailure(final Throwable originalCaught) {
         LOG.log(Level.FINE, "check session in callback");
         display.showError(originalCaught.getMessage());
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
-            @Override public void onFailure(final Throwable caught) {
+            @Override
+            public void onFailure(final Throwable caught) {
                 LOG.log(Level.FINE, "failed-checksession", caught);
                 eventBus.fireEvent(new ServerStatusEvent(ServerStatusEventHandler.ServerStatus.UNAVAILABLE));
                 finish();
             }
 
-            @Override public void onSuccess(final UserPresentation result) {
+            @Override
+            public void onSuccess(final UserPresentation result) {
                 LOG.log(Level.FINE, "success-checksession");
                 eventBus.fireEvent(!result.isValid() ? new LogoutEvent(null) : new ServerStatusEvent(result));
                 finish();
@@ -90,7 +100,8 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
         });
     }
 
-    @Override public void onSuccess(final T result) {
+    @Override
+    public void onSuccess(final T result) {
         LOG.log(Level.FINE, "success-call " + getClass());
         // eventBus.fireEvent(AVAILABLE);
         callback(result);
