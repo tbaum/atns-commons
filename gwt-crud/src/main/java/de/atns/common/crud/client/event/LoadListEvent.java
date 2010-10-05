@@ -3,14 +3,9 @@ package de.atns.common.crud.client.event;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
-import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
-import de.atns.common.gwt.client.Callback;
-import de.atns.common.security.client.DefaultCallback;
-import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
-
-import static de.atns.common.security.client.DefaultCallback.callback;
+import de.atns.common.security.client.Callback;
+import de.atns.common.security.client.SharedServicesHolder;
 
 
 /**
@@ -26,23 +21,19 @@ public class LoadListEvent<E extends IsSerializable> extends GwtEvent<LoadListEv
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends IsSerializable> DefaultCallback<ListPresentation<T>> eventCallback(
-            final DispatchAsync dispatcher,
-            final EventBus eventBus,
-            final GwtEvent.Type<LoadListEventHandler<T>> type, ListPresenter source) {
-        return eventCallback(dispatcher, eventBus, null, type, source);
+    public static <T extends IsSerializable> Callback<ListPresentation<T>> eventCallback(
+            final ErrorWidgetDisplay display, final Type<LoadListEventHandler<T>> type, final Object source) {
+        return new Callback<ListPresentation<T>>(display) {
+            @Override public void callback(final ListPresentation<T> result11) {
+                fireEvent(result11, type, source);
+            }
+        };
     }
 
-    public static <T extends IsSerializable> DefaultCallback<ListPresentation<T>> eventCallback(
-            final DispatchAsync dispatcher,
-            final EventBus eventBus,
-            final ErrorWidgetDisplay display,
-            final GwtEvent.Type<LoadListEventHandler<T>> type, final Object source) {
-        return callback(dispatcher, eventBus, display, new Callback<ListPresentation<T>>() {
-            @Override public void callback(final ListPresentation<T> result11) {
-                eventBus.fireEvent(new LoadListEvent<T>(result11, type, source));
-            }
-        });
+    private static <T extends IsSerializable> void fireEvent(final ListPresentation<T> result,
+                                                             final Type<LoadListEventHandler<T>> type,
+                                                             final Object source) {
+        SharedServicesHolder.shared().getEventBus().fireEvent(new LoadListEvent<T>(result, type, source));
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------

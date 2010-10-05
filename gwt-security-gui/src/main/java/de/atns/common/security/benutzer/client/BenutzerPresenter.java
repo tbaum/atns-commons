@@ -105,7 +105,7 @@ public class BenutzerPresenter extends DefaultWidgetPresenter<BenutzerPresenter.
 
     @Override
     public void updateList() {
-        dispatcher.execute(display.getData(), eventCallback(dispatcher, eventBus, display, TYPE, this));
+        dispatcher.execute(display.getData(), eventCallback(display, TYPE, this));
     }
 
     @Override

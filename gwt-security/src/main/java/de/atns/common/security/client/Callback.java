@@ -14,6 +14,10 @@ import net.customware.gwt.presenter.client.EventBus;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author tbaum
+ * @since 05.10.2010
+ */
 public abstract class Callback<T> implements AsyncCallback<T> {
 // ------------------------------ FIELDS ------------------------------
 

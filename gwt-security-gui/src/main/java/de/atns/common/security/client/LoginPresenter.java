@@ -8,7 +8,6 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.inject.Singleton;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
-import de.atns.common.gwt.client.Callback;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
 import de.atns.common.security.client.action.UserLogin;
@@ -18,8 +17,6 @@ import de.atns.common.security.client.model.UserPresentation;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static de.atns.common.security.client.DefaultCallback.callback;
 
 /**
  * @author tbaum
@@ -76,13 +73,11 @@ public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Disp
             Cookies.removeCookie("l");
         }
 
-        dispatcher.execute(new UserLogin(login, password),
-                callback(dispatcher, eventBus, display, new Callback<UserPresentation>() {
-                    @Override
-                    public void callback(final UserPresentation user) {
-                        eventBus.fireEvent(new ServerStatusEvent(user));
-                    }
-                }));
+        dispatcher.execute(new UserLogin(login, password), new Callback<UserPresentation>(display) {
+            @Override public void callback(final UserPresentation user) {
+                eventBus.fireEvent(new ServerStatusEvent(user));
+            }
+        });
     }
 
 // -------------------------- INNER CLASSES --------------------------
