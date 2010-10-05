@@ -1,13 +1,13 @@
 package de.atns.common.security.benutzer.client.gin;
 
-import de.atns.common.crud.client.SharedServicesModule;
+import de.atns.common.crud.client.CrudModule;
 import de.atns.common.security.benutzer.client.*;
 
 /**
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerModule extends SharedServicesModule {
+public class BenutzerModule extends CrudModule {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configure() {

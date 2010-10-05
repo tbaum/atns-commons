@@ -1,7 +1,6 @@
 package de.atns.common.security.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import de.atns.common.gwt.client.Callback;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
 import de.atns.common.security.client.action.CheckSession;
@@ -15,14 +14,10 @@ import net.customware.gwt.presenter.client.EventBus;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author tbaum
- * @since 24.10.2009
- */
-public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T> {
+public abstract class Callback<T> implements AsyncCallback<T> {
 // ------------------------------ FIELDS ------------------------------
 
-    private static final Logger LOG = Logger.getLogger(DefaultCallback.class.getName());
+    private static final Logger LOG = Logger.getLogger(Callback.class.getName());
 
     private static final ErrorWidgetDisplay nullDisplay = new DefaultErrorWidgetDisplay() {
         @Override
@@ -33,38 +28,15 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
     private final EventBus eventBus;
     private final ErrorWidgetDisplay display;
 
-// -------------------------- STATIC METHODS --------------------------
-
-    public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
-                                                  final Callback<T> call) {
-        return new DefaultCallback<T>(dispatcher, bus) {
-            @Override
-            public void callback(final T result) {
-                call.callback(result);
-            }
-        };
-    }
-
-    public static <T> DefaultCallback<T> callback(final DispatchAsync dispatcher, final EventBus bus,
-                                                  final ErrorWidgetDisplay display, final Callback<T> call) {
-        return new DefaultCallback<T>(display, dispatcher, bus) {
-            @Override
-            public void callback(final T result) {
-                call.callback(result);
-            }
-        };
-    }
-
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private DefaultCallback(final DispatchAsync dispatchAsync, final EventBus eventBus) {
-        this(nullDisplay, dispatchAsync, eventBus);
+    public Callback() {
+        this(nullDisplay);
     }
 
-    private DefaultCallback(final ErrorWidgetDisplay display, final DispatchAsync dispatchAsync,
-                            final EventBus eventBus) {
-        this.dispatcher = dispatchAsync;
-        this.eventBus = eventBus;
+    public Callback(final ErrorWidgetDisplay display) {
+        this.dispatcher = SharedServicesHolder.shared().getDispatchAsync();
+        this.eventBus = SharedServicesHolder.shared().getEventBus();
         this.display = display;
         this.display.startProcessing();
     }
@@ -110,11 +82,9 @@ public abstract class DefaultCallback<T> implements AsyncCallback<T>, Callback<T
         display.stopProcessing();
     }
 
-// --------------------- Interface Callback ---------------------
+// -------------------------- OTHER METHODS --------------------------
 
     public abstract void callback(T result);
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void callbackError(final Throwable caught) {
         LOG.log(Level.FINE, "error " + getClass(), caught);

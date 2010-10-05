@@ -1,4 +1,4 @@
-package de.atns.common.crud.client;
+package de.atns.common.security.client;
 
 import com.google.inject.Provider;
 import com.google.inject.Provides;
@@ -6,9 +6,7 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.gwt.client.gin.SharedServicesAware;
 import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.Display;
 import net.customware.gwt.presenter.client.EventBus;
-import net.customware.gwt.presenter.client.Presenter;
 import net.customware.gwt.presenter.client.gin.AbstractPresenterModule;
 
 /**
@@ -18,17 +16,9 @@ import net.customware.gwt.presenter.client.gin.AbstractPresenterModule;
 public class SharedServicesModule extends AbstractPresenterModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    protected <D extends Display> void bindPresenter(Class<? extends Presenter> presenter, Class<D> display,
-                                                     Class<? extends D> displayImpl) {
-        bind(presenter).in(Singleton.class);
-        bindDisplay(display, displayImpl);
-    }
-
     @Override protected void configure() {
         bind(SharedServicesAware.class).to(SharedServicesAdapter.class);
         bind(SharedServices.class).toProvider(SharedServicesAdapter.class);
-
-        bindDisplay(PagePresenter.Display.class, PageView.class);
     }
 
     @Provides

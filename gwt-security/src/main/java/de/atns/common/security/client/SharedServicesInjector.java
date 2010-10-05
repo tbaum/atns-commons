@@ -1,4 +1,4 @@
-package de.atns.common.crud.client;
+package de.atns.common.security.client;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
@@ -14,10 +14,9 @@ import net.customware.gwt.presenter.client.EventBus;
 public interface SharedServicesInjector extends Ginjector {
 // -------------------------- OTHER METHODS --------------------------
 
-    SharedServicesAware sharedServicesAware();
-
     DispatchAsync getDispatchAsync();
 
     EventBus getEventBus();
 
+    SharedServicesAware sharedServicesAware();
 }
