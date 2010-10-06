@@ -72,7 +72,7 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         final Criteria criteria = createFilteredListCriteria(session, filter, dataClass);
         criteria.setProjection(Projections.countDistinct("id"));
 
-        final Integer count = (Integer) criteria.uniqueResult();
+        final Number count = (Number) criteria.uniqueResult();
 
         criteria.setFirstResult(start);
         criteria.setMaxResults(max);
@@ -104,7 +104,7 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         }
 
 
-        return PartResult.createPartResult(start, count, results);
+        return PartResult.createPartResult(start, count.intValue(), results);
     }
 
     protected <TYPE extends Serializable> Criteria createFilteredListCriteria(final Session session,
