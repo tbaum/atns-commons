@@ -2,18 +2,25 @@ package de.atns.common.crud.client;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.ui.PopupPanel;
 import de.atns.common.gwt.client.DialogBoxDisplayInterface;
 
 /**
- * Created by IntelliJ IDEA.
- * User: tbaum
- * Date: 05.10.2010
- * Time: 04:07:57
- * To change this template use File | Settings | File Templates.
+ * @author tbaum
+ * @since 05.10.2010
  */
-public abstract class DialogBoxListWidgetPresenter<D extends DialogBoxDisplayInterface & ListWidgetDisplay>
-        extends ListWidgetPresenter<D> {
+public abstract class DialogBoxListWidgetPresenter<D extends DialogBoxDisplayInterface & ListWidgetDisplay<T>, T extends IsSerializable>
+        extends ListWidgetPresenter<D, T> {
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Presenter ---------------------
+
+    @Override public D getDisplay() {
+        return super.getDisplay();
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override

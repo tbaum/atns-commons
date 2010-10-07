@@ -41,7 +41,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
         bind();
     }
 
-    public <T extends IsSerializable> void bind(final ListPresenter parentPresenter,
+    public <T extends IsSerializable> void bind(final ListPresenter<T> parentPresenter,
                                                 final GwtEvent.Type<LoadListEventHandler<T>> type) {
         bind(parentPresenter);
         registerHandler(eventBus.addHandler(type, new LoadListEventHandler<T>() {

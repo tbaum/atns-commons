@@ -30,9 +30,9 @@ public class LoadListEvent<E extends IsSerializable> extends GwtEvent<LoadListEv
         };
     }
 
-    private static <T extends IsSerializable> void fireEvent(final ListPresentation<T> result,
-                                                             final Type<LoadListEventHandler<T>> type,
-                                                             final Object source) {
+    public static <T extends IsSerializable> void fireEvent(final ListPresentation<T> result,
+                                                            final Type<LoadListEventHandler<T>> type,
+                                                            final Object source) {
         SharedServicesHolder.shared().getEventBus().fireEvent(new LoadListEvent<T>(result, type, source));
     }
 

@@ -6,12 +6,11 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
+import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
-import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.model.StandardFilter;
-import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import org.cobogw.gwt.user.client.ui.Button;
 
@@ -34,7 +33,6 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     //    private final ListBox status = new ListBox();
     private final FlowPanel pagePresenterPanel = new FlowPanel();
     private boolean containsEmptyRow;
-    private PagePresenter pagePresenter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -106,10 +104,6 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
         return neu.addClickHandler(clickHandler);
     }
 
-    @Override public HandlerRegistration forSuche(final ClickHandler clickHandler) {
-        return suche.addClickHandler(clickHandler);
-    }
-
     @Override public StandardFilter getFilter() {
         return new StandardFilter(text.getValue());
     }
@@ -130,30 +124,29 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
         return edit.addClickHandler(editHandler);
     }
 
-    @Override public void setPagePresenter(final PagePresenter pagePresenter) {
-        this.pagePresenter = pagePresenter;
-        pagePresenterPanel.clear();
-        pagePresenterPanel.add(pagePresenter.getDisplay().asWidget());
-    }
-
-    @Override public HandlerRegistration[] forPressEnter(final KeyPressHandler handler) {
-        return new HandlerRegistration[]{
-                text.addKeyPressHandler(handler),
-        };
-    }
-
-    public BenutzerList getData() {
-        return new BenutzerList(getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange());
-    }
-
 // --------------------- Interface ErrorWidgetDisplay ---------------------
-
 
     public void reset() {
         clearList();
         containsEmptyRow = true;
         table.cell("- keine Benutzer gefunden -").colspan(12).
                 nextRow();
+    }
+
+// --------------------- Interface ListWidgetDisplay ---------------------
+
+
+    @Override public void setPagePresenter(final PagePresenter.Display display) {
+        pagePresenterPanel.clear();
+        pagePresenterPanel.add(display.asWidget());
+    }
+
+    @Override public HandlerRegistration forSuche(final ClickHandler clickHandler) {
+        return suche.addClickHandler(clickHandler);
+    }
+
+    @Override public HandlerRegistration forPressEnter(final KeyPressHandler handler) {
+        return text.addKeyPressHandler(handler);
     }
 
 // -------------------------- OTHER METHODS --------------------------

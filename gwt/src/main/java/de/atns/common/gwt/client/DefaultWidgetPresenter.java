@@ -22,6 +22,15 @@ public abstract class DefaultWidgetPresenter<D extends WidgetDisplay> extends Wi
         this.dispatcher = dispatcher;
     }
 
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Presenter ---------------------
+
+    @Override public D getDisplay() {
+        return super.getDisplay();
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
