@@ -2,6 +2,8 @@ package de.atns.common.gwt.client;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
@@ -19,6 +21,12 @@ public abstract class DialogBoxWidgetPresenter<D extends DialogBoxDisplayInterfa
             @Override
             public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
                 unbind();
+            }
+        });
+
+        DeferredCommand.addCommand(new Command() {
+            @Override public void execute() {
+                getDisplay().showDialogBox();
             }
         });
     }
