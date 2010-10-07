@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client;
+package de.atns.common.crud.client;
 
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
@@ -15,7 +15,7 @@ public abstract class EnterKeyPressHandler implements KeyPressHandler {
 // --------------------- Interface KeyPressHandler ---------------------
 
     @Override public void onKeyPress(final KeyPressEvent event) {
-        if (event.getCharCode() == KeyCodes.KEY_ENTER) {
+        if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
             onEnterPressed();
         }
     }

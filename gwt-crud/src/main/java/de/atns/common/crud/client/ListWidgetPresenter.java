@@ -1,6 +1,7 @@
 package de.atns.common.crud.client;
 
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -64,12 +65,10 @@ public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T exte
             }
         }));
 
-        registerHandler(display.forPressEnter(new KeyPressHandler() {
-            @Override public void onKeyPress(final KeyPressEvent event) {
-                if (event.getCharCode() == KeyCodes.KEY_ENTER) {
-                    pagePresenter.firstPage();
-                    updateList();
-                }
+        registerHandler(display.forPressEnter(new EnterKeyPressHandler() {
+            @Override protected void onEnterPressed() {
+                pagePresenter.firstPage();
+                updateList();
             }
         }));
 
