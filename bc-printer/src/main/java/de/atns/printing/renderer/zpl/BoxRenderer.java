@@ -35,6 +35,6 @@ public class BoxRenderer extends AbstractRenderer<BoxElement> {
         this.dr.getBuffer().append(getPositionString(element));
         this.dr.getBuffer().append("^GB").append(w).append(",").append(h).append(",").append(element.getSize());
         this.dr.getBuffer().append("^FS");
-        this.dr.getBuffer().append("\n");
+        this.dr.getBuffer().append("\r\n");
     }
 }

@@ -40,6 +40,6 @@ public class TextRenderer extends AbstractRenderer<TextElement> {
         this.dr.getBuffer().append("^FH");
         this.dr.getBuffer().append("^FD");
         appendEscaped(this.dr.getBuffer(), element.getText());
-        this.dr.getBuffer().append("^FS\n");
+        this.dr.getBuffer().append("^FS\r\n");
     }
 }

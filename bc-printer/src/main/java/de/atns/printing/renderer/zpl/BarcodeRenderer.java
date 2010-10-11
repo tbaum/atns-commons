@@ -70,6 +70,6 @@ public class BarcodeRenderer extends AbstractRenderer<BarcodeElement> {
         buffer.append("^FS");
 
         this.dr.getBuffer().append(buffer);
-        this.dr.getBuffer().append("^FWN\n");
+        this.dr.getBuffer().append("^FWN\r\n");
     }
 }

@@ -62,9 +62,9 @@ public class ImageRenderer extends AbstractRenderer<ImageElement>  {
             if ((bthumb.getWidth()) % 8 != 0) {
                 buffer.append(toHex(ret));
             }
-            buffer.append('\n');
+            buffer.append("\r\n");
         }
-        buffer.append('\n');
+        buffer.append("\r\n");
 
     }
 
