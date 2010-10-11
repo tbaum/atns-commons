@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.*;
+import java.net.Socket;
 import java.text.MessageFormat;
 import java.util.Properties;
 
@@ -92,7 +93,23 @@ public abstract class FileUtil {
         closeSilent(closeable, null);
     }
 
+    public static void closeSilent(final Socket closeable) {
+        closeSilent(closeable, null);
+    }
+
     public static void closeSilent(final Closeable closeable, final String message) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                if (message != null) {
+                    LOG.error(MessageFormat.format(message, e.getMessage()));
+                }
+            }
+        }
+    }
+
+    public static void closeSilent(final Socket closeable, final String message) {
         if (closeable != null) {
             try {
                 closeable.close();
