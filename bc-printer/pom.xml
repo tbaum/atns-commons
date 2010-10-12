@@ -22,6 +22,11 @@
             <artifactId>commons-logging</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>fileutils</artifactId>
+            <version>1.4.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

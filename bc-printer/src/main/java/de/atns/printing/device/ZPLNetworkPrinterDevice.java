@@ -1,5 +1,7 @@
 package de.atns.printing.device;
 
+import de.atns.common.fileutils.FileUtil;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -15,6 +17,7 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
     private int port;
 
     private OutputStream stream = null;
+    private Socket socket;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -36,6 +39,11 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
 
 // -------------------------- OTHER METHODS --------------------------
 
+    public void close() {
+        FileUtil.closeSilent(socket);
+        FileUtil.closeSilent(stream);
+    }
+
     @Override
     protected void processInstructions(final StringBuffer sb) throws IOException {
         final OutputStream stream = openSocket();
@@ -48,7 +56,7 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
 
     private OutputStream openSocket() throws IOException {
         if (stream == null) {
-            final Socket socket = new Socket(this.adress, this.port);
+            socket = new Socket(this.adress, this.port);
             stream = socket.getOutputStream();
         }
 
