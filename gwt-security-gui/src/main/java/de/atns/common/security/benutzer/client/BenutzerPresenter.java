@@ -34,17 +34,21 @@ public class BenutzerPresenter extends ListWidgetPresenter<BenutzerPresenter.Dis
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerPresenter(final BenutzerEditPresenter editPresenter,
-                             final BenutzerInjector injector) {
+    public BenutzerPresenter(final BenutzerEditPresenter editPresenter, final BenutzerInjector injector) {
         this.editPresenter = editPresenter;
         this.injector = injector;
     }
 
-// -------------------------- OTHER METHODS --------------------------
+// ------------------------ INTERFACE METHODS ------------------------
 
-    @Override protected GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> _listEvent() {
+
+// --------------------- Interface ListPresenter ---------------------
+
+    @Override public GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> _listEvent() {
         return LIST_EVENT;
     }
+
+// -------------------------- OTHER METHODS --------------------------
 
     protected String bindRow(final BenutzerPresentation g, String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
