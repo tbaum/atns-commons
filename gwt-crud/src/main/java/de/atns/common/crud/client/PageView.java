@@ -50,7 +50,6 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
 
 // --------------------- Interface Display ---------------------
 
-
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {
         Label label = new Label("" + site);
@@ -73,6 +72,7 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
 
     @Override
     public HandlerRegistration addLengthButton(final ChangeHandler handler, final int active, final int... range) {
+        rangeBox.clear();
         for (int i : range) {
             rangeBox.addItem(String.valueOf(i));
 
@@ -93,6 +93,5 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
 
     @Override public void reset() {
         leftPanel.clear();
-        rangeBox.clear();
     }
 }
