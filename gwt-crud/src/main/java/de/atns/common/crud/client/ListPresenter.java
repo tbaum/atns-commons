@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client;
+package de.atns.common.crud.client;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.IsSerializable;

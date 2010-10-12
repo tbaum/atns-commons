@@ -9,7 +9,6 @@ import com.google.inject.Inject;
 import de.atns.common.crud.client.event.LoadListEvent;
 import de.atns.common.crud.client.event.LoadListEventHandler;
 import de.atns.common.gwt.client.DefaultWidgetPresenter;
-import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.security.client.Callback;
 import net.customware.gwt.dispatch.shared.Action;

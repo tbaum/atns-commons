@@ -9,7 +9,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import de.atns.common.crud.client.event.LoadListEventHandler;
 import de.atns.common.gwt.client.DefaultWidgetPresenter;
 import de.atns.common.gwt.client.ErrorWidgetDisplay;
-import de.atns.common.gwt.client.ListPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 
 
