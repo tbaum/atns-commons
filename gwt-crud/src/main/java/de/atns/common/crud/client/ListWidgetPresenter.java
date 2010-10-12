@@ -2,7 +2,6 @@ package de.atns.common.crud.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -20,8 +19,7 @@ import net.customware.gwt.dispatch.shared.Action;
  * @since 05.10.2010
  */
 public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T extends IsSerializable>
-        extends DefaultWidgetPresenter<D>
-        implements ListPresenter<T> {
+        extends DefaultWidgetPresenter<D> implements ListPresenter<T> {
 // ------------------------------ FIELDS ------------------------------
 
     protected PagePresenter pagePresenter;
@@ -49,12 +47,10 @@ public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T exte
         return super.getDisplay();
     }
 
-    protected abstract GwtEvent.Type<LoadListEventHandler<T>> _listEvent();
-
     @Override protected void onBind() {
         super.onBind();
 
-        pagePresenter.bind(this, _listEvent());
+        pagePresenter.bind(this);
         display.setPagePresenter(pagePresenter.getDisplay());
 
 
