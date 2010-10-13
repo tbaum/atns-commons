@@ -44,7 +44,7 @@ public abstract class DefaultErrorWidgetDisplay extends DefaultWidgetDisplay imp
     }
 
     @Override public void showError(final String text) {
-        errorPanel.setVisible(true);
+        setErrorVisible(true);
         errorLabel.setText(text);
     }
 }

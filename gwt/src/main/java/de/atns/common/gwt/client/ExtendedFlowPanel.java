@@ -29,6 +29,24 @@ public class ExtendedFlowPanel {
         return flowPanel;
     }
 
+    public ExtendedFlowPanel add(Widget widget) {
+        addNoStyle(widget);
+        updateStyle(widget);
+        return this;
+    }
+
+    public ExtendedFlowPanel addNoStyle(Widget widget) {
+        panel.add(widget);
+        count++;
+        return this;
+    }
+
+    private void updateStyle(final Widget widget) {
+        widget.getElement().getStyle().setDisplay(Style.Display.INLINE_BLOCK);
+        widget.getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
+        widget.getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
+    }
+
     public static ExtendedFlowPanel extendedFlowPanel(int padding, Widget... items) {
         final ExtendedFlowPanel flowPanel = extendedFlowPanel();
         flowPanel.setPadding(padding);
@@ -41,19 +59,6 @@ public class ExtendedFlowPanel {
     public ExtendedFlowPanel setPadding(final int padding) {
         this.padding = padding;
         return this;
-    }
-
-    public ExtendedFlowPanel add(Widget widget) {
-        panel.add(widget);
-        count++;
-        updateStyle(widget);
-        return this;
-    }
-
-    private void updateStyle(final Widget widget) {
-        widget.getElement().getStyle().setDisplay(Style.Display.INLINE_BLOCK);
-        widget.getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
-        widget.getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -87,8 +92,7 @@ public class ExtendedFlowPanel {
     public ExtendedFlowPanel newLine() {
         final HTML widget = new HTML("");
         widget.getElement().getStyle().setPadding(padding, Style.Unit.PX);
-        panel.add(widget);
-        count++;
+        addNoStyle(widget);
         panel.getWidget(count - 1).getElement().getStyle().setDisplay(BLOCK);
         return this;
     }
