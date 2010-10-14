@@ -52,7 +52,6 @@ public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T exte
         pagePresenter.bind(this);
         display.setPagePresenter(pagePresenter.getDisplay());
 
-
         registerHandler(display.forSuche(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 pagePresenter.firstPage();
@@ -69,13 +68,12 @@ public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T exte
 
         registerHandler(eventBus.addHandler(_listEvent(),
                 new LoadListEventHandler<T>() {
-                    @Override public void onLoad(final ListPresentation<T> event,
-                                                 final Object source) {
-                        if (event.getEntries() != null && !event.getEntries().isEmpty()) {
-                            display.reset();
+                    @Override public void onLoad(final ListPresentation<T> event, final Object source) {
+                        display.reset();
+                        if (event.getEntries() != null) {
                             String lastValue = null;
-                            for (final T p : event.getEntries()) {
-                                lastValue = bindRow(p, lastValue);
+                            for (final T presentation : event.getEntries()) {
+                                lastValue = bindRow(presentation, lastValue);
                             }
                         }
                     }
@@ -88,7 +86,7 @@ public abstract class ListWidgetPresenter<D extends ListWidgetDisplay<T>, T exte
         });
     }
 
-    protected abstract String bindRow(T p, String lastValue);
+    protected abstract String bindRow(T presentation, String lastValue);
 
     @Override public final void updateList() {
         dispatcher.execute(
