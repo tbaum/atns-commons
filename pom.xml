@@ -5,7 +5,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
     <version>1.4.3-SNAPSHOT</version>
-    <name>${groupId}:${artifactId}:${version}</name>
+    <name>${project.groupId}:${project.artifactId}:${project.packaging}:${project.version}</name>
 
     <parent>
         <groupId>de.atns.maven</groupId>
@@ -19,6 +19,7 @@
         <module>classutils</module>
         <module>config</module>
         <module>dao</module>
+        <module>dao-mail</module>
         <module>fileutils</module>
         <module>gwt</module>
         <module>gwt-crud</module>
