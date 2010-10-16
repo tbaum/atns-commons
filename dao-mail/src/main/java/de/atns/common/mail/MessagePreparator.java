@@ -5,7 +5,10 @@ import org.springframework.mail.MailPreparationException;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import javax.activation.DataHandler;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -33,10 +36,12 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
     @Transient
     private final String debugMode = System.getProperty("debug.email");
 
-    @Basic(optional = false) @Lob
+    @Basic(optional = false)
+    @Lob
     private String text;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long id;
 
@@ -162,7 +167,8 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
 
 // --------------------- Interface MimeMessagePreparator ---------------------
 
-    @Override public void prepare(final MimeMessage mesg) throws MessagingException {
+    @Override
+    public void prepare(final MimeMessage mesg) throws MessagingException {
         mesg.setSubject(subject, MAIL_DEFAULT_CHARSET);
         mesg.setFrom(createAddress(sender, senderName));
         if (replyTo != null) {

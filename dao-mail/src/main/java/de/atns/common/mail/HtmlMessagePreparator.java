@@ -10,6 +10,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -21,7 +22,8 @@ import static java.util.Arrays.asList;
  * Date: 26.02.2008
  * Time: 18:53:01
  */
-@Entity class HtmlMessagePreparator extends MessagePreparator {
+@Entity
+class HtmlMessagePreparator extends MessagePreparator {
 // ------------------------------ FIELDS ------------------------------
 
     private static final long serialVersionUID = 4957245309057720941L;
