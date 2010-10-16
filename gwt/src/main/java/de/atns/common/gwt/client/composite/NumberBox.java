@@ -119,6 +119,10 @@ public class NumberBox extends Composite
 //        return box;
 //    }
 
+    @Override public boolean isEnabled() {
+        return box.isEnabled();
+    }
+
     public void setEnabled(boolean enabled) {
         box.setEnabled(enabled);
     }
