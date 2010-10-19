@@ -18,18 +18,15 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
  * @author mwolter
  * @since 19.11.2009 20:03:32
  */
-@SuppressWarnings({"ALL"}) public class GwtUtil {
-// ------------------------------ FIELDS ------------------------------
-
+public class GwtUtil {
     public static final Command NOOP = new Command() {
-        @Override public void execute() {
+        @Override
+        public void execute() {
         }
     };
 
-// -------------------------- STATIC METHODS --------------------------
-
-    public static FlowPanel flowPanel(Widget... w) {
-        FlowPanel fp = new FlowPanel();
+    public static FlowPanel table(TableRow... w) {
+        FlowPanel fp = flowPanel("table");
         for (Widget widget : w) {
             fp.add(widget);
         }
@@ -39,6 +36,32 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
     public static FlowPanel flowPanel(String style, Widget... w) {
         FlowPanel fp = flowPanel(w);
         fp.setStyleName(style);
+        return fp;
+    }
+
+    public static FlowPanel table(String style, TableRow... w) {
+        FlowPanel fp = table(w);
+        fp.addStyleName(style);
+        return fp;
+    }
+
+    public static FlowPanel flowPanel(Widget... w) {
+        FlowPanel fp = new FlowPanel();
+        for (Widget widget : w) {
+            fp.add(widget);
+        }
+        return fp;
+    }
+
+    public static TableRow tableRow(Object... w) {
+        TableRow fp = new TableRow();
+        fp.addCells(w);
+        return fp;
+    }
+
+    public static TableRow tableHead(Object... w) {
+        TableRow fp = new TableRow("head");
+        fp.addCells(w);
         return fp;
     }
 
@@ -95,7 +118,8 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
         labelStyle.setTextDecoration(UNDERLINE);
 
         label.addClickHandler(new ClickHandler() {
-            @Override public void onClick(final ClickEvent clickEvent) {
+            @Override
+            public void onClick(final ClickEvent clickEvent) {
                 History.newItem(historyLink);
             }
         });
@@ -148,8 +172,6 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
 
         return flowPanel;
     }
-
-// -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {
         WEISS, BLAU, ROT

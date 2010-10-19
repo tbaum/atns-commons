@@ -5,12 +5,17 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.inject.Inject;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
 
+import static com.google.gwt.dom.client.Style.Cursor.POINTER;
+import static com.google.gwt.dom.client.Style.Display.INLINE;
+import static com.google.gwt.dom.client.Style.Float.RIGHT;
+import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
 import static de.atns.common.gwt.client.GwtUtil.createLabel;
@@ -21,12 +26,8 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @since 24.10.2009
  */
 public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter.Display {
-// ------------------------------ FIELDS ------------------------------
-
     private final ListBox rangeBox = new ListBox();
     private final ExtendedFlowPanel leftPanel = extendedFlowPanel();
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public PageView() {
@@ -40,15 +41,13 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
         leftP.getElement().getStyle().setDisplay(Style.Display.INLINE);
         final FlowPanel rightP = rightPanel.getPanel();
 
-        rightP.getElement().getStyle().setProperty("cssFloat", "right");
+        rightP.getElement().getStyle().setFloat(RIGHT);
 
-        initWidget(flowPanel(createLabel("Seite", true), leftP, rightP));
+        final FlowPanel p = flowPanel("table pagination", createLabel("Seite", true), leftPanel.getPanel(), rightP);
+        p.getElement().getStyle().setMarginTop(5, PX);
+
+        initWidget(p);
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
 
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {
@@ -66,7 +65,8 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
         return label.addClickHandler(clickHandler);
     }
 
-    @Override public void addDots() {
+    @Override
+    public void addDots() {
         leftPanel.add("...");
     }
 
@@ -84,14 +84,14 @@ public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter
         return rangeBox.addChangeHandler(handler);
     }
 
-    @Override public int selectedRange() {
+    @Override
+    public int selectedRange() {
         final int selectedIndex = rangeBox.getSelectedIndex();
         return Integer.parseInt(rangeBox.getValue(selectedIndex));
     }
 
-// --------------------- Interface ErrorWidgetDisplay ---------------------
-
-    @Override public void reset() {
+    @Override
+    public void reset() {
         leftPanel.clear();
     }
 }
