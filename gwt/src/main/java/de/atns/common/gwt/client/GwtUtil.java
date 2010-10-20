@@ -25,23 +25,9 @@ public class GwtUtil {
         }
     };
 
-    public static FlowPanel table(TableRow... w) {
-        FlowPanel fp = flowPanel("table");
-        for (Widget widget : w) {
-            fp.add(widget);
-        }
-        return fp;
-    }
-
     public static FlowPanel flowPanel(String style, Widget... w) {
         FlowPanel fp = flowPanel(w);
         fp.setStyleName(style);
-        return fp;
-    }
-
-    public static FlowPanel table(String style, TableRow... w) {
-        FlowPanel fp = table(w);
-        fp.addStyleName(style);
         return fp;
     }
 
@@ -50,18 +36,6 @@ public class GwtUtil {
         for (Widget widget : w) {
             fp.add(widget);
         }
-        return fp;
-    }
-
-    public static TableRow tableRow(Object... w) {
-        TableRow fp = new TableRow();
-        fp.addCells(w);
-        return fp;
-    }
-
-    public static TableRow tableHead(Object... w) {
-        TableRow fp = new TableRow("head");
-        fp.addCells(w);
         return fp;
     }
 
