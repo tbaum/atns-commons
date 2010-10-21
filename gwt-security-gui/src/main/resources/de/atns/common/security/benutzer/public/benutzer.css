@@ -1,0 +1,35 @@
+.benutzer table, .benutzer .pagination {
+    width: 625px;
+}
+
+.benutzer .cell0 {
+    width: 170px;
+}
+
+.benutzer .cell1 {
+    width: 170px;
+}
+
+.benutzer .cell2 {
+    width: 200px;
+}
+
+.benutzer .cell3 {
+    width: 85px;
+}
+
+.benutzer .suche .cell0 {
+    width: 40px;
+}
+
+.benutzer .suche .cell1 {
+    width: 160px;
+}
+
+.benutzer .suche .cell2 {
+    width: 425px;
+    border-left: none;
+    float: none;
+    padding: 0;
+    text-align: left;
+}

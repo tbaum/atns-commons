@@ -4,19 +4,22 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
+import de.atns.common.gwt.client.Table;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import org.cobogw.gwt.user.client.ui.Button;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
-import static de.atns.common.gwt.client.ExtendedFlexTable.table;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
+import static de.atns.common.gwt.client.Table.*;
 
 /**
  * @author tbaum
@@ -25,28 +28,37 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
-    private final ExtendedFlexTable table = table("datatable");
+    private final Table table = table("benutzer datatable");
 
     private final Button neu = new Button("Neuer Benutzer");
     private final Button suche = new Button("Suchen");
     private final TextBox text = new TextBox();
     //    private final ListBox status = new ListBox();
-    private final FlowPanel pagePresenterPanel = new FlowPanel();
+    private final Table.Row pagePresenterPanel = row();
     private boolean containsEmptyRow;
+    private PagePresenter.Display pagePresenter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public BenutzerView() {
         ExtendedFlowPanel extendedFlowPanel = ExtendedFlowPanel.extendedFlowPanel(5)
-                .add(getErrorPanel()).newLine()
+                .add(getErrorPanel())
                 .add(getLoader())
-                .add("Benutzer:").addStyle("heading").newLine()
-                .add(neu).newLine()
-                .add(flowPanel(ExtendedFlexTable.table("filtertable")
-                        .cell("Suche:")
-                        .cell(flowPanel(text)).width(160)
-                        .cell(suche).width(76).getTable(), table.getTable(), pagePresenterPanel));
+                .newLine()
+                .add("Benutzer:").addStyle("heading")
+                .newLine()
+                .add(neu)
+                .newLine()
+                .add(flowPanel("benutzer",
+                        table("suche filtertable", head(
+                                "Suche:",
+                                flowPanel(text),
+                                suche
+                        )),
+                        table,
+                        pagePresenterPanel
+                ));
 
         final FlowPanel panel = extendedFlowPanel.getPanel();
         panel.getElement().getStyle().setMarginLeft(20, PX);
@@ -111,15 +123,16 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     public HandlerRegistration addRow(final BenutzerPresentation g, final ClickHandler editHandler) {
         if (containsEmptyRow) {
             clearList();
+            setPagination(pagePresenter.asWidget());
         }
         final Button edit = new Button("Bearbeiten");
-        table
-                .cell(g.getLogin())
-                .cell(g.isAdmin() ? "Admin" : "Nutzer")
-                .cell(g.getEmail())
-                .cell(flowPanel(edit))
-                .nextRow();
+        table.add(row(
+                g.getLogin(),
+                g.isAdmin() ? "Admin" : "Nutzer",
+                g.getEmail(),
+                flowPanel(edit)
 
+        ));
 
         return edit.addClickHandler(editHandler);
     }
@@ -129,16 +142,20 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
     public void reset() {
         clearList();
         containsEmptyRow = true;
-        table.cell("- keine Benutzer gefunden -").colspan(12).
-                nextRow();
+        setPagination(new HTML("- keine Benutzer gefunden -"));
     }
 
 // --------------------- Interface ListWidgetDisplay ---------------------
 
 
     @Override public void setPagePresenter(final PagePresenter.Display display) {
+        pagePresenter = display;
+        setPagination(pagePresenter.asWidget());
+    }
+
+    private void setPagination(Widget widget) {
         pagePresenterPanel.clear();
-        pagePresenterPanel.add(display.asWidget());
+        pagePresenterPanel.add(widget);
     }
 
     @Override public HandlerRegistration forSuche(final ClickHandler clickHandler) {
@@ -153,12 +170,12 @@ public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerP
 
     private void clearList() {
         containsEmptyRow = false;
-        table
-                .clear()
-                .cell("Login").addStyle("header").width(170)
-                .cell("Rolle").addStyle("header").width(170)
-                .cell("Email").addStyle("header").width(200)
-                .cell("").addStyle("header").width(85)
-                .nextRow(true);
+        table.clear();
+        table.add(head(
+                "Login",
+                "Rolle",
+                "Email",
+                ""
+        ));
     }
 }
