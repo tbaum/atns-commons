@@ -3,10 +3,7 @@ package de.atns.common.gwt.client;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * @author tbaum
@@ -55,7 +52,15 @@ public class Table extends ComplexPanel {
         add(child, getElement());
     }
 
-    private static class Cell extends SimplePanel {
+    public static Cell cell(IsWidget w) {
+        return new Cell(w);
+    }
+
+    public static Cell cell(String s) {
+        return new Cell(s);
+    }
+
+    public static class Cell extends SimplePanel {
         Cell(IsWidget w) {
             super(DOM.createElement("td"));
             setWidget(w);
@@ -64,6 +69,11 @@ public class Table extends ComplexPanel {
         Cell(String w) {
             super(DOM.createElement("td"));
             getElement().setInnerHTML(w);
+        }
+
+        public Cell colspan(int i) {
+            getElement().setAttribute("colspan", String.valueOf(i));
+            return this;
         }
     }
 
