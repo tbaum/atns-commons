@@ -1,0 +1,109 @@
+package de.atns.common.crud.client.sortheader;
+
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
+import de.atns.common.gwt.client.Table;
+
+import java.util.ArrayList;
+
+public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColumn<FIELD>> {
+// ------------------------------ FIELDS ------------------------------
+
+    private final ArrayList<SortHeading> headers = new ArrayList<SortHeading>();
+    private SortColumn<FIELD> sortColumn = new SortColumn<FIELD>(null, null);
+
+    private ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers = new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
+    private Table.Row headerRow = Table.row();
+
+// --------------------- GETTER / SETTER METHODS ---------------------
+
+    public Table.Row getHeaderRow() {
+        return headerRow;
+    }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface HasHandlers ---------------------
+
+    @Override
+    public void fireEvent(GwtEvent<?> gwtEvent) {
+        if (gwtEvent instanceof ValueChangeEvent) {
+            ValueChangeEvent event = (ValueChangeEvent) gwtEvent;
+            for (ValueChangeHandler<SortColumn<FIELD>> header : handlers) {
+                // TODO check
+                header.onValueChange(event);
+            }
+        }
+    }
+
+// --------------------- Interface HasValueChangeHandlers ---------------------
+
+    @Override
+    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<SortColumn<FIELD>> handler) {
+        handlers.add(handler);
+        return new HandlerRegistration() {
+            @Override
+            public void removeHandler() {
+                handlers.remove(handler);
+            }
+        };
+    }
+
+// --------------------- Interface TakesValue ---------------------
+
+    @Override
+    public SortColumn<FIELD> getValue() {
+        return sortColumn;
+    }
+
+    @Override
+    public void setValue(SortColumn<FIELD> sortColumn) {
+        setValue(sortColumn, false);
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public Widget addHeader(String s) {
+        final Label label = new Label(s);
+        headerRow.add(new Object[]{label});
+        return label;
+    }
+
+    public SortHeading addHeader(String name, final FIELD field) {
+        final SortHeading widget = new SortHeading(name);
+        headers.add(widget);
+
+        widget.addValueChangeHandler(new ValueChangeHandler<OrderField.Sort>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
+                for (SortHeading sortHeading : headers) {
+                    if (sortHeading != widget)
+                        sortHeading.setSort(OrderField.Sort.NONE);
+                }
+
+                setValue(new SortColumn<FIELD>(field, sortValueChangeEvent.getValue()), true);
+            }
+        });
+
+        headerRow.add(new Object[]{widget});
+        return widget;
+    }
+
+    @Override
+    public void setValue(SortColumn<FIELD> sortColumn, boolean b) {
+        boolean shouldFire = this.sortColumn == null || !this.sortColumn.equals(sortColumn);
+
+        this.sortColumn = new SortColumn<FIELD>(sortColumn.field, sortColumn.value);
+
+        if (b && shouldFire) {
+            HeaderGroup.this.fireEvent(new ValueChangeEvent<SortColumn>(sortColumn) {
+            });
+        }
+    }
+}
