@@ -10,7 +10,7 @@
     <parent>
         <groupId>de.atns.maven</groupId>
         <artifactId>defaults</artifactId>
-        <version>1.9.0</version>
+        <version>1.9.1</version>
     </parent>
 
     <modules>
@@ -22,6 +22,7 @@
         <module>dao-mail</module>
         <module>fileutils</module>
         <module>gwt</module>
+        <module>pdf</module>
         <module>gwt-crud</module>
         <module>gwt-security</module>
         <module>gwt-security-gui</module>
