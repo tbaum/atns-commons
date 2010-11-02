@@ -19,13 +19,13 @@ public class QueryBuilder {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void and(String crit, Object... value) {
-        addOp(crit, "AND", value);
+    public void and(String crit, Object... values) {
+        addOp(crit, "AND", values);
     }
 
-    private void addOp(String crit, String op, Object[] value) {
-        final List<Object> paramNames = new ArrayList<Object>(value.length);
-        for (Object v : value) {
+    private void addOp(String crit, String op, Object[] values) {
+        final List<Object> paramNames = new ArrayList<Object>(values.length);
+        for (Object value : values) {
             final String pname = "p" + params.size();
             params.put(pname, value);
             paramNames.add(":" + pname);
@@ -40,8 +40,8 @@ public class QueryBuilder {
         return filter.length() == 0 ? "" : " WHERE " + filter.toString();
     }
 
-    public void or(String crit, Object... value) {
-        addOp(crit, "OR", value);
+    public void or(String crit, Object... values) {
+        addOp(crit, "OR", values);
     }
 
     public void setParameter(Query q) {
