@@ -11,7 +11,7 @@ import java.util.Map;
  * @author tbaum
  * @since 02.11.10
  */
-public class HqlBuilder {
+public class QueryBuilder {
 // ------------------------------ FIELDS ------------------------------
 
     private final StringBuilder filter = new StringBuilder();
@@ -28,7 +28,7 @@ public class HqlBuilder {
         for (Object v : value) {
             final String pname = "p" + params.size();
             params.put(pname, value);
-            paramNames.add(pname);
+            paramNames.add(":" + pname);
         }
 
         filter.append(filter.length() == 0 ? " ( " : " " + op + " ( ");
