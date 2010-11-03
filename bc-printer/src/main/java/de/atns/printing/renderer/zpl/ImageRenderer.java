@@ -8,28 +8,31 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer.zpl;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-
 import de.atns.printing.document.ImageElement;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 /**
- * 
  * @author Thomas Baum
- * 
  */
-public class ImageRenderer extends AbstractRenderer<ImageElement>  {
+public class ImageRenderer extends AbstractRenderer<ImageElement> {
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public ImageRenderer(final DocumentRenderer dr) {
         super(dr);
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Renderer ---------------------
 
     public void render(final ImageElement element) {
         final StringBuffer buffer = this.dr.getBuffer();
@@ -65,11 +68,11 @@ public class ImageRenderer extends AbstractRenderer<ImageElement>  {
             buffer.append("\r\n");
         }
         buffer.append("\r\n");
-
     }
+
+// -------------------------- OTHER METHODS --------------------------
 
     private String toHex(final int ret) {
         return (ret < 0x10 ? "0" : "") + Integer.toHexString(ret).toUpperCase();
     }
-
 }

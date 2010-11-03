@@ -1,10 +1,11 @@
 package de.atns.printing.environment;
 
-import java.io.IOException;
-
 import de.atns.printing.device.Device;
 
+import java.io.IOException;
+
 public interface Printer {
+// -------------------------- OTHER METHODS --------------------------
 
     public abstract boolean canPrint(Label lf);
 
@@ -35,5 +36,4 @@ public interface Printer {
     public void updateState() throws IOException;
 
     public boolean waitForPrinter();
-
 }

@@ -8,31 +8,36 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer.buffer;
-
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
 
 import de.atns.printing.Converter;
 import de.atns.printing.document.ImageElement;
 import de.atns.printing.renderer.Renderer;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public class ImageRenderer implements Renderer<ImageElement> {
+// ------------------------------ FIELDS ------------------------------
 
     private DocumentRenderer dr;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public ImageRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Renderer ---------------------
 
     public void render(final ImageElement element) {
         // Image i = element.getImage();
@@ -48,5 +53,4 @@ public class ImageRenderer implements Renderer<ImageElement> {
                 Converter.convertMMToDots(element.getX(), this.dr.getResolution()),//
                 Converter.convertMMToDots(element.getY(), this.dr.getResolution()), null);
     }
-
 }

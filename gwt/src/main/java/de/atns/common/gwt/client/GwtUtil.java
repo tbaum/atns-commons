@@ -19,23 +19,27 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
  * @since 19.11.2009 20:03:32
  */
 public class GwtUtil {
+// ------------------------------ FIELDS ------------------------------
+
     public static final Command NOOP = new Command() {
         @Override
         public void execute() {
         }
     };
 
-    public static FlowPanel flowPanel(String style, Widget... w) {
-        FlowPanel fp = flowPanel(w);
-        fp.setStyleName(style);
-        return fp;
-    }
+// -------------------------- STATIC METHODS --------------------------
 
     public static FlowPanel flowPanel(Widget... w) {
         FlowPanel fp = new FlowPanel();
         for (Widget widget : w) {
             fp.add(widget);
         }
+        return fp;
+    }
+
+    public static FlowPanel flowPanel(String style, Widget... w) {
+        FlowPanel fp = flowPanel(w);
+        fp.setStyleName(style);
         return fp;
     }
 
@@ -146,6 +150,8 @@ public class GwtUtil {
 
         return flowPanel;
     }
+
+// -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {
         WEISS, BLAU, ROT

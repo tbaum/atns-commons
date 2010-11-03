@@ -23,12 +23,20 @@ import java.awt.*;
  * @author Thomas Baum
  */
 public class TextRenderer implements Renderer<TextElement> {
+// ------------------------------ FIELDS ------------------------------
 
     private DocumentRenderer dr;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public TextRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Renderer ---------------------
 
     public void render(final TextElement element) {
         final Font font = new Font("sans", Font.PLAIN, Converter.convertMMToDots(element.getSize() * 0.9, this.dr.getResolution()));
@@ -39,5 +47,4 @@ public class TextRenderer implements Renderer<TextElement> {
         final int y = (int) (Converter.convertMMToDots(element.getY(), dr.getResolution()) + graphics.getFontMetrics().getMaxAscent() * 0.8);
         graphics.drawString((element).getText(), x, y);
     }
-
 }

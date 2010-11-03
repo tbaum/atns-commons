@@ -29,6 +29,7 @@ public class BarcodeRenderer implements Renderer<BarcodeElement> {
 
 // ------------------------ INTERFACE METHODS ------------------------
 
+
 // --------------------- Interface Renderer ---------------------
 
     public void render(final BarcodeElement element) throws IOException {

@@ -36,6 +36,10 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
         cancelButton.getElement().getStyle().setMarginRight(5, PX);
     }
 
+    public void setGlassEnabled(boolean enabled) {
+        dialogBox.setGlassEnabled(enabled);
+    }
+
     @Override public void hideDialogBox() {
         dialogBox.hide();
     }
@@ -49,10 +53,18 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface DialogBoxDisplayInterface ---------------------
+// --------------------- Interface DialogBoxDisplay ---------------------
 
     @Override public HandlerRegistration addCancelButtonClickHandler(ClickHandler clickHandler) {
         return cancelButton.addClickHandler(clickHandler);
+    }
+
+    @Override public HandlerRegistration addDialogBoxCloseCommand(final CloseHandler<PopupPanel> handler) {
+        return dialogBox.addCloseHandler(handler);
+    }
+
+    @Override public boolean isShowing() {
+        return dialogBox.isShowing();
     }
 
     @Override public void setCancelButtonText(final String text) {
@@ -67,19 +79,5 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
     @Override public void showDialogBox() {
         dialogBox.center();
         dialogBox.show();
-    }
-
-    @Override public HandlerRegistration addDialogBoxCloseCommand(final CloseHandler<PopupPanel> handler) {
-        return dialogBox.addCloseHandler(handler);
-    }
-
-    @Override public boolean isShowing() {
-        return dialogBox.isShowing();
-    }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    public void setGlassEnabled(boolean enabled) {
-        dialogBox.setGlassEnabled(enabled);
     }
 }

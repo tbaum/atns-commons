@@ -10,8 +10,6 @@ import de.atns.common.util.SHA1;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import static de.atns.common.security.model.DefaultRoles.ADMIN;
-
 /**
  * @author tbaum
  * @since 17.06.2010

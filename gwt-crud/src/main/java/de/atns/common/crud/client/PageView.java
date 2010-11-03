@@ -22,8 +22,12 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @since 24.10.2009
  */
 public class PageView extends DefaultWidgetDisplay implements PagePresenter.Display {
+// ------------------------------ FIELDS ------------------------------
+
     private final ListBox rangeBox = new ListBox();
     private final ExtendedFlowPanel leftPanel = extendedFlowPanel();
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public PageView() {
@@ -44,6 +48,11 @@ public class PageView extends DefaultWidgetDisplay implements PagePresenter.Disp
 
         initWidget(p);
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Display ---------------------
 
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {
@@ -85,6 +94,9 @@ public class PageView extends DefaultWidgetDisplay implements PagePresenter.Disp
         final int selectedIndex = rangeBox.getSelectedIndex();
         return Integer.parseInt(rangeBox.getValue(selectedIndex));
     }
+
+// --------------------- Interface WidgetDisplay ---------------------
+
 
     @Override
     public void reset() {

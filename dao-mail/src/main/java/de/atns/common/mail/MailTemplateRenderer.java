@@ -11,7 +11,6 @@ public interface MailTemplateRenderer {
 // -------------------------- OTHER METHODS --------------------------
 
     //TODO use on method!!
-
     String renderHtmlTemplate(MailTemplate template, Map<String, Object> context);
 
     String renderPlainTemplate(MailTemplate template, Map<String, Object> context);

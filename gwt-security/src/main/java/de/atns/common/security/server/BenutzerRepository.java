@@ -19,6 +19,9 @@ public interface BenutzerRepository {
 
 // -------------------------- OTHER METHODS --------------------------
 
+    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin") Benutzer benutzerByLogin(
+            @Named("aLogin") String login);
+
     @Finder(query = "SELECT count(distinct b) FROM Benutzer b ") int countAllBenutzer();
 
     @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER) int countBenutzer(
@@ -29,9 +32,5 @@ public interface BenutzerRepository {
             @FirstResult int start, @MaxResults int paging);
 
 
-    @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login")
-    List<Benutzer> findBenutzer(@Named("aLogin") String name, @FirstResult int start, @MaxResults int paging);
-
-    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin") Benutzer benutzerByLogin(
-            @Named("aLogin") String login);
+    @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login") List<Benutzer> findBenutzer(@Named("aLogin") String name, @FirstResult int start, @MaxResults int paging);
 }

@@ -22,13 +22,18 @@ import java.io.UnsupportedEncodingException;
  * @author Thomas Baum
  */
 public class BoxRenderer extends AbstractRenderer<BoxElement> {
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public BoxRenderer(final DocumentRenderer dr) {
         super(dr);
     }
 
-    public void render(final BoxElement element) throws UnsupportedEncodingException {
+// ------------------------ INTERFACE METHODS ------------------------
 
+
+// --------------------- Interface Renderer ---------------------
+
+    public void render(final BoxElement element) throws UnsupportedEncodingException {
         final int w = Converter.convertMMToDots(element.getX2(), this.dr.getResolution());
         final int h = Converter.convertMMToDots(element.getY2(), this.dr.getResolution());
 

@@ -8,7 +8,7 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer;
@@ -16,25 +16,30 @@ package de.atns.printing.renderer;
 import de.atns.printing.device.Device;
 
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public abstract class AbstractDocumentRenderer implements DocumentRenderer {
+// ------------------------------ FIELDS ------------------------------
 
     protected Device device;
 
     protected RendererFactory factory;
 
-    public int getResolution() {
-        return this.device.getDpi();
-    }
+// --------------------------- CONSTRUCTORS ---------------------------
 
     protected AbstractDocumentRenderer(final Device device) {
         this.device = device;
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public void setFactory(final RendererFactory factory) {
         this.factory = factory;
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public int getResolution() {
+        return this.device.getDpi();
     }
 }

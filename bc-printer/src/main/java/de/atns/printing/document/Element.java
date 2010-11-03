@@ -8,7 +8,7 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.document;
@@ -16,9 +16,7 @@ package de.atns.printing.document;
 import java.io.Serializable;
 
 /**
- * 
  * @author Steffen Schoenwiese
- * 
  */
 public interface Element extends Serializable {
     //

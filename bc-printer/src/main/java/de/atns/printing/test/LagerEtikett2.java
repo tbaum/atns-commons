@@ -25,14 +25,13 @@ import de.atns.printing.document.TextElement;
  * @author Steffen Schoenwiese
  */
 public class LagerEtikett2 {
-
-    public static void main(final String[] args) throws Exception {
-        new LagerEtikett2();
-    }
+// ------------------------------ FIELDS ------------------------------
 
     private String address = "10.1.1.19";
 
     private int port = 9100;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public LagerEtikett2() throws Exception {
         String[] pr = {
@@ -366,18 +365,18 @@ public class LagerEtikett2 {
 //        testZLP(createLabel("B.02-D.04"));
     }
 
-    private DocumentElement createLabel(final String s) {
-
-        final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
-        label.addElement(new TextElement(s, 10, 8, 18));
-        return label;
-    }
-
     private DocumentElement createLabel1(final String s) {
-
         final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
         label.addElement(new BarcodeElement(7, 6, 12, BarcodeElement.Type.EAN128, BarcodeElement.MODULO3, false, "99" + s.replaceAll("\\.", "").replaceAll(" ", "")));
         label.addElement(new TextElement(s, 8, 20, 7));
+        return label;
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    private DocumentElement createLabel(final String s) {
+        final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
+        label.addElement(new TextElement(s, 10, 8, 18));
         return label;
     }
 
@@ -391,4 +390,9 @@ public class LagerEtikett2 {
         f.renderDocument(label);
     }
 
+// --------------------------- main() method ---------------------------
+
+    public static void main(final String[] args) throws Exception {
+        new LagerEtikett2();
+    }
 }

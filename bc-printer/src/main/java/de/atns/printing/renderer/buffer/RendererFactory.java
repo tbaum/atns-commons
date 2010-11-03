@@ -8,7 +8,7 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer.buffer;
@@ -20,11 +20,10 @@ import de.atns.printing.document.TextElement;
 import de.atns.printing.renderer.AbstractRendererFactory;
 
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public class RendererFactory extends AbstractRendererFactory<DocumentRenderer> {
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public RendererFactory(final Device device) {
         super(new DocumentRenderer(device));
@@ -32,5 +31,4 @@ public class RendererFactory extends AbstractRendererFactory<DocumentRenderer> {
         this.renderes.put(ImageElement.class, new ImageRenderer(getDocumentRenderer()));
         this.renderes.put(TextElement.class, new TextRenderer(getDocumentRenderer()));
     }
-
 }

@@ -8,28 +8,28 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer;
 
-import java.io.IOException;
-
 import de.atns.printing.document.DocumentElement;
 import de.atns.printing.document.Element;
 
+import java.io.IOException;
+
 /**
  * Registry for all renderes of <DOC>
- * 
- * @author Thomas Baum
- * 
+ *
  * @param <DOC>
+ * @author Thomas Baum
  */
 public interface RendererFactory<DOC extends DocumentRenderer> {
+// -------------------------- OTHER METHODS --------------------------
 
     /**
      * returns the document-renderer
-     * 
+     *
      * @param element
      * @return
      */
@@ -37,7 +37,7 @@ public interface RendererFactory<DOC extends DocumentRenderer> {
 
     /**
      * returns the renderer for this type of element
-     * 
+     *
      * @param element
      * @return
      */
@@ -45,10 +45,9 @@ public interface RendererFactory<DOC extends DocumentRenderer> {
 
     /**
      * call: getDocumentRenderer().render(document)
-     * 
+     *
      * @param document
      * @throws IOException
      */
     public void renderDocument(DocumentElement document) throws IOException;
-
 }

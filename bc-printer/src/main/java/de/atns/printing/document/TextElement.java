@@ -8,21 +8,22 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.document;
 
 /**
- * 
  * @author Steffen Schoenwiese
- * 
  */
 public class TextElement extends AbstractElement {
+// ------------------------------ FIELDS ------------------------------
 
     private double size;
 
     private String text;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     protected TextElement(final double x, final double y, final double size) {
         super(x, y);
@@ -39,16 +40,18 @@ public class TextElement extends AbstractElement {
         this.text = text;
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public double getSize() {
         return this.size;
     }
 
-    public String getText() {
-        return this.text;
-    }
-
     public void setSize(final double size) {
         this.size = size;
+    }
+
+    public String getText() {
+        return this.text;
     }
 
     public void setText(final String text) {

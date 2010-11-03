@@ -31,7 +31,7 @@ public class DispatchServlet extends HttpServlet {
         this.result = result;
     }
 
-    // -------------------------- OTHER METHODS --------------------------
+// -------------------------- OTHER METHODS --------------------------
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response)

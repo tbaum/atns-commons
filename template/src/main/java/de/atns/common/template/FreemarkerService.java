@@ -74,6 +74,7 @@ public class FreemarkerService {
         return values;
     }
 
+// -------------------------- INNER CLASSES --------------------------
 
     @ConfigurationName("template-dir") @Retention(RUNTIME) @Target(FIELD) public static @interface TemplateDir {
     }

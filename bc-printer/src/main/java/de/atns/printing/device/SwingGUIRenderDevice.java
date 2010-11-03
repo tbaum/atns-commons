@@ -8,30 +8,27 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.device;
 
-import java.awt.Image;
+import de.atns.printing.document.DocumentElement;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.WindowConstants;
-
-import de.atns.printing.document.DocumentElement;
-
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public class SwingGUIRenderDevice extends BufferedImageRenderDevice implements Device {
+// ------------------------------ FIELDS ------------------------------
 
     private JLabel output;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public SwingGUIRenderDevice() {
         this.dpi = 300;
@@ -44,13 +41,19 @@ public class SwingGUIRenderDevice extends BufferedImageRenderDevice implements D
         frame.setVisible(true);
     }
 
-    @Override
-    protected void processImage(final BufferedImage image) {
-        this.output.setIcon(new ImageIcon(image.getScaledInstance(-1, 1100, Image.SCALE_AREA_AVERAGING)));
-    }
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Device ---------------------
 
     public void renderDocument(final DocumentElement doc, final int quantity) throws IOException {
         // TODO Auto-generated method stub
-        
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    @Override
+    protected void processImage(final BufferedImage image) {
+        this.output.setIcon(new ImageIcon(image.getScaledInstance(-1, 1100, Image.SCALE_AREA_AVERAGING)));
     }
 }

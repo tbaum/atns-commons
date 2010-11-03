@@ -69,7 +69,6 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 
 // --------------------- Interface HasName ---------------------
 
-
     @Override public void setName(final String name) {
         fileUpload.setName(name);
     }

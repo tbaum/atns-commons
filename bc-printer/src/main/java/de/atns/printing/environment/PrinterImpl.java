@@ -20,6 +20,7 @@ public class PrinterImpl extends AbstractPrinterImpl {
 
 // ------------------------ INTERFACE METHODS ------------------------
 
+
 // --------------------- Interface Printer ---------------------
 
     public boolean canPrint(final Label lf) {

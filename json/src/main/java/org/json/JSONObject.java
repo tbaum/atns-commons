@@ -345,6 +345,16 @@ public class JSONObject {
     }
 
     /**
+     * Get an optional value associated with a key.
+     *
+     * @param key A key string.
+     * @return An object which is the value, or null if there is no value.
+     */
+    public Object opt(final String key) {
+        return key == null ? null : this.map.get(key);
+    }
+
+    /**
      * Put a key/value pair in the JSONObject. If the value is null,
      * then the key will be removed from the JSONObject if it is present.
      *
@@ -367,6 +377,28 @@ public class JSONObject {
             remove(key);
         }
         return this;
+    }
+
+    /**
+     * Throw an exception if the object is an NaN or infinite number.
+     *
+     * @param o The object to test.
+     * @throws JSONException If o is a non-finite number.
+     */
+    static void testValidity(final Object o) throws JSONException {
+        if (o != null) {
+            if (o instanceof Double) {
+                if (((Double) o).isInfinite() || ((Double) o).isNaN()) {
+                    throw new JSONException(
+                            "JSON does not allow non-finite numbers.");
+                }
+            } else if (o instanceof Float) {
+                if (((Float) o).isInfinite() || ((Float) o).isNaN()) {
+                    throw new JSONException(
+                            "JSON does not allow non-finite numbers.");
+                }
+            }
+        }
     }
 
     /**
@@ -514,16 +546,6 @@ public class JSONObject {
         for (int i = 0; i < names.length; i += 1) {
             putOnce(names[i], jo.opt(names[i]));
         }
-    }
-
-    /**
-     * Get an optional value associated with a key.
-     *
-     * @param key A key string.
-     * @return An object which is the value, or null if there is no value.
-     */
-    public Object opt(final String key) {
-        return key == null ? null : this.map.get(key);
     }
 
     /**
@@ -798,28 +820,6 @@ public class JSONObject {
             }
         }
         return s;
-    }
-
-    /**
-     * Throw an exception if the object is an NaN or infinite number.
-     *
-     * @param o The object to test.
-     * @throws JSONException If o is a non-finite number.
-     */
-    static void testValidity(final Object o) throws JSONException {
-        if (o != null) {
-            if (o instanceof Double) {
-                if (((Double) o).isInfinite() || ((Double) o).isNaN()) {
-                    throw new JSONException(
-                            "JSON does not allow non-finite numbers.");
-                }
-            } else if (o instanceof Float) {
-                if (((Float) o).isInfinite() || ((Float) o).isNaN()) {
-                    throw new JSONException(
-                            "JSON does not allow non-finite numbers.");
-                }
-            }
-        }
     }
 
 // -------------------------- OTHER METHODS --------------------------

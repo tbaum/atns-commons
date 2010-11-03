@@ -1,15 +1,18 @@
 package de.atns.common.gwt.client;
 
-import com.google.gwt.dom.client.Node;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author tbaum
  * @since 20.10.10
  */
 public class Table extends ComplexPanel {
+// -------------------------- STATIC METHODS --------------------------
+
     public static Table table(Row... w) {
         Table fp = new Table();
         fp.add(w);
@@ -42,16 +45,6 @@ public class Table extends ComplexPanel {
         return fp;
     }
 
-    Table() {
-        setElement(DOM.createElement("table"));
-        getElement().setAttribute("cellspacing", "0");
-    }
-
-    @Override
-    public void add(Widget child) {
-        add(child, getElement());
-    }
-
     public static Cell cell(IsWidget w) {
         return new Cell(w);
     }
@@ -59,6 +52,25 @@ public class Table extends ComplexPanel {
     public static Cell cell(String s) {
         return new Cell(s);
     }
+
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    Table() {
+        setElement(DOM.createElement("table"));
+        getElement().setAttribute("cellspacing", "0");
+    }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface HasWidgets ---------------------
+
+    @Override
+    public void add(Widget child) {
+        add(child, getElement());
+    }
+
+// -------------------------- INNER CLASSES --------------------------
 
     public static class Cell extends SimplePanel {
         Cell(IsWidget w) {

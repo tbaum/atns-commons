@@ -8,27 +8,24 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.document;
 
 /**
- * 
  * @author Steffen Schoenwiese
- * 
  */
 public abstract class AbstractElement implements Element {
-
-    public enum Rotation {
-        NORMAL, ROTATED, INVERTED, BOTTOMUP;
-    }
+// ------------------------------ FIELDS ------------------------------
 
     private Rotation rot;
 
     private double x;
 
     private double y;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     protected AbstractElement(final double x, final double y) {
         this(x, y, Rotation.NORMAL);
@@ -40,28 +37,35 @@ public abstract class AbstractElement implements Element {
         this.rot = rot;
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public Rotation getRot() {
         return this.rot;
-    }
-
-    public double getX() {
-        return this.x;
-    }
-
-    public double getY() {
-        return this.y;
     }
 
     public void setRot(final Rotation rot) {
         this.rot = rot;
     }
 
+    public double getX() {
+        return this.x;
+    }
+
     public void setX(final double x) {
         this.x = x;
+    }
+
+    public double getY() {
+        return this.y;
     }
 
     public void setY(final double y) {
         this.y = y;
     }
 
+// -------------------------- ENUMERATIONS --------------------------
+
+    public enum Rotation {
+        NORMAL, ROTATED, INVERTED, BOTTOMUP;
+    }
 }

@@ -39,10 +39,6 @@ public class ImageButton extends ButtonBase {
         getElement().setTitle(alt);
     }
 
-    public void setSrc(String src) {
-        getElement().setAttribute("src", src);
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
     public void click() {
@@ -51,5 +47,9 @@ public class ImageButton extends ButtonBase {
 
     protected ButtonElement getButtonElement() {
         return getElement().cast();
+    }
+
+    public void setSrc(String src) {
+        getElement().setAttribute("src", src);
     }
 }

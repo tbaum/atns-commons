@@ -25,5 +25,4 @@ public class FreemarkerMailTemplateRenderer extends DefaultTemplateRenderer impl
     @Override protected String renderTemplate(final String templateName, final Map<String, Object> context) {
         return freemarkerService.renderTemplate(templateName, context);
     }
-
 }

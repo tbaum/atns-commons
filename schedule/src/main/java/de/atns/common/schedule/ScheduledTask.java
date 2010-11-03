@@ -5,7 +5,6 @@ package de.atns.common.schedule;
  * @since 13.02.2010
  */
 public class ScheduledTask {
-
 // ------------------------------ FIELDS ------------------------------
 
     private final Long delay;

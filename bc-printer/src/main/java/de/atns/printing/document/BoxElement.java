@@ -39,14 +39,11 @@ public class BoxElement extends AbstractElement {
         return this.size;
     }
 
-
     public double getX2() {
         return x2;
     }
 
-
     public double getY2() {
         return y2;
     }
-
- }
+}

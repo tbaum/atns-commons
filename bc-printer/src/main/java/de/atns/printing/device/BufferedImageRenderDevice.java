@@ -8,30 +8,36 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.device;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 import de.atns.printing.document.DocumentElement;
 import de.atns.printing.renderer.buffer.RendererFactory;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public abstract class BufferedImageRenderDevice extends AbstractDevice {
+// ------------------------------ FIELDS ------------------------------
 
     private RendererFactory factory;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public BufferedImageRenderDevice() {
         this.factory = new RendererFactory(this);
         this.dpi = 300;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Device ---------------------
 
     @Override
     public void renderDocument(final DocumentElement doc) throws IOException {
@@ -39,6 +45,7 @@ public abstract class BufferedImageRenderDevice extends AbstractDevice {
         processImage(this.factory.getDocumentRenderer().getImage());
     }
 
-    protected abstract void processImage(BufferedImage image);
+// -------------------------- OTHER METHODS --------------------------
 
+    protected abstract void processImage(BufferedImage image);
 }

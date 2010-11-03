@@ -3,7 +3,6 @@ package de.atns.common.security;
 import com.google.inject.AbstractModule;
 import de.atns.common.security.server.DummyDataCreator;
 import de.atns.common.security.server.UserServiceImpl;
-import net.customware.gwt.dispatch.server.guice.ActionHandlerModule;
 
 /**
  * @author tbaum
@@ -11,6 +10,7 @@ import net.customware.gwt.dispatch.server.guice.ActionHandlerModule;
  */
 public class BenutzerSecurityModule extends SecurityModule {
 // -------------------------- OTHER METHODS --------------------------
+
 //
 //    @Override protected void configure() {
 //        install(new SecurityModule() {
@@ -31,6 +31,5 @@ public class BenutzerSecurityModule extends SecurityModule {
         });
 
         install(new SecurityActionHandlerModule());
-
     }
 }

@@ -8,6 +8,7 @@ import de.atns.common.security.benutzer.BenutzerActionHandlerModule;
  */
 public class BenutzerSecurityGuiModule extends BenutzerSecurityModule {
 // -------------------------- OTHER METHODS --------------------------
+
 //
 //    @Override protected void configure() {
 //        install(new SecurityModule() {

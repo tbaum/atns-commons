@@ -8,27 +8,27 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.document;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 /**
- * 
  * @author Steffen Schoenwiese
- * 
  */
 public class ImageElement extends AbstractElement {
+// ------------------------------ FIELDS ------------------------------
 
     private Image image;
 
     private double scale;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     protected ImageElement(final double x, final double y, final double scale) {
         super(x, y);
@@ -44,16 +44,18 @@ public class ImageElement extends AbstractElement {
         this(ImageIO.read(new File(fileName)), x, y, zoom);
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public Image getImage() {
         return this.image;
     }
 
-    public double getScale() {
-        return this.scale;
-    }
-
     public void setImage(final Image image) {
         this.image = image;
+    }
+
+    public double getScale() {
+        return this.scale;
     }
 
     public void setScale(final double scale) {

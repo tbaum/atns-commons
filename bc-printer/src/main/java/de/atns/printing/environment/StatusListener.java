@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class StatusListener extends Thread {
+// ------------------------------ FIELDS ------------------------------
 
 //    private PrinterEnvironment env;
 
@@ -13,14 +14,23 @@ public class StatusListener extends Thread {
 
     private ServerSocket socket;
 
+// --------------------------- CONSTRUCTORS ---------------------------
+
     public StatusListener(final ServerSocket socket, @SuppressWarnings("unused") final PrinterEnvironment env) {
 //        this.env = env;
         this.socket = socket;
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public void setListen(final boolean listen) {
         this.listen = listen;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Runnable ---------------------
 
     @Override
     public void run() {
@@ -37,6 +47,5 @@ public class StatusListener extends Thread {
                 e.printStackTrace();
             }
         }
-
     }
 }

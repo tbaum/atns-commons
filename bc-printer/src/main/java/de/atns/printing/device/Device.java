@@ -8,25 +8,24 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.device;
 
-import java.io.IOException;
-
 import de.atns.printing.document.DocumentElement;
 
+import java.io.IOException;
+
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public interface Device {
-
-    public void renderDocument(DocumentElement doc) throws IOException;
-    public void renderDocument(DocumentElement doc, int quantity) throws IOException;
+// -------------------------- OTHER METHODS --------------------------
 
     public int getDpi();
 
+    public void renderDocument(DocumentElement doc) throws IOException;
+
+    public void renderDocument(DocumentElement doc, int quantity) throws IOException;
 }

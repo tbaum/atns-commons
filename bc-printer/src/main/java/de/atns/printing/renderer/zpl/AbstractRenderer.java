@@ -1,22 +1,22 @@
 package de.atns.printing.renderer.zpl;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
-
 import de.atns.printing.Converter;
 import de.atns.printing.document.AbstractElement;
 import de.atns.printing.document.AbstractElement.Rotation;
 import de.atns.printing.renderer.Renderer;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class AbstractRenderer<E extends AbstractElement> implements Renderer<E> {
+// ------------------------------ FIELDS ------------------------------
+
     protected static final Map<Rotation, String> rotations = new HashMap<Rotation, String>();
 
     protected DocumentRenderer dr;
 
-    public AbstractRenderer(final DocumentRenderer dr) {
-        this.dr = dr;
-    }
+// -------------------------- STATIC METHODS --------------------------
 
     static {
         rotations.put(Rotation.NORMAL, "^FWN");
@@ -25,9 +25,13 @@ public abstract class AbstractRenderer<E extends AbstractElement> implements Ren
         rotations.put(Rotation.BOTTOMUP, "^FWB");
     }
 
-    public String getRotation(final Rotation rot) {
-        return rotations.get(rot);
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    public AbstractRenderer(final DocumentRenderer dr) {
+        this.dr = dr;
     }
+
+// -------------------------- OTHER METHODS --------------------------
 
     public void appendEscaped(final StringBuffer buffer, final String txt) throws UnsupportedEncodingException {
         for (int i = 0; i < txt.length(); i++) {
@@ -48,5 +52,9 @@ public abstract class AbstractRenderer<E extends AbstractElement> implements Ren
         final int y = Converter.convertMMToDots(element.getY(), resolution);
         buffer.append("^FO").append(x).append(",").append(y);
         return buffer;
+    }
+
+    public String getRotation(final Rotation rot) {
+        return rotations.get(rot);
     }
 }

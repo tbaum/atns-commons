@@ -24,6 +24,7 @@ import de.atns.printing.renderer.AbstractRendererFactory;
  * @author Thomas Baum
  */
 public class RendererFactory extends AbstractRendererFactory<DocumentRenderer> {
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public RendererFactory(final Device device) {
         super(new DocumentRenderer(device));
@@ -32,5 +33,4 @@ public class RendererFactory extends AbstractRendererFactory<DocumentRenderer> {
         this.renderes.put(TextElement.class, new TextRenderer(getDocumentRenderer()));
         this.renderes.put(BoxElement.class, new BoxRenderer(getDocumentRenderer()));
     }
-
 }

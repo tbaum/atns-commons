@@ -16,9 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static org.hibernate.criterion.Restrictions.isNull;
-import static org.springframework.transaction.annotation.Propagation.REQUIRED;
-
 @Service("mailUtil")
 public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUtil {
 // ------------------------------ FIELDS ------------------------------
@@ -57,7 +54,6 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
     public MessagePreparator sendMail(final String recipient, final String recipientName, final String bccRecipient,
                                       final MailTemplate template, final Map<String, Object> context,
                                       final MailResource... attachments) {
-
         if (template == null) {
             throw new IllegalArgumentException("missing template");
         }

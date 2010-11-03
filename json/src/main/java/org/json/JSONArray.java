@@ -320,6 +320,21 @@ public class JSONArray {
     }
 
     /**
+     * Get the object value associated with an index.
+     *
+     * @param index The index must be between 0 and length() - 1.
+     * @return An object value.
+     * @throws JSONException If there is no value for the index.
+     */
+    public Object get(final int index) throws JSONException {
+        final Object o = opt(index);
+        if (o == null) {
+            throw new JSONException("JSONArray[" + index + "] not found.");
+        }
+        return o;
+    }
+
+    /**
      * Get the JSONObject associated with an index.
      *
      * @param index subscript
@@ -344,6 +359,18 @@ public class JSONArray {
      */
     public boolean isNull(final int index) {
         return JSONObject.NULL.equals(opt(index));
+    }
+
+    /**
+     * Get the optional object value associated with an index.
+     *
+     * @param index The index must be between 0 and length() - 1.
+     * @return An object value, or null if there is no
+     *         object at that index.
+     */
+    public Object opt(final int index) {
+        return (index < 0 || index >= length()) ?
+                null : this.myArrayList.get(index);
     }
 
     /**
@@ -399,33 +426,6 @@ public class JSONArray {
     }
 
     /**
-     * Get the object value associated with an index.
-     *
-     * @param index The index must be between 0 and length() - 1.
-     * @return An object value.
-     * @throws JSONException If there is no value for the index.
-     */
-    public Object get(final int index) throws JSONException {
-        final Object o = opt(index);
-        if (o == null) {
-            throw new JSONException("JSONArray[" + index + "] not found.");
-        }
-        return o;
-    }
-
-    /**
-     * Get the optional object value associated with an index.
-     *
-     * @param index The index must be between 0 and length() - 1.
-     * @return An object value, or null if there is no
-     *         object at that index.
-     */
-    public Object opt(final int index) {
-        return (index < 0 || index >= length()) ?
-                null : this.myArrayList.get(index);
-    }
-
-    /**
      * Get the optional double value associated with an index.
      * NaN is returned if there is no value for the index,
      * or if the value is not a number and cannot be converted to a number.
@@ -451,6 +451,26 @@ public class JSONArray {
             return getDouble(index);
         } catch (Exception e) {
             return defaultValue;
+        }
+    }
+
+    /**
+     * Get the double value associated with an index.
+     *
+     * @param index The index must be between 0 and length() - 1.
+     * @return The value.
+     * @throws JSONException If the key is not found or if the value cannot
+     *                       be converted to a number.
+     */
+    public double getDouble(final int index) throws JSONException {
+        final Object o = get(index);
+        try {
+            return o instanceof Number ?
+                    ((Number) o).doubleValue() :
+                    Double.valueOf((String) o).doubleValue();
+        } catch (Exception e) {
+            throw new JSONException("JSONArray[" + index +
+                    "] is not a number.");
         }
     }
 
@@ -496,26 +516,6 @@ public class JSONArray {
         final Object o = get(index);
         return o instanceof Number ?
                 ((Number) o).intValue() : (int) getDouble(index);
-    }
-
-    /**
-     * Get the double value associated with an index.
-     *
-     * @param index The index must be between 0 and length() - 1.
-     * @return The value.
-     * @throws JSONException If the key is not found or if the value cannot
-     *                       be converted to a number.
-     */
-    public double getDouble(final int index) throws JSONException {
-        final Object o = get(index);
-        try {
-            return o instanceof Number ?
-                    ((Number) o).doubleValue() :
-                    Double.valueOf((String) o).doubleValue();
-        } catch (Exception e) {
-            throw new JSONException("JSONArray[" + index +
-                    "] is not a number.");
-        }
     }
 
     /**

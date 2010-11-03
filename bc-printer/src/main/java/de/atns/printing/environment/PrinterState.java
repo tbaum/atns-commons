@@ -1,11 +1,12 @@
 package de.atns.printing.environment;
 
+import de.atns.printing.document.Mode;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import de.atns.printing.document.Mode;
-
 public class PrinterState {
+// ------------------------------ FIELDS ------------------------------
 
     private boolean paperOut = false;
 
@@ -29,28 +30,14 @@ public class PrinterState {
 
     private boolean ribbonIn = false;
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public int getJobs() {
         return this.jobs;
     }
 
     public void setJobs(final int jobs) {
         this.jobs = jobs;
-    }
-
-    public boolean isPrinting() {
-        return (this.jobs > 0);
-    }
-
-    public boolean isThermoTransferMode() {
-        return this.thermoTransferMode;
-    }
-
-    public void setThermoTransferMode(final boolean thermoTransferMode) {
-        this.thermoTransferMode = thermoTransferMode;
-    }
-
-    public void setThermoTransferMode(final String string) {
-        this.thermoTransferMode = "1".equals(string);
     }
 
     public boolean isBufferFull() {
@@ -61,20 +48,12 @@ public class PrinterState {
         this.bufferFull = bufferFull;
     }
 
-    public void setBufferFull(final String bufferFull) {
-        this.bufferFull = "1".equals(bufferFull);
-    }
-
     public boolean isCorruptRam() {
         return this.corruptRam;
     }
 
     public void setCorruptRam(final boolean corruptRam) {
         this.corruptRam = corruptRam;
-    }
-
-    public void setCorruptRam(final String corruptRam) {
-        this.corruptRam = "1".equals(corruptRam);
     }
 
     public boolean isHeadUp() {
@@ -85,20 +64,12 @@ public class PrinterState {
         this.headUp = headUp;
     }
 
-    public void setHeadUp(final String headUp) {
-        this.headUp = "1".equals(headUp);
-    }
-
     public boolean isHighTemperature() {
         return this.highTemperature;
     }
 
     public void setHighTemperature(final boolean highTemperature) {
         this.highTemperature = highTemperature;
-    }
-
-    public void setHighTemperature(final String highTemperature) {
-        this.highTemperature = "1".equals(highTemperature);
     }
 
     public boolean isLowTemperature() {
@@ -109,20 +80,12 @@ public class PrinterState {
         this.lowTemperature = lowTemperature;
     }
 
-    public void setLowTemperature(final String lowTemperature) {
-        this.lowTemperature = "1".equals(lowTemperature);
-    }
-
     public boolean isPaperOut() {
         return this.paperOut;
     }
 
     public void setPaperOut(final boolean paperOut) {
         this.paperOut = paperOut;
-    }
-
-    public void setPaperOut(final String paperOut) {
-        this.paperOut = "1".equals(paperOut);
     }
 
     public boolean isPaused() {
@@ -133,10 +96,6 @@ public class PrinterState {
         this.paused = paused;
     }
 
-    public void setPaused(final String paused) {
-        this.paused = "1".equals(paused);
-    }
-
     public boolean isRibbonOut() {
         return this.ribbonOut;
     }
@@ -145,33 +104,19 @@ public class PrinterState {
         this.ribbonOut = ribbonOut;
     }
 
-    public void setRibbonOut(final String ribbonOut) {
-        this.ribbonOut = "1".equals(ribbonOut);
+    public boolean isThermoTransferMode() {
+        return this.thermoTransferMode;
+    }
+
+    public void setThermoTransferMode(final boolean thermoTransferMode) {
+        this.thermoTransferMode = thermoTransferMode;
     }
 
     public void setRibbonIn(final boolean ribbonIn) {
         this.ribbonIn = ribbonIn;
     }
 
-    public void setRibbonIn(final String ribbonIn) {
-        this.ribbonIn = "1".equals(ribbonIn);
-    }
-
-    public boolean isPrintableState(final Mode mode) {
-        final boolean modeOk = ((mode.equals(Mode.TT) && this.thermoTransferMode) || (mode.equals(Mode.TD) && !this.thermoTransferMode));
-        return modeOk && statusOk();
-    }
-
-    public boolean statusOk() {
-        return (!this.paperOut && !this.paused && !this.bufferFull && !this.corruptRam && !this.lowTemperature
-                && !this.highTemperature && !this.headUp && !this.ribbonOut && !this.ribbonIn);
-    }
-
-    public boolean isRecoverable() {
-        return (!this.paperOut &&
-        // !paused &&
-                !this.bufferFull && !this.corruptRam && !this.lowTemperature && !this.highTemperature && !this.headUp);
-    }
+// ------------------------ CANONICAL METHODS ------------------------
 
     @Override
     public String toString() {
@@ -188,6 +133,8 @@ public class PrinterState {
         sb.append("Jobs : ").append(this.jobs).append("\n");
         return sb.toString();
     }
+
+// -------------------------- OTHER METHODS --------------------------
 
     public List<String> getErrorMessages() {
         final ArrayList<String> result = new ArrayList<String>();
@@ -212,4 +159,63 @@ public class PrinterState {
         return result;
     }
 
+    public boolean isPrintableState(final Mode mode) {
+        final boolean modeOk = ((mode.equals(Mode.TT) && this.thermoTransferMode) || (mode.equals(Mode.TD) && !this.thermoTransferMode));
+        return modeOk && statusOk();
+    }
+
+    public boolean statusOk() {
+        return (!this.paperOut && !this.paused && !this.bufferFull && !this.corruptRam && !this.lowTemperature
+                && !this.highTemperature && !this.headUp && !this.ribbonOut && !this.ribbonIn);
+    }
+
+    public boolean isPrinting() {
+        return (this.jobs > 0);
+    }
+
+    public boolean isRecoverable() {
+        return (!this.paperOut &&
+                // !paused &&
+                !this.bufferFull && !this.corruptRam && !this.lowTemperature && !this.highTemperature && !this.headUp);
+    }
+
+    public void setBufferFull(final String bufferFull) {
+        this.bufferFull = "1".equals(bufferFull);
+    }
+
+    public void setCorruptRam(final String corruptRam) {
+        this.corruptRam = "1".equals(corruptRam);
+    }
+
+    public void setHeadUp(final String headUp) {
+        this.headUp = "1".equals(headUp);
+    }
+
+    public void setHighTemperature(final String highTemperature) {
+        this.highTemperature = "1".equals(highTemperature);
+    }
+
+    public void setLowTemperature(final String lowTemperature) {
+        this.lowTemperature = "1".equals(lowTemperature);
+    }
+
+    public void setPaperOut(final String paperOut) {
+        this.paperOut = "1".equals(paperOut);
+    }
+
+    public void setPaused(final String paused) {
+        this.paused = "1".equals(paused);
+    }
+
+    public void setRibbonIn(final String ribbonIn) {
+        this.ribbonIn = "1".equals(ribbonIn);
+    }
+
+    public void setRibbonOut(final String ribbonOut) {
+        this.ribbonOut = "1".equals(ribbonOut);
+    }
+
+    public void setThermoTransferMode(final String string) {
+        this.thermoTransferMode = "1".equals(string);
+    }
 }

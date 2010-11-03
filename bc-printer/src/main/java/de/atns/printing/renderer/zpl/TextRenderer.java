@@ -8,26 +8,30 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer.zpl;
 
-import java.io.UnsupportedEncodingException;
-
 import de.atns.printing.Converter;
 import de.atns.printing.document.TextElement;
 
+import java.io.UnsupportedEncodingException;
+
 /**
- * 
  * @author Thomas Baum
- * 
  */
 public class TextRenderer extends AbstractRenderer<TextElement> {
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public TextRenderer(final DocumentRenderer dr) {
         super(dr);
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Renderer ---------------------
 
     public void render(final TextElement element) throws UnsupportedEncodingException {
         if (element.getText().length() > 3072)

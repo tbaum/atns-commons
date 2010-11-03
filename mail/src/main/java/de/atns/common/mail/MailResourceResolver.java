@@ -95,6 +95,12 @@ public class MailResourceResolver {
         }
     }
 
+    @SuppressWarnings({"unchecked"})
+    public static <T> T[] toArray(final Class<T> clazz, final Collection<T> col) {
+        final ArrayList<T> entries = new ArrayList<T>(col);
+        return entries.toArray((T[]) Array.newInstance(clazz, entries.size()));
+    }
+
 // -------------------------- INNER CLASSES --------------------------
 
     public class ResolvedMail {
@@ -106,12 +112,4 @@ public class MailResourceResolver {
             this.message = message;
         }
     }
-
-
-    @SuppressWarnings({"unchecked"})
-    public static <T> T[] toArray(final Class<T> clazz, final Collection<T> col) {
-        final ArrayList<T> entries = new ArrayList<T>(col);
-        return entries.toArray((T[]) Array.newInstance(clazz, entries.size()));
-    }
-
 }

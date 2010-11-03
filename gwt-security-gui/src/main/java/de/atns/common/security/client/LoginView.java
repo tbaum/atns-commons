@@ -90,7 +90,6 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
 
 // --------------------- Interface Display ---------------------
 
-
     @Override public HandlerRegistration addLoginClick(final ClickHandler clickHandler) {
         return login.addClickHandler(clickHandler);
     }
@@ -121,7 +120,25 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         updateLoginButton();
     }
 
-// --------------------- Interface ErrorWidgetDisplay ---------------------
+// --------------------- Interface KeyPressHandler ---------------------
+
+    @Override public void onKeyPress(final KeyPressEvent event) {
+        updateLoginButton();
+
+        final NativeEvent nativeEvent = event.getNativeEvent();
+        final int keyCode = nativeEvent.getKeyCode();
+        if (keyCode == KEY_ENTER) {
+            if (event.getSource().equals(username)) {
+                password.setFocus(true);
+            } else if (event.getSource().equals(password)) {
+                if (login.isEnabled()) {
+                    login.click();
+                }
+            }
+        }
+    }
+
+// --------------------- Interface WidgetDisplay ---------------------
 
     @Override public void reset() {
         username.setValue("");
@@ -141,23 +158,5 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         updateLoginButton();
         username.setEnabled(true);
         password.setEnabled(true);
-    }
-
-// --------------------- Interface KeyPressHandler ---------------------
-
-    @Override public void onKeyPress(final KeyPressEvent event) {
-        updateLoginButton();
-
-        final NativeEvent nativeEvent = event.getNativeEvent();
-        final int keyCode = nativeEvent.getKeyCode();
-        if (keyCode == KEY_ENTER) {
-            if (event.getSource().equals(username)) {
-                password.setFocus(true);
-            } else if (event.getSource().equals(password)) {
-                if (login.isEnabled()) {
-                    login.click();
-                }
-            }
-        }
     }
 }

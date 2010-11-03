@@ -56,8 +56,7 @@ public class PrinterEnvironment {
     public Material getMaterialByName(final String name) {
         try {
             return Material.valueOf(name);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return Material.NONE;
         }
     }

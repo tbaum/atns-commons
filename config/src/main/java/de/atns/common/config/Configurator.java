@@ -45,6 +45,4 @@ public class Configurator {
     public String getPropertyName(final String s) {
         return configName + "." + s;
     }
-
-
 }

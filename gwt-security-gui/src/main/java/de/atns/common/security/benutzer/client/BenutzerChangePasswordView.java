@@ -86,7 +86,7 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface DialogBoxDisplayInterface ---------------------
+// --------------------- Interface DialogBoxDisplay ---------------------
 
     @Override public void showDialogBox() {
         super.showDialogBox();
@@ -95,11 +95,6 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
 
 // --------------------- Interface Display ---------------------
 
-    @Override public void reset() {
-        passwort1.setValue("");
-        passwort2.setValue("");
-        updButton();
-    }
 
     @Override public HandlerRegistration addSafeHandler(final ClickHandler handler) {
         return speichern.addClickHandler(handler);
@@ -107,5 +102,13 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
 
     @Override public String getPassword() {
         return passwort1.getValue();
+    }
+
+// --------------------- Interface WidgetDisplay ---------------------
+
+    @Override public void reset() {
+        passwort1.setValue("");
+        passwort2.setValue("");
+        updButton();
     }
 }

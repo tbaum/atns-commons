@@ -136,25 +136,11 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return edit.addClickHandler(editHandler);
     }
 
-// --------------------- Interface ErrorWidgetDisplay ---------------------
-
-    public void reset() {
-        clearList();
-        containsEmptyRow = true;
-        setPagination(new HTML("- keine Benutzer gefunden -"));
-    }
-
-// --------------------- Interface ListWidgetDisplay ---------------------
-
+// --------------------- Interface ListDisplay ---------------------
 
     @Override public void setPagePresenter(final PagePresenter.Display display) {
         pagePresenter = display;
         setPagination(pagePresenter.asWidget());
-    }
-
-    private void setPagination(Widget widget) {
-        pagePresenterPanel.clear();
-        pagePresenterPanel.add(widget);
     }
 
     @Override public HandlerRegistration forSuche(final ClickHandler clickHandler) {
@@ -163,6 +149,14 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
 
     @Override public HandlerRegistration forPressEnter(final KeyPressHandler handler) {
         return text.addKeyPressHandler(handler);
+    }
+
+// --------------------- Interface WidgetDisplay ---------------------
+
+    public void reset() {
+        clearList();
+        containsEmptyRow = true;
+        setPagination(new HTML("- keine Benutzer gefunden -"));
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -176,5 +170,10 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
                 "Email",
                 ""
         ));
+    }
+
+    private void setPagination(Widget widget) {
+        pagePresenterPanel.clear();
+        pagePresenterPanel.add(widget);
     }
 }

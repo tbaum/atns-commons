@@ -8,24 +8,23 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer;
 
-import java.io.IOException;
-
 import de.atns.printing.document.Element;
+
+import java.io.IOException;
 
 /**
  * Renders given elemenent (uses DocumentRenderer)
- * 
- * @author Thomas Baum
- * 
+ *
  * @param <E>
+ * @author Thomas Baum
  */
 public interface Renderer<E extends Element> {
+// -------------------------- OTHER METHODS --------------------------
 
     public void render(E element) throws IOException;
-
 }

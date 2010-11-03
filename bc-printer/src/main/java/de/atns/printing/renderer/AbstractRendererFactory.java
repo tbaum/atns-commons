@@ -8,29 +8,30 @@
  *
  * ATNS does not assume liability for the use of this file or the results
  * obtained from using it.
- * 
+ *
  **/
 
 package de.atns.printing.renderer;
+
+import de.atns.printing.document.DocumentElement;
+import de.atns.printing.document.Element;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.atns.printing.document.DocumentElement;
-import de.atns.printing.document.Element;
-
 /**
- * 
- * @author Thomas Baum
- * 
  * @param <DOC>
+ * @author Thomas Baum
  */
 public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> implements RendererFactory<DocumentRenderer> {
+// ------------------------------ FIELDS ------------------------------
+
+    protected Map<Class, Renderer> renderes = new HashMap<Class, Renderer>();
 
     private DOC documentRenderer;
 
-    protected Map<Class, Renderer> renderes = new HashMap<Class, Renderer>();
+// --------------------------- CONSTRUCTORS ---------------------------
 
     protected AbstractRendererFactory(final DOC documentRenderer) {
         this.documentRenderer = documentRenderer;
@@ -38,9 +39,16 @@ public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> impl
         this.renderes.put(DocumentElement.class, documentRenderer);
     }
 
+// --------------------- GETTER / SETTER METHODS ---------------------
+
     public DOC getDocumentRenderer() {
         return this.documentRenderer;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface RendererFactory ---------------------
 
     public Renderer getRender(final Element element) {
         final Renderer r = this.renderes.get(element.getClass());

@@ -75,7 +75,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface ErrorWidgetDisplay ---------------------
+// --------------------- Interface WidgetDisplay ---------------------
 
     @Override public void reset() {
         login.setValue("");

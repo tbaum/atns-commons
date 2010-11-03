@@ -3,11 +3,13 @@ package de.atns.common.lock;
 import de.atns.common.dao.LongIdObject;
 
 public interface LockState<TYPE extends LongIdObject> {
-    void refresh();
+// -------------------------- OTHER METHODS --------------------------
 
     LockObject<TYPE> getLockObject();
 
     LockPrincipal getLockPrincipal();
 
     boolean isTimeout();
+
+    void refresh();
 }

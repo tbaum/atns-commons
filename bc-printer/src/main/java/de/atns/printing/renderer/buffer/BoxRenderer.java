@@ -23,12 +23,20 @@ import java.awt.*;
  * @author Thomas Baum
  */
 public class BoxRenderer implements Renderer<BoxElement> {
+// ------------------------------ FIELDS ------------------------------
 
     private DocumentRenderer dr;
+
+// --------------------------- CONSTRUCTORS ---------------------------
 
     public BoxRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Renderer ---------------------
 
     public void render(final BoxElement element) {
         final Graphics graphics = this.dr.getGraphics();
@@ -42,5 +50,4 @@ public class BoxRenderer implements Renderer<BoxElement> {
 
         graphics.drawLine(x, y, x + w, y + h);
     }
-
 }
