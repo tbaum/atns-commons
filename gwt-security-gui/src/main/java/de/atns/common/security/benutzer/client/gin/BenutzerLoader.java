@@ -6,7 +6,6 @@ import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.ModuleLoader;
-import de.atns.common.gwt.client.gin.ModuleLoaderCallback;
 import de.atns.common.gwt.client.gin.SharedServices;
 
 /**
@@ -32,7 +31,7 @@ public class BenutzerLoader implements ModuleLoader {
 
 // --------------------- Interface ModuleLoader ---------------------
 
-    public void load(final ModuleLoaderCallback callback) {
+    public void load(final Callback callback) {
         GWT.runAsync(BenutzerLoader.class, new RunAsyncCallback() {
             public void onSuccess() {
                 if (injector == null) {
