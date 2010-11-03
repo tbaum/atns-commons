@@ -50,10 +50,6 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.customware.gwt.presenter</groupId>
-            <artifactId>gwt-presenter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>net.customware.gwt.dispatch</groupId>
             <artifactId>gwt-dispatch</artifactId>
         </dependency>

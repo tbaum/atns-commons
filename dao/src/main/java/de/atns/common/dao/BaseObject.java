@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
     private long id;
 
     @Version
-    private long version;
+    private int version;
 
     private Date lastUpdateTimestamp;
     private Date createTimestamp;
@@ -33,7 +33,7 @@ import static javax.persistence.GenerationType.IDENTITY;
         return lastUpdateTimestamp;
     }
 
-    public long getVersion() {
+    public int getVersion() {
         return version;
     }
 

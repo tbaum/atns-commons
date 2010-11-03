@@ -1,15 +1,15 @@
 package de.atns.common.security.client;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
-import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.DefaultWidgetDisplay;
+import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.LogoutEvent;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,22 +23,22 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     private static final Logger LOG = Logger.getLogger(Callback.class.getName());
 
-    private static final ErrorWidgetDisplay nullDisplay = new DefaultErrorWidgetDisplay() {
+    private static final WidgetDisplay NULL_DISPLAY = new DefaultWidgetDisplay() {
         @Override
         public void reset() {
         }
     };
     private final DispatchAsync dispatcher;
     private final EventBus eventBus;
-    private final ErrorWidgetDisplay display;
+    private final WidgetDisplay display;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public Callback() {
-        this(nullDisplay);
+        this(NULL_DISPLAY);
     }
 
-    public Callback(final ErrorWidgetDisplay display) {
+    public Callback(final WidgetDisplay display) {
         this.dispatcher = SharedServicesHolder.shared().getDispatchAsync();
         this.eventBus = SharedServicesHolder.shared().getEventBus();
         this.display = display;

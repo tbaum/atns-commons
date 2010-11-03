@@ -1,16 +1,26 @@
-package de.atns.common.gwt.client;
+package de.atns.common.crud.client;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.ui.PopupPanel;
+import de.atns.common.gwt.client.DialogBoxDisplay;
 
 /**
  * @author tbaum
- * @since 07.12.2009
+ * @since 05.10.2010
  */
-public abstract class DialogBoxWidgetPresenter<D extends DialogBoxDisplayInterface> extends DefaultWidgetPresenter<D> {
+public abstract class DialogBoxListPresenter<D extends DialogBoxDisplay & ListDisplay<T>, T extends IsSerializable>
+        extends ListPresenter<D, T> {
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Presenter ---------------------
+
+    @Override public D getDisplay() {
+        return super.getDisplay();
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
@@ -21,12 +31,6 @@ public abstract class DialogBoxWidgetPresenter<D extends DialogBoxDisplayInterfa
             @Override
             public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
                 unbind();
-            }
-        });
-
-        DeferredCommand.addCommand(new Command() {
-            @Override public void execute() {
-                getDisplay().showDialogBox();
             }
         });
     }

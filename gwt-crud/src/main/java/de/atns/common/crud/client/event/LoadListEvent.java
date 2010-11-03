@@ -2,7 +2,7 @@ package de.atns.common.crud.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.SharedServicesHolder;
@@ -22,7 +22,7 @@ public class LoadListEvent<E extends IsSerializable> extends GwtEvent<LoadListEv
 // -------------------------- STATIC METHODS --------------------------
 
     public static <T extends IsSerializable> Callback<ListPresentation<T>> eventCallback(
-            final ErrorWidgetDisplay display, final Type<LoadListEventHandler<T>> type, final Object source) {
+            final WidgetDisplay display, final Type<LoadListEventHandler<T>> type, final Object source) {
         return new Callback<ListPresentation<T>>(display) {
             @Override public void callback(final ListPresentation<T> result11) {
                 fireEvent(result11, type, source);

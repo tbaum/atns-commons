@@ -9,8 +9,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import de.atns.common.crud.client.PagePresenter;
-import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
-import de.atns.common.gwt.client.ExtendedFlexTable;
+import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
 import de.atns.common.gwt.client.Table;
 import de.atns.common.gwt.client.model.StandardFilter;
@@ -25,7 +24,7 @@ import static de.atns.common.gwt.client.Table.*;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerView extends DefaultErrorWidgetDisplay implements BenutzerPresenter.Display {
+public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     private final Table table = table("benutzer datatable");

@@ -4,9 +4,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Singleton;
-import de.atns.common.gwt.client.DialogBoxDisplayInterface;
-import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
-import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.DialogBoxDisplay;
+import de.atns.common.gwt.client.DialogBoxPresenter;
 import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
@@ -18,7 +17,7 @@ import de.atns.common.security.client.Callback;
  * @since 24.10.2009
  */
 @Singleton
-public class BenutzerChangePasswordPresenter extends DialogBoxWidgetPresenter<BenutzerChangePasswordPresenter.Display> {
+public class BenutzerChangePasswordPresenter extends DialogBoxPresenter<BenutzerChangePasswordPresenter.Display> {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
@@ -44,7 +43,7 @@ public class BenutzerChangePasswordPresenter extends DialogBoxWidgetPresenter<Be
 
 // -------------------------- INNER CLASSES --------------------------
 
-    public static interface Display extends ErrorWidgetDisplay, DialogBoxDisplayInterface {
+    public static interface Display extends DialogBoxDisplay {
         public HandlerRegistration addSafeHandler(ClickHandler handler);
 
         String getPassword();

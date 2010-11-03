@@ -7,7 +7,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
-import de.atns.common.gwt.client.DialogBoxErrorWidgetDisplay;
+import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.gwt.client.FieldSetPanel;
 import org.cobogw.gwt.user.client.ui.Button;
 
@@ -18,7 +18,7 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerChangePasswordView extends DialogBoxErrorWidgetDisplay
+public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
         implements BenutzerChangePasswordPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 

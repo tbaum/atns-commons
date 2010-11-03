@@ -5,17 +5,13 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.inject.Inject;
-import de.atns.common.gwt.client.DefaultErrorWidgetDisplay;
+import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
 
-import static com.google.gwt.dom.client.Style.Cursor.POINTER;
-import static com.google.gwt.dom.client.Style.Display.INLINE;
 import static com.google.gwt.dom.client.Style.Float.RIGHT;
-import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
 import static de.atns.common.gwt.client.GwtUtil.createLabel;
@@ -25,7 +21,7 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public class PageView extends DefaultErrorWidgetDisplay implements PagePresenter.Display {
+public class PageView extends DefaultWidgetDisplay implements PagePresenter.Display {
     private final ListBox rangeBox = new ListBox();
     private final ExtendedFlowPanel leftPanel = extendedFlowPanel();
 

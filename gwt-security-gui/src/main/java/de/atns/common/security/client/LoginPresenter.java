@@ -1,15 +1,14 @@
 package de.atns.common.security.client;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.inject.Singleton;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
-import de.atns.common.gwt.client.DialogBoxDisplayInterface;
-import de.atns.common.gwt.client.DialogBoxWidgetPresenter;
+import de.atns.common.gwt.client.DialogBoxDisplay;
+import de.atns.common.gwt.client.DialogBoxPresenter;
 import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
@@ -23,7 +22,7 @@ import java.util.logging.Logger;
  * @since 24.10.2009
  */
 @Singleton
-public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Display> {
+public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Logger LOG = Logger.getLogger(LoginPresenter.class.getName());
@@ -50,7 +49,7 @@ public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Disp
             display.passwordValue(password);
             display.rememberValue(true);
 
-            DeferredCommand.addCommand(new Command() {
+            Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
                 @Override
                 public void execute() {
                     doLogin(username, password);
@@ -82,7 +81,7 @@ public class LoginPresenter extends DialogBoxWidgetPresenter<LoginPresenter.Disp
 
 // -------------------------- INNER CLASSES --------------------------
 
-    public static interface Display extends DialogBoxDisplayInterface {
+    public static interface Display extends DialogBoxDisplay {
         HandlerRegistration addLoginClick(final ClickHandler clickHandler);
 
         String passwordValue();

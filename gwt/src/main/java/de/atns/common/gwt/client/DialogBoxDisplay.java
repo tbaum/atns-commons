@@ -11,7 +11,7 @@ import org.cobogw.gwt.user.client.ui.Button;
  * @author mwolter
  * @since 18.03.2010 14:52:56
  */
-public interface DialogBoxDisplayInterface extends ErrorWidgetDisplay {
+public interface DialogBoxDisplay extends WidgetDisplay {
 // -------------------------- OTHER METHODS --------------------------
 
     HandlerRegistration addCancelButtonClickHandler(ClickHandler clickHandler);

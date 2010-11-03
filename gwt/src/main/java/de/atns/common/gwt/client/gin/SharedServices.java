@@ -1,7 +1,7 @@
 package de.atns.common.gwt.client.gin;
 
+import com.google.gwt.event.shared.EventBus;
 import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
 
 /**
  * @author tbaum

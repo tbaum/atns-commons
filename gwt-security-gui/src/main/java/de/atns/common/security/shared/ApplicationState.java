@@ -1,5 +1,6 @@
 package de.atns.common.security.shared;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.security.client.event.LoginEvent;
@@ -7,7 +8,6 @@ import de.atns.common.security.client.event.LoginEventHandler;
 import de.atns.common.security.client.event.LogoutEvent;
 import de.atns.common.security.client.event.LogoutEventHandler;
 import de.atns.common.security.client.model.UserPresentation;
-import net.customware.gwt.presenter.client.EventBus;
 
 /**
  * @author tbaum

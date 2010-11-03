@@ -7,8 +7,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import de.atns.common.crud.client.event.LoadListEventHandler;
-import de.atns.common.gwt.client.DefaultWidgetPresenter;
-import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.WidgetDisplay;
+import de.atns.common.gwt.client.WidgetPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 
 
@@ -16,7 +16,7 @@ import de.atns.common.gwt.client.model.ListPresentation;
  * @author tbaum
  * @since 24.10.2009
  */
-public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display> {
+public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final int PAGING = 2;
@@ -105,7 +105,7 @@ public class PagePresenter extends DefaultWidgetPresenter<PagePresenter.Display>
 
 // -------------------------- INNER CLASSES --------------------------
 
-    public static interface Display extends ErrorWidgetDisplay {
+    public static interface Display extends WidgetDisplay {
         void reset();
 
         HandlerRegistration addSeitenButton(int site, ClickHandler clickHandler, boolean active);

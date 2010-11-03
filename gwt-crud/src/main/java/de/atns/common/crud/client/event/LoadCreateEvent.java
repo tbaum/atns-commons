@@ -2,7 +2,7 @@ package de.atns.common.crud.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import de.atns.common.gwt.client.ErrorWidgetDisplay;
+import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.SharedServicesHolder;
 
@@ -20,7 +20,7 @@ public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCrea
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends IsSerializable> Callback<T> eventCallback(final ErrorWidgetDisplay display,
+    public static <T extends IsSerializable> Callback<T> eventCallback(final WidgetDisplay display,
                                                                        final Type<LoadCreateEventHandler<T>> type,
                                                                        final Object source) {
         return new Callback<T>(display) {
@@ -30,7 +30,7 @@ public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCrea
         };
     }
 
-    public static <T extends IsSerializable> void fireEvent(final T result, final ErrorWidgetDisplay display,
+    public static <T extends IsSerializable> void fireEvent(final T result, final WidgetDisplay display,
                                                             final Type<LoadCreateEventHandler<T>> type,
                                                             final Object source) {
         SharedServicesHolder.shared().getEventBus().fireEvent(new LoadCreateEvent<T>(result, type, source));

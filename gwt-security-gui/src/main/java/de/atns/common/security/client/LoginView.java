@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
-import de.atns.common.gwt.client.DialogBoxErrorWidgetDisplay;
+import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.security.client.model.ApplicationName;
 import org.cobogw.gwt.user.client.ui.Button;
 
@@ -18,7 +18,7 @@ import static com.google.gwt.event.dom.client.KeyCodes.KEY_ENTER;
  * @author tbaum
  * @since 24.10.2009
  */
-public class LoginView extends DialogBoxErrorWidgetDisplay implements KeyPressHandler, LoginPresenter.Display {
+public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandler, LoginPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     private final Button login;

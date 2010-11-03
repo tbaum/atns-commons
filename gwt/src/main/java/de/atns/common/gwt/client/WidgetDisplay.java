@@ -1,13 +1,15 @@
 package de.atns.common.gwt.client;
 
-import net.customware.gwt.presenter.client.widget.WidgetDisplay;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author mwolter
  * @since 22.02.2010 16:18:05
  */
-public interface ErrorWidgetDisplay extends WidgetDisplay {
+public interface WidgetDisplay {
 // -------------------------- OTHER METHODS --------------------------
+
+    Widget asWidget();
 
     void reset();
 

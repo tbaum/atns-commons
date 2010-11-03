@@ -1,10 +1,10 @@
 package de.atns.common.security.client;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import de.atns.common.gwt.client.gin.SharedServicesAware;
 import net.customware.gwt.dispatch.client.DispatchAsync;
-import net.customware.gwt.presenter.client.EventBus;
 
 /**
  * @author tbaum

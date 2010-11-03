@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
-import de.atns.common.gwt.client.DialogBoxErrorWidgetDisplay;
+import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.gwt.client.FieldSetPanel;
 import org.cobogw.gwt.user.client.ui.Button;
 
@@ -21,7 +21,7 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public abstract class BenutzerDetailView extends DialogBoxErrorWidgetDisplay {
+public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
 // ------------------------------ FIELDS ------------------------------
 
     protected final TextBox login = new TextBox();

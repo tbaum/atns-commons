@@ -7,8 +7,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import de.atns.common.crud.client.ListWidgetDisplay;
-import de.atns.common.crud.client.ListWidgetPresenter;
+import de.atns.common.crud.client.ListDisplay;
+import de.atns.common.crud.client.ListPresenter;
 import de.atns.common.crud.client.event.LoadListEventHandler;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
@@ -23,7 +23,7 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
  * @since 24.10.2009
  */
 @Singleton
-public class BenutzerPresenter extends ListWidgetPresenter<BenutzerPresenter.Display, BenutzerPresentation> {
+public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, BenutzerPresentation> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> LIST_EVENT =
@@ -39,16 +39,11 @@ public class BenutzerPresenter extends ListWidgetPresenter<BenutzerPresenter.Dis
         this.injector = injector;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ListPresenter ---------------------
+// -------------------------- OTHER METHODS --------------------------
 
     @Override public GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> _listEvent() {
         return LIST_EVENT;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected String bindRow(final BenutzerPresentation g, String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
@@ -87,7 +82,7 @@ public class BenutzerPresenter extends ListWidgetPresenter<BenutzerPresenter.Dis
 
 // -------------------------- INNER CLASSES --------------------------
 
-    public static interface Display extends ListWidgetDisplay<BenutzerPresentation> {
+    public static interface Display extends ListDisplay<BenutzerPresentation> {
         HandlerRegistration forNeu(ClickHandler clickHandler);
 
         HandlerRegistration forSuche(ClickHandler clickHandler);
