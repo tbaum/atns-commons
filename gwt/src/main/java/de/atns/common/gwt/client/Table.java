@@ -53,6 +53,14 @@ public class Table extends ComplexPanel {
         return new Cell(s);
     }
 
+    public static Cell cell(String style, IsWidget w) {
+        return new Cell(style, w);
+    }
+
+    public static Cell cell(String style, String s) {
+        return new Cell(style, s);
+    }
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     Table() {
@@ -73,19 +81,35 @@ public class Table extends ComplexPanel {
 // -------------------------- INNER CLASSES --------------------------
 
     public static class Cell extends SimplePanel {
-        Cell(IsWidget w) {
+        private String style;
+
+        Cell(String style, IsWidget w) {
             super(DOM.createElement("td"));
             setWidget(w);
+            this.style = style;
         }
 
-        Cell(String w) {
+        Cell(String style, String w) {
             super(DOM.createElement("td"));
             getElement().setInnerHTML(w);
+            this.style = style;
+        }
+
+        public Cell(IsWidget widget) {
+            this(null, widget);
+        }
+
+        public Cell(String w) {
+            this(null, w);
         }
 
         public Cell colspan(int i) {
             getElement().setAttribute("colspan", String.valueOf(i));
             return this;
+        }
+
+        public String getStyle() {
+            return style;
         }
     }
 
@@ -108,9 +132,12 @@ public class Table extends ComplexPanel {
                     tc = new Cell(widget != null ? widget.toString() : "");
                 }
 
-
-                tc.addStyleName("cell");
-                tc.addStyleName("cell" + i);
+                if (tc.getStyle() == null) {
+                    tc.addStyleName("cell");
+                    tc.addStyleName("cell" + i);
+                } else {
+                    tc.addStyleName(tc.getStyle());
+                }
 
                 add(tc);
             }

@@ -1,5 +1,6 @@
 package de.atns.common.crud.client.sortheader;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -8,10 +9,12 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
 import java.util.ArrayList;
 
+import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static de.atns.common.crud.client.sortheader.OrderField.Sort.*;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 
@@ -19,8 +22,8 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
 // ------------------------------ FIELDS ------------------------------
 
     private final Anchor label = new Anchor();
-    private final Label labelUp = new Label("/\\");
-    private final Label labelDown = new Label("\\/");
+    private final Image labelUp = new Image("arrow_up.png");
+    private final Image labelDown = new Image("arrow_down.png");
     private OrderField.Sort sort = NONE;
 
     private ArrayList<ValueChangeHandler<OrderField.Sort>> handlers = new ArrayList<ValueChangeHandler<OrderField.Sort>>();
@@ -30,7 +33,7 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
     public SortHeading() {
         setSort(NONE);
         initWidget(flowPanel(label, labelUp, labelDown));
-
+        label.getElement().getStyle().setCursor(POINTER);
         label.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {

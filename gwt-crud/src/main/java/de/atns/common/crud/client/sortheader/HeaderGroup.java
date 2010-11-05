@@ -18,7 +18,7 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
     private SortColumn<FIELD> sortColumn = new SortColumn<FIELD>(null, null);
 
     private ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers = new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
-    private Table.Row headerRow = Table.row();
+    private Table.Row headerRow = Table.head();
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
