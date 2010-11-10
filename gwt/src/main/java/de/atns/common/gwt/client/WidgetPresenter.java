@@ -1,7 +1,9 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -11,8 +13,26 @@ import java.util.List;
  * @author tbaum
  * @since 07.12.2009
  */
-public abstract class WidgetPresenter<D extends WidgetDisplay> {
+public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activity {
 // ------------------------------ FIELDS ------------------------------
+
+
+    @Override public String mayStop() {
+        return null;
+    }
+
+    @Override public void onCancel() {
+        onStop();
+    }
+
+    @Override public void onStop() {
+        unbind();
+    }
+
+    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
+        panel.setWidget(display.asWidget());
+        bind();
+    }
 
     protected DispatchAsync dispatcher;
 
