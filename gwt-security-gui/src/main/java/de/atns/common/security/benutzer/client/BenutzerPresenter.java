@@ -1,15 +1,18 @@
 package de.atns.common.security.benutzer.client;
 
+import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.crud.client.ListDisplay;
 import de.atns.common.crud.client.ListPresenter;
 import de.atns.common.crud.client.event.LoadListEventHandler;
+import de.atns.common.gwt.client.gin.PlacePresenter;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
@@ -23,7 +26,8 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
  * @since 24.10.2009
  */
 @Singleton
-public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, BenutzerPresentation> {
+public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, BenutzerPresentation>
+        implements PlacePresenter<Place> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> LIST_EVENT =
@@ -37,6 +41,15 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
     public BenutzerPresenter(final BenutzerEditPresenter editPresenter, final BenutzerInjector injector) {
         this.editPresenter = editPresenter;
         this.injector = injector;
+    }
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface PlacePresenter ---------------------
+
+    @Override public Activity updateForPlace(Place place) {
+        return this;
     }
 
 // -------------------------- OTHER METHODS --------------------------
