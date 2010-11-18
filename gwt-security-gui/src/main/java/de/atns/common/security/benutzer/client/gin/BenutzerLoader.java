@@ -1,50 +1,38 @@
 package de.atns.common.security.benutzer.client.gin;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.RunAsyncCallback;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.ModuleLoader;
 import de.atns.common.gwt.client.gin.SharedServices;
+import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
+import de.atns.common.security.benutzer.client.BenutzerPresenter;
 
 /**
  * @author tbaum
  * @since 16.06.2010
  */
 @Singleton
-public class BenutzerLoader implements ModuleLoader {
-// ------------------------------ FIELDS ------------------------------
-
-    private static BenutzerInjector injector;
-    private final SharedServices sharedServices;
-
+public class BenutzerLoader extends ModuleLoader<BenutzerPresenter> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public BenutzerLoader(SharedServices sharedServices) {
-        this.sharedServices = sharedServices;
+        super(sharedServices);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
+// -------------------------- OTHER METHODS --------------------------
 
+    @Override public boolean canHandlePlace(Place place) {
+        return false;     // TODO
+    }
 
-// --------------------- Interface ModuleLoader ---------------------
+    @Override protected WidgetPresenterGinjector<BenutzerPresenter> create() {
+        return GWT.create(BenutzerInjector.class);
+    }
 
-    public void load(final Callback callback) {
-        GWT.runAsync(BenutzerLoader.class, new RunAsyncCallback() {
-            public void onSuccess() {
-                if (injector == null) {
-                    injector = GWT.create(BenutzerInjector.class);
-                    injector.sharedServicesAware().setSharedServices(sharedServices);
-                }
-
-                callback.onLoaded(injector.presenter());
-            }
-
-            public void onFailure(Throwable reason) {
-                Window.alert("Failed to load admin presenter");
-            }
-        });
+    public void load() {
+        GWT.runAsync(BenutzerLoader.class, this);
     }
 }

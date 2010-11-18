@@ -1,8 +1,7 @@
 package de.atns.common.security.benutzer.client.gin;
 
 import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
-import de.atns.common.gwt.client.gin.SharedServicesAware;
+import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
 import de.atns.common.security.benutzer.client.BenutzerCreatePresenter;
 import de.atns.common.security.benutzer.client.BenutzerPresenter;
 
@@ -11,12 +10,8 @@ import de.atns.common.security.benutzer.client.BenutzerPresenter;
  * @since 16.06.2010
  */
 @GinModules(BenutzerModule.class)
-public interface BenutzerInjector extends Ginjector {
+public interface BenutzerInjector extends WidgetPresenterGinjector<BenutzerPresenter> {
 // -------------------------- OTHER METHODS --------------------------
 
     BenutzerCreatePresenter getBenutzerCreatePresenter();
-
-    BenutzerPresenter presenter();
-
-    SharedServicesAware sharedServicesAware();
 }
