@@ -3,6 +3,8 @@ package de.atns.common.gwt.client;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
@@ -10,6 +12,15 @@ import com.google.gwt.user.client.ui.PopupPanel;
  * @since 07.12.2009
  */
 public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends WidgetPresenter<D> {
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Activity ---------------------
+
+    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
+        bind();
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
