@@ -7,6 +7,7 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.ModuleLoader;
 import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
+import de.atns.common.security.benutzer.client.BenutzerPlace;
 import de.atns.common.security.benutzer.client.BenutzerPresenter;
 
 /**
@@ -25,7 +26,7 @@ public class BenutzerLoader extends ModuleLoader<BenutzerPresenter> {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override public boolean canHandlePlace(Place place) {
-        return false;     // TODO
+        return place instanceof BenutzerPlace;
     }
 
     @Override protected WidgetPresenterGinjector<BenutzerPresenter> create() {

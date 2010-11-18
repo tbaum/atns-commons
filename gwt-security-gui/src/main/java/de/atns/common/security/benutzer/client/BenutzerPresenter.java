@@ -6,7 +6,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.crud.client.ListDisplay;
@@ -27,7 +26,7 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
  */
 @Singleton
 public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, BenutzerPresentation>
-        implements PlacePresenter<Place> {
+        implements PlacePresenter<BenutzerPlace> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> LIST_EVENT =
@@ -48,7 +47,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
 
 // --------------------- Interface PlacePresenter ---------------------
 
-    @Override public Activity updateForPlace(Place place) {
+    @Override public Activity updateForPlace(BenutzerPlace place) {
         return this;
     }
 
