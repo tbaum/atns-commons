@@ -57,7 +57,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     @Override
     public void onFailure(final Throwable originalCaught) {
-        LOG.log(Level.WARNING, "check session in callback");
+        LOG.log(Level.WARNING, "check session in callback ", originalCaught);
         display.showError(originalCaught.getMessage());
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
             @Override
