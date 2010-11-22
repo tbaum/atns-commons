@@ -25,7 +25,6 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>fileutils</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -43,12 +43,10 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>security</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

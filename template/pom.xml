@@ -16,7 +16,6 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>config</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

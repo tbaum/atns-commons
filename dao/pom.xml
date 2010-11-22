@@ -15,7 +15,6 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>classutils</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

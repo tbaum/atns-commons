@@ -19,12 +19,10 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>fileutils</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>config</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
