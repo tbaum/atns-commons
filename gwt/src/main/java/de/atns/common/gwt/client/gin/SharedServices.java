@@ -1,6 +1,7 @@
 package de.atns.common.gwt.client.gin;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.requestfactory.shared.RequestFactory;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 /**
@@ -10,7 +11,9 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 public interface SharedServices {
 // -------------------------- OTHER METHODS --------------------------
 
-    DispatchAsync getDispatchAsync();
+    DispatchAsync dispatcher();
 
-    EventBus getEventBus();
+    EventBus eventBus();
+
+    RequestFactory requestFactory();
 }

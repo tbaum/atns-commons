@@ -1,6 +1,7 @@
 package de.atns.common.security.client;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -19,22 +20,25 @@ public class SharedServicesModule extends AbstractPresenterModule {
     @Override protected void configure() {
         bind(SharedServicesAware.class).to(SharedServicesAdapter.class);
         bind(SharedServices.class).toProvider(SharedServicesAdapter.class);
+
+        requestStaticInjection(Callback.class);
     }
 
-    @Provides
-    public DispatchAsync dispatchAsync(SharedServices sharedServices) {
-        return sharedServices.getDispatchAsync();
+    @Provides public DispatchAsync dispatchAsync(SharedServices sharedServices) {
+        return sharedServices.dispatcher();
     }
 
-    @Provides
-    public EventBus eventBus(SharedServices sharedServices) {
-        return sharedServices.getEventBus();
+    @Provides public EventBus eventBus(SharedServices sharedServices) {
+        return sharedServices.eventBus();
+    }
+
+    @Provides public RequestFactory requestFactory(final SharedServices sharedServices) {
+        return sharedServices.requestFactory();
     }
 
 // -------------------------- INNER CLASSES --------------------------
 
-    @Singleton
-    public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
+    @Singleton public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
         private SharedServices services;
 
         public void setSharedServices(SharedServices services) {

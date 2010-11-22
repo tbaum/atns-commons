@@ -1,10 +1,12 @@
 package de.atns.common.crud.client.event;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.Callback;
-import de.atns.common.security.client.SharedServicesHolder;
 
 
 /**
@@ -14,6 +16,7 @@ import de.atns.common.security.client.SharedServicesHolder;
 public class LoadDetailEvent<E extends IsSerializable> extends GwtEvent<LoadDetailEventHandler<E>> {
 // ------------------------------ FIELDS ------------------------------
 
+    @Inject private static Provider<EventBus> eventBus;
     private final E result;
     private Type<LoadDetailEventHandler<E>> type;
     private final Object source;
@@ -33,14 +36,13 @@ public class LoadDetailEvent<E extends IsSerializable> extends GwtEvent<LoadDeta
     public static <T extends IsSerializable> void fireEvent(final T result, final WidgetDisplay display,
                                                             final Type<LoadDetailEventHandler<T>> type,
                                                             final Object source) {
-        SharedServicesHolder.shared().getEventBus().fireEvent(new LoadDetailEvent<T>(result, type, source));
+        eventBus.get().fireEvent(new LoadDetailEvent<T>(result, type, source));
         display.stopProcessing();
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public LoadDetailEvent(final E result, final Type<LoadDetailEventHandler<E>> type,
-                           final Object source) {
+    public LoadDetailEvent(final E result, final Type<LoadDetailEventHandler<E>> type, final Object source) {
         this.result = result;
         this.type = type;
         this.source = source;

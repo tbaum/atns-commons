@@ -2,8 +2,11 @@ package de.atns.common.security.client;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.WidgetDisplay;
+import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.LogoutEvent;
 import de.atns.common.security.client.event.ServerStatusEvent;
@@ -28,6 +31,8 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         public void reset() {
         }
     };
+
+    @Inject private static Provider<SharedServices> shared;
     private final DispatchAsync dispatcher;
     private final EventBus eventBus;
     private final WidgetDisplay display;
@@ -39,8 +44,8 @@ public abstract class Callback<T> implements AsyncCallback<T> {
     }
 
     public Callback(final WidgetDisplay display) {
-        this.dispatcher = SharedServicesHolder.shared().getDispatchAsync();
-        this.eventBus = SharedServicesHolder.shared().getEventBus();
+        this.dispatcher = shared.get().dispatcher();
+        this.eventBus = shared.get().eventBus();
         this.display = display;
         this.display.startProcessing();
     }

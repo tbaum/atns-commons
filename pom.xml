@@ -21,8 +21,9 @@
         <module>dao</module>
         <module>dao-mail</module>
         <module>fileutils</module>
-        <module>gwt</module>
         <module>pdf</module>
+        <module>gwt</module>
+        <module>gwt-app</module>
         <module>gwt-crud</module>
         <module>gwt-security</module>
         <module>gwt-security-gui</module>
