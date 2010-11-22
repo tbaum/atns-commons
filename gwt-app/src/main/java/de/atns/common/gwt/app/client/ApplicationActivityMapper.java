@@ -22,8 +22,8 @@ public abstract class ApplicationActivityMapper implements ActivityMapper {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public ApplicationActivityMapper(ApplicationInjector clientFactory) {
-        moduleLoaders = loadModules(clientFactory.sharedServices());
+    public ApplicationActivityMapper(ApplicationInjector applicationInjector) {
+        moduleLoaders = loadModules(applicationInjector.sharedServices());
     }
 
     protected abstract List<? extends ModuleLoader> loadModules(final SharedServices sharedServices);
