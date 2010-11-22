@@ -11,6 +11,8 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 public interface SharedServices {
 // -------------------------- OTHER METHODS --------------------------
 
+    AppShell appShell();
+
     DispatchAsync dispatcher();
 
     EventBus eventBus();

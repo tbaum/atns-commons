@@ -4,7 +4,7 @@
     <groupId>de.atns.common</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}:${project.packaging}:${project.version}</name>
 
     <parent>
@@ -23,10 +23,6 @@
         <module>fileutils</module>
         <module>pdf</module>
         <module>gwt</module>
-        <module>gwt-app</module>
-        <module>gwt-crud</module>
-        <module>gwt-security</module>
-        <module>gwt-security-gui</module>
         <module>image</module>
         <module>json</module>
         <module>numbergenerator</module>

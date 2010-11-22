@@ -8,7 +8,7 @@
     <parent>
         <groupId>de.atns.common</groupId>
         <artifactId>parent</artifactId>
-        <version>1.4.3-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -19,12 +19,12 @@
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>fileutils</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>config</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

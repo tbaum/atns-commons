@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.1/distro-source/core/src/gwt-module.dtd">
+<module>
+
+    <inherits name="de.atns.common.gwt.Gwt"/>
+    <inherits name="de.atns.common.security.Security"/>
+    <inherits name="de.atns.common.security.Shared"/>
+    <inherits name="de.atns.common.crud.Crud"/>
+
+    <source path="client"/>
+
+</module>

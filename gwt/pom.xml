@@ -8,7 +8,7 @@
     <parent>
         <groupId>de.atns.common</groupId>
         <artifactId>parent</artifactId>
-        <version>1.4.3-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -33,13 +33,30 @@
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.code.gwt-crypto</groupId>
+            <artifactId>gwt-crypto</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.cobogw.gwt</groupId>
             <artifactId>cobogw</artifactId>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>dao</artifactId>
-            <version>1.4.3-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
