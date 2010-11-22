@@ -9,6 +9,7 @@
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="de.atns.common.gwt.Gwt"/>
+    <inherits name="de.atns.common.security.Security"/>
 
     <source path="client"/>
 </module>

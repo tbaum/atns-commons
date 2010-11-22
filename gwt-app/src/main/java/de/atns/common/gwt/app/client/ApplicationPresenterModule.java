@@ -22,15 +22,6 @@ import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
 public abstract class ApplicationPresenterModule extends AbstractPresenterModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override protected final void configure() {
-        bind(ApplicationShell.class).in(Singleton.class);
-        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-
-        configureApplication();
-    }
-
-    protected abstract void configureApplication();
-
     protected void bindApplication(Class<? extends ApplicationActivityMapper> activityMapperClass,
                                    Class<? extends PlaceHistoryMapper> historyMapperClass,
                                    Class<? extends Navigation> navigationClass) {
@@ -39,7 +30,18 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
         bind(historyMapperClass).in(Singleton.class);
 
         bind(Navigation.class).to(navigationClass);
+        
+        requestStaticInjection(Navigation.class);
     }
+
+    @Override protected final void configure() {
+        bind(ApplicationShell.class).in(Singleton.class);
+        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
+
+        configureApplication();
+    }
+
+    protected abstract void configureApplication();
 
     @Provides @Singleton ActivityManager getActivityManager(final ActivityMapper mapper, final EventBus eventBus,
                                                             final ApplicationShell shell) {
