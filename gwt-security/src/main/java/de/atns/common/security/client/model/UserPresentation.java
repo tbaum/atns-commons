@@ -12,6 +12,7 @@ public class UserPresentation implements Result, IsSerializable {
 
     private String login;
     private String authToken;
+    private String[] roles;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -19,9 +20,10 @@ public class UserPresentation implements Result, IsSerializable {
         this(null, null);
     }
 
-    public UserPresentation(final String login, final String authToken) {
+    public UserPresentation(final String login, final String authToken, final String... roles) {
         this.login = login;
         this.authToken = authToken;
+        this.roles = roles;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -34,6 +36,10 @@ public class UserPresentation implements Result, IsSerializable {
         return login;
     }
 
+    public String[] getRoles() {
+        return roles;
+    }
+
 // ------------------------ CANONICAL METHODS ------------------------
 
     @Override public String toString() {
@@ -44,6 +50,15 @@ public class UserPresentation implements Result, IsSerializable {
     }
 
 // -------------------------- OTHER METHODS --------------------------
+
+    public boolean inRole(final String targetRole) {
+        for (String role : roles) {
+            if (role.equals(targetRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean isValid() {
         return authToken != null;
