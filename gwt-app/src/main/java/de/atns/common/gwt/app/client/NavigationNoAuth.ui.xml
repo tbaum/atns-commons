@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+    <ui:style>
+        .navi {
+            height: 22px;
+            margin-top: 5px;
+        }
+
+        .left {
+            border: none;
+            float: left;
+        }
+
+        .right {
+            border: none;
+            float: right;
+        }
+    </ui:style>
+
+    <g:HTMLPanel addStyleNames="{style.navi} gwt-MenuBar-horizontal">
+        <g:MenuBar autoOpen="true" addStyleNames="{style.left}">
+
+        </g:MenuBar>
+
+        <g:MenuBar addStyleNames="{style.right}">
+            <g:MenuItem ui:field="login" text="Login"/>
+        </g:MenuBar>
+    </g:HTMLPanel>
+</ui:UiBinder>
