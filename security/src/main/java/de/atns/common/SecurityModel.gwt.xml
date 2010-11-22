@@ -3,6 +3,9 @@
         "http://google-web-toolkit.googlecode.com/svn/releases/2.1/distro-source/core/src/gwt-module.dtd">
 <module>
     <source path="security">
+        <include name="SecurityException.java"/>
+        <include name="NotLogginException.java"/>
+        <include name="NotInRoleException.java"/>
         <include name="Secured.java"/>
         <include name="SecurityUser.java"/>
     </source>

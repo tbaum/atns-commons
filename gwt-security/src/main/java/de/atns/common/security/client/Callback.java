@@ -57,12 +57,12 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     @Override
     public void onFailure(final Throwable originalCaught) {
-        LOG.log(Level.FINE, "check session in callback");
+        LOG.log(Level.WARNING, "check session in callback");
         display.showError(originalCaught.getMessage());
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
             @Override
             public void onFailure(final Throwable caught) {
-                LOG.log(Level.FINE, "failed-checksession", caught);
+                LOG.log(Level.WARNING, "failed-checksession", caught);
                 eventBus.fireEvent(new ServerStatusEvent(ServerStatusEventHandler.ServerStatus.UNAVAILABLE));
                 finish();
             }
