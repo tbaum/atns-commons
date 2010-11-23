@@ -16,6 +16,7 @@ import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
 import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.login.client.LoginPlace;
+import de.atns.common.security.login.client.LogoutPlace;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,8 +86,6 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
     @Override
     protected void onBind() {
         super.onBind();
-        System.err.println("!!!!!!!!!! bind???");
-
 
         registerHandler(eventBus.addHandler(ServerStatusEventHandler.TYPE, new ServerStatusEventHandler() {
             @Override public void onServerStatusChange(ServerStatusEvent event) {
@@ -119,18 +118,17 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
         doLogin();
     }
 
-    @Override protected void onUnbind() {
-        super.onUnbind();
-        System.err.println("!!!!!!!!!! unbind???");
-    }
-
     private void doLogin() {
         Place where = placeController.getWhere();
         String lastPlace = "";
-        if (where != null) {
+        if (where != null && !(where instanceof LoginPlace) && !(where instanceof LogoutPlace)) {
             lastPlace = historyMapper.getToken(where);
         }
         placeController.goTo(new LoginPlace(lastPlace));
+    }
+
+    @Override protected void onUnbind() {
+        super.onUnbind();
     }
 
 // -------------------------- INNER CLASSES --------------------------
