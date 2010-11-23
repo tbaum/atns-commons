@@ -88,4 +88,8 @@ public class Util {
     public static BigDecimal parseBigDecimal(final String text, final BigDecimal defaultValue) {
         return text.isEmpty() ? defaultValue : new BigDecimal(text);
     }
+
+    public static String toString(final Object display) {
+        return display.getClass() + "#" + display.hashCode();
+    }
 }

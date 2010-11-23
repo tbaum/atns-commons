@@ -8,6 +8,8 @@ import com.google.inject.Inject;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author tbaum
@@ -16,29 +18,12 @@ import java.util.List;
 public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activity {
 // ------------------------------ FIELDS ------------------------------
 
-
-    @Override public String mayStop() {
-        return null;
-    }
-
-    @Override public void onCancel() {
-        onStop();
-    }
-
-    @Override public void onStop() {
-        unbind();
-    }
-
-    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
-        panel.setWidget(display.asWidget());
-        bind();
-    }
-
     protected DispatchAsync dispatcher;
 
 
     protected D display;
     protected EventBus eventBus;
+    private final Logger LOG = Logger.getLogger(this.getClass().toString());
     private List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
 
     private boolean bound = false;
@@ -49,23 +34,37 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
         return display;
     }
 
-    @Inject
-    public void setDisplay(D display) {
-        this.display = display;
-    }
-
     public boolean isBound() {
         return bound;
     }
 
-    @Inject
-    public void setDispatcher(DispatchAsync dispatcher) {
-        this.dispatcher = dispatcher;
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface Activity ---------------------
+
+    @Override public String mayStop() {
+        return null;
     }
 
-    @Inject
-    public void setEventBus(EventBus eventBus) {
-        this.eventBus = eventBus;
+    @Override public void onCancel() {
+        LOG.log(Level.FINE, "Activity: onCancel()");
+        onStop();
+    }
+
+    @Override public void onStop() {
+        LOG.log(Level.FINE, "Activity: onStop()");
+
+        unbind();
+    }
+
+    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
+        LOG.log(Level.FINE, "Activity: start()");
+
+        panel.setWidget(display.asWidget());
+        LOG.log(Level.FINE, "Activity: showPanel(" + display + ")");
+
+        bind();
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -100,6 +99,31 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
     protected void registerHandler(HandlerRegistration... handlerRegistration) {
         for (HandlerRegistration registration : handlerRegistration) {
             handlerRegistrations.add(registration);
+        }
+    }
+
+    @Inject
+    public void setDispatcher(DispatchAsync dispatcher) {
+        this.dispatcher = dispatcher;
+        if (LOG.isLoggable(Level.FINEST)) {
+            LOG.log(Level.FINEST, "setDispatcher->" + Util.toString(dispatcher));
+        }
+    }
+
+    @Inject
+    public void setDisplay(D display) {
+        this.display = display;
+        if (LOG.isLoggable(Level.FINEST)) {
+            LOG.log(Level.FINEST, "setDisplay->" + Util.toString(display));
+        }
+    }
+
+    @Inject
+    public void setEventBus(EventBus eventBus) {
+        this.eventBus = eventBus;
+
+        if (LOG.isLoggable(Level.FINEST)) {
+            LOG.log(Level.FINEST, "setEventBus->" + Util.toString(eventBus));
         }
     }
 
