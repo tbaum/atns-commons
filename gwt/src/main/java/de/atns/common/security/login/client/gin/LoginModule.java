@@ -1,5 +1,6 @@
 package de.atns.common.security.login.client.gin;
 
+import com.google.inject.Singleton;
 import de.atns.common.security.client.SharedServicesModule;
 import de.atns.common.security.login.client.LoginPresenter;
 import de.atns.common.security.login.client.LoginView;
@@ -15,5 +16,6 @@ public class LoginModule extends SharedServicesModule {
         super.configure();
 
         bindPresenter(LoginPresenter.class, LoginPresenter.Display.class, LoginView.class);
+//        bind(LoginView.class).in(Singleton.class);
     }
 }

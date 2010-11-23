@@ -59,7 +59,6 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
     @Override
     protected void onBind() {
         super.onBind();
-        display.showDialogBox();
 
         registerHandler(display.addLoginClick(new ClickHandler() {
             @Override

@@ -4,6 +4,7 @@ import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
@@ -58,9 +59,10 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
 
     @Provides @Singleton PlaceHistoryHandler getPlaceHistoryHandler(final PlaceHistoryMapper mapper,
                                                                     final EventBus eventBus,
-                                                                    final PlaceController placeController) {
+                                                                    final PlaceController placeController,
+                                                                    final @ApplicationDefaultPlace Place defaultPlace) {
         final PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(mapper);
-        historyHandler.register(placeController, eventBus, StartPlace.START);
+        historyHandler.register(placeController, eventBus, defaultPlace);
         return historyHandler;
     }
 
