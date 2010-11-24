@@ -60,7 +60,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
                         .getPanel()
                 ), new FieldSetPanel("Passwort", extendedFlowPanel()
                         .add("Passwort").widthPX(120).add(passwort1).newLine()
-                        .add("weiderholen").widthPX(120).add(passwort2).newLine()
+                        .add("wiederholen").widthPX(120).add(passwort2).newLine()
                         .getPanel()
                 ),
                 getErrorPanel(),
