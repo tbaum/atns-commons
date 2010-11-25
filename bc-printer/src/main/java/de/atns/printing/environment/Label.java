@@ -12,23 +12,26 @@ public class Label implements Serializable {
     protected DocumentElement document;
 
     protected Material material = Material.TD_21786;
+    private final int anzahl;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public Label() {
-        // empty Constructor
-    }
-
     public Label(final DocumentElement element) {
         this.document = element;
+        anzahl = 1;
     }
 
-    public Label(final DocumentElement element, final Material material) {
+    public Label(final DocumentElement element, final Material material, final int anzahl) {
         this.document = element;
         this.material = material;
+        this.anzahl = anzahl;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
+
+    public int getAnzahl() {
+        return anzahl;
+    }
 
     public DocumentElement getDocument() {
         return this.document;

@@ -25,9 +25,7 @@ public abstract class ZPLPrinterDevice extends AbstractDevice {
 
     @Override
     public void renderDocument(final DocumentElement doc) throws IOException {
-        this.factory.getDocumentRenderer().render(doc);
-        final StringBuffer buffer = this.factory.getDocumentRenderer().getBuffer();
-        processInstructions(buffer);
+        renderDocument(doc, 1);
     }
 
     public void renderDocument(final DocumentElement doc, final int quantity) throws IOException {
