@@ -26,7 +26,7 @@ import java.io.IOException;
 public class SwingGUIRenderDevice extends BufferedImageRenderDevice implements Device {
 // ------------------------------ FIELDS ------------------------------
 
-    private JLabel output;
+    private final JLabel output;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

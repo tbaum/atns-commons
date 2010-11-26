@@ -41,7 +41,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
 
     @Inject
     public BenutzerView() {
-        ExtendedFlowPanel extendedFlowPanel = ExtendedFlowPanel.extendedFlowPanel(5)
+        final ExtendedFlowPanel extendedFlowPanel = ExtendedFlowPanel.extendedFlowPanel(5)
                 .add(getErrorPanel())
                 .add(getLoader())
                 .newLine()
@@ -172,7 +172,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         ));
     }
 
-    private void setPagination(Widget widget) {
+    private void setPagination(final Widget widget) {
         pagePresenterPanel.clear();
         pagePresenterPanel.add(widget);
     }

@@ -47,7 +47,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
 
 // --------------------- Interface PlacePresenter ---------------------
 
-    @Override public Activity updateForPlace(BenutzerPlace place) {
+    @Override public Activity updateForPlace(final BenutzerPlace place) {
         return this;
     }
 
@@ -57,7 +57,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
         return LIST_EVENT;
     }
 
-    protected String bindRow(final BenutzerPresentation g, String lastValue) {
+    protected String bindRow(final BenutzerPresentation g, final String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {

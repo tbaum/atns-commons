@@ -60,8 +60,8 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public ApplicationPresenter(PlaceController placeController, PlaceHistoryMapper historyMapper,
-                                @ApplicationDefaultPlace Place defaultPlace) {
+    public ApplicationPresenter(final PlaceController placeController, final PlaceHistoryMapper historyMapper,
+                                @ApplicationDefaultPlace final Place defaultPlace) {
         this.placeController = placeController;
         this.historyMapper = historyMapper;
         this.defaultPlace = defaultPlace;
@@ -91,7 +91,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
         super.onBind();
 
         registerHandler(eventBus.addHandler(ServerStatusEventHandler.TYPE, new ServerStatusEventHandler() {
-            @Override public void onServerStatusChange(ServerStatusEvent event) {
+            @Override public void onServerStatusChange(final ServerStatusEvent event) {
                 final ServerStatusEvent.ServerStatus status = event.getStatus();
                 if (status == LOGGED_IN) {
                     display.setUser(event.getUser());
@@ -99,7 +99,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
                     final Place where = placeController.getWhere();
                     Place newPlace = null;
                     if (where instanceof LoginPlace) {
-                        LoginPlace loginPlace = (LoginPlace) where;
+                        final LoginPlace loginPlace = (LoginPlace) where;
                         newPlace = historyMapper.getPlace(loginPlace.getToken());
                     }
                     if (newPlace == null) {
@@ -121,7 +121,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
     }
 
     private void doLogin() {
-        Place where = placeController.getWhere();
+        final Place where = placeController.getWhere();
         String lastPlace = "";
         if (where != null && !(where instanceof LoginPlace) && !(where instanceof LogoutPlace)) {
             lastPlace = historyMapper.getToken(where);

@@ -18,7 +18,7 @@ public class BenutzerChangePassword implements Action<BenutzerPresentation> {
     public BenutzerChangePassword() {
     }
 
-    public BenutzerChangePassword(String pass) {
+    public BenutzerChangePassword(final String pass) {
         this.pass = pass;
     }
 

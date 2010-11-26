@@ -20,7 +20,7 @@ public class BenutzerEditView extends BenutzerDetailView implements BenutzerEdit
 // --------------------- Interface Display ---------------------
 
 
-    public void setData(BenutzerPresentation p, final boolean isAdmin) {
+    public void setData(final BenutzerPresentation p, final boolean isAdmin) {
         this.id = p.getId();
         login.setValue(p.getLogin());
         email.setValue(p.getEmail());

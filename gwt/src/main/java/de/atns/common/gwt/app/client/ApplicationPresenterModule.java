@@ -24,9 +24,9 @@ import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
 public abstract class ApplicationPresenterModule extends AbstractPresenterModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    protected void bindApplication(Class<? extends ApplicationActivityMapper> activityMapperClass,
-                                   Class<? extends PlaceHistoryMapper> historyMapperClass,
-                                   Class<? extends Navigation> navigationClass) {
+    protected void bindApplication(final Class<? extends ApplicationActivityMapper> activityMapperClass,
+                                   final Class<? extends PlaceHistoryMapper> historyMapperClass,
+                                   final Class<? extends Navigation> navigationClass) {
         bind(ActivityMapper.class).to(activityMapperClass).in(Singleton.class);
         bind(PlaceHistoryMapper.class).to(historyMapperClass).in(Singleton.class);
         bind(Navigation.class).to(navigationClass);

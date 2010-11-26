@@ -38,10 +38,10 @@ public class FreemarkerService {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public String renderTemplate(String templateName, Map<String, Object> context, Object... params) {
+    public String renderTemplate(final String templateName, final Map<String, Object> context, final Object... params) {
         try {
-            Template template = getTemplate(templateName);
-            StringWriter stringWriter = new StringWriter();
+            final Template template = getTemplate(templateName);
+            final StringWriter stringWriter = new StringWriter();
             template.process(createMap(context, params), stringWriter);
             return stringWriter.toString();
         } catch (IOException e) {
@@ -76,6 +76,9 @@ public class FreemarkerService {
 
 // -------------------------- INNER CLASSES --------------------------
 
-    @ConfigurationName("template-dir") @Retention(RUNTIME) @Target(FIELD) public static @interface TemplateDir {
+    @ConfigurationName("template-dir")
+    @Retention(RUNTIME)
+    @Target(FIELD)
+    public static @interface TemplateDir {
     }
 }

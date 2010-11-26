@@ -13,7 +13,8 @@ import static java.lang.Long.parseLong;
  * @author tbaum
  * @since 06.11.2009
  */
-@Singleton public class NumberGenerator {
+@Singleton
+public class NumberGenerator {
 // ------------------------------ FIELDS ------------------------------
 
     private final File orderNumberDir;
@@ -31,7 +32,7 @@ import static java.lang.Long.parseLong;
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public long next(NumberType type, final Object... data) {
+    public long next(final NumberType type, final Object... data) {
         synchronized (orderNumberDir) {
             final File d1 = new File(orderNumberDir, type.name());
             File[] f = d1.listFiles();
@@ -53,7 +54,7 @@ import static java.lang.Long.parseLong;
                 case DAY:
                 case MONTH:
                 case YEAR:
-                    String content = readLine(f[0]);
+                    final String content = readLine(f[0]);
                     final String prefix = type.period().currentPrefix(data);
                     if (!content.equals(prefix)) {
                         current = 1;
@@ -90,7 +91,7 @@ import static java.lang.Long.parseLong;
             //noinspection ResultOfMethodCallIgnored
             file.getParentFile().mkdirs();
 
-            PrintWriter f = new PrintWriter(file);
+            final PrintWriter f = new PrintWriter(file);
             f.println(prefix);
             f.close();
         } catch (IOException e) {

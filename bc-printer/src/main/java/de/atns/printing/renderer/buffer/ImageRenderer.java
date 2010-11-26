@@ -26,7 +26,7 @@ import java.awt.*;
 public class ImageRenderer implements Renderer<ImageElement> {
 // ------------------------------ FIELDS ------------------------------
 
-    private DocumentRenderer dr;
+    private final DocumentRenderer dr;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

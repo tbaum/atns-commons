@@ -19,7 +19,7 @@ import java.io.IOException;
 public class BarcodeRenderer implements Renderer<BarcodeElement> {
 // ------------------------------ FIELDS ------------------------------
 
-    private DocumentRenderer dr;
+    private final DocumentRenderer dr;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

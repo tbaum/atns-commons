@@ -22,7 +22,7 @@ public class Configurator {
             final Properties configMapping = new Properties();
             configMapping.load(getClass().getResourceAsStream("mapping.properties"));
             final String hostName = getLocalHost().getHostName();
-            String configName = configMapping.getProperty(hostName, "unknown");
+            final String configName = configMapping.getProperty(hostName, "unknown");
             LOG.warn("using config-name " + configName + " for host " + hostName);
             return configName;
         } catch (IOException e) {

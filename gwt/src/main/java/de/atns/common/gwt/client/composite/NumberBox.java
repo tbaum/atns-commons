@@ -32,7 +32,7 @@ public class NumberBox extends Composite
         this(null, DEFAULT_FORMAT);
     }
 
-    public NumberBox(Number number, NumberBox.Format format) {
+    public NumberBox(final Number number, final NumberBox.Format format) {
         assert format != null : "You may not construct a number box with a null format";
         this.format = format;
 
@@ -42,7 +42,7 @@ public class NumberBox extends Composite
 
         box.addBlurHandler(new BlurHandler() {
             @Override public void onBlur(final BlurEvent blurEvent) {
-                Number parsedNumber = parseNumber(true);
+                final Number parsedNumber = parseNumber(true);
                 if (parsedNumber != null) {
                     setValue(numberValue, parsedNumber, true);
                 }
@@ -50,11 +50,11 @@ public class NumberBox extends Composite
         });
 
         box.addKeyDownHandler(new KeyDownHandler() {
-            public void onKeyDown(KeyDownEvent event) {
+            public void onKeyDown(final KeyDownEvent event) {
                 switch (event.getNativeKeyCode()) {
                     case KeyCodes.KEY_ENTER:
                     case KeyCodes.KEY_TAB:
-                        Number parsedNumber = parseNumber(true);
+                        final Number parsedNumber = parseNumber(true);
                         if (parsedNumber != null) {
                             setValue(numberValue, parsedNumber, true);
                         }
@@ -66,15 +66,15 @@ public class NumberBox extends Composite
         setValue(number);
     }
 
-    private Number parseNumber(boolean reportError) {
+    private Number parseNumber(final boolean reportError) {
         if (reportError) {
             format.reset(this, false);
         }
-        String text = box.getText().trim();
+        final String text = box.getText().trim();
         return format.parse(this, text, reportError);
     }
 
-    private void setValue(Number oldNumber, Number number, boolean fireEvents) {
+    private void setValue(final Number oldNumber, final Number number, final boolean fireEvents) {
         numberValue = number;
         format.reset(this, false);
         box.setValue(format.format(this, number));
@@ -84,7 +84,7 @@ public class NumberBox extends Composite
         }
     }
 
-    public void setValue(Number number) {
+    public void setValue(final Number number) {
         setValue(number, false);
     }
 
@@ -97,15 +97,15 @@ public class NumberBox extends Composite
         return box.getTabIndex();
     }
 
-    public void setAccessKey(char key) {
+    public void setAccessKey(final char key) {
         box.setAccessKey(key);
     }
 
-    public void setFocus(boolean focused) {
+    public void setFocus(final boolean focused) {
         box.setFocus(focused);
     }
 
-    public void setTabIndex(int index) {
+    public void setTabIndex(final int index) {
         box.setTabIndex(index);
     }
 
@@ -123,19 +123,19 @@ public class NumberBox extends Composite
         return box.isEnabled();
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         box.setEnabled(enabled);
     }
 
 // --------------------- Interface HasValue ---------------------
 
-    public void setValue(Number number, boolean fireEvents) {
+    public void setValue(final Number number, final boolean fireEvents) {
         setValue(numberValue, number, fireEvents);
     }
 
 // --------------------- Interface HasValueChangeHandlers ---------------------
 
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Number> handler) {
+    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<Number> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
@@ -147,7 +147,7 @@ public class NumberBox extends Composite
 
 // --------------------- Interface ValueChangeHandler ---------------------
 
-    public void onValueChange(ValueChangeEvent<Number> event) {
+    public void onValueChange(final ValueChangeEvent<Number> event) {
         setValue(parseNumber(false), event.getValue(), true);
         box.setFocus(true);
     }
@@ -175,11 +175,11 @@ public class NumberBox extends Composite
             numberFormat = NumberFormat.getDecimalFormat();
         }
 
-        public DefaultFormat(NumberFormat numberFormat) {
+        public DefaultFormat(final NumberFormat numberFormat) {
             this.numberFormat = numberFormat;
         }
 
-        public String format(NumberBox numberBox, Number number) {
+        public String format(final NumberBox numberBox, final Number number) {
             if (number == null) {
                 return "";
             } else {
@@ -192,7 +192,7 @@ public class NumberBox extends Composite
         }
 
         @SuppressWarnings("deprecation")
-        public Number parse(NumberBox numberBox, String numberText, boolean reportError) {
+        public Number parse(final NumberBox numberBox, final String numberText, final boolean reportError) {
             Number number = null;
             try {
                 if (numberText.length() > 0) {
@@ -211,7 +211,7 @@ public class NumberBox extends Composite
             return number;
         }
 
-        public void reset(NumberBox numberBox, boolean abandon) {
+        public void reset(final NumberBox numberBox, final boolean abandon) {
             numberBox.removeStyleName(NUMBER_BOX_FORMAT_ERROR);
         }
     }

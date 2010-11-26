@@ -56,7 +56,7 @@ public class ClassUtils {
         }
     }
 
-    public static void setField(Object target, Field field, Object value) {
+    public static void setField(final Object target, final Field field, final Object value) {
         try {
             field.setAccessible(true);
             field.set(target, value);
@@ -66,7 +66,7 @@ public class ClassUtils {
     }
 
     @SuppressWarnings({"unchecked"})
-    public static <T> T getField(Object target, Field field) {
+    public static <T> T getField(final Object target, final Field field) {
         try {
             field.setAccessible(true);
             return (T) field.get(target);

@@ -17,8 +17,9 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
     private final ArrayList<SortHeading> headers = new ArrayList<SortHeading>();
     private SortColumn<FIELD> sortColumn = new SortColumn<FIELD>(null, null);
 
-    private ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers = new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
-    private Table.Row headerRow = Table.head();
+    private final ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers =
+            new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
+    private final Table.Row headerRow = Table.head();
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
@@ -32,10 +33,10 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
 // --------------------- Interface HasHandlers ---------------------
 
     @Override
-    public void fireEvent(GwtEvent<?> gwtEvent) {
+    public void fireEvent(final GwtEvent<?> gwtEvent) {
         if (gwtEvent instanceof ValueChangeEvent) {
-            ValueChangeEvent event = (ValueChangeEvent) gwtEvent;
-            for (ValueChangeHandler<SortColumn<FIELD>> header : handlers) {
+            final ValueChangeEvent event = (ValueChangeEvent) gwtEvent;
+            for (final ValueChangeHandler<SortColumn<FIELD>> header : handlers) {
                 // TODO check
                 header.onValueChange(event);
             }
@@ -63,26 +64,26 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
     }
 
     @Override
-    public void setValue(SortColumn<FIELD> sortColumn) {
+    public void setValue(final SortColumn<FIELD> sortColumn) {
         setValue(sortColumn, false);
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public Widget addHeader(String s) {
+    public Widget addHeader(final String s) {
         final Label label = new Label(s);
         headerRow.add(new Object[]{label});
         return label;
     }
 
-    public SortHeading addHeader(String name, final FIELD field) {
+    public SortHeading addHeader(final String name, final FIELD field) {
         final SortHeading widget = new SortHeading(name);
         headers.add(widget);
 
         widget.addValueChangeHandler(new ValueChangeHandler<OrderField.Sort>() {
             @Override
-            public void onValueChange(ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
-                for (SortHeading sortHeading : headers) {
+            public void onValueChange(final ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
+                for (final SortHeading sortHeading : headers) {
                     if (sortHeading != widget)
                         sortHeading.setSort(OrderField.Sort.NONE);
                 }
@@ -96,8 +97,8 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
     }
 
     @Override
-    public void setValue(SortColumn<FIELD> sortColumn, boolean b) {
-        boolean shouldFire = this.sortColumn == null || !this.sortColumn.equals(sortColumn);
+    public void setValue(final SortColumn<FIELD> sortColumn, final boolean b) {
+        final boolean shouldFire = this.sortColumn == null || !this.sortColumn.equals(sortColumn);
 
         this.sortColumn = new SortColumn<FIELD>(sortColumn.field, sortColumn.value);
 

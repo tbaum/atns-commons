@@ -43,7 +43,8 @@ public class UserLoginHandler implements ActionHandler<UserLogin, UserPresentati
     }
 
     @Override
-    public final UserPresentation execute(final UserLogin action, ExecutionContext context) throws ActionException {
+    public final UserPresentation execute(final UserLogin action,
+                                          final ExecutionContext context) throws ActionException {
         LOG.info("login " + action.getUserName());
         final UUID token = securityFilter.login(action.getUserName(), action.getPassword());
         if (token == null) {

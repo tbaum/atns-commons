@@ -17,7 +17,7 @@ public class ValidatingLengthKeyPressHandler extends ValidatingKeyPressHandler {
 // -------------------------- OTHER METHODS --------------------------
 
     @Override protected boolean isValid(final KeyPressEvent event) {
-        TextBox textBox = (TextBox) event.getSource();
+        final TextBox textBox = (TextBox) event.getSource();
         return textBox.getText().length() < maxLength || textBox.getSelectedText().length() != 0;
     }
 }

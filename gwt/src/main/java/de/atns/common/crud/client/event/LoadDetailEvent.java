@@ -18,7 +18,7 @@ public class LoadDetailEvent<E extends IsSerializable> extends GwtEvent<LoadDeta
 
     @Inject private static Provider<EventBus> eventBus;
     private final E result;
-    private Type<LoadDetailEventHandler<E>> type;
+    private final Type<LoadDetailEventHandler<E>> type;
     private final Object source;
 
 // -------------------------- STATIC METHODS --------------------------

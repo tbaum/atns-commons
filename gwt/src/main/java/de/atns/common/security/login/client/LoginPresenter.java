@@ -40,7 +40,7 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
 
 // --------------------- Interface PlacePresenter ---------------------
 
-    @Override public Activity updateForPlace(Place place) {
+    @Override public Activity updateForPlace(final Place place) {
         if (place instanceof LogoutPlace) {
             Cookies.removeCookie("l");
             dispatcher.execute(new UserLogout(), new Callback<UserPresentation>() {
@@ -68,7 +68,7 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
         }));
 
         try {
-            String[] s = Cookies.getCookie("l").split(":");
+            final String[] s = Cookies.getCookie("l").split(":");
             final String username = CryptoUtil.decrypt(s[0]);
             display.getUsername(username);
             final String password = CryptoUtil.decrypt(s[1]);

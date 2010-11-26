@@ -40,7 +40,8 @@ public class CheckSessionHandler implements ActionHandler<CheckSession, UserPres
     }
 
     @Override
-    public final UserPresentation execute(final CheckSession action, ExecutionContext context) throws ActionException {
+    public final UserPresentation execute(final CheckSession action,
+                                          final ExecutionContext context) throws ActionException {
         final SecurityUser user = this.user.get();
         final UUID token = securityFilter.getAuthToken();
         if (user == null || token == null) {

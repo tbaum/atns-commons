@@ -7,7 +7,6 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.inject.Inject;
 import de.atns.common.crud.client.event.LoadListProxyEvent;
 import de.atns.common.crud.client.event.LoadListProxyEventHandler;
@@ -27,7 +26,7 @@ public abstract class ListProxyPresenter<D extends ListProxyDisplay<T>, T extend
 // --------------------- GETTER / SETTER METHODS ---------------------
 
     @Inject
-    public void setPageProxyPresenter(PageProxyPresenter pageProxyPresenter) {
+    public void setPageProxyPresenter(final PageProxyPresenter pageProxyPresenter) {
         this.pageProxyPresenter = pageProxyPresenter;
     }
 
@@ -89,7 +88,7 @@ public abstract class ListProxyPresenter<D extends ListProxyDisplay<T>, T extend
 
     protected Receiver<List<T>> loadReceiver() {
         return new Receiver<List<T>>() {
-            @Override public void onSuccess(List<T> result) {
+            @Override public void onSuccess(final List<T> result) {
                 LoadListProxyEvent.fireEvent(result, _listEvent(), ListProxyPresenter.this);
             }
         };

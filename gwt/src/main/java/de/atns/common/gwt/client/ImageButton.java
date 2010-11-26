@@ -19,17 +19,17 @@ public class ImageButton extends ButtonBase {
         getElement().getStyle().setCursor(Style.Cursor.POINTER);
     }
 
-    protected ImageButton(Element elem) {
+    protected ImageButton(final Element elem) {
         super(elem);
         getElement().getStyle().setCursor(Style.Cursor.POINTER);
     }
 
-    public ImageButton(String src) {
+    public ImageButton(final String src) {
         this();
         getElement().setAttribute("src", src);
     }
 
-    public ImageButton(String src, ClickHandler handler) {
+    public ImageButton(final String src, final ClickHandler handler) {
         this(src);
         addClickHandler(handler);
     }
@@ -49,7 +49,7 @@ public class ImageButton extends ButtonBase {
         return getElement().cast();
     }
 
-    public void setSrc(String src) {
+    public void setSrc(final String src) {
         getElement().setAttribute("src", src);
     }
 }

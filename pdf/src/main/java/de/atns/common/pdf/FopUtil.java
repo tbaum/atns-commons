@@ -82,7 +82,7 @@ public class FopUtil {
         try {
             final StreamSource source = new StreamSource(templateFile);
             final Transformer transformer = transformerFactory.get().newTransformer(source);
-            for (Map.Entry<String, Object> p : params.entrySet()) {
+            for (final Map.Entry<String, Object> p : params.entrySet()) {
                 transformer.setParameter(p.getKey(), p.getValue());
             }
             final Fop fop = fopFactory.get().newFop(MimeConstants.MIME_PDF, outputStream);

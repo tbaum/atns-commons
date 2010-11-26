@@ -24,7 +24,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
     protected D display;
     protected EventBus eventBus;
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
-    private List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
+    private final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
 
     private boolean bound = false;
 
@@ -58,7 +58,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
         unbind();
     }
 
-    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
+    @Override public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
         LOG.log(Level.FINE, "Activity: start()");
 
         panel.setWidget(display.asWidget());
@@ -96,14 +96,14 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
      *
      * @param handlerRegistration The registration.
      */
-    protected void registerHandler(HandlerRegistration... handlerRegistration) {
-        for (HandlerRegistration registration : handlerRegistration) {
+    protected void registerHandler(final HandlerRegistration... handlerRegistration) {
+        for (final HandlerRegistration registration : handlerRegistration) {
             handlerRegistrations.add(registration);
         }
     }
 
     @Inject
-    public void setDispatcher(DispatchAsync dispatcher) {
+    public void setDispatcher(final DispatchAsync dispatcher) {
         this.dispatcher = dispatcher;
         if (LOG.isLoggable(Level.FINEST)) {
             LOG.log(Level.FINEST, "setDispatcher->" + Util.toString(dispatcher));
@@ -111,7 +111,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
     }
 
     @Inject
-    public void setDisplay(D display) {
+    public void setDisplay(final D display) {
         this.display = display;
         if (LOG.isLoggable(Level.FINEST)) {
             LOG.log(Level.FINEST, "setDisplay->" + Util.toString(display));
@@ -119,7 +119,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
     }
 
     @Inject
-    public void setEventBus(EventBus eventBus) {
+    public void setEventBus(final EventBus eventBus) {
         this.eventBus = eventBus;
 
         if (LOG.isLoggable(Level.FINEST)) {
@@ -131,7 +131,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
         if (bound) {
             bound = false;
 
-            for (HandlerRegistration reg : handlerRegistrations) {
+            for (final HandlerRegistration reg : handlerRegistrations) {
                 reg.removeHandler();
             }
             handlerRegistrations.clear();

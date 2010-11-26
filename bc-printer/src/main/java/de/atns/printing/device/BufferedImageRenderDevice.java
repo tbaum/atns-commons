@@ -25,7 +25,7 @@ import java.io.IOException;
 public abstract class BufferedImageRenderDevice extends AbstractDevice {
 // ------------------------------ FIELDS ------------------------------
 
-    private RendererFactory factory;
+    private final RendererFactory factory;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

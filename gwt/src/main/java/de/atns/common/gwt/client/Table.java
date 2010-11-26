@@ -13,51 +13,51 @@ import com.google.gwt.user.client.ui.Widget;
 public class Table extends ComplexPanel {
 // -------------------------- STATIC METHODS --------------------------
 
-    public static Table table(Row... w) {
-        Table fp = new Table();
+    public static Table table(final Row... w) {
+        final Table fp = new Table();
         fp.add(w);
         return fp;
     }
 
-    public void add(Row... w) {
-        for (Row row : w) {
+    public void add(final Row... w) {
+        for (final Row row : w) {
             add(row);
         }
     }
 
-    public static Table table(String style, Row... w) {
-        Table fp = table(w);
+    public static Table table(final String style, final Row... w) {
+        final Table fp = table(w);
         fp.addStyleName(style);
         return fp;
     }
 
-    public static Row head(Object... w) {
-        Row fp = new Row();
+    public static Row head(final Object... w) {
+        final Row fp = new Row();
         fp.setStyleName("header");
         fp.add(w);
         return fp;
     }
 
-    public static Row row(Object... w) {
-        Row fp = new Row();
+    public static Row row(final Object... w) {
+        final Row fp = new Row();
         fp.setStyleName("row");
         fp.add(w);
         return fp;
     }
 
-    public static Cell cell(IsWidget w) {
+    public static Cell cell(final IsWidget w) {
         return new Cell(w);
     }
 
-    public static Cell cell(String s) {
+    public static Cell cell(final String s) {
         return new Cell(s);
     }
 
-    public static Cell cell(String style, IsWidget w) {
+    public static Cell cell(final String style, final IsWidget w) {
         return new Cell(style, w);
     }
 
-    public static Cell cell(String style, String s) {
+    public static Cell cell(final String style, final String s) {
         return new Cell(style, s);
     }
 
@@ -74,7 +74,7 @@ public class Table extends ComplexPanel {
 // --------------------- Interface HasWidgets ---------------------
 
     @Override
-    public void add(Widget child) {
+    public void add(final Widget child) {
         add(child, getElement());
     }
 
@@ -83,27 +83,27 @@ public class Table extends ComplexPanel {
     public static class Cell extends SimplePanel {
         private String style;
 
-        Cell(String style, IsWidget w) {
+        Cell(final String style, final IsWidget w) {
             super(DOM.createElement("td"));
             setWidget(w);
             this.style = style;
         }
 
-        Cell(String style, String w) {
+        Cell(final String style, final String w) {
             super(DOM.createElement("td"));
             getElement().setInnerHTML(w);
             this.style = style;
         }
 
-        public Cell(IsWidget widget) {
+        public Cell(final IsWidget widget) {
             this(null, widget);
         }
 
-        public Cell(String w) {
+        public Cell(final String w) {
             this(null, w);
         }
 
-        public Cell colspan(int i) {
+        public Cell colspan(final int i) {
             getElement().setAttribute("colspan", String.valueOf(i));
             return this;
         }
@@ -115,13 +115,13 @@ public class Table extends ComplexPanel {
 
     public static class Row extends ComplexPanel {
         @Override
-        public void add(Widget w) {
+        public void add(final Widget w) {
             add(w, getElement());
         }
 
-        public void add(Object... w) {
+        public void add(final Object... w) {
             for (int i = 0, w1Length = w.length; i < w1Length; i++) {
-                Object widget = w[i];
+                final Object widget = w[i];
                 final Cell tc;
 
                 if (widget instanceof Cell) {

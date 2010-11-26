@@ -12,9 +12,9 @@ import java.net.Socket;
 public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
 // ------------------------------ FIELDS ------------------------------
 
-    private String adress;
+    private final String adress;
 
-    private int port;
+    private final int port;
 
     private OutputStream stream = null;
     private Socket socket;

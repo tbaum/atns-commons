@@ -28,7 +28,8 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public ApplicationShell(NavigationNoAuth logoutMenu, Navigation loginMenu, @ApplicationName String appName) {
+    public ApplicationShell(final NavigationNoAuth logoutMenu, final Navigation loginMenu,
+                            @ApplicationName final String appName) {
         this.logoutMenu = logoutMenu;
         this.loginMenu = loginMenu;
         this.appName = appName;
@@ -39,7 +40,7 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
         show(false);
     }
 
-    public void show(boolean isAuth) {
+    public void show(final boolean isAuth) {
         navigation.setWidget(isAuth ? loginMenu : logoutMenu);
     }
 

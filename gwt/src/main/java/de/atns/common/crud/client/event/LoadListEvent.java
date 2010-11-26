@@ -19,7 +19,7 @@ public class LoadListEvent<E extends IsSerializable> extends GwtEvent<LoadListEv
 
     @Inject private static Provider<EventBus> eventBus;
     private final ListPresentation<E> result;
-    private Type<LoadListEventHandler<E>> type;
+    private final Type<LoadListEventHandler<E>> type;
     private final Object source;
 
 // -------------------------- STATIC METHODS --------------------------

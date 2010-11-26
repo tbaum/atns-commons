@@ -14,7 +14,7 @@ public enum NumberPeriood {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public String currentPrefix(Object... data) {
+    public String currentPrefix(final Object... data) {
         final Calendar c = Calendar.getInstance();
         if (data.length > 0) {
             c.setTime((Date) data[0]);

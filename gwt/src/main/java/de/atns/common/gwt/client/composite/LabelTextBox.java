@@ -19,9 +19,9 @@ public class LabelTextBox extends Composite
         implements /*TODO HasFocus, */ HasValue<String>, FocusHandler, BlurHandler, KeyUpHandler {
 // ------------------------------ FIELDS ------------------------------
 
-    private TextBox textBox = new TextBox();
+    private final TextBox textBox = new TextBox();
 
-    private InlineLabel infoLabel = new InlineLabel();
+    private final InlineLabel infoLabel = new InlineLabel();
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -126,7 +126,7 @@ public class LabelTextBox extends Composite
 
     private void updateLabelState() {
         //textBox.selectAll();
-        boolean ns = !textBox.getValue().isEmpty();
+        final boolean ns = !textBox.getValue().isEmpty();
         infoLabel.setVisible(!ns);
     }
 }

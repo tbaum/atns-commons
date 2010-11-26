@@ -27,14 +27,14 @@ import de.atns.printing.document.TextElement;
 public class LagerEtikett {
 // ------------------------------ FIELDS ------------------------------
 
-    private String address = "10.1.1.19";
+    private final String address = "10.1.1.19";
 
-    private int port = 9100;
+    private final int port = 9100;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public LagerEtikett() throws Exception {
-        String[] pr = {
+        final String[] pr = {
                 "A.01", "A.01", "A.01", "A.01", "A.02", "A.02", "A.02", "A.02", "A.03", "A.03", "A.03", "A.03", "A.04",
                 "A.04", "A.04", "A.04", "A.05", "A.05", "A.05", "A.05", "A.06", "A.06", "A.06", "A.06", "A.07", "A.07",
                 "A.07", "A.07", "A.08", "A.08", "A.08", "A.08", "A.09", "A.09", "A.09", "A.09", "A.10", "A.10", "A.10",
@@ -44,9 +44,9 @@ public class LagerEtikett {
                 "B.04", "B.04", "B.05", "B.05", "B.05", "B.05", "C.01", "C.01", "C.01", "C.01", "C.02", "C.02", "C.02",
                 "C.02", "C.03", "C.03", "C.03", "C.03"
         };
-        Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port);
 
-        for (String i : pr) {
+        for (final String i : pr) {
             f.renderDocument(createLabel(i));
         }
 //        testZLP(createLabel("B.02-D.04"));
@@ -62,7 +62,8 @@ public class LagerEtikett {
 
     private DocumentElement createLabel1(final String s) {
         final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
-        label.addElement(new BarcodeElement(7, 6, 12, BarcodeElement.Type.EAN128, BarcodeElement.MODULO3, false, "99" + s.replaceAll(".", "")));
+        label.addElement(new BarcodeElement(7, 6, 12, BarcodeElement.Type.EAN128, BarcodeElement.MODULO3, false,
+                "99" + s.replaceAll(".", "")));
         label.addElement(new TextElement(s, 10, 20, 7));
         return label;
     }
@@ -73,7 +74,7 @@ public class LagerEtikett {
     }
 
     public void testZLP(@SuppressWarnings("unused") final DocumentElement label) throws Exception {
-        Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port);
         f.renderDocument(label);
     }
 

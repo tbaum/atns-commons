@@ -19,7 +19,7 @@ public abstract class ModuleLoader<T extends WidgetPresenter & PlacePresenter> i
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public ModuleLoader(SharedServices sharedServices) {
+    public ModuleLoader(final SharedServices sharedServices) {
         this.sharedServices = sharedServices;
         load();
     }
@@ -31,7 +31,7 @@ public abstract class ModuleLoader<T extends WidgetPresenter & PlacePresenter> i
 
 // --------------------- Interface RunAsyncCallback ---------------------
 
-    public void onFailure(Throwable reason) {
+    public void onFailure(final Throwable reason) {
         Window.alert("Failed to load module");
     }
 

@@ -13,13 +13,13 @@ public class ListHandlerRgistration implements HandlerRegistration {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static HandlerRegistration toList(HandlerRegistration... handlerRegistration) {
+    public static HandlerRegistration toList(final HandlerRegistration... handlerRegistration) {
         return new ListHandlerRgistration(handlerRegistration);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private ListHandlerRgistration(HandlerRegistration... handlerRegistration) {
+    private ListHandlerRgistration(final HandlerRegistration... handlerRegistration) {
         this.handlerRegistration = handlerRegistration;
     }
 
@@ -29,7 +29,7 @@ public class ListHandlerRgistration implements HandlerRegistration {
 // --------------------- Interface HandlerRegistration ---------------------
 
     @Override public void removeHandler() {
-        for (HandlerRegistration registration : handlerRegistration) {
+        for (final HandlerRegistration registration : handlerRegistration) {
             try {
                 registration.removeHandler();
             } catch (Exception ignored) {

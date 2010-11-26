@@ -31,7 +31,7 @@ public class AdminDummyDataCreator {
 // -------------------------- OTHER METHODS --------------------------
 
     @Transactional public void createDefaultAdmin() {
-        Benutzer admin = new Benutzer("admin", SHA1.createSHA1Code("admin"), "");
+        final Benutzer admin = new Benutzer("admin", SHA1.createSHA1Code("admin"), "");
         admin.addRolle(DefaultRoles.ADMIN);
         entityManager.get().merge(admin);
     }

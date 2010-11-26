@@ -56,7 +56,7 @@ public class PageProxyView extends DefaultWidgetDisplay implements PageProxyPres
 
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {
-        Label label = new Label("" + site);
+        final Label label = new Label("" + site);
         final Style style = label.getElement().getStyle();
         style.setCursor(Style.Cursor.POINTER);
         style.setTextDecoration(Style.TextDecoration.UNDERLINE);
@@ -78,7 +78,7 @@ public class PageProxyView extends DefaultWidgetDisplay implements PageProxyPres
     @Override
     public HandlerRegistration addLengthButton(final ChangeHandler handler, final int active, final int... range) {
         rangeBox.clear();
-        for (int i : range) {
+        for (final int i : range) {
             rangeBox.addItem(String.valueOf(i));
 
             if (active == i) {

@@ -28,7 +28,7 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 // --------------------- GETTER / SETTER METHODS ---------------------
 
     @Inject
-    public void setState(ApplicationState state) {
+    public void setState(final ApplicationState state) {
         this.state = state;
     }
 

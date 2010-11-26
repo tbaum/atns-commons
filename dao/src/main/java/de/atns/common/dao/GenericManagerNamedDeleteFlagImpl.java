@@ -19,7 +19,7 @@ public abstract class GenericManagerNamedDeleteFlagImpl<TYPE extends LongIdObjec
     @Transactional(readOnly = true, propagation = REQUIRES_NEW)
     public Map<Long, String> loadNameList() {
         final Map<Long, String> result = new HashMap<Long, String>();
-        for (TYPE e : loadAll()) {
+        for (final TYPE e : loadAll()) {
             result.put(e.getId(), e.getName());
         }
         return result;

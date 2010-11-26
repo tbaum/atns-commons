@@ -14,10 +14,11 @@ import javax.persistence.NoResultException;
  * @author tbaum
  * @since 27.11.2009
  */
-@Singleton public class UserServiceImpl implements UserService {
+@Singleton
+public class UserServiceImpl implements UserService {
 // ------------------------------ FIELDS ------------------------------
 
-    private static Log LOG = LogFactory.getLog(UserServiceImpl.class);
+    private static final Log LOG = LogFactory.getLog(UserServiceImpl.class);
     private final BenutzerRepository repository;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -32,7 +33,7 @@ import javax.persistence.NoResultException;
 // --------------------- Interface UserService ---------------------
 
     @Override public Benutzer findUser(final String login, final String pass) {
-        Benutzer user = refreshUser(login);
+        final Benutzer user = refreshUser(login);
         if (user == null) {
             return null;
         }

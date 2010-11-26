@@ -19,13 +19,13 @@ public class BenutzerLoader extends ModuleLoader<BenutzerPresenter> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerLoader(SharedServices sharedServices) {
+    public BenutzerLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override public boolean canHandlePlace(Place place) {
+    @Override public boolean canHandlePlace(final Place place) {
         return place instanceof BenutzerPlace;
     }
 

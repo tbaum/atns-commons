@@ -48,7 +48,7 @@ public class Util {
     }
 
     @SuppressWarnings({"unchecked"})
-    public static <E extends Enum> E parseEnum(final ListBox listBox, Class<E> enumClass) {
+    public static <E extends Enum> E parseEnum(final ListBox listBox, final Class<E> enumClass) {
         final int index = listBox.getSelectedIndex();
         if (index > listBox.getItemCount() || index < 0) {
             return null;
@@ -59,7 +59,7 @@ public class Util {
 
     public static void fillListBox(final ListBox listBox, final Map<Long, String> entries, final Long selected) {
         listBox.clear();
-        for (Map.Entry<Long, String> entry : entries.entrySet()) {
+        for (final Map.Entry<Long, String> entry : entries.entrySet()) {
             listBox.addItem(entry.getValue(), String.valueOf(entry.getKey()));
             if (entry.getKey().equals(selected)) {
                 listBox.setSelectedIndex(listBox.getItemCount() - 1);

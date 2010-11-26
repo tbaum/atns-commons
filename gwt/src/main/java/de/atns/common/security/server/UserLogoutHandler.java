@@ -38,8 +38,9 @@ public class UserLogoutHandler implements ActionHandler<UserLogout, UserPresenta
     }
 
     @Override @Transactional
-    public final UserPresentation execute(final UserLogout action, ExecutionContext context) throws ActionException {
-        SecurityUser user = securityService.logout();
+    public final UserPresentation execute(final UserLogout action,
+                                          final ExecutionContext context) throws ActionException {
+        final SecurityUser user = securityService.logout();
 
         LOG.info("loggedout " + (user != null ? user.getLogin() : ""));
         return new UserPresentation(user != null ? user.getLogin() : null, null);

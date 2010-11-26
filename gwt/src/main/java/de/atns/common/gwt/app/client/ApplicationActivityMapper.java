@@ -43,8 +43,8 @@ public abstract class ApplicationActivityMapper implements ActivityMapper {
 // --------------------- Interface ActivityMapper ---------------------
 
     @Override
-    public Activity getActivity(Place place) {
-        for (ModuleLoader moduleLoader : moduleLoaders) {
+    public Activity getActivity(final Place place) {
+        for (final ModuleLoader moduleLoader : moduleLoaders) {
             if (!moduleLoader.canHandlePlace(place)) {
                 continue;
             }

@@ -24,7 +24,7 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
 // ------------------------------ FIELDS ------------------------------
 
     private final FileUpload fileUpload = new FileUpload();
-    private Button label;
+    private final Button label;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

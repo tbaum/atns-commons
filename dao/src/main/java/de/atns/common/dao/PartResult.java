@@ -10,13 +10,13 @@ public class PartResult<TYPE extends Serializable> implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
     private static final long serialVersionUID = -1948780339175966559L;
-    private int start;
+    private final int start;
     private final int total;
     private final List<TYPE> items;
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends Serializable> PartResult<T> createPartResult(PartResult<? extends T> p,
+    public static <T extends Serializable> PartResult<T> createPartResult(final PartResult<? extends T> p,
                                                                           final Collection<? extends T> result) {
         return new PartResult<T>(p.start, p.total, result);
     }

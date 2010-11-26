@@ -29,7 +29,7 @@ public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> impl
 
     protected Map<Class, Renderer> renderes = new HashMap<Class, Renderer>();
 
-    private DOC documentRenderer;
+    private final DOC documentRenderer;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

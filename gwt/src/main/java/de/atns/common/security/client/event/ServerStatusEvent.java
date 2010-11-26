@@ -19,12 +19,12 @@ public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static ServerStatusEvent loggedin(UserPresentation user) {
+    public static ServerStatusEvent loggedin(final UserPresentation user) {
         if (user == null) return toServerStatus(null);
         return user.isValid() ? new ServerStatusEvent(LOGGED_IN, user) : loggedout();
     }
 
-    public static ServerStatusEvent toServerStatus(Throwable exception) {
+    public static ServerStatusEvent toServerStatus(final Throwable exception) {
         if (exception instanceof NotLogginException) {
             return loggedout();
         }
@@ -40,7 +40,7 @@ public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private ServerStatusEvent(final ServerStatus status, UserPresentation user) {
+    private ServerStatusEvent(final ServerStatus status, final UserPresentation user) {
         this.status = status;
         this.user = user;
     }

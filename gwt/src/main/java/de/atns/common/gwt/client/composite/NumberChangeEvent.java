@@ -12,7 +12,7 @@ class NumberChangeEvent extends ValueChangeEvent<Number> {
 // -------------------------- STATIC METHODS --------------------------
 
     public static <S extends HasValueChangeHandlers<Number> & HasHandlers> void fireIfNotEqualNumbers(
-            S source, Number oldValue, Number newValue) {
+            final S source, final Number oldValue, final Number newValue) {
         if (ValueChangeEvent.shouldFire(source, oldValue, newValue)) {
             source.fireEvent(new NumberChangeEvent(newValue));
         }
@@ -20,7 +20,7 @@ class NumberChangeEvent extends ValueChangeEvent<Number> {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    protected NumberChangeEvent(Number value) {
+    protected NumberChangeEvent(final Number value) {
         super(value);
     }
 }

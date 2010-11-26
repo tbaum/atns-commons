@@ -52,7 +52,7 @@ public class UserPresentation implements Result, IsSerializable {
 // -------------------------- OTHER METHODS --------------------------
 
     public boolean inRole(final String targetRole) {
-        for (String role : roles) {
+        for (final String role : roles) {
             if (role.equals(targetRole)) {
                 return true;
             }

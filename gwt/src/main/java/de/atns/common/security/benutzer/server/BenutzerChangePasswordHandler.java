@@ -54,7 +54,7 @@ public class BenutzerChangePasswordHandler
     public Benutzer executeInternal(final BenutzerChangePassword action) throws ActionException {
         final Benutzer t = (Benutzer) securityService.currentUser();
 
-        Benutzer benutzer = em.get().find(Benutzer.class, t.getId());
+        final Benutzer benutzer = em.get().find(Benutzer.class, t.getId());
 
         if (!t.isAdmin() || t.getId() != benutzer.getId()) {
             throw new SecurityException("unable to change password.");

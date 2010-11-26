@@ -13,23 +13,23 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public FieldSetPanel(Widget legend) {
+    public FieldSetPanel(final Widget legend) {
         this(legend, null);
     }
 
-    public FieldSetPanel(String text) {
+    public FieldSetPanel(final String text) {
         this(new Label(text));
     }
 
-    public FieldSetPanel(String text, Widget content) {
+    public FieldSetPanel(final String text, final Widget content) {
         this(new Label(text), content);
     }
 
-    public FieldSetPanel(String text, ExtendedFlowPanel content) {
+    public FieldSetPanel(final String text, final ExtendedFlowPanel content) {
         this(text, content.getPanel());
     }
 
-    public FieldSetPanel(Widget legend, Widget content) {
+    public FieldSetPanel(final Widget legend, final Widget content) {
         legendPanel = new LegendPanel();
         setElement(DOM.createFieldSet());
         legendPanel.add(legend);
@@ -40,7 +40,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
     }
 
     @Override
-    public void add(Widget w) {
+    public void add(final Widget w) {
         add(w, getElement());
     }
 
@@ -49,17 +49,17 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
 
 // --------------------- Interface InsertPanel ---------------------
 
-    @Override public void insert(Widget w, int beforeIndex) {
+    @Override public void insert(final Widget w, final int beforeIndex) {
         insert(w, getElement(), beforeIndex, true);
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void addLegend(Widget legend) {
+    public void addLegend(final Widget legend) {
         legendPanel.add(legend);
     }
 
-    public void addLegend(String text) {
+    public void addLegend(final String text) {
         addLegend(new Label(text));
     }
 
@@ -85,7 +85,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         }
 
         @Override
-        public void add(Widget w) {
+        public void add(final Widget w) {
             add(w, getElement());
         }
 
@@ -97,7 +97,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
             }
         }
 
-        @Override public void insert(Widget w, int beforeIndex) {
+        @Override public void insert(final Widget w, final int beforeIndex) {
             insert(w, getElement(), beforeIndex, true);
         }
     }

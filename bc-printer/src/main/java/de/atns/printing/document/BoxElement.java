@@ -19,10 +19,10 @@ package de.atns.printing.document;
 public class BoxElement extends AbstractElement {
 // ------------------------------ FIELDS ------------------------------
 
-    private int size;
+    private final int size;
 
-    private double x2;
-    private double y2;
+    private final double x2;
+    private final double y2;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

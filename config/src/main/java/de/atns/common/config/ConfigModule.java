@@ -30,7 +30,7 @@ public class ConfigModule extends AbstractModule {
             @Override public <I> void hear(final TypeLiteral<I> type, final TypeEncounter<I> encounter) {
                 final Class<? super I> rawType = type.getRawType();
                 for (final Field field : rawType.getDeclaredFields()) {
-                    for (Annotation annotation : field.getAnnotations()) {
+                    for (final Annotation annotation : field.getAnnotations()) {
                         final ConfigurationName cn = annotation.annotationType().getAnnotation(ConfigurationName.class);
 
                         if (cn != null) {
@@ -63,7 +63,7 @@ public class ConfigModule extends AbstractModule {
     }
 
     protected void configure(final Class<? extends Annotation> annotation) {
-        String name = annotation.getAnnotation(ConfigurationName.class).value();
+        final String name = annotation.getAnnotation(ConfigurationName.class).value();
 
         final String configValue = value(name);
         if (configValue != null) {

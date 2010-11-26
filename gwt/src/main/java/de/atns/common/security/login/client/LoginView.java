@@ -107,7 +107,7 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         return automatic.getValue();
     }
 
-    @Override public void setAutomaticLogin(boolean v) {
+    @Override public void setAutomaticLogin(final boolean v) {
         automatic.setValue(v);
     }
 

@@ -21,21 +21,21 @@ public class ExtendedFlowPanel {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static ExtendedFlowPanel extendedFlowPanel(Widget... items) {
+    public static ExtendedFlowPanel extendedFlowPanel(final Widget... items) {
         final ExtendedFlowPanel flowPanel = new ExtendedFlowPanel();
-        for (Widget item : items) {
+        for (final Widget item : items) {
             flowPanel.add(item);
         }
         return flowPanel;
     }
 
-    public ExtendedFlowPanel add(Widget widget) {
+    public ExtendedFlowPanel add(final Widget widget) {
         addNoStyle(widget);
         updateStyle(widget);
         return this;
     }
 
-    public ExtendedFlowPanel addNoStyle(Widget widget) {
+    public ExtendedFlowPanel addNoStyle(final Widget widget) {
         panel.add(widget);
         count++;
         return this;
@@ -47,10 +47,10 @@ public class ExtendedFlowPanel {
         widget.getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
     }
 
-    public static ExtendedFlowPanel extendedFlowPanel(int padding, Widget... items) {
+    public static ExtendedFlowPanel extendedFlowPanel(final int padding, final Widget... items) {
         final ExtendedFlowPanel flowPanel = extendedFlowPanel();
         flowPanel.setPadding(padding);
-        for (Widget item : items) {
+        for (final Widget item : items) {
             flowPanel.add(item);
         }
         return flowPanel;
@@ -74,11 +74,11 @@ public class ExtendedFlowPanel {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public ExtendedFlowPanel add(Object text) {
+    public ExtendedFlowPanel add(final Object text) {
         return add(GwtUtil.createLabel(text != null ? text.toString() : ""));
     }
 
-    public ExtendedFlowPanel addStyle(String styleName) {
+    public ExtendedFlowPanel addStyle(final String styleName) {
         panel.getWidget(count - 1).addStyleName(styleName);
         return this;
     }
@@ -97,12 +97,12 @@ public class ExtendedFlowPanel {
         return this;
     }
 
-    public ExtendedFlowPanel widthPC(double w) {
+    public ExtendedFlowPanel widthPC(final double w) {
         panel.getWidget(count - 1).setWidth(w + "%");
         return this;
     }
 
-    public ExtendedFlowPanel widthPX(int w) {
+    public ExtendedFlowPanel widthPX(final int w) {
         panel.getWidget(count - 1).setWidth(w + "px");
         return this;
     }

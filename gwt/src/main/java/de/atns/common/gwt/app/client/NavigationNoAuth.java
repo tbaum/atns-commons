@@ -21,7 +21,7 @@ public class NavigationNoAuth extends Composite {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public NavigationNoAuth(PlaceController placeController) {
+    public NavigationNoAuth(final PlaceController placeController) {
         this.placeController = placeController;
 
         final ShellUiBinder uiBinder = GWT.create(ShellUiBinder.class);

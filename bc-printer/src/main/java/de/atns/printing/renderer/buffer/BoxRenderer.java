@@ -25,7 +25,7 @@ import java.awt.*;
 public class BoxRenderer implements Renderer<BoxElement> {
 // ------------------------------ FIELDS ------------------------------
 
-    private DocumentRenderer dr;
+    private final DocumentRenderer dr;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

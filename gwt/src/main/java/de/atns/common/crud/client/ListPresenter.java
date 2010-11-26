@@ -25,7 +25,7 @@ public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerial
 // --------------------- GETTER / SETTER METHODS ---------------------
 
     @Inject
-    public void setPagePresenter(PagePresenter pagePresenter) {
+    public void setPagePresenter(final PagePresenter pagePresenter) {
         this.pagePresenter = pagePresenter;
     }
 

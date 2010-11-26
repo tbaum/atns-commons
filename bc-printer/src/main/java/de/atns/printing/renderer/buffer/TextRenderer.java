@@ -25,7 +25,7 @@ import java.awt.*;
 public class TextRenderer implements Renderer<TextElement> {
 // ------------------------------ FIELDS ------------------------------
 
-    private DocumentRenderer dr;
+    private final DocumentRenderer dr;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -39,12 +39,14 @@ public class TextRenderer implements Renderer<TextElement> {
 // --------------------- Interface Renderer ---------------------
 
     public void render(final TextElement element) {
-        final Font font = new Font("sans", Font.PLAIN, Converter.convertMMToDots(element.getSize() * 0.9, this.dr.getResolution()));
+        final Font font = new Font("sans", Font.PLAIN,
+                Converter.convertMMToDots(element.getSize() * 0.9, this.dr.getResolution()));
         final Graphics graphics = this.dr.getGraphics();
 
         graphics.setFont(font);
         final int x = Converter.convertMMToDots(element.getX(), dr.getResolution());
-        final int y = (int) (Converter.convertMMToDots(element.getY(), dr.getResolution()) + graphics.getFontMetrics().getMaxAscent() * 0.8);
+        final int y = (int) (Converter.convertMMToDots(element.getY(), dr.getResolution()) + graphics.getFontMetrics()
+                .getMaxAscent() * 0.8);
         graphics.drawString((element).getText(), x, y);
     }
 }

@@ -18,17 +18,17 @@ public class ExtendedFlexTable {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static ExtendedFlexTable table(String... styles) {
+    public static ExtendedFlexTable table(final String... styles) {
         return new ExtendedFlexTable(styles);
     }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    private ExtendedFlexTable(String... styles) {
+    private ExtendedFlexTable(final String... styles) {
         table.setCellPadding(0);
         table.setCellSpacing(0);
         table.setBorderWidth(1);
-        for (String style : styles) {
+        for (final String style : styles) {
             table.addStyleName(style);
         }
     }
@@ -41,18 +41,18 @@ public class ExtendedFlexTable {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public ExtendedFlexTable cell(Widget widget) {
+    public ExtendedFlexTable cell(final Widget widget) {
         table.setWidget(row, col++, widget);
         addStyle((row + rowx) % 2 == 1 ? "even" : "odd");
         return this;
     }
 
-    public ExtendedFlexTable addStyle(String styleName) {
+    public ExtendedFlexTable addStyle(final String styleName) {
         table.getFlexCellFormatter().addStyleName(row, col - 1, styleName);
         return this;
     }
 
-    public ExtendedFlexTable cell(Object text) {
+    public ExtendedFlexTable cell(final Object text) {
         table.setText(row, col++, text != null ? text.toString() : "");
         addStyle((row + rowx) % 2 == 1 ? "even" : "odd");
         return this;
@@ -81,7 +81,7 @@ public class ExtendedFlexTable {
         return nextRow(false);
     }
 
-    public ExtendedFlexTable nextRow(boolean noadd) {
+    public ExtendedFlexTable nextRow(final boolean noadd) {
         row++;
         if (noadd) {
             rowx++;
@@ -95,12 +95,12 @@ public class ExtendedFlexTable {
         return this;
     }
 
-    public ExtendedFlexTable width(int w) {
+    public ExtendedFlexTable width(final int w) {
         table.getFlexCellFormatter().setWidth(row, col - 1, w + "px");
         return this;
     }
 
-    public ExtendedFlexTable widthPC(int w) {
+    public ExtendedFlexTable widthPC(final int w) {
         table.getFlexCellFormatter().setWidth(row, col - 1, w + "%");
         return this;
     }

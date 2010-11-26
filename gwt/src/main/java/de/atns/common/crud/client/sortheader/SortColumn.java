@@ -8,7 +8,7 @@ public class SortColumn<FIELD extends OrderField> {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    SortColumn(FIELD field, OrderField.Sort value) {
+    SortColumn(final FIELD field, final OrderField.Sort value) {
         this.field = field;
         this.value = value;
     }
@@ -16,11 +16,11 @@ public class SortColumn<FIELD extends OrderField> {
 // ------------------------ CANONICAL METHODS ------------------------
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SortColumn that = (SortColumn) o;
+        final SortColumn that = (SortColumn) o;
 
         if (field != null ? !field.equals(that.field) : that.field != null) return false;
         if (value != that.value) return false;

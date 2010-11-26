@@ -17,7 +17,7 @@ public class LoginPlace extends Place {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public LoginPlace(String token) {
+    public LoginPlace(final String token) {
         this.token = token;
     }
 
@@ -31,11 +31,11 @@ public class LoginPlace extends Place {
 
     @Prefix("login")
     public static class Tokenizer implements PlaceTokenizer<LoginPlace> {
-        public LoginPlace getPlace(String token) {
+        public LoginPlace getPlace(final String token) {
             return new LoginPlace(token);
         }
 
-        public String getToken(LoginPlace place) {
+        public String getToken(final LoginPlace place) {
             return place.getToken();
         }
     }

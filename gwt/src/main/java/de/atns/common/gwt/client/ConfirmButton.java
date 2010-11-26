@@ -28,7 +28,7 @@ public class ConfirmButton extends Button {
                 final DialogBox dialogBox = new DialogBox(false, true);
                 dialogBox.setText(title);
 
-                FlowPanel flowPanel = new FlowPanel();
+                final FlowPanel flowPanel = new FlowPanel();
 
                 final Label w = new Label(message, true);
                 w.addStyleName("heading");
@@ -36,7 +36,7 @@ public class ConfirmButton extends Button {
                 flowPanel.add(w);
 
 
-                Button cancelButton = new Button(cancelText);
+                final Button cancelButton = new Button(cancelText);
                 cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
 
                 final ClickHandler clickHandler = new ClickHandler() {

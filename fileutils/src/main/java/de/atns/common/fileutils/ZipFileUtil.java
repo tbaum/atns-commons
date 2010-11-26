@@ -25,7 +25,7 @@ public class ZipFileUtil {
 
     public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter)
             throws IOException {
-        List<File> extractedFiles = new LinkedList<File>();
+        final List<File> extractedFiles = new LinkedList<File>();
         final Enumeration<? extends ZipEntry> entries = zipFile.entries();
         while (entries.hasMoreElements()) {
             final ZipEntry zipEntry = entries.nextElement();

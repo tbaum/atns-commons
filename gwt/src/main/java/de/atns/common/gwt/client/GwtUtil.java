@@ -29,35 +29,35 @@ public class GwtUtil {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static FlowPanel flowPanel(Widget... w) {
-        FlowPanel fp = new FlowPanel();
-        for (Widget widget : w) {
+    public static FlowPanel flowPanel(final Widget... w) {
+        final FlowPanel fp = new FlowPanel();
+        for (final Widget widget : w) {
             fp.add(widget);
         }
         return fp;
     }
 
-    public static FlowPanel flowPanel(String style, Widget... w) {
-        FlowPanel fp = flowPanel(w);
+    public static FlowPanel flowPanel(final String style, final Widget... w) {
+        final FlowPanel fp = flowPanel(w);
         fp.setStyleName(style);
         return fp;
     }
 
-    public static Widget divBoxBorder(final Widget inhalt, final String width, DivBoxColor color) {
-        FlowPanel ro = new FlowPanel();
+    public static Widget divBoxBorder(final Widget inhalt, final String width, final DivBoxColor color) {
+        final FlowPanel ro = new FlowPanel();
 
-        String erweiterung = color.name().toLowerCase();
+        final String erweiterung = color.name().toLowerCase();
 
         ro.addStyleName("divBox-ro_" + erweiterung);
         ro.setWidth(width);
 
-        FlowPanel lo = new FlowPanel();
+        final FlowPanel lo = new FlowPanel();
         lo.addStyleName("divBox-lo_" + erweiterung);
 
-        FlowPanel lu = new FlowPanel();
+        final FlowPanel lu = new FlowPanel();
         lu.addStyleName("divBox-lu_" + erweiterung);
 
-        FlowPanel ru = new FlowPanel();
+        final FlowPanel ru = new FlowPanel();
         ru.addStyleName("divBox-ru_" + erweiterung);
 
         ro.add(lo);
@@ -79,7 +79,7 @@ public class GwtUtil {
     }
 
     static Button button(final String text, final String style, final ClickHandler clickHandler) {
-        Button button = new Button(text, clickHandler);
+        final Button button = new Button(text, clickHandler);
         button.setStyleName(style);
         return button;
     }
@@ -89,7 +89,7 @@ public class GwtUtil {
     }
 
     public static Label anchor(final String text, final String historyLink, final String style) {
-        Label label = createLabel(text, style, true);
+        final Label label = createLabel(text, style, true);
 
         final Style labelStyle = label.getElement().getStyle();
         labelStyle.setCursor(POINTER);
@@ -139,13 +139,13 @@ public class GwtUtil {
         return image;
     }
 
-    public static FlowPanel createFieldSet(String legend, Widget content) {
-        Element fieldset = DOM.createFieldSet();
+    public static FlowPanel createFieldSet(final String legend, final Widget content) {
+        final Element fieldset = DOM.createFieldSet();
         fieldset.setInnerHTML("<legend>" + legend + "</legend>");
         DOM.appendChild(fieldset, content.getElement());
         fieldset.getStyle().setMargin(0, Style.Unit.PX);
 
-        FlowPanel flowPanel = new FlowPanel();
+        final FlowPanel flowPanel = new FlowPanel();
         DOM.appendChild(flowPanel.getElement(), fieldset);
 
         return flowPanel;

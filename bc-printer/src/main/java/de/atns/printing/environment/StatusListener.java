@@ -12,7 +12,7 @@ public class StatusListener extends Thread {
 
     private boolean listen = true;
 
-    private ServerSocket socket;
+    private final ServerSocket socket;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

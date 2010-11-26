@@ -18,13 +18,13 @@ public class CryptoUtil {
 // -------------------------- STATIC METHODS --------------------------
 
     public static String encrypt(final String l) throws InvalidCipherTextException {
-        TripleDesCipher cipher = new TripleDesCipher();
+        final TripleDesCipher cipher = new TripleDesCipher();
         cipher.setKey(DES_KEY);
         return cipher.encrypt(l);
     }
 
     public static String decrypt(final String l) throws InvalidCipherTextException {
-        TripleDesCipher cipher = new TripleDesCipher();
+        final TripleDesCipher cipher = new TripleDesCipher();
         cipher.setKey(DES_KEY);
         return cipher.decrypt(l);
     }

@@ -64,12 +64,12 @@ public class Benutzer extends BaseObject implements SecurityUser {
 // --------------------- Interface SecurityUser ---------------------
 
     @Override public boolean hasAccessTo(final Secured secured) {
-        String[] required = secured.value();
+        final String[] required = secured.value();
         if (required.length == 0) {
             return true;
         }
 
-        for (String rolle : getRolle()) {
+        for (final String rolle : getRolle()) {
             if (contains(required, rolle)) {
                 return true;
             }
@@ -81,7 +81,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
 // -------------------------- OTHER METHODS --------------------------
 
     public void addRolle(final String... rollen) {
-        ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
+        final ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
         rolle.addAll(asList(rollen));
         this.rollen = StringUtils.join(",", rolle);
     }
@@ -95,7 +95,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
     private boolean contains(final String[] required, final String rolle) {
-        for (String s : required) {
+        for (final String s : required) {
             if (s.equals(rolle)) {
                 return true;
             }
@@ -104,7 +104,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
     public void removeRolle(final String... rollen) {
-        ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
+        final ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
         rolle.removeAll(asList(rollen));
         this.rollen = StringUtils.join(",", rolle);
     }

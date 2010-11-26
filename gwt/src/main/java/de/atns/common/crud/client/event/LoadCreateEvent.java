@@ -18,7 +18,7 @@ public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCrea
 
     @Inject private static Provider<EventBus> eventBus;
     private final E result;
-    private Type<LoadCreateEventHandler<E>> type;
+    private final Type<LoadCreateEventHandler<E>> type;
     private final Object source;
 
 // -------------------------- STATIC METHODS --------------------------

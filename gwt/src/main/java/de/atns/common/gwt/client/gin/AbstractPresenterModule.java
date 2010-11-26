@@ -8,13 +8,14 @@ import de.atns.common.gwt.client.WidgetPresenter;
 public abstract class AbstractPresenterModule extends AbstractGinModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    protected <D extends WidgetDisplay> void bindPresenter(Class<? extends WidgetPresenter<D>> presenter, Class<D> display,
-                                                           Class<? extends D> displayImpl) {
+    protected <D extends WidgetDisplay> void bindPresenter(
+            final Class<? extends WidgetPresenter<D>> presenter, final Class<D> display,
+            final Class<? extends D> displayImpl) {
         bind(presenter).in(Singleton.class);
         bindDisplay(display, displayImpl);
     }
 
-    protected <D extends WidgetDisplay> void bindDisplay(Class<D> display, Class<? extends D> displayImpl) {
+    protected <D extends WidgetDisplay> void bindDisplay(final Class<D> display, final Class<? extends D> displayImpl) {
         bind(display).to(displayImpl);
     }
 }

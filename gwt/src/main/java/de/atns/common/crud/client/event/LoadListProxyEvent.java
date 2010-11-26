@@ -3,11 +3,9 @@ package de.atns.common.crud.client.event;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import de.atns.common.gwt.client.WidgetDisplay;
-import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.security.client.Callback;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class LoadListProxyEvent<E extends EntityProxy> extends GwtEvent<LoadList
 
     @Inject private static Provider<EventBus> eventBus;
     private final List<E> result;
-    private Type<LoadListProxyEventHandler<E>> type;
+    private final Type<LoadListProxyEventHandler<E>> type;
     private final Object source;
 
 // -------------------------- STATIC METHODS --------------------------
@@ -38,8 +36,8 @@ public class LoadListProxyEvent<E extends EntityProxy> extends GwtEvent<LoadList
 
 
     public static <T extends EntityProxy> void fireEvent(final List<T> result,
-                                                            final Type<LoadListProxyEventHandler<T>> type,
-                                                            final Object source) {
+                                                         final Type<LoadListProxyEventHandler<T>> type,
+                                                         final Object source) {
         eventBus.get().fireEvent(new LoadListProxyEvent<T>(result, type, source));
     }
 

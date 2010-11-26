@@ -57,7 +57,7 @@ public class TimeoutCache<K, V> {
     }
 
     private void removeAccess(final K key) {
-        AccessTime t = accessMap.remove(key);
+        final AccessTime t = accessMap.remove(key);
         if (t != null) {
             lastAccess.remove(t);
         }
@@ -65,7 +65,7 @@ public class TimeoutCache<K, V> {
 
     public void removeValue(final V v) {
         synchronized (this) {
-            for (Map.Entry<K, V> kvEntry : cache.entrySet()) {
+            for (final Map.Entry<K, V> kvEntry : cache.entrySet()) {
                 if (kvEntry.getValue().equals(v)) {
                     cache.remove(kvEntry.getKey());
                     removeAccess(kvEntry.getKey());
@@ -112,7 +112,7 @@ public class TimeoutCache<K, V> {
         }
 
         @Override public int compareTo(final AccessTime other) {
-            int c = time.compareTo(other.time);
+            final int c = time.compareTo(other.time);
             return c == 0 ? ((Integer) hashCode()).compareTo(other.hashCode()) : c;
         }
     }

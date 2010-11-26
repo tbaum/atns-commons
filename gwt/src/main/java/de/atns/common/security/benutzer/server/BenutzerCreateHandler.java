@@ -54,7 +54,7 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
     public Benutzer executeInternal(final BenutzerCreate action) throws ActionException {
         final EntityManager em = this.em.get();
         try {
-            Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),
+            final Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),
                     action.getEmail().toLowerCase());
             roleHandler.updateRollen(m, action);
 

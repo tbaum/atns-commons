@@ -17,15 +17,15 @@ public class ScheduledTask {
         return new ScheduledTask(0, null, null);
     }
 
-    public static ScheduledTask task(final long period, Class<? extends Runnable> targetClass) {
+    public static ScheduledTask task(final long period, final Class<? extends Runnable> targetClass) {
         return new ScheduledTask(0, period, targetClass);
     }
 
-    public static ScheduledTask repeatingTask(long period) {
+    public static ScheduledTask repeatingTask(final long period) {
         return task().repeating(period);
     }
 
-    public ScheduledTask repeating(long period) {
+    public ScheduledTask repeating(final long period) {
         return new ScheduledTask(delay, period, targetClass);
     }
 
@@ -53,7 +53,7 @@ public class ScheduledTask {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public ScheduledTask delay(long delay) {
+    public ScheduledTask delay(final long delay) {
         return new ScheduledTask(delay, period, targetClass);
     }
 

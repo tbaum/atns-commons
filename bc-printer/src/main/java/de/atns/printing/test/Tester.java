@@ -27,9 +27,9 @@ import de.atns.printing.document.TextElement;
 public class Tester {
 // ------------------------------ FIELDS ------------------------------
 
-    private String address = "10.1.1.19";
+    private final String address = "10.1.1.19";
 
-    private int port = 9100;
+    private final int port = 9100;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -62,7 +62,8 @@ public class Tester {
     private DocumentElement createLabel() {
         final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
 //        label.addElement(new TextElement("EAN-Code", 6, 32, 6));
-        label.addElement(new BarcodeElement(7, 6, 12, BarcodeElement.Type.EAN128, BarcodeElement.MODULO3, false, "99B02-D04"));
+        label.addElement(
+                new BarcodeElement(7, 6, 12, BarcodeElement.Type.EAN128, BarcodeElement.MODULO3, false, "99B02-D04"));
         label.addElement(new TextElement("(99)B02-D04", 5, 20, 7));
 //        label.addElement(new BarcodeElement(6, 82, 20, BarcodeElement.Type.EAN128, BarcodeElement.MODULO4,
 //                "01012345678901283105123560"));
@@ -74,7 +75,7 @@ public class Tester {
     }
 
     public void testZLP(@SuppressWarnings("unused") final DocumentElement label) throws Exception {
-        Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port);
         f.renderDocument(label);
     }
 

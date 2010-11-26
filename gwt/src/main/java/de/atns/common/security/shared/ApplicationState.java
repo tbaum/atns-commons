@@ -14,7 +14,8 @@ import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatu
  * @author tbaum
  * @since 14.02.2010
  */
-@Singleton public class ApplicationState {
+@Singleton
+public class ApplicationState {
 // ------------------------------ FIELDS ------------------------------
 
     private UserPresentation user = new UserPresentation();
@@ -23,7 +24,7 @@ import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatu
 
     @Inject public ApplicationState(final EventBus eventBus) {
         eventBus.addHandler(ServerStatusEventHandler.TYPE, new ServerStatusEventHandler() {
-            @Override public void onServerStatusChange(ServerStatusEvent event) {
+            @Override public void onServerStatusChange(final ServerStatusEvent event) {
                 final ServerStatusEvent.ServerStatus status = event.getStatus();
                 if (status == LOGGED_IN) {
                     user = event.getUser();

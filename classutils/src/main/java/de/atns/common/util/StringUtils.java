@@ -11,8 +11,8 @@ public class StringUtils {
 // -------------------------- STATIC METHODS --------------------------
 
     public static <T> String join(final String delimiter, final Iterable<T> iterable) {
-        StringBuilder b = new StringBuilder();
-        for (T r : iterable) {
+        final StringBuilder b = new StringBuilder();
+        for (final T r : iterable) {
             if (b.length() != 0) {
                 b.append(delimiter);
             }
@@ -30,14 +30,14 @@ public class StringUtils {
     }
 
     public static <T extends Enum<T>> EnumSet<T> parseEnumSet(final Class<T> t, final String... string) {
-        EnumSet<T> enumSet = EnumSet.noneOf(t);
-        for (String s : string) {
+        final EnumSet<T> enumSet = EnumSet.noneOf(t);
+        for (final String s : string) {
             enumSet.add(Enum.valueOf(t, s));
         }
         return enumSet;
     }
 
-    public static String toUpLower(String name) {
+    public static String toUpLower(final String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }

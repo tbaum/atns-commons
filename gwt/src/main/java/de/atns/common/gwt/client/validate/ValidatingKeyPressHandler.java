@@ -24,7 +24,7 @@ public abstract class ValidatingKeyPressHandler implements KeyPressHandler {
         }
 
         if (!isValid(event)) {
-            Object source = event.getSource();
+            final Object source = event.getSource();
             if (source instanceof TextBox) {
                 ((TextBox) source).cancelKey();
             } else if (source instanceof LabelTextBox) {

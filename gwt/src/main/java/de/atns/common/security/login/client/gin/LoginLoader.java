@@ -20,13 +20,13 @@ public class LoginLoader extends ModuleLoader<LoginPresenter> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public LoginLoader(SharedServices sharedServices) {
+    public LoginLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override public boolean canHandlePlace(Place place) {
+    @Override public boolean canHandlePlace(final Place place) {
         return place instanceof LoginPlace || place instanceof LogoutPlace;
     }
 

@@ -29,11 +29,11 @@ public class SharedServicesModule extends AbstractPresenterModule {
         requestStaticInjection(Callback.class);
     }
 
-    @Provides public DispatchAsync dispatchAsync(SharedServices sharedServices) {
+    @Provides public DispatchAsync dispatchAsync(final SharedServices sharedServices) {
         return sharedServices.dispatcher();
     }
 
-    @Provides public EventBus eventBus(SharedServices sharedServices) {
+    @Provides public EventBus eventBus(final SharedServices sharedServices) {
         return sharedServices.eventBus();
     }
 
@@ -43,10 +43,11 @@ public class SharedServicesModule extends AbstractPresenterModule {
 
 // -------------------------- INNER CLASSES --------------------------
 
-    @Singleton public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
+    @Singleton
+    public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
         private SharedServices services;
 
-        public void setSharedServices(SharedServices services) {
+        public void setSharedServices(final SharedServices services) {
             this.services = services;
         }
 

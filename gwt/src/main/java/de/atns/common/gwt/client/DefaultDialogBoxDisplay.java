@@ -36,7 +36,7 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
         cancelButton.getElement().getStyle().setMarginRight(5, PX);
     }
 
-    public void setGlassEnabled(boolean enabled) {
+    public void setGlassEnabled(final boolean enabled) {
         dialogBox.setGlassEnabled(enabled);
     }
 
@@ -55,7 +55,7 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
 
 // --------------------- Interface DialogBoxDisplay ---------------------
 
-    @Override public HandlerRegistration addCancelButtonClickHandler(ClickHandler clickHandler) {
+    @Override public HandlerRegistration addCancelButtonClickHandler(final ClickHandler clickHandler) {
         return cancelButton.addClickHandler(clickHandler);
     }
 

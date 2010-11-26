@@ -24,7 +24,8 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
     private final Image labelDown = new Image("arrow_down.png");
     private OrderField.Sort sort = NONE;
 
-    private ArrayList<ValueChangeHandler<OrderField.Sort>> handlers = new ArrayList<ValueChangeHandler<OrderField.Sort>>();
+    private final ArrayList<ValueChangeHandler<OrderField.Sort>> handlers =
+            new ArrayList<ValueChangeHandler<OrderField.Sort>>();
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -34,20 +35,20 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
         label.getElement().getStyle().setCursor(POINTER);
         label.addClickHandler(new ClickHandler() {
             @Override
-            public void onClick(ClickEvent clickEvent) {
+            public void onClick(final ClickEvent clickEvent) {
                 setSort(sort.next());
 
-                ValueChangeEvent<OrderField.Sort> valueChangeEvent = new ValueChangeEvent<OrderField.Sort>(sort) {
+                final ValueChangeEvent<OrderField.Sort> valueChangeEvent = new ValueChangeEvent<OrderField.Sort>(sort) {
                 };
 
-                for (ValueChangeHandler<OrderField.Sort> handler : handlers) {
+                for (final ValueChangeHandler<OrderField.Sort> handler : handlers) {
                     handler.onValueChange(valueChangeEvent);
                 }
             }
         });
     }
 
-    public void setSort(OrderField.Sort sort) {
+    public void setSort(final OrderField.Sort sort) {
         this.sort = sort == null ? NONE : sort;
         labelUp.setVisible(sort == DESC);
         labelDown.setVisible(sort == ASC);
@@ -58,7 +59,7 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
         setText(text);
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         label.setText(text);
     }
 

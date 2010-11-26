@@ -19,11 +19,11 @@ public class LogoutPlace extends Place {
     public static class Tokenizer implements PlaceTokenizer<LogoutPlace> {
         private static final String NO_ID = "n";
 
-        public LogoutPlace getPlace(String token) {
+        public LogoutPlace getPlace(final String token) {
             return new LogoutPlace();
         }
 
-        public String getToken(LogoutPlace place) {
+        public String getToken(final LogoutPlace place) {
             return NO_ID;
         }
     }

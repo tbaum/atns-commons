@@ -23,7 +23,7 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
 
 // --------------------- Interface Activity ---------------------
 
-    @Override public void start(AcceptsOneWidget panel, EventBus eventBus) {
+    @Override public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
         LOG.log(Level.FINE, "Activity: start()");
         bind();
     }
