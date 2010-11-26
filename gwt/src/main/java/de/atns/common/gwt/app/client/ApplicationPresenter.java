@@ -78,6 +78,9 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
 
             @Override
             public void onSuccess(final UserPresentation user) {
+                if (!user.isValid()) {
+                    doLogin();
+                }
                 command.execute();
             }
         });
@@ -110,7 +113,6 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
                 } else if (status == LOGGED_OUT) {
                     checkSessionTimer.cancel();
                     doLogin();
-                    display.show(false);
                 }
             }
         }));
@@ -125,6 +127,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
             lastPlace = historyMapper.getToken(where);
         }
         placeController.goTo(new LoginPlace(lastPlace));
+        display.show(false);
     }
 
     @Override protected void onUnbind() {

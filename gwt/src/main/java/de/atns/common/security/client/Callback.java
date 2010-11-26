@@ -73,7 +73,6 @@ public abstract class Callback<T> implements AsyncCallback<T> {
                 @Override
                 public void onSuccess(final UserPresentation result) {
                     LOG.log(Level.FINE, "success-checksession");
-                    eventBus.get().fireEvent(loggedin(result));
                     display.stopProcessing();
                 }
             });
