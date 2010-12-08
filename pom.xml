@@ -25,6 +25,7 @@
         <module>gwt</module>
         <module>image</module>
         <module>json</module>
+        <module>lock</module>
         <module>numbergenerator</module>
         <module>schedule</module>
         <module>security</module>
