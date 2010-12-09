@@ -1,5 +1,6 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -23,7 +24,8 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
 
 // --------------------- Interface Activity ---------------------
 
-    @Override public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
+    @Override
+    public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
         LOG.log(Level.FINE, "Activity: start()");
         bind();
     }
@@ -41,7 +43,12 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
             }
         });
 
-        display.showDialogBox();
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            @Override
+            public void execute() {
+                display.showDialogBox();
+            }
+        });
     }
 
     @Override

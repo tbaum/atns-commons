@@ -57,7 +57,6 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
                 });
             }
         }));
-        display.showDialogBox();
     }
 
 // -------------------------- INNER CLASSES --------------------------

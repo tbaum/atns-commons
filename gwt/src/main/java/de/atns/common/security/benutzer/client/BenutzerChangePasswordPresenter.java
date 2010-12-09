@@ -38,7 +38,6 @@ public class BenutzerChangePasswordPresenter extends DialogBoxPresenter<Benutzer
                         });
             }
         }));
-        display.showDialogBox();
     }
 
 // -------------------------- INNER CLASSES --------------------------

@@ -38,7 +38,6 @@ public class BenutzerCreatePresenter extends DialogBoxPresenter<BenutzerCreatePr
                         });
             }
         }));
-        display.showDialogBox();
     }
 
 // -------------------------- INNER CLASSES --------------------------
