@@ -30,7 +30,9 @@ public abstract class DialogBoxListPresenter<D extends DialogBoxDisplay & ListDi
 
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override public void execute() {
-                display.showDialogBox();
+                if (isBound()) {
+                    display.showDialogBox();
+                }
             }
         });
     }

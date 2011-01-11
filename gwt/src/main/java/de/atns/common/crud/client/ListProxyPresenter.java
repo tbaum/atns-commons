@@ -73,7 +73,9 @@ public abstract class ListProxyPresenter<D extends ListProxyDisplay<T>, T extend
 
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override public void execute() {
-                updateList();
+                if (isBound()) {
+                    updateList();
+                }
             }
         });
     }

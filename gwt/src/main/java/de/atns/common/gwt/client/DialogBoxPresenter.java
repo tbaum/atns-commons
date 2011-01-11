@@ -46,7 +46,9 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override
             public void execute() {
-                display.showDialogBox();
+                if (isBound()) {
+                    display.showDialogBox();
+                }
             }
         });
     }

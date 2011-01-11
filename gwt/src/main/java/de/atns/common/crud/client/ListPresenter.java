@@ -66,7 +66,9 @@ public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerial
 
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override public void execute() {
-                updateList();
+                if (isBound()) {
+                    updateList();
+                }
             }
         });
     }
