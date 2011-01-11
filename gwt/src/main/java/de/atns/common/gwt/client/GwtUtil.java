@@ -3,6 +3,7 @@ package de.atns.common.gwt.client;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -149,6 +150,12 @@ public class GwtUtil {
         DOM.appendChild(flowPanel.getElement(), fieldset);
 
         return flowPanel;
+    }
+
+    public static Image bgImage(ImageResource backgroundImage) {
+        Image image = new Image(backgroundImage);
+        image.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);
+        return image;
     }
 
 // -------------------------- ENUMERATIONS --------------------------
