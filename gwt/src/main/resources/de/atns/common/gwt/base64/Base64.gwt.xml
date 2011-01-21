@@ -1,0 +1,8 @@
+<module>
+    <!--<script src="js/amathcontext.js"></script>                                                                                                                                      -->
+        <!--<script src="js/bigdecimal.js"></script>                                                                                                                                    -->
+        <!--<inherits name="com.google.gwt.user.User"/>                                                                                                                                 -->
+
+
+        <inherits name="de.atns.common.gwt.base64.emul.Emulation"/>
+</module>
