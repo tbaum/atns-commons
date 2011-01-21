@@ -4,10 +4,7 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
 import org.cobogw.gwt.user.client.ui.Button;
 
@@ -67,6 +64,10 @@ public class GwtUtil {
         lu.add(inhalt);
 
         return ro;
+    }
+
+    public static void openWindow(String url, String window, int i, int i1) {
+        Window.open(url, window, "location=yes, status=yes, scrollbars=yes, width=" + i + ", height=" + i1);
     }
 
     public static boolean checkTelefonSymbol(final char code) {
@@ -157,6 +158,12 @@ public class GwtUtil {
         image.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);
         return image;
     }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public static native void closeWindow() /*-{
+        $wnd.close();
+    }-*/;
 
 // -------------------------- ENUMERATIONS --------------------------
 
