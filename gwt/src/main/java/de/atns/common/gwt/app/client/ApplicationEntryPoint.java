@@ -41,11 +41,12 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
                 // force init
                 injector.activityManager();
 
+                LOG.log(Level.FINE, "application handle history " + History.getToken());
+                injector.placeHistoryManager().handleCurrentHistory();
+
                 injector.applicationPresenter().bind();
 
-                LOG.log(Level.FINE, "application handle history " + History.getToken());
 
-                injector.placeHistoryManager().handleCurrentHistory();
             }
         });
     }
