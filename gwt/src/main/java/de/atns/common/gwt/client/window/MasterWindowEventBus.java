@@ -6,27 +6,28 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.*;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.user.client.Window;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.HashMap;
 
 /**
- * @author: mwolter
- * @since: 24.01.11 12:51
+ * @author tbaum
+ * @since 03.02.11
  */
-public class MasterWindowEventBus extends EventBus {
+
+@Singleton public class MasterWindowEventBus extends EventBus {
 // ------------------------------ FIELDS ------------------------------
 
-    private final SimpleEventBus simpleEventBus = new SimpleEventBus();
+    private final EventBus simpleEventBus = new SimpleEventBus();
     private final EventSerializer serializer;
-
     private HashMap<String, JavaScriptObject> windows = new HashMap<String, JavaScriptObject>();
-
     private final long myid = System.currentTimeMillis();
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public MasterWindowEventBus(final EventSerializer serializer) {
-        this.serializer = serializer;
+    @Inject public MasterWindowEventBus(EventSerializer eventSerializer) {
+        this.serializer = eventSerializer;
         _registerEventBus(this);
 
 
@@ -108,10 +109,6 @@ public class MasterWindowEventBus extends EventBus {
         //        }
     }
 
-    private void removeWindow(String wnd) {
-        windows.remove(wnd);
-    }
-
     public void openWindow(String url, String name, String para) {
         String windowId = name + "_" + myid;
         JavaScriptObject wnd = open(this, url, windowId, para);
@@ -123,4 +120,8 @@ public class MasterWindowEventBus extends EventBus {
         newWindow._myid = name;
         return newWindow;
     }-*/;
+
+    private void removeWindow(String wnd) {
+        windows.remove(wnd);
+    }
 }

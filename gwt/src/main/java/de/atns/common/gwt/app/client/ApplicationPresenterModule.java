@@ -37,7 +37,6 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
 
         bindDisplay(ApplicationPresenter.Display.class, ApplicationShell.class);
         bind(ApplicationShell.class).in(Singleton.class);
-        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         requestStaticInjection(ApplicationActivityMapper.class);
         requestStaticInjection(Navigation.class);
 
@@ -45,6 +44,10 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
     }
 
     protected abstract void configureApplication();
+
+    @Provides @Singleton protected EventBus eventBus() {
+        return new SimpleEventBus();
+    }
 
     @Provides @Singleton ActivityManager getActivityManager(final ActivityMapper mapper, final EventBus eventBus,
                                                             final ApplicationShell shell) {
