@@ -4,7 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import de.atns.common.gwt.client.gin.ModuleLoader;
+import de.atns.common.gwt.client.gin.WidgetPresenterModuleLoader;
 import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
 import de.atns.common.security.login.client.LoginPlace;
@@ -16,7 +16,7 @@ import de.atns.common.security.login.client.LogoutPlace;
  * @since 16.06.2010
  */
 @Singleton
-public class LoginLoader extends ModuleLoader<LoginPresenter> {
+public class LoginLoader extends WidgetPresenterModuleLoader<LoginPresenter> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject

@@ -4,7 +4,7 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.google.inject.Inject;
-import de.atns.common.gwt.client.gin.ModuleLoader;
+import de.atns.common.gwt.client.gin.WidgetPresenterModuleLoader;
 import de.atns.common.gwt.client.gin.PlacePresenter;
 import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.security.benutzer.client.gin.BenutzerLoader;
@@ -22,20 +22,20 @@ public abstract class ApplicationActivityMapper implements ActivityMapper {
 
     @Inject private static ApplicationPresenter application;
     @Inject private static SharedServices sharedServices;
-    private final List<ModuleLoader> moduleLoaders;
+    private final List<WidgetPresenterModuleLoader> moduleLoaders;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public ApplicationActivityMapper() {
         // sharedServices = applicationInjector.sharedServices();
 
-        moduleLoaders = new ArrayList<ModuleLoader>(loadModules(sharedServices));
+        moduleLoaders = new ArrayList<WidgetPresenterModuleLoader>(loadModules(sharedServices));
 
         moduleLoaders.add(new LoginLoader(sharedServices));
         moduleLoaders.add(new BenutzerLoader(sharedServices));
     }
 
-    protected abstract List<? extends ModuleLoader> loadModules(final SharedServices sharedServices);
+    protected abstract List<? extends WidgetPresenterModuleLoader> loadModules(final SharedServices sharedServices);
 
 // ------------------------ INTERFACE METHODS ------------------------
 
@@ -44,7 +44,7 @@ public abstract class ApplicationActivityMapper implements ActivityMapper {
 
     @Override
     public Activity getActivity(final Place place) {
-        for (final ModuleLoader moduleLoader : moduleLoaders) {
+        for (final WidgetPresenterModuleLoader moduleLoader : moduleLoaders) {
             if (!moduleLoader.canHandlePlace(place)) {
                 continue;
             }

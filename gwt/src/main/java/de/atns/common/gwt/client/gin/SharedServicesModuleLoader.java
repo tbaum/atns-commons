@@ -1,25 +1,21 @@
 package de.atns.common.gwt.client.gin;
 
 import com.google.gwt.core.client.RunAsyncCallback;
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.Window;
-import de.atns.common.gwt.client.WidgetPresenter;
 
 /**
  * @author tbaum
- * @since 18.11.10
+ * @since 04.02.11
  */
-public abstract class ModuleLoader<T extends WidgetPresenter & PlacePresenter> implements RunAsyncCallback {
+public abstract class SharedServicesModuleLoader<I extends SharedServicesGinjector> implements RunAsyncCallback {
 // ------------------------------ FIELDS ------------------------------
 
-    private WidgetPresenterGinjector<T> injector;
-
-    private T presenter;
+    private I injector;
     private final SharedServices sharedServices;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public ModuleLoader(final SharedServices sharedServices) {
+    public SharedServicesModuleLoader(final SharedServices sharedServices) {
         this.sharedServices = sharedServices;
         load();
     }
@@ -40,24 +36,17 @@ public abstract class ModuleLoader<T extends WidgetPresenter & PlacePresenter> i
             injector = create();
             injector.sharedServicesAware().setSharedServices(sharedServices);
         }
-        presenter = injector.presenter();
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public abstract boolean canHandlePlace(Place place);
+    protected abstract I create();
 
-    protected abstract WidgetPresenterGinjector<T> create();
-
-    public WidgetPresenterGinjector<T> injector() {
+    public I injector() {
         return injector;
     }
 
     public boolean isLoaded() {
-        return presenter != null;
-    }
-
-    public T presenter() {
-        return presenter;
+        return injector != null;
     }
 }
