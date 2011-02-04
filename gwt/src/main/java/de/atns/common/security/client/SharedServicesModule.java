@@ -20,7 +20,7 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 public class SharedServicesModule extends AbstractPresenterModule {
 // -------------------------- OTHER METHODS --------------------------
 
-    @Provides public AppShell appshel(final SharedServices sharedServices) {
+    @Provides public AppShell appshell(final SharedServices sharedServices) {
         return sharedServices.appShell();
     }
 

@@ -3,6 +3,7 @@ package de.atns.common.gwt.app.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -20,6 +21,8 @@ import de.atns.common.security.client.model.UserPresentation;
 public class ApplicationShell extends DefaultWidgetDisplay implements ApplicationPresenter.Display, AppShell {
 // ------------------------------ FIELDS ------------------------------
 
+    private static final ShellUiBinder UI_BINDER = GWT.create(ShellUiBinder.class);
+
     @UiField SimplePanel contentPanel;
     @UiField SimplePanel navigation;
 
@@ -29,15 +32,13 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public ApplicationShell(final NavigationNoAuth logoutMenu, final Navigation loginMenu,
-                            @ApplicationName final String appName) {
+    @Inject public ApplicationShell(final NavigationNoAuth logoutMenu, final Navigation loginMenu,
+                                    @ApplicationName final String appName) {
         this.logoutMenu = logoutMenu;
         this.loginMenu = loginMenu;
         this.appName = appName;
 
-        final ShellUiBinder uiBinder = GWT.create(ShellUiBinder.class);
-        initWidget(uiBinder.createAndBindUi(this));
+        initWidget(UI_BINDER.createAndBindUi(this));
 
         show(false);
     }
@@ -61,13 +62,12 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
 
 // --------------------- Interface Display ---------------------
 
-    @Override
-    public void setUser(final UserPresentation user) {
-        loginMenu.setUsername(user != null ? user.getLogin() : "");
+    @Override public AcceptsOneWidget getContentWidget() {
+        return contentPanel;
     }
 
-    public HasOneWidget getPanel() {
-        return contentPanel;
+    @Override public void setUser(final UserPresentation user) {
+        loginMenu.setUsername(user != null ? user.getLogin() : "");
     }
 
 // --------------------- Interface WidgetDisplay ---------------------

@@ -52,7 +52,7 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
     @Provides @Singleton ActivityManager getActivityManager(final ActivityMapper mapper, final EventBus eventBus,
                                                             final ApplicationShell shell) {
         final ActivityManager activityManager = new ActivityManager(mapper, eventBus);
-        activityManager.setDisplay(shell.getPanel());
+        activityManager.setDisplay(shell.getContentWidget());
         return activityManager;
     }
 

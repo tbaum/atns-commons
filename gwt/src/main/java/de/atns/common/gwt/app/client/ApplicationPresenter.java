@@ -141,6 +141,6 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
 
         void show(boolean isAuth);
 
-        AcceptsOneWidget getPanel();
+        AcceptsOneWidget getContentWidget();
     }
 }
