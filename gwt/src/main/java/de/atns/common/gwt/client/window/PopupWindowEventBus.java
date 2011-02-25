@@ -42,7 +42,11 @@ import com.google.inject.Singleton;
     private native void _registerEventBus(PopupWindowEventBus windowEventbus) /*-{
         $wnd._event_from_master = function(event) {
             windowEventbus.@de.atns.common.gwt.client.window.PopupWindowEventBus::fire(Lcom/google/gwt/core/client/JavaScriptObject;)(event);
-        }
+        };
+
+        $wnd._open_popup = function(url, name, para) {
+            $wnd.opener._open_Window(url, name, para);
+        };
     }-*/;
 
     private native void windowClosed() /*-{
@@ -51,6 +55,9 @@ import com.google.inject.Singleton;
 
 // ------------------------ INTERFACE METHODS ------------------------
 
+    public native void openWindow(String url, String name, String para) /*-{
+        $wnd.opener._open_popup(url, name, para);
+    }-*/;
 
 // --------------------- Interface HasHandlers ---------------------
 
