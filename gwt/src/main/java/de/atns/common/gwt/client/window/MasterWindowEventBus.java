@@ -48,6 +48,10 @@ import java.util.HashMap;
         $wnd._popup_closed = function(source) {
             windowEventbus.@de.atns.common.gwt.client.window.MasterWindowEventBus::removeWindow(Ljava/lang/String;)(source);
         };
+        $wnd._open_popup = function(url, title, para) {
+            windowEventbus.@de.atns.common.gwt.client.window.MasterWindowEventBus::openWindow(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(url,
+                    title, para);
+        };
     }-*/;
 
     private native void closeWindow(JavaScriptObject window) /*-{
