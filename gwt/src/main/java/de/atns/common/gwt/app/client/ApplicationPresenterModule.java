@@ -3,7 +3,8 @@ package de.atns.common.gwt.app.client;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.json.client.JSONNull;
+import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
@@ -14,6 +15,10 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;
+import de.atns.common.gwt.client.window.EventSerializer;
+import de.atns.common.gwt.client.window.MasterWindowEventBus;
+import de.atns.common.gwt.client.window.PopupWindowEventBus;
+import de.atns.common.gwt.client.window.TransportAware;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
 
@@ -22,6 +27,17 @@ import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
  * @since 22.11.10
  */
 public abstract class ApplicationPresenterModule extends AbstractPresenterModule {
+// ------------------------------ FIELDS ------------------------------
+
+    private static final TransportAware NOOP_TRANSPORT = new TransportAware() {
+        @Override public void fromJson(JSONValue data) {
+        }
+
+        @Override public JSONValue toJson() {
+            return JSONNull.getInstance();
+        }
+    };
+
 // -------------------------- OTHER METHODS --------------------------
 
     protected void bindApplication(final Class<? extends ApplicationActivityMapper> activityMapperClass,
@@ -45,8 +61,20 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
 
     protected abstract void configureApplication();
 
-    @Provides @Singleton protected EventBus eventBus() {
-        return new SimpleEventBus();
+    @Provides @Singleton protected EventBus eventBus(final EventSerializer eventSerializer) {
+        if (PopupWindowEventBus.isRunningInPopup()) {
+            return new PopupWindowEventBus(eventSerializer);
+        } else {
+            return new MasterWindowEventBus(eventSerializer);
+        }
+    }
+
+    @Provides @Singleton public EventSerializer eventSerializer() {
+        return new EventSerializer() {
+            @Override protected TransportAware createClass(String clazz) {
+                return NOOP_TRANSPORT;
+            }
+        };
     }
 
     @Provides @Singleton ActivityManager getActivityManager(final ActivityMapper mapper, final EventBus eventBus,
