@@ -3,6 +3,8 @@ package de.atns.common.gwt.client.gin;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.user.client.Window;
 
+import java.util.logging.Logger;
+
 /**
  * @author tbaum
  * @since 04.02.11
@@ -12,6 +14,7 @@ public abstract class SharedServicesModuleLoader<I extends SharedServicesGinject
 
     private I injector;
     private final SharedServices sharedServices;
+    private final Logger LOG = Logger.getLogger(this.getClass().toString());
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -35,6 +38,8 @@ public abstract class SharedServicesModuleLoader<I extends SharedServicesGinject
         if (injector == null) {
             injector = create();
             injector.sharedServicesAware().setSharedServices(sharedServices);
+            LOG.info("fire  ModuleReadyEvent / " + this.getClass());
+            sharedServices.eventBus().fireEvent(new ModuleReadyEvent(this));
         }
     }
 

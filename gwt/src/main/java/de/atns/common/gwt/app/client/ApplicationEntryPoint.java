@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
+import de.atns.common.gwt.client.gin.ApplicationReadyEventHandler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,17 +37,18 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
 
                 final ApplicationInjector injector = create();
 
-                RootPanel.get().add(injector.applicationShell());
+                injector.eventBus().addHandler(ApplicationReadyEventHandler.type, new ApplicationReadyEventHandler() {
+                    @Override public void onReady() {
+                        LOG.log(Level.FINE, "application handle history " + History.getToken());
+                        injector.placeHistoryManager().handleCurrentHistory();
+                        injector.applicationPresenter().bind();
+                    }
+                });
 
                 // force init
                 injector.activityManager();
 
-                LOG.log(Level.FINE, "application handle history " + History.getToken());
-                injector.placeHistoryManager().handleCurrentHistory();
-
-                injector.applicationPresenter().bind();
-
-
+                RootPanel.get().add(injector.applicationShell());
             }
         });
     }
