@@ -1,5 +1,6 @@
 package de.atns.common.gwt.app.client;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
@@ -117,7 +118,11 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
             }
         }));
 
-        doLogin();
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            @Override public void execute() {
+                doLogin();
+            }
+        });
     }
 
     private void doLogin() {
