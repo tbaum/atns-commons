@@ -63,47 +63,6 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         panel.getElement().getStyle().setMarginLeft(20, PX);
         initWidget(panel);
         pagePresenterPanel.setWidth("640px");
-
-//      
-//        final FlowPanel formPanel = new FlowPanel();
-//        formPanel.add(getLoader());
-//
-//        formPanel.getElement().getStyle().setProperty("textAlign", "left");
-//        formPanel.getElement().getStyle().setProperty("padding", "0 0 20px 20px");
-//
-//
-//        formPanel.getElement().getStyle().setPaddingBottom(1, Style.Unit.EM);
-//
-//
-//        formPanel.add(getLoader());
-//
-//        final Label w1 = new Label("Benutzer - Übersicht:");
-//        w1.addStyleName("heading");
-//        formPanel.add(w1);
-//
-////        status.addItem("", "");
-////        for (Status auftragsStatus : Status.values()) {
-////            status.addItem(auftragsStatus.name());
-////        }
-//
-//
-//        final FlexTable table = table()
-//                .cell("Text").width(55)
-//                .cell(text).width(180)
-//                .cell(suche).width(394)
-//                .getTable();
-//
-//        table.addStyleName("filtertable");
-//
-//        formPanel.add(getErrorPanel());
-//        formPanel.add(table);
-//
-//        auftraege.getTable().addStyleName("datatable");
-//        formPanel.add(auftraege.getTable());
-//        formPanel.add(pagePresenterPanel);
-//        clearList();
-//
-//        initWidget(extendedFlowPanel.getPanel());
     }
 
 // ------------------------ INTERFACE METHODS ------------------------

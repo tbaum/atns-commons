@@ -124,6 +124,10 @@ public class LabelTextBox extends Composite
         textBox.setFocus(focus);
     }
 
+    public void setLabelText(String title) {
+        infoLabel.setText(title);
+    }
+
     private void updateLabelState() {
         //textBox.selectAll();
         final boolean ns = !textBox.getValue().isEmpty();
