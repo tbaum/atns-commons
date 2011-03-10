@@ -38,6 +38,10 @@
         <url>scm:git:ssh://git@git.atns.de/common</url>
     </scm>
 
+    <properties>
+         <spring.version>3.0.5.RELEASE</spring.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -153,6 +157,15 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>spring-maven-milestone</id>
+            <name>Springframework Maven Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>neo4j</id>
+            <url>http://repo.neo4j.org/snapshots</url>
         </repository>
     </repositories>
 
