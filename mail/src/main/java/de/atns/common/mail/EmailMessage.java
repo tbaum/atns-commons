@@ -134,11 +134,15 @@ public class EmailMessage implements Serializable {
             mesg.addRecipient(TO, createAddress(debugMode, recipientName));
         } else {
             mesg.addRecipient(TO, createAddress(recipient, recipientName));
-            if (cc != null) {
-                mesg.addRecipient(CC, createAddress(cc));
+            if (cc != null && !cc.trim().isEmpty()) {
+                for (String s : cc.split(",")) {
+                    mesg.addRecipient(CC, createAddress(s.trim()));
+                }
             }
-            if (bcc != null) {
-                mesg.addRecipient(BCC, createAddress(bcc));
+            if (bcc != null && !bcc.trim().isEmpty()) {
+                for (String s : bcc.split(",")) {
+                    mesg.addRecipient(BCC, createAddress(s.trim()));
+                }
             }
         }
         prepareContent(mesg);
