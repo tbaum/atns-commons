@@ -32,9 +32,12 @@ public class NumberGenerator {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public long next(final NumberType type, final Object... data) {
+    public long next(final NumberType type, final String subType, final Object... data) {
         synchronized (orderNumberDir) {
-            final File d1 = new File(orderNumberDir, type.name());
+            File d1 = new File(orderNumberDir, type.name());
+            if (subType != null && !subType.isEmpty()) {
+                d1 = new File(d1, subType);
+            }
             File[] f = d1.listFiles();
             if (f == null || f.length == 0) {
                 final File newFile = new File(d1, "0");
