@@ -27,15 +27,15 @@ public class GwtUtil {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static FlowPanel flowPanel(final Widget... w) {
+    public static FlowPanel flowPanel(final IsWidget... w) {
         final FlowPanel fp = new FlowPanel();
-        for (final Widget widget : w) {
+        for (final IsWidget widget : w) {
             fp.add(widget);
         }
         return fp;
     }
 
-    public static FlowPanel flowPanel(final String style, final Widget... w) {
+    public static FlowPanel flowPanel(final String style, final IsWidget... w) {
         final FlowPanel fp = flowPanel(w);
         fp.setStyleName(style);
         return fp;
