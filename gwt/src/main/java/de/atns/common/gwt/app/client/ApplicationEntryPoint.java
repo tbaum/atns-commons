@@ -40,8 +40,12 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
                 injector.eventBus().addHandler(ApplicationReadyEventHandler.type, new ApplicationReadyEventHandler() {
                     @Override public void onReady() {
                         LOG.log(Level.FINE, "application handle history " + History.getToken());
-                        injector.placeHistoryManager().handleCurrentHistory();
                         injector.applicationPresenter().bind();
+                        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+                            @Override public void execute() {
+                                injector.placeHistoryManager().handleCurrentHistory();
+                            }
+                        });
                     }
                 });
 

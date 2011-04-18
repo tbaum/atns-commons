@@ -1,6 +1,5 @@
 package de.atns.common.gwt.app.client;
 
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
@@ -12,6 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.gwt.client.WidgetPresenter;
+import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 
 import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatus.LOGGED_IN;
 import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatus.LOGGED_OUT;
+import static de.atns.common.security.client.event.ServerStatusEvent.loggedin;
 
 /**
  * @author tbaum
@@ -104,7 +105,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
                         newPlace = historyMapper.getPlace(loginPlace.getToken());
                     }
                     if (newPlace == null) {
-                        newPlace = defaultPlace;
+                        newPlace = where != null ? where : defaultPlace;
                     }
                     LOG.log(Level.FINE, "after login: " + newPlace);
                     placeController.goTo(newPlace);
@@ -118,9 +119,13 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
             }
         }));
 
-        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-            @Override public void execute() {
-                doLogin();
+        dispatcher.execute(new CheckSession(), new Callback<UserPresentation>(display) {
+            @Override public void callback(final UserPresentation user) {
+                if (user.isValid()) {
+                    eventBus.fireEvent(loggedin(user));
+                } else {
+                    doLogin();
+                }
             }
         });
     }
