@@ -105,7 +105,8 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
                         newPlace = historyMapper.getPlace(loginPlace.getToken());
                     }
                     if (newPlace == null) {
-                        newPlace = where != null ? where : defaultPlace;
+                        newPlace = (where instanceof LoginPlace) || (where instanceof LogoutPlace) || (where == null)
+                                ? defaultPlace : where;
                     }
                     LOG.log(Level.FINE, "after login: " + newPlace);
                     placeController.goTo(newPlace);
