@@ -7,4 +7,5 @@
     <inherits name="de.atns.common.SecurityModel"/>
 
     <source path="client"/>
+    <source path="shared"/>
 </module>
