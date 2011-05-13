@@ -29,16 +29,23 @@
 
     <dependencies>
         <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.code.gwt-crypto</groupId>
             <artifactId>gwt-crypto</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.cobogw.gwt</groupId>
-            <artifactId>cobogw</artifactId>
         </dependency>
         <dependency>
             <groupId>de.atns.common</groupId>

@@ -5,13 +5,9 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
 import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.gwt.client.FieldSetPanel;
-import org.cobogw.gwt.user.client.ui.Button;
 
 import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
@@ -59,10 +55,10 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
                         .add("Email").widthPX(120).add(email).newLine()
                         .getPanel()
                 ), new FieldSetPanel("Passwort", extendedFlowPanel()
-                        .add("Passwort").widthPX(120).add(passwort1).newLine()
-                        .add("wiederholen").widthPX(120).add(passwort2).newLine()
-                        .getPanel()
-                ),
+                .add("Passwort").widthPX(120).add(passwort1).newLine()
+                .add("wiederholen").widthPX(120).add(passwort2).newLine()
+                .getPanel()
+        ),
                 getErrorPanel(),
                 fp
         ));

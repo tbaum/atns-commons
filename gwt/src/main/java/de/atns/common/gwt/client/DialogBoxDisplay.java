@@ -3,9 +3,9 @@ package de.atns.common.gwt.client;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
-import org.cobogw.gwt.user.client.ui.Button;
 
 /**
  * @author mwolter

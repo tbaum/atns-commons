@@ -10,7 +10,6 @@ import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.gwt.client.gin.AppShell;
-import org.cobogw.gwt.user.client.ui.Button;
 
 import static com.google.gwt.event.dom.client.KeyCodes.KEY_ENTER;
 
@@ -42,7 +41,7 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
 
         login = new Button("Anmelden");
         login.addStyleName("notloading");
-        login.setSize(100);
+        // login.setSize(100);
 
         final FlexTable grid = new FlexTable();
 
