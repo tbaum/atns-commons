@@ -50,10 +50,10 @@ public class BenutzerListHandler
     public PartResult<Benutzer> executeInternal(final BenutzerList action) throws ActionException {
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
-            return createPartResult(action.getStartEntry(), repository.countBenutzer(text),
+            return createPartResult(action.getStartEntry(), (int) repository.countBenutzer(text),
                     repository.findBenutzer(text, action.getStartEntry(), action.getPageRange()));
         } else {
-            return createPartResult(action.getStartEntry(), repository.countAllBenutzer(),
+            return createPartResult(action.getStartEntry(), (int) repository.countAllBenutzer(),
                     repository.findAllBenutzer(action.getStartEntry(), action.getPageRange()));
         }
     }
