@@ -1,7 +1,7 @@
 package de.atns.common.security.server;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 import de.atns.common.security.SecurityService;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.security.client.action.UserLogout;

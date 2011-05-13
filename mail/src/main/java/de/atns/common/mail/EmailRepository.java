@@ -1,6 +1,6 @@
 package de.atns.common.mail;
 
-import com.wideplay.warp.persist.dao.Finder;
+import com.google.inject.persist.finder.Finder;
 
 import java.util.List;
 

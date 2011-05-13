@@ -29,8 +29,8 @@
             <artifactId>template</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.wideplay</groupId>
-            <artifactId>warp-persist</artifactId>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

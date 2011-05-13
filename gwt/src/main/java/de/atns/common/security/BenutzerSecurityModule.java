@@ -26,7 +26,7 @@ public class BenutzerSecurityModule extends SecurityModule {
 
         install(new AbstractModule() {
             @Override protected void configure() {
-                bind(DummyDataCreator.class).asEagerSingleton();
+//                bind(DummyDataCreator.class).asEagerSingleton();
             }
         });
 

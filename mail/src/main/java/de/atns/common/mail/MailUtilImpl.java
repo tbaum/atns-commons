@@ -2,7 +2,7 @@ package de.atns.common.mail;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.Map;

@@ -3,9 +3,9 @@ package de.atns.common.lock;
 import de.atns.common.dao.LongIdObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.security.Authentication;
-import org.springframework.security.InsufficientAuthenticationException;
-import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;

@@ -2,7 +2,7 @@ package de.atns.common.security.benutzer.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;

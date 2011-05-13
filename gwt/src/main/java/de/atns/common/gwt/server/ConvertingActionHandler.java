@@ -1,7 +1,7 @@
 package de.atns.common.gwt.server;
 
 import ch.lambdaj.function.convert.Converter;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
 import net.customware.gwt.dispatch.shared.Action;

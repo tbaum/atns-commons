@@ -1,9 +1,9 @@
 package de.atns.common.security.server;
 
 import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-import com.wideplay.warp.persist.dao.FirstResult;
-import com.wideplay.warp.persist.dao.MaxResults;
+import com.google.inject.persist.finder.Finder;
+import com.google.inject.persist.finder.FirstResult;
+import com.google.inject.persist.finder.MaxResults;
 import de.atns.common.security.model.Benutzer;
 
 import java.util.List;
@@ -22,15 +22,14 @@ public interface BenutzerRepository {
     @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin") Benutzer benutzerByLogin(
             @Named("aLogin") String login);
 
-    @Finder(query = "SELECT count(distinct b) FROM Benutzer b ") int countAllBenutzer();
+    @Finder(query = "SELECT count(distinct b) FROM Benutzer b ") long countAllBenutzer();
 
-    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER) int countBenutzer(
+    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER) long countBenutzer(
             @Named("aLogin") String name);
 
-
     @Finder(query = "SELECT distinct b FROM Benutzer b order by b.login") List<Benutzer> findAllBenutzer(
-            @FirstResult int start, @MaxResults int paging);
+            @FirstResult long start, @MaxResults long paging);
 
-
-    @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login") List<Benutzer> findBenutzer(@Named("aLogin") String name, @FirstResult int start, @MaxResults int paging);
+    @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login")
+    List<Benutzer> findBenutzer(@Named("aLogin") String name, @FirstResult long start, @MaxResults long paging);
 }
