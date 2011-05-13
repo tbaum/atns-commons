@@ -2,6 +2,7 @@ package de.atns.common.mail;
 
 import com.google.inject.persist.finder.Finder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,5 +12,6 @@ import java.util.List;
 public interface EmailRepository {
 // -------------------------- OTHER METHODS --------------------------
 
-    @Finder(query = "from EmailMessage where sent is null AND error is null") List<EmailMessage> getAllUnsentMails();
+    @Finder(query = "from EmailMessage where sent is null AND error is null", returnAs = ArrayList.class)
+    List<EmailMessage> getAllUnsentMails();
 }
