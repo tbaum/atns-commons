@@ -1,5 +1,6 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
@@ -17,6 +18,7 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         this(legend, null);
     }
 
+    @UiConstructor
     public FieldSetPanel(final String text) {
         this(new Label(text));
     }

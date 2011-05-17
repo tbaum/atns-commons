@@ -65,7 +65,16 @@ public class Table extends ComplexPanel {
 
     Table() {
         setElement(DOM.createElement("table"));
-        getElement().setAttribute("cellspacing", "0");
+        setCellspacing(0);
+    }
+
+    public void setCellspacing(int cellspacing) {
+        getElement().setAttribute("cellspacing", Integer.toString(cellspacing));
+    }
+
+    public Table(int cellspacing) {
+        setElement(DOM.createElement("table"));
+        setCellspacing(cellspacing);
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
@@ -103,9 +112,17 @@ public class Table extends ComplexPanel {
             this(null, w);
         }
 
+        public Cell() {
+            this(null, "");
+        }
+
         public Cell colspan(final int i) {
-            getElement().setAttribute("colspan", String.valueOf(i));
+            setColspan(i);
             return this;
+        }
+
+        public void setColspan(int i) {
+            getElement().setAttribute("colspan", String.valueOf(i));
         }
 
         public String getStyle() {
