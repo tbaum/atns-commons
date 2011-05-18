@@ -3,7 +3,6 @@
         "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.google.gwt.user.User"/>
-    <inherits name="com.google.gwt.user.theme.chrome.Chrome"/>
 
     <inherits name="com.google.gwt.requestfactory.RequestFactory"/>
     <inherits name="com.google.gwt.inject.Inject"/>

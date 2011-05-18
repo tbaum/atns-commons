@@ -3,7 +3,7 @@
 
     <ui:style>
         .navi {
-            height: 22px;
+            height: 32px;
             margin-top: 5px;
         }
 
