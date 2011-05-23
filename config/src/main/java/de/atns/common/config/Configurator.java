@@ -17,6 +17,22 @@ public class Configurator {
 
 // -------------------------- OTHER METHODS --------------------------
 
+    public synchronized String get(final String key) {
+        ensureLoaded();
+        return configProperties.getProperty(getPropertyName(key));
+    }
+
+    private synchronized void ensureLoaded() {
+        if (configName == null) {
+            try {
+                configName = get();
+                configProperties.load(getClass().getResourceAsStream("config.properties"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public synchronized String get() {
         try {
             final Properties configMapping = new Properties();
@@ -30,19 +46,12 @@ public class Configurator {
         }
     }
 
-    public synchronized String get(final String s) {
-        if (configName == null) {
-            try {
-                configName = get();
-                configProperties.load(getClass().getResourceAsStream("config.properties"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return configProperties.getProperty(getPropertyName(s));
-    }
-
     public String getPropertyName(final String s) {
         return configName + "." + s;
+    }
+
+    public void put(final String key, final String value) {
+        ensureLoaded();
+        configProperties.put(getPropertyName(key), value);
     }
 }
