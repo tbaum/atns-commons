@@ -6,7 +6,6 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
-import com.google.inject.util.Providers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -62,15 +61,7 @@ public class ConfigModule extends AbstractModule {
     protected void configureConfig() {
     }
 
-    protected void configure(final Class<? extends Annotation> annotation) {
-        final String name = annotation.getAnnotation(ConfigurationName.class).value();
-
-        final String configValue = value(name);
-        if (configValue != null) {
-            bindConstant().annotatedWith(annotation).to(configValue);
-        } else {
-            LOG.warn("configuration value for '" + config.getPropertyName(name) + "' is null");
-            bind(String.class).annotatedWith(annotation).toProvider(Providers.of((String) null));
-        }
+    protected void configure(final Class<? extends Annotation> d, final String value) {
+        config.put(d.getAnnotation(ConfigurationName.class).value(), value);
     }
-}                                                   
+}
