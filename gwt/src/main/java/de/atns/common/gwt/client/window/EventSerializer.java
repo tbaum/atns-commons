@@ -5,8 +5,8 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONString;
 
 /**
- * @author: mwolter
- * @since: 25.01.11 11:07
+ * @author mwolter
+ * @since 25.01.11 11:07
  */
 public abstract class EventSerializer {
 // -------------------------- OTHER METHODS --------------------------
