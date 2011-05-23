@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,9 +98,7 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
      * @param handlerRegistration The registration.
      */
     protected void registerHandler(final HandlerRegistration... handlerRegistration) {
-        for (final HandlerRegistration registration : handlerRegistration) {
-            handlerRegistrations.add(registration);
-        }
+        Collections.addAll(handlerRegistrations, handlerRegistration);
     }
 
     @Inject
