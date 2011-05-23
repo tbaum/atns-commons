@@ -25,21 +25,27 @@ public class EmailResource implements Serializable {
     @Basic(optional = false)
     private byte[] data;
 
+    @Basic
+    private boolean embedded;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     public EmailResource() {
     }
 
     public EmailResource(final String name, final byte[] data) {
-        this.name = name;
-        this.mimeType = ImageInfo.getMimeType(data);
-        this.data = data;
+        this(name, ImageInfo.getMimeType(data), data, false);
     }
 
     public EmailResource(final String name, final String mimeType, final byte[] data) {
+        this(name, mimeType, data, false);
+    }
+
+    public EmailResource(final String name, final String mimeType, final byte[] data, boolean embedded) {
         this.name = name;
         this.mimeType = mimeType;
         this.data = data;
+        this.embedded = embedded;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -54,5 +60,9 @@ public class EmailResource implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isEmbedded() {
+        return embedded;
     }
 }

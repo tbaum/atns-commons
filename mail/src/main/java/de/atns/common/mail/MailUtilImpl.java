@@ -37,7 +37,8 @@ public class MailUtilImpl implements MailUtil {
                                  final MailTemplateResource... attachments) {
         EmailResource[] at = new EmailResource[attachments.length];
         for (int i = 0, attachments1Length = attachments.length; i < attachments1Length; i++) {
-            at[i] = new EmailResource(attachments[i].getName(), attachments[i].getMimeType(), attachments[i].getData());
+            at[i] = new EmailResource(attachments[i].getName(), attachments[i].getMimeType(), attachments[i].getData(),
+                    attachments[i].isEmbedded());
         }
 
         return sendMail(recipient, recipientName, ccRecipient, bccRecipient, template, context, at);

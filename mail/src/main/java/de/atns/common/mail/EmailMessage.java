@@ -166,14 +166,33 @@ public class EmailMessage implements Serializable {
 
     protected void prepareContent(final MimeMessage mesg) throws MessagingException {
         if (attachments.size() > 0) {
-            final MimeMultipart bodyPart = new MimeMultipart("mixed");
-            createTextMessage(bodyPart);
-            attachAttachments(bodyPart);
+            final MimeMultipart message = new MimeMultipart("related");
+            createTextMessage(message);
+            attachAttachments(message, true);
 
-            mesg.setContent(bodyPart);
+            if (!hasDownloads()) {
+                mesg.setContent(message);
+            } else {
+                final MimeMultipart bodyPart = new MimeMultipart("mixed");
+                MimeBodyPart mimeBodyPart = new MimeBodyPart();
+                mimeBodyPart.setContent(message);
+                bodyPart.addBodyPart(mimeBodyPart);
+                attachAttachments(bodyPart, false);
+
+                mesg.setContent(bodyPart);
+            }
         } else {
             createTextMessage(mesg);
         }
+    }
+
+    private boolean hasDownloads() {
+        for (EmailResource attachment : attachments) {
+            if (!attachment.isEmbedded()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected void createTextMessage(final MimeMultipart bodyPart) throws MessagingException {
@@ -182,15 +201,19 @@ public class EmailMessage implements Serializable {
         bodyPart.addBodyPart(textPart);
     }
 
-    protected void attachAttachments(final Multipart root) throws MessagingException {
+    protected void attachAttachments(final Multipart root, boolean embedd) throws MessagingException {
         for (final EmailResource attachment : attachments) {
-            final MimeBodyPart imagePart = new MimeBodyPart();
-            imagePart.setDisposition(ATTACHMENT);
-            imagePart.setDataHandler(
-                    new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
-            imagePart.setFileName(attachment.getName());
-            imagePart.setContentID("<" + attachment.getName() + ">");
-            root.addBodyPart(imagePart);
+            if (attachment.isEmbedded() == embedd) {
+                final MimeBodyPart imagePart = new MimeBodyPart();
+                if (!embedd) {
+                    imagePart.setDisposition(ATTACHMENT);
+                    imagePart.setFileName(attachment.getName());
+                }
+                imagePart.setDataHandler(
+                        new DataHandler(new ByteArrayDataSource(attachment.getData(), attachment.getMimeType())));
+                imagePart.setContentID("<" + attachment.getName() + ">");
+                root.addBodyPart(imagePart);
+            }
         }
     }
 

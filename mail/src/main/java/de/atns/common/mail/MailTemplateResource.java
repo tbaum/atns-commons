@@ -12,4 +12,6 @@ public interface MailTemplateResource {
     String getMimeType();
 
     String getName();
+
+    boolean isEmbedded();
 }
