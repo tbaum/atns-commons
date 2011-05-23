@@ -7,8 +7,8 @@
     <inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="com.google.gwt.requestfactory.RequestFactory"/>
 
-    <inherits name="com.google.gwt.user.theme.clean.Clean"/>
-    <stylesheet src="atns-gwt.css"/>
+    <!--<inherits name="com.google.gwt.user.theme.clean.Clean"/>-->
+    <!--<stylesheet src="atns-gwt.css"/>-->
 
     <source path="client"/>
 </module>
