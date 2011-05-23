@@ -10,7 +10,6 @@ import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
-import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,24 +33,14 @@ public class BenutzerChangePasswordHandler
 
     @Inject
     public BenutzerChangePasswordHandler(final Provider<EntityManager> em, final SecurityService securityService) {
-        super(BENUTZER_CONVERTER);
+        super(BENUTZER_CONVERTER, BenutzerChangePassword.class);
         this.em = em;
         this.securityService = securityService;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override public Class<BenutzerChangePassword> getActionType() {
-        return BenutzerChangePassword.class;
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
-    @Transactional @Secured @Override
-    public Benutzer executeInternal(final BenutzerChangePassword action) throws ActionException {
+    @Transactional @Secured @Override public Benutzer executeInternal(final BenutzerChangePassword action) {
         final Benutzer t = (Benutzer) securityService.currentUser();
 
         final Benutzer benutzer = em.get().find(Benutzer.class, t.getId());

@@ -20,17 +20,23 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
     private static final Log LOG = LogFactory.getLog(ConvertingActionHandler.class);
     protected final Converter<S, R> converter;
+    private final Class<A> clazz;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    protected ConvertingActionHandler(final Converter<S, R> converter) {
+    protected ConvertingActionHandler(final Converter<S, R> converter, final Class<A> clazz) {
         this.converter = converter;
+        this.clazz = clazz;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
 
 
 // --------------------- Interface ActionHandler ---------------------
+
+    @Override public final Class<A> getActionType() {
+        return clazz;
+    }
 
     @Override @Transactional
     public R execute(final A action, final ExecutionContext context) throws ActionException {

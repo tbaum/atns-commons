@@ -8,7 +8,6 @@ import de.atns.common.security.client.action.UserLogout;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
-import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -38,8 +37,7 @@ public class UserLogoutHandler implements ActionHandler<UserLogout, UserPresenta
     }
 
     @Override @Transactional
-    public final UserPresentation execute(final UserLogout action,
-                                          final ExecutionContext context) throws ActionException {
+    public final UserPresentation execute(final UserLogout action, final ExecutionContext context) {
         final SecurityUser user = securityService.logout();
 
         LOG.info("loggedout " + (user != null ? user.getLogin() : ""));

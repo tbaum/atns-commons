@@ -9,7 +9,6 @@ import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.security.server.BenutzerRepository;
-import net.customware.gwt.dispatch.shared.ActionException;
 
 import static de.atns.common.dao.PartResult.createPartResult;
 import static de.atns.common.gwt.server.ListConverter.listConverter;
@@ -31,23 +30,13 @@ public class BenutzerListHandler
 
     @Inject
     public BenutzerListHandler(final BenutzerRepository repository) {
-        super(listConverter(BENUTZER_CONVERTER));
+        super(listConverter(BENUTZER_CONVERTER), BenutzerList.class);
         this.repository = repository;
-    }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override public Class<BenutzerList> getActionType() {
-        return BenutzerList.class;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Secured(ADMIN)
-    public PartResult<Benutzer> executeInternal(final BenutzerList action) throws ActionException {
+    @Override @Secured(ADMIN) public PartResult<Benutzer> executeInternal(final BenutzerList action) {
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
             return createPartResult(action.getStartEntry(), (int) repository.countBenutzer(text),

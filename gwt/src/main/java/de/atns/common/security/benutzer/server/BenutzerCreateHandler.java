@@ -8,7 +8,6 @@ import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.model.Benutzer;
-import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.exception.ConstraintViolationException;
@@ -34,24 +33,14 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerCreateHandler(final Provider<EntityManager> em, final BenutzerRollenHandler roleHandler) {
-        super(BenutzerPresentationConverter.BENUTZER_CONVERTER);
+        super(BenutzerPresentationConverter.BENUTZER_CONVERTER, BenutzerCreate.class);
         this.em = em;
         this.roleHandler = roleHandler;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override public Class<BenutzerCreate> getActionType() {
-        return BenutzerCreate.class;
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(ADMIN)
-    public Benutzer executeInternal(final BenutzerCreate action) throws ActionException {
+    @Override @Transactional @Secured(ADMIN) public Benutzer executeInternal(final BenutzerCreate action) {
         final EntityManager em = this.em.get();
         try {
             final Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),

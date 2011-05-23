@@ -9,7 +9,6 @@ import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
-import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,24 +32,14 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em, final BenutzerRollenHandler roleHandler) {
-        super(BENUTZER_CONVERTER);
+        super(BENUTZER_CONVERTER, BenutzerUpdate.class);
         this.em = em;
         this.roleHandler = roleHandler;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override public Class<BenutzerUpdate> getActionType() {
-        return BenutzerUpdate.class;
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(ADMIN)
-    public Benutzer executeInternal(final BenutzerUpdate action) throws ActionException {
+    @Override @Transactional @Secured(ADMIN) public Benutzer executeInternal(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
         final Benutzer benutzer = em.find(Benutzer.class, action.getId());

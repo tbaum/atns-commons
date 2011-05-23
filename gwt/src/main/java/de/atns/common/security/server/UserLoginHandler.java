@@ -8,7 +8,6 @@ import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
-import net.customware.gwt.dispatch.shared.ActionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -42,9 +41,7 @@ public class UserLoginHandler implements ActionHandler<UserLogin, UserPresentati
         return UserLogin.class;
     }
 
-    @Override
-    public final UserPresentation execute(final UserLogin action,
-                                          final ExecutionContext context) throws ActionException {
+    @Override public final UserPresentation execute(final UserLogin action, final ExecutionContext context) {
         LOG.info("login " + action.getUserName());
         final UUID token = securityFilter.login(action.getUserName(), action.getPassword());
         if (token == null) {
