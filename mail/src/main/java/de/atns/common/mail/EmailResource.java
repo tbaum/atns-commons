@@ -10,7 +10,6 @@ import java.io.Serializable;
 public class EmailResource implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = 6311733671520162881L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
