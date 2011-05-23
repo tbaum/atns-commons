@@ -9,8 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @MappedSuperclass public class BaseObject implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @Version
@@ -18,6 +17,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 
     private Date lastUpdateTimestamp;
     private Date createTimestamp;
+
+// --------------------------- CONSTRUCTORS ---------------------------
+
+    public BaseObject() {
+    }
+
+    protected BaseObject(final long id) {
+        this.id = id;
+    }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
