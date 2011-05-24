@@ -1,8 +1,8 @@
 package de.atns.common.mail;
 
 import de.atns.common.util.ImageInfo;
-import org.apache.commons.codec.binary.Base64;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -21,8 +21,8 @@ public class EmailResource implements Serializable {
     @Basic(optional = false)
     private String mimeType;
 
-    @Lob
-    private String data;
+    @Basic(optional = false)
+    private byte[] data;
 
     @Basic
     private boolean embedded;
@@ -43,14 +43,14 @@ public class EmailResource implements Serializable {
     public EmailResource(final String name, final String mimeType, final byte[] data, boolean embedded) {
         this.name = name;
         this.mimeType = mimeType;
-        this.data = Base64.encodeBase64String(data);
+        this.data = data;
         this.embedded = embedded;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
     public byte[] getData() {
-        return Base64.decodeBase64(data);
+        return data;
     }
 
     public String getMimeType() {
