@@ -4,13 +4,13 @@
     <groupId>de.atns.common</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.5.1-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}:${project.packaging}:${project.version}</name>
 
     <parent>
         <groupId>de.atns.maven</groupId>
         <artifactId>defaults</artifactId>
-        <version>1.9.6</version>
+        <version>1.9.9-SNAPSHOT</version>
     </parent>
 
     <modules>
@@ -24,7 +24,6 @@
         <module>pdf</module>
         <module>gwt</module>
         <module>image</module>
-        <module>json</module>
         <module>lock</module>
         <module>numbergenerator</module>
         <module>schedule</module>
@@ -39,9 +38,6 @@
         <url>scm:git:ssh://git@git.atns.de/common</url>
     </scm>
 
-    <properties>
-        <spring.version>3.0.5.RELEASE</spring.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -53,24 +49,12 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--
             <dependency>
                 <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core-tiger</artifactId>
-                <version>2.0.4</version>
-                <scope>provided</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-aop</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-support</artifactId>
-                    </exclusion>
-                </exclusions>
+                <artifactId>spring-security-core</artifactId>
+                <version>3.0.5.RELEASE</version>
             </dependency>
-            -->
+
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>cache</artifactId>

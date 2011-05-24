@@ -5,15 +5,13 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.util.ajax.JSON;
+import org.json.JSONException;
+import org.json.JSONStringer;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author tbaum
@@ -61,15 +59,21 @@ import java.util.Map;
 // -------------------------- OTHER METHODS --------------------------
 
     private String mapException(final Throwable e) {
-        final Map<String, Serializable> result = new LinkedHashMap<String, Serializable>();
-        result.put("failed", true);
-        result.put("message", e.getMessage());
-        result.put("stacktrace", e.getStackTrace());
+        try {
+            final JSONStringer json = new JSONStringer();
+            json.object()
+                    .key("failed").value(true)
+                    .key("message").value(e.getMessage())
+                    .key("stacktrace").value(e.getStackTrace());
 
-        if (e.getCause() != null) {
-            result.put("cause", mapException(e.getCause()));
+            if (e.getCause() != null) {
+                json.key("cause").value(mapException(e.getCause()));
+            }
+            json.endObject();
+
+            return json.toString();
+        } catch (JSONException e1) {
+            throw new RuntimeException(e1);
         }
-
-        return JSON.toString(result);
     }
 }

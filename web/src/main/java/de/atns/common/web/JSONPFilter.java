@@ -1,6 +1,8 @@
 package de.atns.common.web;
 
 import com.google.inject.Singleton;
+import org.json.JSONException;
+import org.json.JSONStringer;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +47,16 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
         final String function = status[0] == SC_OK ? "ok" : "error";
 
         ((HttpServletResponse) response).setStatus(SC_OK);
-        final String json = "{ status:\"" + function + "\", result:" + new String(bos.toByteArray()) + "}";
-        response.getWriter().write(request.getParameter("callback") + "(" + json + ");");
+        try {
+            JSONStringer json = new JSONStringer();
+            json.object()
+                    .key("status").value(function)
+                    .key("result").value(new String(bos.toByteArray()))
+                    .endObject();
+            response.getWriter().write(request.getParameter("callback") + "(" + json.toString() + ");");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override public void destroy() {

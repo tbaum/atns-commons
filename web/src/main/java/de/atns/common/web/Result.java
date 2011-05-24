@@ -2,7 +2,8 @@ package de.atns.common.web;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
-import org.eclipse.jetty.util.ajax.JSON;
+import org.json.JSONException;
+import org.json.JSONStringer;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
@@ -32,6 +33,16 @@ import java.util.Map;
     }
 
     public String toJSON() {
-        return JSON.toString(map);
+        try {
+            JSONStringer json = new JSONStringer();
+            json.object();
+            for (Map.Entry<String, Object> s : map.entrySet()) {
+                json.key(s.getKey()).value(s.getValue());
+            }
+            json.endObject();
+            return json.toString();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
