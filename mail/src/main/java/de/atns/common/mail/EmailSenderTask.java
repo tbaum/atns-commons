@@ -52,39 +52,32 @@ public class EmailSenderTask implements Runnable {
                 final EntityManager em = this.em.get();
                 final Session session = Session.getInstance(mailConfiguration);
 
-                final EntityTransaction transaction1 = em.getTransaction();
+                final EntityTransaction transaction = em.getTransaction();
                 try {
-                    transaction1.begin();
+                    transaction.begin();
 
                     for (final EmailMessage p1 : repository.getAllUnsentMails()) {
 
-                        final EntityTransaction transaction = em.getTransaction();
+                        final EmailMessage message = em.find(EmailMessage.class, p1.getId());
                         try {
-                            transaction.begin();
-                            final EmailMessage message = em.find(EmailMessage.class, p1.getId());
-                            try {
-                                final MimeMessage mimeMessage = new MimeMessage(session);
-                                message.prepare(mimeMessage);
-                                LOG.debug("sending #" + p1.getId() + " " + p1.getSender() + " " + p1.getSubject() +
-                                        " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
-                                Transport.send(mimeMessage);
-                                message.setSent(new Date());
-                            } catch (Exception e) {
-                                LOG.error(e);
-                                message.setError(e.getMessage());
-                            }
+                            final MimeMessage mimeMessage = new MimeMessage(session);
+                            message.prepare(mimeMessage);
+                            LOG.debug("sending #" + p1.getId() + " " + p1.getSender() + " " + p1.getSubject() +
+                                    " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
+                            Transport.send(mimeMessage);
+                            message.setSent(new Date());
 
-                            transaction.commit();
-                        } finally {
-                            if (transaction.isActive()) {
-                                transaction.rollback();
-                            }
+                            em.merge(message);
+                        } catch (Exception e) {
+                            LOG.error(e);
+                            message.setError(e.getMessage());
                         }
+                        em.flush();
                     }
-                    transaction1.commit();
+                    transaction.commit();
                 } finally {
-                    if (transaction1.isActive()) {
-                        transaction1.rollback();
+                    if (transaction.isActive()) {
+                        transaction.rollback();
                     }
                 }
             } catch (Exception e) {
