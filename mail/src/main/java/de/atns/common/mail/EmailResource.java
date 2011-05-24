@@ -3,7 +3,6 @@ package de.atns.common.mail;
 import de.atns.common.util.ImageInfo;
 import org.apache.commons.codec.binary.Base64;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

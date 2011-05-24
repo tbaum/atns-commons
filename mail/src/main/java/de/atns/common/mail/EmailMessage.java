@@ -26,7 +26,7 @@ import static org.hibernate.annotations.CascadeType.ALL;
  */
 @Entity
 @Table(name = "email_spool")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) @DiscriminatorValue("0")
 public class EmailMessage implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
