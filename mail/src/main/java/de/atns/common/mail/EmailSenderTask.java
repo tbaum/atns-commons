@@ -6,11 +6,13 @@ import com.google.inject.Singleton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -51,7 +53,6 @@ public class EmailSenderTask implements Runnable {
                 final Session session = Session.getInstance(mailConfiguration);
 
                 for (final EmailMessage p1 : repository.getAllUnsentMails()) {
-                    LOG.debug("sending #" + p1.getId() + " " + p1.getSender() + " " + p1.getSubject());
 
                     final EntityTransaction transaction = em.getTransaction();
                     try {
@@ -60,6 +61,8 @@ public class EmailSenderTask implements Runnable {
                         try {
                             final MimeMessage mimeMessage = new MimeMessage(session);
                             message.prepare(mimeMessage);
+                            LOG.debug("sending #" + p1.getId() + " " + p1.getSender() + " " + p1.getSubject() +
+                                    " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
                             Transport.send(mimeMessage);
                             message.setSent(new Date());
                         } catch (Exception e) {
