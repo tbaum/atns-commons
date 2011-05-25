@@ -167,7 +167,6 @@ try {
                     transaction.rollback();
                 }
             }
-            em.flush();
         }
     }
 
