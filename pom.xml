@@ -22,6 +22,7 @@
         <module>dao-mail</module>
         <module>fileutils</module>
         <module>pdf</module>
+        <module>persist</module>
         <module>gwt</module>
         <module>image</module>
         <module>lock</module>
@@ -98,6 +99,11 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>template</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>persist</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

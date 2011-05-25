@@ -74,8 +74,8 @@
             <artifactId>gin</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-persist</artifactId>
+            <groupId>de.atns.common</groupId>
+            <artifactId>persist</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
