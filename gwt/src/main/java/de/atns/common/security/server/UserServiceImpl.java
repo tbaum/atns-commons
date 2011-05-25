@@ -2,6 +2,7 @@ package de.atns.common.security.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.persist.Transactional;
 import de.atns.common.security.UserService;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override public Benutzer refreshUser(final String login) {
+    @Override @Transactional public Benutzer refreshUser(final String login) {
         try {
             return repository.benutzerByLogin(login);
         } catch (NoResultException e) {
