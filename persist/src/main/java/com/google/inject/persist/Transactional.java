@@ -70,15 +70,15 @@ public @interface Transactional {
 
     /**
      * A list of exceptions to *not* rollback on. A caveat to the rollbackOn clause.
-     * The disjunction of rollbackOn and exceptOn represents the list of exceptions
+     * The disjunction of rollbackOn and ignore represents the list of exceptions
      * that will trigger a rollback.
      * The complement of rollbackOn and the universal set plus any exceptions in the
-     * exceptOn set represents the list of exceptions that will trigger a commit.
+     * ignore set represents the list of exceptions that will trigger a commit.
      * <p/>
-     * Note that exceptOn exceptions take precedence over rollbackOn, but with subtype
+     * Note that ignore exceptions take precedence over rollbackOn, but with subtype
      * granularity.
      *
      * @return Returns the configured rollback exceptions.
      */
-    Class<? extends Exception>[] exceptOn() default {};
+    Class<? extends Exception>[] ignore() default {};
 }

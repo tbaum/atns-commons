@@ -39,7 +39,7 @@ public interface TransactionStrategyBuilder extends PersistenceModuleBuilder {
      *
      * Note that if you do not have an {@code @Transactional} annotation present on transactional methods, and
      * use a {@code Matcher.any()} for methods, warp-persist
-     *  will assume default rollbackOn and exceptOn clauses (as though @Transactional were present but
+     *  will assume default rollbackOn and ignore clauses (as though @Transactional were present but
      *  with no attributes specified).
      *
      * @param classMatcher A Matcher on classes to watch for transactional methods

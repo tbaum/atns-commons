@@ -134,8 +134,8 @@ class HibernateLocalTxnInterceptor implements MethodInterceptor {
             if (rollBackOn.isInstance(e)) {
                 commit = false;
 
-                //check exceptOn clauses (supercedes rollback clause)
-                for (Class<? extends Exception> exceptOn : transactional.exceptOn()) {
+                //check ignore clauses (supercedes rollback clause)
+                for (Class<? extends Exception> exceptOn : transactional.ignore()) {
 
                     //An exception to the rollback clause was found, DONT rollback (i.e. commit and throw anyway)
                     if (exceptOn.isInstance(e)) {
@@ -144,7 +144,7 @@ class HibernateLocalTxnInterceptor implements MethodInterceptor {
                     }
                 }
 
-                //rollback only if nothing matched the exceptOn check
+                //rollback only if nothing matched the ignore check
                 if (!commit) {
                     txn.rollback();
                 }
