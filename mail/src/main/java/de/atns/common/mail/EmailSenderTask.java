@@ -7,7 +7,10 @@ import com.google.inject.persist.Transactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.event.TransportAdapter;
 import javax.mail.event.TransportEvent;
 import javax.mail.internet.MimeMessage;
@@ -26,7 +29,7 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
     private static final Log LOG = LogFactory.getLog(EmailSenderTask.class);
     private final Provider<Properties> mailConfiguration;
-    private final Provider<EmailRepository> repository;
+    private final EmailRepository repository;
     private final Provider<EntityManager> em;
     private final AtomicBoolean running = new AtomicBoolean(false);
 
@@ -34,7 +37,7 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
     @Inject public EmailSenderTask(final Provider<EntityManager> em,
                                    @MailConfiguration final Provider<Properties> mailConfiguration,
-                                   final Provider<EmailRepository> repository) {
+                                   final EmailRepository repository) {
         this.em = em;
         this.mailConfiguration = mailConfiguration;
         this.repository = repository;
@@ -91,7 +94,6 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
         final EntityManager em = this.em.get();
         em.setFlushMode(FlushModeType.COMMIT);
-        final EmailRepository repository = this.repository.get();
 
         final Session session;
 
@@ -106,10 +108,10 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         Transport transport = null;
         for (final EmailMessage me : repository.getAllUnsentMails()) {
             EmailMessage message = em.find(EmailMessage.class, me.getId());
-            if (transport == null) {
-                transport = getTransport(session, ssl, host, user, pass);
-            }
             try {
+                if (transport == null) {
+                    transport = getTransport(session, ssl, host, user, pass);
+                }
                 final MimeMessage mimeMessage = new MimeMessage(session);
                 message.prepare(mimeMessage);
                 LOG.debug("sending #" + message.getId() + " " + message.getSender() + " " + message.getSubject() +
@@ -125,30 +127,24 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         }
     }
 
-    private Transport getTransport(final Session session, final boolean ssl, final String host, final String user, final String pass) {
-        try {
-            final Transport transport = session.getTransport(ssl ? "smtps" : "smtp");
-            transport.addTransportListener(new TransportAdapter() {
-                @Override public void messagePartiallyDelivered(final TransportEvent e) {
-                    LOG.debug("part " + e);
-                }
+    private Transport getTransport(final Session session, final boolean ssl, final String host, final String user, final String pass) throws MessagingException {
+        final Transport transport = session.getTransport(ssl ? "smtps" : "smtp");
+        transport.addTransportListener(new TransportAdapter() {
+            @Override public void messagePartiallyDelivered(final TransportEvent e) {
+                LOG.debug("part " + e);
+            }
 
-                @Override public void messageNotDelivered(final TransportEvent e) {
-                    LOG.debug("not  " + e);
-                }
+            @Override public void messageNotDelivered(final TransportEvent e) {
+                LOG.debug("not  " + e);
+            }
 
-                @Override public void messageDelivered(final TransportEvent e) {
-                    LOG.debug("del  " + e);
-                }
-            });
-            transport.connect(host, user, pass);
+            @Override public void messageDelivered(final TransportEvent e) {
+                LOG.debug("del  " + e);
+            }
+        });
+        transport.connect(host, user, pass);
 
-            return transport;
-        } catch (NoSuchProviderException e) {
-            throw new RuntimeException(e);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        return transport;
     }
 
     public void trigger() {
