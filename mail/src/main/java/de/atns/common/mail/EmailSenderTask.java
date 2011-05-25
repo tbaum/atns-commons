@@ -42,6 +42,9 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         this.mailConfiguration = mailConfiguration;
         this.repository = repository;
     }
+
+// -------------------------- OTHER METHODS --------------------------
+
     /*
 @Override public void run() {
 try {
@@ -139,12 +142,21 @@ try {
         }
         session = Session.getInstance(props);
         Transport transport = null;
-        for (final EmailMessage me : repository.getAllUnsentMails()) {
-            final EntityTransaction transaction = em.getTransaction();
+        final List<Long> allUnsentMails = new ArrayList<Long>();
+        final EntityTransaction transaction = em.getTransaction();
 
+        try {
+            transaction.begin();
+            for (EmailMessage message : repository.getAllUnsentMails()) {
+                allUnsentMails.add(message.getId());
+            }
+        } finally {
+            transaction.commit();
+        }
+        for (final Long id : allUnsentMails) {
             try {
                 transaction.begin();
-                EmailMessage message = em.find(EmailMessage.class, me.getId());
+                EmailMessage message = em.find(EmailMessage.class, id);
                 try {
                     if (transport == null) {
                         transport = getTransport(session, ssl, host, user, pass);
