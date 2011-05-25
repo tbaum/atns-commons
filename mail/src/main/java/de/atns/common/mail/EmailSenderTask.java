@@ -3,7 +3,6 @@ package de.atns.common.mail;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.google.inject.persist.Transactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -15,6 +14,7 @@ import javax.mail.event.TransportAdapter;
 import javax.mail.event.TransportEvent;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -42,10 +42,43 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         this.mailConfiguration = mailConfiguration;
         this.repository = repository;
     }
+    /*
+@Override public void run() {
+try {
+ final EntityManager em = this.em.get();
+ final Session session = Session.getInstance(mailConfiguration);
+
+ for (final EmailMessage p1 : repository.getAllUnsentMails()) {
+     LOG.debug("sending #" + p1.getId() + " " + p1.getSender() + " " + p1.getSubject());
+
+     final EntityTransaction transaction = em.getTransaction();
+     try {
+         transaction.begin();
+         final EmailMessage message = em.find(EmailMessage.class, p1.getId());
+         try {
+             final MimeMessage mimeMessage = new MimeMessage(session);
+             message.prepare(mimeMessage);
+             Transport.send(mimeMessage);
+             message.setSent(new Date());
+         } catch (Exception e) {
+             LOG.error(e);
+             message.setError(e.getMessage());
+         }
+
+         transaction.commit();
+     } finally {
+         if (transaction.isActive()) {
+             transaction.rollback();
+         }
+     }
+ }
+} catch (Exception e) {
+ LOG.error(e, e);
+}
+}           */
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Transactional
     public void sendEmails() {
         final Properties props1 = mailConfiguration.get();
 
@@ -107,21 +140,32 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         session = Session.getInstance(props);
         Transport transport = null;
         for (final EmailMessage me : repository.getAllUnsentMails()) {
-            EmailMessage message = em.find(EmailMessage.class, me.getId());
-            try {
-                if (transport == null) {
-                    transport = getTransport(session, ssl, host, user, pass);
-                }
-                final MimeMessage mimeMessage = new MimeMessage(session);
-                message.prepare(mimeMessage);
-                LOG.debug("sending #" + message.getId() + " " + message.getSender() + " " + message.getSubject() +
-                        " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
+            final EntityTransaction transaction = em.getTransaction();
 
-                transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-                message.setSent(new Date());
-            } catch (Exception e) {
-                LOG.error(e);
-                message.setError(e.getMessage());
+            try {
+                transaction.begin();
+                EmailMessage message = em.find(EmailMessage.class, me.getId());
+                try {
+                    if (transport == null) {
+                        transport = getTransport(session, ssl, host, user, pass);
+                    }
+                    final MimeMessage mimeMessage = new MimeMessage(session);
+                    message.prepare(mimeMessage);
+                    LOG.debug("sending #" + message.getId() + " " + message.getSender() + " " + message.getSubject() +
+                            " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
+
+                    transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+                    message.setSent(new Date());
+                } catch (Exception e) {
+                    LOG.error(e);
+                    message.setError(e.getMessage());
+                }
+
+                transaction.commit();
+            } finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
             }
             em.flush();
         }
