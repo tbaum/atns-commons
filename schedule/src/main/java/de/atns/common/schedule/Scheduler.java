@@ -21,7 +21,7 @@ public class Scheduler {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public Scheduler(final Set<ScheduledTask> tasks, final Injector injector) {
-        final Timer timer = new Timer();
+        final Timer timer = new Timer(true);
         for (final ScheduledTask task : tasks) {
             final TimerTask timerTask = new TimerTask() {
                 @Override public void run() {
