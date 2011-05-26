@@ -5,6 +5,7 @@ import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MailUtilImpl implements MailUtil {
@@ -29,6 +30,20 @@ public class MailUtilImpl implements MailUtil {
 
 
 // --------------------- Interface MailUtil ---------------------
+
+    @Transactional
+    public EmailMessage sendMail(final String recipient, final String recipientName,
+                                 final MailTemplate template, final HashMap<String, Object> context,
+                                 final MailTemplateResource... attachments) {
+        return sendMail(recipient, recipientName, null, null, template, context, attachments);
+    }
+
+    @Transactional
+    public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
+                                 final MailTemplate template, final HashMap<String, Object> context,
+                                 final MailTemplateResource... attachments) {
+        return sendMail(recipient, recipientName, ccRecipient, null, template, context, attachments);
+    }
 
     @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
@@ -70,7 +85,6 @@ public class MailUtilImpl implements MailUtil {
             message = new EmailMessage(sender, senderName, recipient, recipientName, ccRecipient, bccRecipient,
                     subject, text, attachments);
         }
-
         return em.get().merge(message);
     }
 }
