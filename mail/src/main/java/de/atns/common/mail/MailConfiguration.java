@@ -1,15 +1,41 @@
 package de.atns.common.mail;
 
-import com.google.inject.BindingAnnotation;
+import java.util.Properties;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+/**
+ * @author tbaum
+ * @since 26.05.11 04:38
+ */
+public class MailConfiguration extends Properties {
+// --------------------------- CONSTRUCTORS ---------------------------
 
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+    public MailConfiguration(final Properties properties) {
+        super(properties);
 
-@BindingAnnotation
-@Retention(RUNTIME)
-@Target(PARAMETER)
-public @interface MailConfiguration {
+
+        this.put("mail.smtp.dsn.notify", "SUCCESS,FAILURE,DELAY");
+        this.put("mail.smtp.dsn.ret", "HDRS");
+
+        if (getHost() != null) {
+            this.put(isSsl() ? "mail.smtps.host" : "mail.smtp.host", getHost());
+        }
+    }
+
+    public boolean isSsl() {
+        return "true".equalsIgnoreCase((String) get("mail.smtp.ssl"));
+    }
+
+    public String getHost() {
+        return (String) get("mail.smtp.host");
+    }
+
+// -------------------------- OTHER METHODS --------------------------
+
+    public String getPass() {
+        return (String) get("mail.smtp.password");
+    }
+
+    public String getUser() {
+        return (String) get("mail.smtp.user");
+    }
 }
