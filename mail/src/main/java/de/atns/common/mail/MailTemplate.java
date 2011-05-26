@@ -13,5 +13,7 @@ public interface MailTemplate {
 
     String getText();
 
+    boolean isAutoText();
+
     boolean isHtmlMail();
 }

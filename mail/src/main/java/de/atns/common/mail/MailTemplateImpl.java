@@ -56,6 +56,10 @@ public class MailTemplateImpl implements MailTemplate {
         return html;
     }
 
+    @Override public boolean isAutoText() {
+        return false;
+    }
+
     @Override public boolean isHtmlMail() {
         return html != null;
     }

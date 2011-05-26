@@ -3,6 +3,7 @@ package de.atns.common.mail;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
+import org.jsoup.Jsoup;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
@@ -66,12 +67,17 @@ public class MailUtilImpl implements MailUtil {
             throw new IllegalArgumentException("missing template");
         }
 
+        String text = templateRenderer.renderPlainTemplate(template, context);
+        String html = template.isHtmlMail() ? templateRenderer.renderHtmlTemplate(template, context) : null;
+
+        if (template.isHtmlMail() && template.isAutoText()) {
+            text = new Html2Text(Jsoup.parse(html).normalise().toString()).getPlainText();
+        }
+
         final EmailMessage message = new EmailMessage(
                 template.getSenderEmail(), template.getSenderName(),
                 recipient, recipientName, ccRecipient, bccRecipient,
-                template.getSubject(), templateRenderer.renderPlainTemplate(template, context),
-                template.isHtmlMail() ? templateRenderer.renderHtmlTemplate(template, context) : null,
-                attachments);
+                template.getSubject(), text, html, attachments);
 
         return em.get().merge(message);
     }
