@@ -29,9 +29,16 @@
             <groupId>de.atns.common</groupId>
             <artifactId>template</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>de.atns.common</groupId>
             <artifactId>persist</artifactId>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-persist</artifactId>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
