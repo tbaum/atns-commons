@@ -1,7 +1,5 @@
 package de.atns.common.mail;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.activation.DataHandler;
 import javax.mail.MessagingException;
@@ -32,7 +30,6 @@ import static java.util.Arrays.asList;
     private String html;
 
     @OneToMany(targetEntity = MailResource.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "resources")
     private List<MailResource> resources;
 
