@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import static java.util.Arrays.asList;
 import static javax.mail.Message.RecipientType.*;
@@ -25,8 +26,6 @@ import static org.hibernate.annotations.CascadeType.ALL;
  * Date: 26.02.2008
  */
 @Entity
-@Table(name = "email_spool")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) @DiscriminatorValue("0")
 public class EmailMessage implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
@@ -34,6 +33,9 @@ public class EmailMessage implements Serializable {
 
     @Transient
     protected final String MAIL_DEFAULT_CHARSET = "ISO-8859-15";
+
+    @OneToMany(mappedBy = "message") @Cascade(ALL)
+    protected Collection<EmailMessageResource> messageResources = new ArrayList<EmailMessageResource>();
 
     @Transient
     private final String debugMode = System.getProperty("debug.email");
@@ -44,12 +46,6 @@ public class EmailMessage implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long id;
-
-
-    @OneToMany(targetEntity = EmailResource.class)
-    @Cascade(ALL)
-    @JoinColumn(name = "attachment")
-    private Collection<EmailResource> attachments = new ArrayList<EmailResource>();
 
     @Basic(optional = true)
     private String cc;
@@ -81,14 +77,19 @@ public class EmailMessage implements Serializable {
     @Basic(optional = true)
     private String replyTo;
 
+    @Basic(optional = true) @Lob
+    private String html;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     EmailMessage() {
     }
 
     public EmailMessage(final String sender, final String senderName,
-                        final String recipient, final String recipientName, final String cc, final String bcc,
-                        final String subject, final String text, final EmailResource... attachments) {
+                        final String recipient, final String recipientName,
+                        final String cc, final String bcc,
+                        final String subject, final String text, final String html,
+                        final Collection<EmailMessageResource> messageResources) {
         this.sender = sender;
         this.cc = cc;
         this.bcc = bcc;
@@ -97,7 +98,20 @@ public class EmailMessage implements Serializable {
         this.recipientName = recipientName;
         this.subject = subject;
         this.text = text;
-        this.attachments = new ArrayList<EmailResource>(asList(attachments));
+        this.html = html;
+        this.messageResources = new HashSet<EmailMessageResource>(messageResources);
+
+        for (EmailMessageResource messageResource : this.messageResources) {
+            messageResource.setMessage(this);
+        }
+    }
+
+    public EmailMessage(final String sender, final String senderName,
+                        final String recipient, final String recipientName,
+                        final String cc, final String bcc,
+                        final String subject, final String text, final String html,
+                        final EmailMessageResource... messageResources) {
+        this(sender, senderName, recipient, recipientName, cc, bcc, subject, text, html, asList(messageResources));
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -164,48 +178,74 @@ public class EmailMessage implements Serializable {
         }
     }
 
-    protected void prepareContent(final MimeMessage mesg) throws MessagingException {
-        if (attachments.size() > 0) {
+    private void prepareContent(final MimeMessage mesg) throws MessagingException {
+        if (hasDownloads() && hasEmbedded()) {
             final MimeMultipart message = new MimeMultipart("related");
             createTextMessage(message);
             attachAttachments(message, true);
 
-            if (!hasDownloads()) {
-                mesg.setContent(message);
-            } else {
-                final MimeMultipart bodyPart = new MimeMultipart("mixed");
-                MimeBodyPart mimeBodyPart = new MimeBodyPart();
-                mimeBodyPart.setContent(message);
-                bodyPart.addBodyPart(mimeBodyPart);
-                attachAttachments(bodyPart, false);
+            final MimeMultipart bodyPart = new MimeMultipart("mixed");
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.setContent(message);
+            bodyPart.addBodyPart(mimeBodyPart);
+            attachAttachments(bodyPart, false);
 
-                mesg.setContent(bodyPart);
-            }
+            mesg.setContent(bodyPart);
+        } else if (hasDownloads()) {
+            final MimeMultipart bodyPart = new MimeMultipart("mixed");
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            createTextMessage(mimeBodyPart);
+            bodyPart.addBodyPart(mimeBodyPart);
+            attachAttachments(bodyPart, false);
+
+            mesg.setContent(bodyPart);
+        } else if (hasEmbedded()) {
+            final MimeMultipart message = new MimeMultipart("related");
+            createTextMessage(message);
+            attachAttachments(message, true);
+            mesg.setContent(message);
         } else {
+            System.err.println("no attachment");
             createTextMessage(mesg);
         }
     }
 
     private boolean hasDownloads() {
-        for (EmailResource attachment : attachments) {
-            if (!attachment.isEmbedded()) {
+        for (EmailMessageResource attachment : messageResources) {
+            if (!isHtml() || !attachment.isEmbedded())
+                return true;
+        }
+
+        return false;
+    }
+
+    private boolean isHtml() {
+        return html != null;
+    }
+
+    private boolean hasEmbedded() {
+        if (!isHtml())
+            return false;
+
+        for (EmailMessageResource attachment : messageResources) {
+            if (attachment.isEmbedded()) {
                 return true;
             }
         }
         return false;
     }
 
-    protected void createTextMessage(final MimeMultipart bodyPart) throws MessagingException {
+    private void createTextMessage(final MimeMultipart bodyPart) throws MessagingException {
         final MimeBodyPart textPart = new MimeBodyPart();
         createTextMessage(textPart);
         bodyPart.addBodyPart(textPart);
     }
 
-    protected void attachAttachments(final Multipart root, boolean embedd) throws MessagingException {
-        for (final EmailResource attachment : attachments) {
-            if (attachment.isEmbedded() == embedd) {
+    private void attachAttachments(final Multipart root, boolean embedd) throws MessagingException {
+        for (final EmailMessageResource attachment : messageResources) {
+            if (!isHtml() || attachment.isEmbedded() == embedd) {
                 final MimeBodyPart imagePart = new MimeBodyPart();
-                if (!embedd) {
+                if (!isHtml() || !embedd) {
                     imagePart.setDisposition(ATTACHMENT);
                     imagePart.setFileName(attachment.getName());
                 }
@@ -217,7 +257,21 @@ public class EmailMessage implements Serializable {
         }
     }
 
-    protected void createTextMessage(final MimePart textPart) throws MessagingException {
-        textPart.setText(text, MAIL_DEFAULT_CHARSET);
+    private void createTextMessage(final MimePart mail) throws MessagingException {
+        if (isHtml()) {
+            final MimeMultipart alternativePart = new MimeMultipart("alternative");
+
+            final MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText(text, MAIL_DEFAULT_CHARSET);
+            alternativePart.addBodyPart(textPart);
+
+            final MimeBodyPart htmlPart = new MimeBodyPart();
+            htmlPart.setText(html, MAIL_DEFAULT_CHARSET, "html");
+            alternativePart.addBodyPart(htmlPart);
+
+            mail.setContent(alternativePart);
+        } else {
+            mail.setText(text, MAIL_DEFAULT_CHARSET);
+        }
     }
 }

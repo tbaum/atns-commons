@@ -66,7 +66,7 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
             message.prepare(mimeMessage);
 
-            LOG.debug("sending #" + message.getId() + " " + message.getSender() + " " + message.getSubject() +
+            LOG.debug("sending # " + message.getId() + " " + message.getSender() + " " + message.getSubject() +
                     " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
 
             transport = getTransport(session, transport);

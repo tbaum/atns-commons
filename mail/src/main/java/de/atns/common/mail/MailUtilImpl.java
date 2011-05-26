@@ -11,7 +11,6 @@ import java.util.Map;
 public class MailUtilImpl implements MailUtil {
 // ------------------------------ FIELDS ------------------------------
 
-    private final MailResourceResolver resourceResolver;
     private final MailTemplateRenderer templateRenderer;
 
     private final Provider<EntityManager> em;
@@ -19,10 +18,8 @@ public class MailUtilImpl implements MailUtil {
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public MailUtilImpl(final MailTemplateRenderer templateRenderer, final MailResourceResolver resourceResolver,
-                        final Provider<EntityManager> em) {
+    public MailUtilImpl(final MailTemplateRenderer templateRenderer, final Provider<EntityManager> em) {
         this.templateRenderer = templateRenderer;
-        this.resourceResolver = resourceResolver;
         this.em = em;
     }
 
@@ -50,9 +47,10 @@ public class MailUtilImpl implements MailUtil {
                                  final String bccRecipient,
                                  final MailTemplate template, final Map<String, Object> context,
                                  final MailTemplateResource... attachments) {
-        EmailResource[] at = new EmailResource[attachments.length];
+        EmailMessageResource[] at = new EmailMessageResource[attachments.length];
         for (int i = 0, attachments1Length = attachments.length; i < attachments1Length; i++) {
-            at[i] = new EmailResource(attachments[i].getName(), attachments[i].getMimeType(), attachments[i].getData(),
+            at[i] = new EmailMessageResource(attachments[i].getName(), attachments[i].getMimeType(),
+                    attachments[i].getData(),
                     attachments[i].isEmbedded());
         }
 
@@ -63,28 +61,18 @@ public class MailUtilImpl implements MailUtil {
     public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
                                  final String bccRecipient,
                                  final MailTemplate template, final Map<String, Object> context,
-                                 final EmailResource... attachments) {
+                                 final EmailMessageResource... attachments) {
         if (template == null) {
             throw new IllegalArgumentException("missing template");
         }
 
-        final String sender = template.getSenderEmail();
-        final String senderName = template.getSenderName();
-        final String subject = template.getSubject();
+        final EmailMessage message = new EmailMessage(
+                template.getSenderEmail(), template.getSenderName(),
+                recipient, recipientName, ccRecipient, bccRecipient,
+                template.getSubject(), templateRenderer.renderPlainTemplate(template, context),
+                template.isHtmlMail() ? templateRenderer.renderHtmlTemplate(template, context) : null,
+                attachments);
 
-        final String text = templateRenderer.renderPlainTemplate(template, context);
-
-        final EmailMessage message;
-
-        if (template.isHtmlMail()) {
-            final String html = templateRenderer.renderHtmlTemplate(template, context);
-            final MailResourceResolver.ResolvedMail resolvedMail = resourceResolver.extractResources(html, context);
-            message = new HtmlEmailMessage(sender, senderName, recipient, recipientName, ccRecipient, bccRecipient,
-                    subject, text, attachments, resolvedMail.message, resolvedMail.result);
-        } else {
-            message = new EmailMessage(sender, senderName, recipient, recipientName, ccRecipient, bccRecipient,
-                    subject, text, attachments);
-        }
         return em.get().merge(message);
     }
 }

@@ -23,5 +23,5 @@ public interface MailUtil {
 
     EmailMessage sendMail(String recipient, String recipientName, String ccRecipient, String bccRecipient,
                           MailTemplate template, Map<String, Object> context,
-                          EmailResource... attachments);
+                          EmailMessageResource... attachments);
 }

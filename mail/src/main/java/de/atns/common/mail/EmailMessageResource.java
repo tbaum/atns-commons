@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "email_spool_resource")
-public class EmailResource implements Serializable {
+public class EmailMessageResource implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
     @Id
@@ -27,20 +26,23 @@ public class EmailResource implements Serializable {
     @Basic
     private boolean embedded;
 
+    @ManyToOne
+    private EmailMessage message;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public EmailResource() {
+    public EmailMessageResource() {
     }
 
-    public EmailResource(final String name, final byte[] data) {
+    public EmailMessageResource(final String name, final byte[] data) {
         this(name, ImageInfo.getMimeType(data), data, false);
     }
 
-    public EmailResource(final String name, final String mimeType, final byte[] data) {
+    public EmailMessageResource(final String name, final String mimeType, final byte[] data) {
         this(name, mimeType, data, false);
     }
 
-    public EmailResource(final String name, final String mimeType, final byte[] data, boolean embedded) {
+    public EmailMessageResource(final String name, final String mimeType, final byte[] data, boolean embedded) {
         this.name = name;
         this.mimeType = mimeType;
         this.data = data;
@@ -63,5 +65,9 @@ public class EmailResource implements Serializable {
 
     public boolean isEmbedded() {
         return embedded;
+    }
+
+    protected void setMessage(EmailMessage message) {
+        this.message = message;
     }
 }
