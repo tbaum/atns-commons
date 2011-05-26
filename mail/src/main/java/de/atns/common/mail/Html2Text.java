@@ -81,17 +81,20 @@ public class Html2Text extends StringReader {
         }
 
         if (c == '&') {
-            char[] specialTagValue = new char[10];
-            int tmpValue, indice = 0;
+            StringBuilder specialTagValue = new StringBuilder();
+            int tmpValue;
             while ((tmpValue = super.read()) != -1 && tmpValue != ';') {
-                specialTagValue[indice++] = (char) tmpValue;
+                specialTagValue.append((char) tmpValue);
             }
-            if (tmpValue == -1) {
+            String s = specialTagValue.toString();
+
+            if (s.isEmpty()) {
                 return -1;
             }
-            return specialTagValue[0] != '#' ? specialTag.get(
-                    new String(specialTagValue, 0, indice)) :
-                    (char) Integer.parseInt(new String(specialTagValue, 1, indice - 1));
+            return specialTag.get(s);
+//            return   (s.startsWith("#")) ? (char) Integer.parseInt(s.substring(1))
+//                    new String(specialTagValue, 1, indice - 1)) : specialTag.get(
+//                    new String(specialTagValue, 0, indice));
         }
 
         if (escapeCharacter && Character.isWhitespace((char) c)) {
