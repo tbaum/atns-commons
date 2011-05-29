@@ -32,7 +32,7 @@ public class EmailMessage implements Serializable {
     private static final long serialVersionUID = -7417533601085246546L;
 
     @Transient
-    protected final String MAIL_DEFAULT_CHARSET = "ISO-8859-15";
+    protected final String MAIL_DEFAULT_CHARSET = "UTF-8";
 
     @OneToMany(mappedBy = "message") @Cascade(ALL)
     protected Collection<EmailMessageResource> messageResources = new ArrayList<EmailMessageResource>();
