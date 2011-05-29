@@ -40,8 +40,8 @@ public class EmailMessage implements Serializable {
     @Transient
     private final String debugMode = System.getProperty("debug.email");
 
-    @Basic(optional = false) @Lob
-    private String text;
+    @Basic(optional = false)
+    private byte[] text;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -77,8 +77,8 @@ public class EmailMessage implements Serializable {
     @Basic(optional = true)
     private String replyTo;
 
-    @Basic(optional = true) @Lob
-    private String html;
+    @Basic(optional = true)
+    private byte[] html;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -97,8 +97,8 @@ public class EmailMessage implements Serializable {
         this.recipient = recipient;
         this.recipientName = recipientName;
         this.subject = subject;
-        this.text = text;
-        this.html = html;
+        this.text = text != null ? text.getBytes() : null;
+        this.html = html != null ? html.getBytes() : null;
         this.messageResources = new HashSet<EmailMessageResource>(messageResources);
 
         for (EmailMessageResource messageResource : this.messageResources) {
@@ -262,16 +262,31 @@ public class EmailMessage implements Serializable {
             final MimeMultipart alternativePart = new MimeMultipart("alternative");
 
             final MimeBodyPart textPart = new MimeBodyPart();
-            textPart.setText(text, MAIL_DEFAULT_CHARSET);
+            createTextPart(textPart, "plain", getText());
             alternativePart.addBodyPart(textPart);
 
             final MimeBodyPart htmlPart = new MimeBodyPart();
-            htmlPart.setText(html, MAIL_DEFAULT_CHARSET, "html");
+            createTextPart(htmlPart, "html", getHtml());
             alternativePart.addBodyPart(htmlPart);
 
             mail.setContent(alternativePart);
         } else {
-            mail.setText(text, MAIL_DEFAULT_CHARSET);
+            mail.setText(getText(), MAIL_DEFAULT_CHARSET);
+            createTextPart(mail, "plain", getText());
         }
+    }
+
+    public String getHtml() {
+        return html != null ? new String(html) : null;
+    }
+
+    private void createTextPart(final MimePart textPart, final String ctype, final String text) throws MessagingException {
+        textPart.setText(text, MAIL_DEFAULT_CHARSET);
+        textPart.setHeader("Content-Type", "text/" + ctype + "; charset=\"" + MAIL_DEFAULT_CHARSET + "\"");
+        textPart.setHeader("Content-Transfer-Encoding", "quoted-printable");
+    }
+
+    public String getText() {
+        return text != null ? new String(text) : null;
     }
 }
