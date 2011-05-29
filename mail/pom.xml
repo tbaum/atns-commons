@@ -29,12 +29,6 @@
             <groupId>de.atns.common</groupId>
             <artifactId>template</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>de.atns.common</groupId>
-            <artifactId>persist</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-persist</artifactId>
@@ -48,6 +42,10 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>0.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
         </dependency>
     </dependencies>
 </project>

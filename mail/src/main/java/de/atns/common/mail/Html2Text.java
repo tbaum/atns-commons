@@ -27,6 +27,13 @@ public class Html2Text extends StringReader {
         specialTag.put("lt", '<');
         specialTag.put("gt", '>');
         specialTag.put("nbsp", ' ');
+        specialTag.put("ouml", 'ö');
+        specialTag.put("uuml", 'ü');
+        specialTag.put("auml", 'ä');
+        specialTag.put("Ouml", 'Ö');
+        specialTag.put("Uuml", 'Ü');
+        specialTag.put("Auml", 'Ä');
+        specialTag.put("szlig", 'ß');
         for (String s : asList("br", "/br", "/p", "blockquote", "/blockquote", "pre", "/pre", "h1", "/h1", "h2", "/h2",
                 "h3", "/h3", "h4", "/h4", "h5", "/h5", "h6", "/h6", "hr", "/hr", "img", "/img", "area", "/area", "map",
                 "/map", "table", "/table", "/tr", "th", "/th", "ul", "/ul", "/li", "embed", "/embed")) {
@@ -91,7 +98,7 @@ public class Html2Text extends StringReader {
             if (s.isEmpty()) {
                 return -1;
             }
-            return specialTag.get(s);
+            return specialTag.containsKey(s) ? specialTag.get(s) : '?';
 //            return   (s.startsWith("#")) ? (char) Integer.parseInt(s.substring(1))
 //                    new String(specialTagValue, 1, indice - 1)) : specialTag.get(
 //                    new String(specialTagValue, 0, indice));

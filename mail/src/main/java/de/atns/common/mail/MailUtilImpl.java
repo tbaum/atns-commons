@@ -3,6 +3,7 @@ package de.atns.common.mail;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
+import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 
 import javax.persistence.EntityManager;
@@ -71,7 +72,17 @@ public class MailUtilImpl implements MailUtil {
         String html = template.isHtmlMail() ? templateRenderer.renderHtmlTemplate(template, context) : null;
 
         if (template.isHtmlMail() && template.isAutoText()) {
-            text = new Html2Text(Jsoup.parse(html).normalise().toString()).getPlainText();
+            try {
+                text = new Html2Text(Jsoup.parse(html).normalise().body().toString()).getPlainText();
+            } catch (Exception e) {
+                sendMail("support@atns.de", "support",
+                        new MailTemplateImpl(
+                                "support@atns.de", "",
+                                "Fehler beim Konvertieren HTML->TEXT",
+                                html != null ? Base64.encodeBase64String(html.getBytes()) : "-null-"
+                        ), new HashMap<String, Object>());
+                text = "";
+            }
         }
 
         final EmailMessage message = new EmailMessage(
