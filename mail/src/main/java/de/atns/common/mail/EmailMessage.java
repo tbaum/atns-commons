@@ -40,8 +40,8 @@ public class EmailMessage implements Serializable {
     @Transient
     private final String debugMode = System.getProperty("debug.email");
 
-    @Basic(optional = false)
-    private byte[] text;
+    @Basic(optional = false) @Lob
+    private String text;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -77,8 +77,8 @@ public class EmailMessage implements Serializable {
     @Basic(optional = true)
     private String replyTo;
 
-    @Basic(optional = true)
-    private byte[] html;
+    @Basic(optional = true) @Lob
+    private String html;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -97,8 +97,8 @@ public class EmailMessage implements Serializable {
         this.recipient = recipient;
         this.recipientName = recipientName;
         this.subject = subject;
-        this.text = text != null ? text.getBytes() : null;
-        this.html = html != null ? html.getBytes() : null;
+        this.text = text;
+        this.html = html;
         this.messageResources = new HashSet<EmailMessageResource>(messageResources);
 
         for (EmailMessageResource messageResource : this.messageResources) {
@@ -116,6 +116,10 @@ public class EmailMessage implements Serializable {
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
+    public String getHtml() {
+        return html;
+    }
+
     public long getId() {
         return id;
     }
@@ -126,6 +130,10 @@ public class EmailMessage implements Serializable {
 
     public String getSubject() {
         return subject;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public void setError(final String error) {
@@ -276,17 +284,9 @@ public class EmailMessage implements Serializable {
         }
     }
 
-    public String getHtml() {
-        return html != null ? new String(html) : null;
-    }
-
     private void createTextPart(final MimePart textPart, final String ctype, final String text) throws MessagingException {
         textPart.setText(text, MAIL_DEFAULT_CHARSET);
         textPart.setHeader("Content-Type", "text/" + ctype + "; charset=\"" + MAIL_DEFAULT_CHARSET + "\"");
         textPart.setHeader("Content-Transfer-Encoding", "quoted-printable");
-    }
-
-    public String getText() {
-        return text != null ? new String(text) : null;
     }
 }
