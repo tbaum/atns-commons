@@ -23,6 +23,7 @@ import java.util.TimerTask;
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public Scheduler(final Set<ScheduledTask> tasks, final Injector injector) {
+        LOG.debug("start scheduler");
         timer = new Timer(true);
         for (final ScheduledTask task : tasks) {
             final TimerTask timerTask = new TimerTask() {
@@ -48,6 +49,7 @@ import java.util.TimerTask;
 // -------------------------- OTHER METHODS --------------------------
 
     public void shutdown() {
+        LOG.debug("shutdown scheduler");
         timer.cancel();
     }
 }
