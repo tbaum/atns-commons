@@ -7,7 +7,8 @@ import de.atns.common.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static java.util.Arrays.asList;
@@ -81,7 +82,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
 // -------------------------- OTHER METHODS --------------------------
 
     public void addRolle(final String... rollen) {
-        final ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
+        final Set<String> rolle = new HashSet<String>(asList(getRolle()));
         rolle.addAll(asList(rollen));
         this.rollen = StringUtils.join(",", rolle);
     }
@@ -104,7 +105,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
     public void removeRolle(final String... rollen) {
-        final ArrayList<String> rolle = new ArrayList<String>(asList(getRolle()));
+        final Set<String> rolle = new HashSet<String>(asList(getRolle()));
         rolle.removeAll(asList(rollen));
         this.rollen = StringUtils.join(",", rolle);
     }
