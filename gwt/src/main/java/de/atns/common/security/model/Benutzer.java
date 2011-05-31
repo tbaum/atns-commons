@@ -11,8 +11,9 @@ import java.util.Set;
 
 import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static java.util.Arrays.asList;
+import static javax.persistence.InheritanceType.JOINED;
 
-@Entity @DiscriminatorColumn(discriminatorType = DiscriminatorType.INTEGER) @DiscriminatorValue("0")
+@Entity @Inheritance(strategy = JOINED)
 public class Benutzer extends BaseObject implements SecurityUser {
 // ------------------------------ FIELDS ------------------------------
 
