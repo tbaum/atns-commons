@@ -5,15 +5,14 @@ import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static java.util.Arrays.asList;
 
-@Entity
+@Entity @DiscriminatorColumn(discriminatorType = DiscriminatorType.INTEGER) @DiscriminatorValue("0")
 public class Benutzer extends BaseObject implements SecurityUser {
 // ------------------------------ FIELDS ------------------------------
 
