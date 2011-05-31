@@ -27,7 +27,7 @@ public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
 
         if ("end".equals(methodName)) {
             open--;
-            LOG.debug(createInfoName(methodName));
+//            LOG.debug(createInfoName(methodName));
             //       dumpTrace(new Throwable().getStackTrace(), createInfoName(methodName));
             final Timer timer = t.get();
             if (timer != null) {
@@ -39,7 +39,7 @@ public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
         if ("begin".equals(methodName)) {
             open++;
             final StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-            LOG.debug(createInfoName(methodName));
+//            LOG.debug(createInfoName(methodName));
             final List<String> rs = dumpTrace(stackTrace, createInfoName(methodName));
 
             final Timer tt = new Timer(false);
