@@ -44,5 +44,13 @@ public class JsonpResult<R extends JavaScriptObject> extends JavaScriptObject {
         public final native JsArrayString getStacktrace() /*-{
             return this.stacktrace;
         }-*/;
+
+        public final native String getType() /*-{
+            return this.type;
+        }-*/;
+
+        public final native boolean isFailed() /*-{
+            return this.failed;
+        }-*/;
     }
 }

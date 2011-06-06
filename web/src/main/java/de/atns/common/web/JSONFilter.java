@@ -63,6 +63,7 @@ import java.io.PrintWriter;
             final JSONStringer json = new JSONStringer();
             json.object()
                     .key("failed").value(true)
+                    .key("type").value(e.getClass())
                     .key("message").value(e.getMessage())
                     .key("stacktrace").value(e.getStackTrace());
 

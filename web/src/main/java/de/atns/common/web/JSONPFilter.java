@@ -3,6 +3,7 @@ package de.atns.common.web;
 import com.google.inject.Singleton;
 import org.json.JSONException;
 import org.json.JSONStringer;
+import org.json.JSONTokener;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -49,10 +50,16 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
         ((HttpServletResponse) response).setStatus(SC_OK);
         try {
             JSONStringer json = new JSONStringer();
+            String result = new String(bos.toByteArray());
             json.object()
-                    .key("status").value(function)
-                    .key("result").value(new String(bos.toByteArray()))
-                    .endObject();
+                    .key("status").value(function);
+            try {
+                json.key("result").value(new JSONTokener(result).nextValue());
+            } catch (JSONException e) {
+                json.key("result").value(result);
+            }
+            json.endObject();
+
             response.getWriter().write(request.getParameter("callback") + "(" + json.toString() + ");");
         } catch (JSONException e) {
             throw new RuntimeException(e);
