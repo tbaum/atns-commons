@@ -9,33 +9,37 @@ import java.util.Properties;
 public class MailConfiguration extends Properties {
 // --------------------------- CONSTRUCTORS ---------------------------
 
+    public MailConfiguration() {
+        this(new Properties());
+    }
+
     public MailConfiguration(final Properties properties) {
         super(properties);
 
+        put("mail." + getProtocol() + ".dsn.notify", "FAILURE,DELAY");
+        put("mail." + getProtocol() + ".dsn.ret", "HDRS");
+    }
 
-        this.put("mail.smtp.dsn.notify", "SUCCESS,FAILURE,DELAY");
-        this.put("mail.smtp.dsn.ret", "HDRS");
-
-        if (getHost() != null) {
-            this.put(isSsl() ? "mail.smtps.host" : "mail.smtp.host", getHost());
-        }
+    String getProtocol() {
+        return isSsl() ? "smtps" : "smtp";
     }
 
     public boolean isSsl() {
-        return "true".equalsIgnoreCase((String) get("mail.smtp.ssl"));
-    }
-
-    public String getHost() {
-        return (String) get("mail.smtp.host");
+        return "true".equalsIgnoreCase(getProperty("mail.smtp.ssl")) ||
+                "true".equalsIgnoreCase(getProperty("mail.smtps.ssl"));
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
+    public String getHost() {
+        return (String) get("mail." + getProtocol() + ".host");
+    }
+
     public String getPass() {
-        return (String) get("mail.smtp.password");
+        return (String) get("mail." + getProtocol() + ".password");
     }
 
     public String getUser() {
-        return (String) get("mail.smtp.user");
+        return (String) get("mail." + getProtocol() + ".user");
     }
 }

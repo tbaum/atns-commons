@@ -31,6 +31,7 @@ public class EmailSenderTask extends TimerTask implements Runnable {
     private final EmailRepository repository;
     private final Provider<EntityManager> em;
     private final AtomicBoolean running = new AtomicBoolean(false);
+    private ThreadLocal<Transport> transport = new ThreadLocal<Transport>();
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -44,48 +45,12 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void sendEmails() {
-        final Session session = Session.getInstance(mailConfiguration.get());
-
-        Transport transport = null;
-        for (EmailMessage message : allUnsentMessages()) {
-            transport = sendMessage(session, message, transport);
-        }
-    }
-
-    @Transactional
-    protected List<EmailMessage> allUnsentMessages() {
-        return repository.getAllUnsentMails();
-    }
-
-    @Transactional
-    protected Transport sendMessage(final Session session, final EmailMessage id, Transport transport) {
-        EmailMessage message = em.get().find(EmailMessage.class, id.getId());
-        try {
-            final MimeMessage mimeMessage = new MimeMessage(session);
-
-            message.prepare(mimeMessage);
-
-            LOG.debug("sending # " + message.getId() + " " + message.getSender() + " " + message.getSubject() +
-                    " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
-
-            transport = getTransport(session, transport);
-            transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-
-            message.setSent(new Date());
-            return transport;
-        } catch (Exception e) {
-            LOG.error(e);
-            message.setError(e.getMessage());
-            return null;
-        }
-    }
-
-    private Transport getTransport(final Session session, Transport transport) throws MessagingException {
-        if (transport == null) {
+    private Transport prepareTransport(final Session session) throws MessagingException {
+        if (transport.get() == null) {
             final MailConfiguration mailConfiguration = this.mailConfiguration.get();
 
-            transport = session.getTransport(mailConfiguration.isSsl() ? "smtps" : "smtp");
+            final Transport transport = session.getTransport(mailConfiguration.getProtocol());
+            this.transport.set(transport);
 
             transport.addTransportListener(new TransportAdapter() {
                 @Override public void messagePartiallyDelivered(final TransportEvent e) {
@@ -102,7 +67,45 @@ public class EmailSenderTask extends TimerTask implements Runnable {
             });
             transport.connect(mailConfiguration.getHost(), mailConfiguration.getUser(), mailConfiguration.getPass());
         }
-        return transport;
+
+        return transport.get();
+    }
+
+    public void sendEmails() {
+        final Session session = Session.getInstance(mailConfiguration.get());
+
+        try {
+            for (EmailMessage message : allUnsentMessages()) {
+                sendMessage(session, message);
+            }
+        } finally {
+            transport.remove();
+        }
+    }
+
+    @Transactional
+    protected List<EmailMessage> allUnsentMessages() {
+        return repository.getAllUnsentMails();
+    }
+
+    @Transactional
+    protected void sendMessage(final Session session, final EmailMessage id) {
+        EmailMessage message = em.get().find(EmailMessage.class, id.getId());
+        try {
+            final MimeMessage mimeMessage = new MimeMessage(session);
+            message.prepare(mimeMessage);
+
+            LOG.debug("sending # " + message.getId() + " " + message.getSender() + " " + message.getSubject() +
+                    " --> " + Arrays.toString(mimeMessage.getRecipients(Message.RecipientType.TO)));
+
+            prepareTransport(session).sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+
+            message.setSent(new Date());
+        } catch (Exception e) {
+            LOG.error(e);
+            message.setError(e.getMessage());
+            transport.remove();
+        }
     }
 
     public void trigger() {

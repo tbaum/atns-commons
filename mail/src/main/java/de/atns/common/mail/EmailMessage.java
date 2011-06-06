@@ -213,7 +213,6 @@ public class EmailMessage implements Serializable {
             attachAttachments(message, true);
             mesg.setContent(message);
         } else {
-            System.err.println("no attachment");
             createTextMessage(mesg);
         }
     }
@@ -232,8 +231,9 @@ public class EmailMessage implements Serializable {
     }
 
     private boolean hasEmbedded() {
-        if (!isHtml())
+        if (!isHtml()) {
             return false;
+        }
 
         for (EmailMessageResource attachment : messageResources) {
             if (attachment.isEmbedded()) {
@@ -284,7 +284,7 @@ public class EmailMessage implements Serializable {
         }
     }
 
-    private void createTextPart(final MimePart textPart, final String ctype, final String text) throws MessagingException {
+    private void createTextPart(MimePart textPart, String ctype, String text) throws MessagingException {
         textPart.setText(text, MAIL_DEFAULT_CHARSET);
         textPart.setHeader("Content-Type", "text/" + ctype + "; charset=\"" + MAIL_DEFAULT_CHARSET + "\"");
         textPart.setHeader("Content-Transfer-Encoding", "quoted-printable");
