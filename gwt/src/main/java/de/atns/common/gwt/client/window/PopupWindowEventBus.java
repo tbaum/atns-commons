@@ -26,6 +26,11 @@ import com.google.inject.Singleton;
         return $wnd.opener != null && $wnd.opener._event_from_popup != null;
     }-*/;
 
+    public static native JavaScriptObject setWindowName(String name)/*-{
+        $wnd.location.href = "#" + name
+        $wnd.name = name + "_" + $wnd._myid
+    }-*/;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public PopupWindowEventBus(EventSerializer serializer) {
@@ -55,9 +60,6 @@ import com.google.inject.Singleton;
 
 // ------------------------ INTERFACE METHODS ------------------------
 
-    public native void openWindow(String url, String name, String para) /*-{
-        $wnd.opener._open_popup(url, name, para);
-    }-*/;
 
 // --------------------- Interface HasHandlers ---------------------
 
@@ -97,4 +99,8 @@ import com.google.inject.Singleton;
     @Override public void fireEventFromSource(GwtEvent event, Object source) {
         eventBus.fireEventFromSource(event, source);
     }
+
+    public native void openWindow(String url, String name, String para) /*-{
+        $wnd.opener._open_popup(url, name, para);
+    }-*/;
 }

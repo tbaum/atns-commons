@@ -114,14 +114,26 @@ import java.util.HashMap;
     }
 
     public void openWindow(String url, String name, String para) {
-        String windowId = name + "_" + myid;
-        JavaScriptObject wnd = open(this, url, windowId, para);
-        windows.put(windowId, wnd);
+        name = name + "_" + myid;
+        JavaScriptObject wnd = open(this, url, name, String.valueOf(myid), para);
+        windows.put(name, wnd);
     }
 
-    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String args) /*-{
+    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
+                                         String args) /*-{
         var newWindow = $wnd.open(url, name, args)
-        newWindow._myid = name;
+        newWindow._myid = myid;
+
+        try {
+            netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserWrite');
+            newWindow.menubar.visible = false;
+            newWindow.toolbar.visible = false;
+            newWindow.locationbar.visible = false;
+            newWindow.statusbar.visible = false;
+            newWindow.linkbar.visible = false;
+        } catch (ignored) {
+
+        }
         return newWindow;
     }-*/;
 
