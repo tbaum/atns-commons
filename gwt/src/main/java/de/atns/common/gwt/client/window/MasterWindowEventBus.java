@@ -116,7 +116,7 @@ import java.util.HashMap;
     public void openWindow(String url, String name, String para) {
         name = name + "_" + myid;
         JavaScriptObject wnd = open(this, url, name, String.valueOf(myid), para);
-        windows.put(name, wnd);
+        windows.put(String.valueOf(myid), wnd);
     }
 
     private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
