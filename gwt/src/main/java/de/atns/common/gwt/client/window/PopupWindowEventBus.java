@@ -9,6 +9,8 @@ import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocation;
+
 /**
  * @author tbaum
  * @since 03.02.11
@@ -26,9 +28,13 @@ import com.google.inject.Singleton;
         return $wnd.opener != null && $wnd.opener._event_from_popup != null;
     }-*/;
 
-    public static native JavaScriptObject setWindowName(String name)/*-{
-        $wnd.location.href = "#" + name
-        $wnd.name = name + "_" + $wnd._myid
+    public static void setWindowName(String name) {
+        setWindowName_(currentLocation() + "#" + name, name.replaceAll(":", "_"));
+    }
+
+    private static native void setWindowName_(String name, String name2)/*-{
+        $wnd.location.href = name
+        $wnd.name = name2 + "_" + $wnd._myid
     }-*/;
 
 // --------------------------- CONSTRUCTORS ---------------------------

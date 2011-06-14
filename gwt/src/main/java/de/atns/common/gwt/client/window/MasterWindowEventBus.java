@@ -115,9 +115,23 @@ import java.util.HashMap;
 
     public void openWindow(String url, String name, String para) {
         name = name + "_" + myid;
-        JavaScriptObject wnd = open(this, url, name, String.valueOf(myid), para);
+        JavaScriptObject wnd = open(this, currentLocation() + url, name.replaceAll(":", "_"), String.valueOf(myid),
+                para);
         windows.put(String.valueOf(myid), wnd);
     }
+
+    public static String currentLocation() {
+        String location = location();
+        int i = location.indexOf("#");
+        if (i > -1) {
+            location = location.substring(0, i);
+        }
+        return location;
+    }
+
+    private static native String location() /*-{
+        return $wnd.location.href
+    }-*/;
 
     private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
                                          String args) /*-{
