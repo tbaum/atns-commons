@@ -76,6 +76,10 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
         dialogBox.setWidget(widget);
     }
 
+    @Override public void setTitle(String titel) {
+        dialogBox.setText(titel);
+    }
+
     @Override public void showDialogBox() {
         dialogBox.center();
         dialogBox.show();

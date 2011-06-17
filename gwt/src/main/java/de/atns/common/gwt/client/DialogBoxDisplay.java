@@ -29,4 +29,6 @@ public interface DialogBoxDisplay extends WidgetDisplay {
     void setDialogBoxContent(String titel, Widget widget);
 
     void showDialogBox();
+
+    void setTitle(String titel);
 }
