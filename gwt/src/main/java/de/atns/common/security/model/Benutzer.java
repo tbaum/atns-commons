@@ -5,7 +5,10 @@ import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.util.StringUtils;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +28,9 @@ public class Benutzer extends BaseObject implements SecurityUser {
     private String rollen;
 
     private String email;
+
+    @Transient
+    private String token;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -57,6 +63,14 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     public void setPasswort(final String passwort) {
         this.passwort = passwort;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(final String token) {
+        this.token = token;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
