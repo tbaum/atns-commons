@@ -57,4 +57,10 @@ public class TextElement extends AbstractElement {
     public void setText(final String text) {
         this.text = text;
     }
-}
+
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "TextElement{text='" + text + "', " + super.toString() + "}";
+    }
+} 

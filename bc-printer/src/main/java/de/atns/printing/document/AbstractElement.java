@@ -63,6 +63,12 @@ public abstract class AbstractElement implements Element {
         this.y = y;
     }
 
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "rot=" + rot + ", x=" + x + ", y=" + y;
+    }
+
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum Rotation {

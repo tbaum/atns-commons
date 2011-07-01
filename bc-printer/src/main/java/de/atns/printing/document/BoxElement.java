@@ -46,4 +46,10 @@ public class BoxElement extends AbstractElement {
     public double getY2() {
         return y2;
     }
+
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "BoxElement{size=" + size + ", x2=" + x2 + ", y2=" + y2 + ", " + super.toString() + "}";
+    }
 }

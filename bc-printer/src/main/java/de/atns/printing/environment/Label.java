@@ -7,6 +7,14 @@ import java.io.Serializable;
 public class Label implements Serializable {
 // ------------------------------ FIELDS ------------------------------
 
+    @Override public String toString() {
+        return "Label{" +
+                "anzahl=" + anzahl +
+                ", material=" + material +
+                ", document=" + document +
+                '}';
+    }
+
     private static final long serialVersionUID = -328921583065260180L;
 
     protected DocumentElement document;

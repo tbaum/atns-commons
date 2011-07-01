@@ -75,7 +75,8 @@ public class BarcodeElement extends AbstractElement {
      * @param modulo
      * @param msg
      */
-    public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo, final String msg) {
+    public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo,
+                          final String msg) {
         this(x, y, height, type);
         this.barcode = msg;
         this.modulo = modulo;
@@ -90,7 +91,8 @@ public class BarcodeElement extends AbstractElement {
      * @param interpretationLine
      * @param msg
      */
-    public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo, final boolean interpretationLine, final String msg) {
+    public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo,
+                          final boolean interpretationLine, final String msg) {
         this(x, y, height, type);
         this.barcode = msg;
         this.modulo = modulo;
@@ -133,6 +135,13 @@ public class BarcodeElement extends AbstractElement {
 
     public void setInterpretationLine(final boolean interpretationLine) {
         this.interpretationLine = interpretationLine;
+    }
+
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "BarcodeElement{type=" + type + ", text=" + interpretationLine + ", barcode='" + barcode + "', " +
+                super.toString() + "}";
     }
 
 // -------------------------- ENUMERATIONS --------------------------

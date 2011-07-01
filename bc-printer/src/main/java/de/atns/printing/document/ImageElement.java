@@ -61,4 +61,10 @@ public class ImageElement extends AbstractElement {
     public void setScale(final double scale) {
         this.scale = scale;
     }
+
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "ImageElement{image=" + image.getGraphics().getClipBounds() + ", " + super.toString() + "}";
+    }
 }

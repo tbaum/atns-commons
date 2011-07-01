@@ -72,6 +72,13 @@ public class DocumentElement implements Element {
         this.width = width;
     }
 
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "DocumentElement{mode=" + mode + ", width=" + width + ", height=" + height + ", elements=" +
+                elements + '}';
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     public void addElement(final Element elem) {
