@@ -45,6 +45,12 @@ import static javax.persistence.GenerationType.IDENTITY;
         return version;
     }
 
+// ------------------------ CANONICAL METHODS ------------------------
+
+    @Override public String toString() {
+        return "{id=" + id + "}";
+    }
+
 // -------------------------- OTHER METHODS --------------------------
 
     @PreUpdate
