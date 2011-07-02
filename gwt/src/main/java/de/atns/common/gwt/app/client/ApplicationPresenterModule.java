@@ -9,7 +9,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.requestfactory.shared.RequestFactory;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;

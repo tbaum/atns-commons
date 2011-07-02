@@ -1,7 +1,7 @@
 package de.atns.common.gwt.client.gin;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.requestfactory.shared.RequestFactory;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 /**
