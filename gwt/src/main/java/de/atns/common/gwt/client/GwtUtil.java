@@ -164,6 +164,22 @@ public class GwtUtil {
         $wnd.close();
     }-*/;
 
+    public static Image createImage(ImageResource resource, String s) {
+        Image image = new Image(resource);
+        image.setTitle(s);
+        image.getElement().getStyle().setProperty("margin", "5px 0 0 11px");
+        image.getElement().getStyle().setCursor(POINTER);
+        return image;
+    }
+
+    public static void toogleStyle(final Widget widget, final boolean b, String style) {
+        if (b) {
+            widget.addStyleName(style);
+        } else {
+            widget.removeStyleName(style);
+        }
+    }
+
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum DivBoxColor {

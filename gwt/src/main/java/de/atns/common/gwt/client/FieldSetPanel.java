@@ -27,6 +27,11 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         this(new Label(text), content);
     }
 
+    public FieldSetPanel(final String style, final String text, final Widget content) {
+        this(new Label(text), content);
+        addStyleName(style);
+    }
+
     public FieldSetPanel(final String text, final ExtendedFlowPanel content) {
         this(text, content.getPanel());
     }
@@ -39,6 +44,11 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         if (content != null) {
             add(content);
         }
+    }
+
+    public FieldSetPanel(final String style, final Widget legend, final Widget content) {
+        this(legend, content);
+        addStyleName(style);
     }
 
     @Override
