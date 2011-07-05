@@ -44,7 +44,7 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
         final EntityManager em = this.em.get();
         try {
             final Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),
-                    action.getEmail().toLowerCase());
+                    action.getEmail().toLowerCase(), action.getName());
             roleHandler.updateRollen(m, action);
 
             em.persist(m);

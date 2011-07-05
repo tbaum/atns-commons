@@ -32,15 +32,18 @@ public class Benutzer extends BaseObject implements SecurityUser {
     @Transient
     private String token;
 
+    private String name;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected Benutzer() {
     }
 
-    public Benutzer(final String login, final String passwort, final String email) {
+    public Benutzer(final String login, final String passwort, final String email, final String name) {
         this.login = login;
         this.passwort = passwort;
         this.email = email;
+        this.name = name;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -55,6 +58,14 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     @Override public String getLogin() {
         return login;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPasswort() {

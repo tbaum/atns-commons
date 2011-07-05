@@ -16,7 +16,8 @@ import java.util.List;
 public interface BenutzerRepository {
 // ------------------------------ FIELDS ------------------------------
 
-    String QRY_BENUTZER = "(lower(login) like lower(:aLogin) or  lower(email) like lower(:aLogin))";
+    String QRY_BENUTZER = "(lower(login) like lower(:aLogin) or lower(email) like lower(:aLogin) " +
+            " or lower(name) like lower(:aLogin))";
 
 // -------------------------- OTHER METHODS --------------------------
 

@@ -14,6 +14,7 @@ public class BenutzerCreate implements Action<BenutzerPresentation> {
     private String login;
     private String email;
     private String passwort;
+    private String name;
     private boolean admin;
 
 // --------------------------- CONSTRUCTORS ---------------------------
@@ -21,11 +22,13 @@ public class BenutzerCreate implements Action<BenutzerPresentation> {
     public BenutzerCreate() {
     }
 
-    public BenutzerCreate(final boolean admin, final String login, final String passwort, final String email) {
+    public BenutzerCreate(final boolean admin, final String login, final String passwort, final String email,
+                          final String name) {
         this.admin = admin;
         this.login = login;
         this.passwort = passwort;
         this.email = email;
+        this.name = name;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -36,6 +39,10 @@ public class BenutzerCreate implements Action<BenutzerPresentation> {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPasswort() {

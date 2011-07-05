@@ -45,6 +45,7 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
         final Benutzer benutzer = em.find(Benutzer.class, action.getId());
         roleHandler.updateRollen(benutzer, action);
         benutzer.setEmail(action.getEmail().toLowerCase());
+        benutzer.setName(action.getName());
 
         if (!action.getPasswort().isEmpty()) {
             benutzer.setPasswort(SHA1.createSHA1Code(action.getPasswort()));
