@@ -22,6 +22,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
 
     protected final TextBox login = new TextBox();
     protected final TextBox email = new TextBox();
+    protected final TextBox name = new TextBox();
     protected final PasswordTextBox passwort1 = new PasswordTextBox();
     protected final CheckBox admin = new CheckBox();
     protected final Button speichern = new Button("Speichern");
@@ -53,6 +54,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
                         .add("Login").widthPX(120).add(login).newLine()
                         .add("Admin").widthPX(120).add(admin).newLine()
                         .add("Email").widthPX(120).add(email).newLine()
+                        .add("Name").widthPX(120).add(name).newLine()
                         .getPanel()
                 ), new FieldSetPanel("Passwort", extendedFlowPanel()
                 .add("Passwort").widthPX(120).add(passwort1).newLine()
@@ -76,6 +78,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
     @Override public void reset() {
         login.setValue("");
         email.setValue("");
+        name.setValue("");
         admin.setValue(false);
         passwort1.setValue("");
         passwort2.setValue("");

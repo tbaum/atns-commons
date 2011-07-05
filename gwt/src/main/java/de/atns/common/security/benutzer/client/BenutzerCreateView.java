@@ -13,7 +13,8 @@ public class BenutzerCreateView extends BenutzerDetailView implements BenutzerCr
 // --------------------- Interface Display ---------------------
 
     @Override public BenutzerCreate getData() {
-        return new BenutzerCreate(admin.getValue(), login.getValue(), passwort1.getValue(), email.getValue());
+        return new BenutzerCreate(admin.getValue(), login.getValue(), passwort1.getValue(), email.getValue(),
+                name.getValue());
     }
 
 // -------------------------- OTHER METHODS --------------------------
