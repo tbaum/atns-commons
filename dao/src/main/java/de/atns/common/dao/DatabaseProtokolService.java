@@ -97,7 +97,7 @@ public class DatabaseProtokolService {
         this.em = em;
         this.securityService = securityService;
         if (instance != null) {
-            throw new RuntimeException("instance already set!");
+            LOG.warn("instance already set!");
         }
         instance = this;
     }
