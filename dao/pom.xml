@@ -17,6 +17,11 @@
             <artifactId>classutils</artifactId>
         </dependency>
         <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>security</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <scope>provided</scope>
