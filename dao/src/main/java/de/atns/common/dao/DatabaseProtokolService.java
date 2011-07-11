@@ -160,7 +160,8 @@ public class DatabaseProtokolService {
         }
 
         if (value instanceof Iterable) {
-            return dumpIterable((Iterable) value);
+            return "[Iterable]";
+//            return dumpIterable((Iterable) value);
         }
 
         if (valueClass.getAnnotation(Entity.class) != null) {
