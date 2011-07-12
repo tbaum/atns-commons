@@ -38,7 +38,7 @@ public class DatabaseProtokolService {
 
     private Filter<Field> ignoreFilter = new Filter<Field>() {
         @Override public boolean isInFilter(Field o) {
-            return false;
+            return Iterable.class.isAssignableFrom(o.getType());
         }
     };
 
@@ -160,8 +160,7 @@ public class DatabaseProtokolService {
         }
 
         if (value instanceof Iterable) {
-            return "[Iterable]";
-//            return dumpIterable((Iterable) value);
+            return dumpIterable((Iterable) value);
         }
 
         if (valueClass.getAnnotation(Entity.class) != null) {

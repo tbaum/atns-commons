@@ -71,6 +71,13 @@ import static javax.persistence.GenerationType.IDENTITY;
         return id;
     }
 
+// -------------------------- OTHER METHODS --------------------------
+
+    public String toAssertString() {
+        return String.format("assertLogEntryEquals(\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\", entity)",
+                getBenutzer(), getAction(), getEntity(), getEntityId(), getEntityVersion(), getDaten());
+    }
+
 // -------------------------- ENUMERATIONS --------------------------
 
     public enum Action {

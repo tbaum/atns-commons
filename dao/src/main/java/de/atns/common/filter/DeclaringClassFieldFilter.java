@@ -23,6 +23,6 @@ public class DeclaringClassFieldFilter implements Filter<Field> {
 // --------------------- Interface Filter ---------------------
 
     @Override public boolean isInFilter(Field o) {
-        return o.getDeclaringClass().equals(aClass);
+        return Iterable.class.isAssignableFrom(o.getType()) || o.getDeclaringClass().equals(aClass);
     }
 }

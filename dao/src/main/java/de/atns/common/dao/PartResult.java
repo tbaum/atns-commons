@@ -26,6 +26,11 @@ public class PartResult<TYPE extends Serializable> implements Serializable {
         return new PartResult<T>(start, total, result);
     }
 
+    public static <T extends Serializable> PartResult<T> createPartResult(final int start, final long total,
+                                                                          final Collection<? extends T> result) {
+        return new PartResult<T>(start, (int) total, result);
+    }
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     private PartResult(final int start, final int total, final Collection<? extends TYPE> elements) {
