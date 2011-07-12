@@ -1,13 +1,12 @@
 package de.atns.common.security.server;
 
 import com.google.inject.Inject;
+import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.SecurityFilter;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.security.UserProvider;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.model.UserPresentation;
-import net.customware.gwt.dispatch.server.ActionHandler;
-import net.customware.gwt.dispatch.server.ExecutionContext;
 
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ import java.util.UUID;
  * @author tbaum
  * @since 23.10.2009
  */
-public class CheckSessionHandler implements ActionHandler<CheckSession, UserPresentation> {
+public class CheckSessionHandler extends DefaultActionHandler<CheckSession, UserPresentation> {
 // ------------------------------ FIELDS ------------------------------
 
     private final UserProvider user;
@@ -25,20 +24,14 @@ public class CheckSessionHandler implements ActionHandler<CheckSession, UserPres
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public CheckSessionHandler(final UserProvider user, final SecurityFilter securityFilter) {
+        super(CheckSession.class);
         this.user = user;
         this.securityFilter = securityFilter;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
+// -------------------------- OTHER METHODS --------------------------
 
-
-// --------------------- Interface ActionHandler ---------------------
-
-    @Override public Class<CheckSession> getActionType() {
-        return CheckSession.class;
-    }
-
-    @Override public final UserPresentation execute(final CheckSession action, final ExecutionContext context) {
+    @Override public final UserPresentation executeInternal(final CheckSession action) {
         final SecurityUser user = this.user.get();
         final UUID token = securityFilter.getAuthToken();
         if (user == null || token == null) {
@@ -46,10 +39,6 @@ public class CheckSessionHandler implements ActionHandler<CheckSession, UserPres
         } else {
             return new UserPresentation(user.getLogin(), token.toString());
         }
-    }
-
-    @Override
-    public void rollback(final CheckSession action, final UserPresentation result, final ExecutionContext context) {
     }
 }
 

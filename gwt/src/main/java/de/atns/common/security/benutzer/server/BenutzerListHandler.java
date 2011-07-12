@@ -39,10 +39,10 @@ public class BenutzerListHandler
     @Override @Secured(ADMIN) public PartResult<Benutzer> executeInternal(final BenutzerList action) {
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
-            return createPartResult(action.getStartEntry(), repository.countBenutzer(text).intValue(),
+            return createPartResult(action.getStartEntry(), repository.countBenutzer(text),
                     repository.findBenutzer(text, action.getStartEntry(), action.getPageRange()));
         } else {
-            return createPartResult(action.getStartEntry(), repository.countAllBenutzer().intValue(),
+            return createPartResult(action.getStartEntry(), repository.countAllBenutzer(),
                     repository.findAllBenutzer(action.getStartEntry(), action.getPageRange()));
         }
     }

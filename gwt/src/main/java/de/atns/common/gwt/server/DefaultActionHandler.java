@@ -1,6 +1,5 @@
 package de.atns.common.gwt.server;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.inject.persist.Transactional;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
@@ -14,17 +13,15 @@ import org.apache.commons.logging.LogFactory;
  * @author tbaum
  * @since 12.02.2010
  */
-public abstract class ConvertingActionHandler<A extends Action<R>, R extends Result, S> implements ActionHandler<A, R> {
+public abstract class DefaultActionHandler<A extends Action<R>, R extends Result> implements ActionHandler<A, R> {
 // ------------------------------ FIELDS ------------------------------
 
-    private static final Log LOG = LogFactory.getLog(ConvertingActionHandler.class);
-    protected final Converter<S, R> converter;
+    private static final Log LOG = LogFactory.getLog(DefaultActionHandler.class);
     private final Class<A> clazz;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    protected ConvertingActionHandler(final Converter<S, R> converter, final Class<A> clazz) {
-        this.converter = converter;
+    protected DefaultActionHandler(final Class<A> clazz) {
         this.clazz = clazz;
     }
 
@@ -39,11 +36,11 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
     @Override @Transactional
     public R execute(final A action, final ExecutionContext context) throws ActionException {
-        final S result = executeInternal(action);
+        final R result = executeInternal(action);
         if (LOG.isDebugEnabled()) {
             LOG.debug(result);
         }
-        return converter.convert(result);
+        return result;
     }
 
     @Override
@@ -52,5 +49,5 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public abstract S executeInternal(final A action) throws ActionException;
+    public abstract R executeInternal(final A action) throws ActionException;
 }
