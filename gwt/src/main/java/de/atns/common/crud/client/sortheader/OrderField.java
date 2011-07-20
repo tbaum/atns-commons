@@ -1,6 +1,10 @@
 package de.atns.common.crud.client.sortheader;
 
 public interface OrderField {
+// -------------------------- OTHER METHODS --------------------------
+
+    String name();
+
 // -------------------------- ENUMERATIONS --------------------------
 
     enum Sort {
