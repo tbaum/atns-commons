@@ -158,16 +158,22 @@ public class GwtUtil {
         return image;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public static native void closeWindow() /*-{
         $wnd.close();
     }-*/;
 
-    public static Image createImage(ImageResource resource, String s) {
+    public static Image createImage(ImageResource resource, String alt) {
+        return createImage(resource, alt, "");
+    }
+
+    public static Image createImage(ImageResource resource, String alt, String style) {
         Image image = new Image(resource);
-        image.setTitle(s);
-        image.getElement().getStyle().setProperty("margin", "5px 0 0 11px");
+        image.setTitle(alt);
+        if (style != null && !style.isEmpty()) {
+            image.addStyleName(style);
+        } else {
+            image.getElement().getStyle().setProperty("margin", "5px 0 0 11px");
+        }
         image.getElement().getStyle().setCursor(POINTER);
         return image;
     }
