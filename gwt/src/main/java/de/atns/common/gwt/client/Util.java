@@ -1,10 +1,12 @@
 package de.atns.common.gwt.client;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -13,6 +15,16 @@ import java.util.Map;
  */
 public class Util {
 // -------------------------- STATIC METHODS --------------------------
+
+    public static Date parseDate(final String text, final Date defaultValue) {
+        try {
+            if (text != null && !text.isEmpty()) {
+                return DateTimeFormat.getFormat("dd.MM.yyyy").parse(text);
+            }
+        } catch (IllegalArgumentException ignored) {
+        }
+        return defaultValue;
+    }
 
     public static Double parseDouble(final String text, final Double defaultValue) {
         if (text != null && !text.isEmpty()) {
