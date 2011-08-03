@@ -10,6 +10,7 @@ import de.atns.common.filter.AnnotatedFieldFilter;
 import de.atns.common.filter.DeclaringClassFieldFilter;
 import de.atns.common.filter.Filter;
 import de.atns.common.security.SecurityService;
+import de.atns.common.security.SecurityUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -68,7 +69,11 @@ public class DatabaseProtokolService {
     private String getCurrentUser() {
         String login = null;
         try {
-            login = securityService.currentUser().getLogin();
+            SecurityUser securityUser = securityService.currentUser();
+            if (securityUser == null) {
+                return "None";
+            }
+            login = securityUser.getLogin();
         } catch (OutOfScopeException ignored) {
         }
         return login;
