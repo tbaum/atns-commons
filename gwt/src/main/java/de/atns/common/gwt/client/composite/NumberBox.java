@@ -139,12 +139,6 @@ public class NumberBox extends Composite
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
-// --------------------- Interface TakesValue ---------------------
-
-    public Number getValue() {
-        return parseNumber(true);
-    }
-
 // --------------------- Interface ValueChangeHandler ---------------------
 
     public void onValueChange(final ValueChangeEvent<Number> event) {
@@ -164,6 +158,19 @@ public class NumberBox extends Composite
 
     public HandlerRegistration addKeyUpHandler(final KeyUpHandler handler) {
         return box.addKeyUpHandler(handler);
+    }
+
+    public BigDecimal toBigDecimal() {
+        return toBigDecimal(BigDecimal.ZERO);
+    }
+
+    public BigDecimal toBigDecimal(BigDecimal defaultValue) {
+        Number value = getValue();
+        return value != null ? new BigDecimal(value.doubleValue()) : defaultValue;
+    }
+
+    public Number getValue() {
+        return parseNumber(true);
     }
 
 // -------------------------- INNER CLASSES --------------------------
