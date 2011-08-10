@@ -4,6 +4,8 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -103,5 +105,9 @@ public class Util {
 
     public static String toString(final Object display) {
         return display.getClass() + "#" + display.hashCode();
+    }
+
+    public static DateBox dateBox(String pattern) {
+        return new DateBox(new DatePicker(), null, new DateBox.DefaultFormat(DateTimeFormat.getFormat(pattern)));
     }
 }
