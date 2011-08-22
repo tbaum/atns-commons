@@ -11,6 +11,10 @@ import java.util.Collection;
 public class ArrayUtils {
 // -------------------------- STATIC METHODS --------------------------
 
+    public static <T> T[] toArray(T... verarbeitung) {
+        return verarbeitung;
+    }
+
     @SuppressWarnings({"unchecked"})
     public static <T> T[] toArray(final Class<T> clazz, final Collection<T> col) {
         final ArrayList<T> entries = new ArrayList<T>(col);
