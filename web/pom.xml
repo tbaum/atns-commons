@@ -61,7 +61,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>de.atns.common</groupId>
+            <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
     </dependencies>

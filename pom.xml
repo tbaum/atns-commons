@@ -32,7 +32,6 @@
         <module>web</module>
         <module>mail</module>
         <module>template</module>
-        <module>json</module>
     </modules>
 
     <scm>
@@ -89,11 +88,6 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>template</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.atns.common</groupId>
-                <artifactId>json</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
