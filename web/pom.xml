@@ -29,10 +29,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-        </dependency>
-        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
         </dependency>
@@ -63,6 +59,10 @@
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.atns.common</groupId>
+            <artifactId>json</artifactId>
         </dependency>
     </dependencies>
 </project>
