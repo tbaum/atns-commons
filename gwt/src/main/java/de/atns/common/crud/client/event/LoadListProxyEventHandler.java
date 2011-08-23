@@ -1,9 +1,7 @@
 package de.atns.common.crud.client.event;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.user.client.rpc.IsSerializable;
-import de.atns.common.gwt.client.model.ListPresentation;
+import com.google.web.bindery.requestfactory.shared.EntityProxy;
 
 import java.util.List;
 
