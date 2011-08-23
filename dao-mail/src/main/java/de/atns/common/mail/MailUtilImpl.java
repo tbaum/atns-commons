@@ -91,6 +91,7 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
             executeCallback(new NonReturningHibernateCallback() {
                 @Override
                 protected void executeInHibernate(final Session session) throws HibernateException, SQLException {
+                    @SuppressWarnings({"unchecked"})
                     final List<MessagePreparator> unsent =
                             (List<MessagePreparator>) session.createCriteria(MessagePreparator.class)
                                     .add(Restrictions.isNull("sent")).list();
