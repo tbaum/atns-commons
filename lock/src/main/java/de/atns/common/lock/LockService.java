@@ -14,7 +14,7 @@ public class LockService<T> {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public synchronized void lock(T uuid) {
+    public void lock(T uuid) {
         if (uuid == null) {
             return;
         }
@@ -30,7 +30,7 @@ public class LockService<T> {
         lockMap.putIfAbsent(uuid, semaphore);
     }
 
-    public synchronized void unlock(T uuid) {
+    public void unlock(T uuid) {
         if (uuid == null) {
             return;
         }
