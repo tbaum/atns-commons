@@ -148,6 +148,14 @@ public class NumberBox extends Composite
 
 // -------------------------- OTHER METHODS --------------------------
 
+    public HandlerRegistration addBlurHandler(BlurHandler handler) {
+        return box.addBlurHandler(handler);
+    }
+
+    public HandlerRegistration addFocusHandler(FocusHandler handler) {
+        return box.addFocusHandler(handler);
+    }
+
     public HandlerRegistration addKeyDownHandler(final KeyDownHandler handler) {
         return box.addKeyDownHandler(handler);
     }
