@@ -13,8 +13,8 @@ public abstract class ZPLPrinterDevice extends AbstractDevice {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    protected ZPLPrinterDevice() {
-        this.dpi = 300;
+    protected ZPLPrinterDevice(int dpi) {
+        this.dpi = dpi;
         this.factory = new RendererFactory(this);
     }
 

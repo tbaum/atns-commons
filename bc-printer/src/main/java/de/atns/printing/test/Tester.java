@@ -75,7 +75,7 @@ public class Tester {
     }
 
     public void testZLP(@SuppressWarnings("unused") final DocumentElement label) throws Exception {
-        final Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port, 300);
         f.renderDocument(label);
     }
 

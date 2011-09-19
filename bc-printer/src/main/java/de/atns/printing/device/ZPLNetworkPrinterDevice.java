@@ -21,8 +21,8 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public ZPLNetworkPrinterDevice(final String adress, final int port) {
-        super();
+    public ZPLNetworkPrinterDevice(final String adress, final int port, final int dpi) {
+        super(dpi);
         this.adress = adress;
         this.port = port;
     }

@@ -357,7 +357,7 @@ public class LagerEtikett2 {
                 "C.03 - B.06", "C.03 - B.06", "C.03 - B.06", "C.03 - B.06", "C.03 - B.07", "C.03 - B.07", "C.03 - B.07",
                 "C.03 - B.07", "C.03 - B.08", "C.03 - B.08", "C.03 - B.08", "C.03 - B.08"
         };
-        final Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port, 200);
 
         for (final String i : pr) {
             f.renderDocument(createLabel1(i));
@@ -387,7 +387,7 @@ public class LagerEtikett2 {
     }
 
     public void testZLP(@SuppressWarnings("unused") final DocumentElement label) throws Exception {
-        final Device f = new ZPLNetworkPrinterDevice(address, port);
+        final Device f = new ZPLNetworkPrinterDevice(address, port, 300);
         f.renderDocument(label);
     }
 
