@@ -25,6 +25,6 @@ class BenutzerPresentationConverter implements Converter<Benutzer, BenutzerPrese
 
     @Override public BenutzerPresentation convert(final Benutzer benutzer) {
         return new BenutzerPresentation(benutzer.getId(), benutzer.getLogin(), benutzer.isAdmin(), benutzer.getEmail(),
-                benutzer.getName());
+                benutzer.getName(), benutzer.getRollen());
     }
 }

@@ -76,6 +76,10 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.passwort = passwort;
     }
 
+    public String getRollen() {
+        return rollen;
+    }
+
     public String getToken() {
         return token;
     }
