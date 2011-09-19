@@ -23,6 +23,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
     protected final TextBox login = new TextBox();
     protected final TextBox email = new TextBox();
     protected final TextBox name = new TextBox();
+    protected final TextBox rollen = new TextBox();
     protected final PasswordTextBox passwort1 = new PasswordTextBox();
     protected final CheckBox admin = new CheckBox();
     protected final Button speichern = new Button("Speichern");
@@ -52,6 +53,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
         setDialogBoxContent("Benutzer - Anlegen/Bearbeiten", flowPanel(
                 new FieldSetPanel("Benutzer", extendedFlowPanel()
                         .add("Login").widthPX(120).add(login).newLine()
+                        .add("Rollen").widthPX(120).add(rollen).newLine()
                         .add("Admin").widthPX(120).add(admin).newLine()
                         .add("Email").widthPX(120).add(email).newLine()
                         .add("Name").widthPX(120).add(name).newLine()
@@ -79,6 +81,7 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
         login.setValue("");
         email.setValue("");
         name.setValue("");
+        rollen.setValue("");
         admin.setValue(false);
         passwort1.setValue("");
         passwort2.setValue("");

@@ -1,6 +1,7 @@
 package de.atns.common.security.benutzer.server;
 
 import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.server.ConvertingActionHandler;

@@ -5,8 +5,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 
-import java.util.jar.Attributes;
-
 /**
  * @author tbaum
  * @since 24.10.2009
@@ -26,6 +24,7 @@ public class BenutzerEditView extends BenutzerDetailView implements BenutzerEdit
         this.id = p.getId();
         login.setValue(p.getLogin());
         email.setValue(p.getEmail());
+        rollen.setValue(p.getRollen());
         admin.setValue(p.isAdmin());
         admin.setEnabled(!isAdmin);
         passwort1.setValue("");
@@ -40,7 +39,7 @@ public class BenutzerEditView extends BenutzerDetailView implements BenutzerEdit
 
     public BenutzerUpdate getData() {
         return new BenutzerUpdate(id, admin.getValue(), login.getValue(), passwort1.getValue(), email.getValue(),
-                name.getValue());
+                name.getValue(), rollen.getValue());
     }
 
 // -------------------------- OTHER METHODS --------------------------

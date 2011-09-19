@@ -17,6 +17,7 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
     private String passwort;
     private String name;
     private boolean admin;
+    private String rollen;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -24,13 +25,14 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
     }
 
     public BenutzerUpdate(final long id, final boolean admin, final String login, final String passwort,
-                          final String email, final String name) {
+                          final String email, final String name, final String rollen) {
         this.id = id;
         this.admin = admin;
         this.login = login;
         this.email = email;
         this.passwort = passwort;
         this.name = name;
+        this.rollen = rollen;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -57,6 +59,10 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
 
     public String getPasswort() {
         return passwort;
+    }
+
+    public String getRollen() {
+        return rollen;
     }
 
     public boolean isAdmin() {

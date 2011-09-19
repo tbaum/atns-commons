@@ -17,6 +17,7 @@ public class BenutzerPresentation implements Result, Serializable, IsSerializabl
     private String email;
     private String name;
     private long id;
+    private String rollen;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -24,12 +25,13 @@ public class BenutzerPresentation implements Result, Serializable, IsSerializabl
     }
 
     public BenutzerPresentation(final long id, final String login, final boolean admin, final String email,
-                                final String name) {
+                                final String name, final String rollen) {
         this.id = id;
         this.login = login;
         this.admin = admin;
         this.email = email;
         this.name = name;
+        this.rollen = rollen;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -48,6 +50,10 @@ public class BenutzerPresentation implements Result, Serializable, IsSerializabl
 
     public String getName() {
         return name;
+    }
+
+    public String getRollen() {
+        return rollen;
     }
 
     public boolean isAdmin() {
