@@ -21,7 +21,6 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
 // ------------------------------ FIELDS ------------------------------
 
     protected DispatchAsync dispatcher;
-    protected PlaceController placeController;
 
 
     protected D display;
@@ -89,14 +88,6 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
         }
         if (display instanceof DefaultWidgetDisplay) {
             display.reset();
-        }
-    }
-
-    @Inject
-    public void getPlaceController(final PlaceController placeController) {
-        this.placeController = placeController;
-        if (LOG.isLoggable(Level.FINEST)) {
-            LOG.log(Level.FINEST, "setPlaceController->" + Util.toString(placeController));
         }
     }
 
