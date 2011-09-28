@@ -3,8 +3,8 @@ package de.atns.common.gwt.client;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author tbaum
  * @since 07.12.2009
  */
-public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activity {
+public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
 // ------------------------------ FIELDS ------------------------------
 
     protected DispatchAsync dispatcher;
@@ -83,11 +83,11 @@ public abstract class WidgetPresenter<D extends WidgetDisplay> implements Activi
      * should be done here.
      */
     protected void onBind() {
-        if (display != null) {
-            display.resetErrors();
+        if (display instanceof WidgetDisplay) {
+            ((WidgetDisplay) display).resetErrors();
         }
         if (display instanceof DefaultWidgetDisplay) {
-            display.reset();
+            ((DefaultWidgetDisplay) display).reset();
         }
     }
 

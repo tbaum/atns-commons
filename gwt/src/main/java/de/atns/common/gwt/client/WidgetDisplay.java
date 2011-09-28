@@ -1,15 +1,13 @@
 package de.atns.common.gwt.client;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.IsWidget;
 
 /**
  * @author mwolter
  * @since 22.02.2010 16:18:05
  */
-public interface WidgetDisplay {
+public interface WidgetDisplay extends IsWidget {
 // -------------------------- OTHER METHODS --------------------------
-
-    Widget asWidget();
 
     void reset();
 
