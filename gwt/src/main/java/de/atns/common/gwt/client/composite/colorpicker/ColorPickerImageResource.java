@@ -1,4 +1,4 @@
-package de.atns.common.gwt.client.composite.colorpicker.images;
+package de.atns.common.gwt.client.composite.colorpicker;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
@@ -29,33 +29,33 @@ import com.google.gwt.resources.client.ImageResource;
     */
 public interface ColorPickerImageResource extends ClientBundle
 {
-    public ImageResource bar_blue_bl();
-    public ImageResource bar_blue_br();
-    public ImageResource bar_blue_tl();
-    public ImageResource bar_blue_tr();
-    public ImageResource bar_brightness();
-    public ImageResource bar_green_bl();
-    public ImageResource bar_green_br();
-    public ImageResource bar_green_tl();
-    public ImageResource bar_green_tr();
-    public ImageResource bar_red_bl();
-    public ImageResource bar_red_br();
-    public ImageResource bar_red_tl();
-    public ImageResource bar_red_tr();
-    public ImageResource bar_saturation();
-    public ImageResource bar_hue();
-    public ImageResource bar_white();
-    public ImageResource rangearrows();
-    public ImageResource map_blue_max();
-    public ImageResource map_blue_min();
-    public ImageResource map_brightness();
-    public ImageResource map_green_max();
-    public ImageResource map_green_min();
-    public ImageResource map_hue();
-    public ImageResource mappoint();
-    public ImageResource map_red_max();
-    public ImageResource map_red_min();
-    public ImageResource map_saturation();
-    public ImageResource map_saturation_overlay();
-    public ImageResource map_white();
+     ImageResource bar_blue_bl();
+     ImageResource bar_blue_br();
+     ImageResource bar_blue_tl();
+     ImageResource bar_blue_tr();
+     ImageResource bar_brightness();
+     ImageResource bar_green_bl();
+     ImageResource bar_green_br();
+     ImageResource bar_green_tl();
+     ImageResource bar_green_tr();
+     ImageResource bar_red_bl();
+     ImageResource bar_red_br();
+     ImageResource bar_red_tl();
+     ImageResource bar_red_tr();
+     ImageResource bar_saturation();
+     ImageResource bar_hue();
+     ImageResource bar_white();
+     ImageResource rangearrows();
+     ImageResource map_blue_max();
+     ImageResource map_blue_min();
+     ImageResource map_brightness();
+     ImageResource map_green_max();
+     ImageResource map_green_min();
+     ImageResource map_hue();
+     ImageResource mappoint();
+     ImageResource map_red_max();
+     ImageResource map_red_min();
+     ImageResource map_saturation();
+     ImageResource map_saturation_overlay();
+     ImageResource map_white();
 }

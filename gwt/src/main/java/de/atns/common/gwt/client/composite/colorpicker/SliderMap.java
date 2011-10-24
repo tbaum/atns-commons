@@ -189,7 +189,6 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
-import de.atns.common.gwt.client.composite.colorpicker.images.ColorPickerImageResource;
 
 /**
  * Implements the SliderMap control.
