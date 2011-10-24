@@ -34,7 +34,7 @@ public class SortHandler {
 
     public <A> Long getCount(Class<A> clazz, String where) {
         Query count = em.get().createQuery(
-                "SELECT count(*) FROM " + clazz.getSimpleName() + " " + (where != null ? where : ""));
+                "SELECT count(*) FROM " + clazz.getSimpleName() + " " + (where != null ? ("where " + where) : ""));
         return ((Long) count.getSingleResult());
     }
 
@@ -43,24 +43,24 @@ public class SortHandler {
                                      OrderField.Sort sort) {
         pagerange = pagerange == 0 ? Integer.MAX_VALUE : pagerange;
         StringBuilder queryString = new StringBuilder();
-        queryString.append("FROM ").append(clazz.getSimpleName());
+        queryString.append("FROM ").append(clazz.getSimpleName()).append(" ");
 
         if (where != null) {
-            queryString.append(where).append(" ");
+            queryString.append(" where ").append(where).append(" ");
         }
 
         if (order != null && sort != null && sort != NONE) {
             EntityType<A> entity = em.get().getMetamodel().entity(clazz);
             Attribute<? super A, ?> attribute = entity.getAttribute(order.name());
-            queryString.append("order by ");
+            queryString.append(" order by ");
             if (attribute.getJavaType().equals(String.class)) {
-                queryString.append("lower(").append(order.name()).append(")");
+                queryString.append(" lower(").append(order.name()).append(") ");
             } else {
                 queryString.append(order.name()).append(" ");
             }
             queryString.append(sort.name());
         } else {
-            queryString.append("order by id asc");
+            queryString.append(" order by id asc");
         }
 
         TypedQuery<A> query = em.get().createQuery(queryString.toString(), clazz);
