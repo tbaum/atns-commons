@@ -4,9 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 import org.apache.commons.codec.binary.Base64;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
@@ -89,9 +86,7 @@ public class MailUtilImpl implements MailUtil {
 
     private String createPlainText(final String html) {
         try {
-            final Document document = Jsoup.parse(html);
-            final Element body = document.normalise().body();
-            return new Html2Text(body.toString()).getPlainText();
+            return Html2Text.toPlainText(html);
         } catch (Exception e) {
             sendMail("support@atns.de", "support",
                     new MailTemplateImpl(
@@ -102,4 +97,5 @@ public class MailUtilImpl implements MailUtil {
             return "";
         }
     }
+
 }

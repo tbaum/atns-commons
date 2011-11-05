@@ -1,5 +1,9 @@
 package de.atns.common.mail;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
@@ -63,6 +67,12 @@ public class Html2Text extends StringReader {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public static String toPlainText(String html) {
+        final Document document = Jsoup.parse(html);
+        final Element body = document.normalise().body();
+        return new Html2Text(body.toString()).getPlainText();
     }
 
     public int read() throws IOException {
