@@ -54,15 +54,13 @@ import java.util.Map;
         if (isRunning(clazz)) {
             QueingCallback<R> queingCallback = getCallback(clazz);
 
-            queingCallback.add(new AsyncCallback<R>() {
-                @Override public void onFailure(Throwable caught) {
-                    SingleRunDispatcher.this.executeOnce(action, callback);
-                }
-
-                @Override public void onSuccess(R result) {
-                    SingleRunDispatcher.this.executeOnce(action, callback);
-                }
-            });
+            RetriggerCallback<A, R> asyncCallback = findRetriggerCallback(queingCallback);
+            if (asyncCallback == null) {
+                queingCallback.add(new RetriggerCallback<A, R>(action, callback));
+            } else {
+                asyncCallback.setAction(action);
+                asyncCallback.addCallback(callback);
+            }
         } else {
             executeOnce(action, callback);
         }
@@ -75,6 +73,15 @@ import java.util.Map;
     private <R extends Result> QueingCallback<R> getCallback(Class<? extends Action> clazz) {
         //noinspection unchecked
         return (QueingCallback<R>) running.get(clazz);
+    }
+
+    private <A extends Action<R>, R extends Result> RetriggerCallback<A, R> findRetriggerCallback(QueingCallback<R> queingCallback) {
+        for (AsyncCallback<R> rAsyncCallback : queingCallback) {
+            if (rAsyncCallback instanceof RetriggerCallback) {
+                return (RetriggerCallback<A, R>) rAsyncCallback;
+            }
+        }
+        return null;
     }
 
     /**
@@ -100,7 +107,8 @@ import java.util.Map;
             QueingCallback<R> queingCallback = getCallback(clazz);
             queingCallback.add(callback);
         } else {
-            QueingCallback<R> queingCallback = QueingCallback.queingCallback(this, callback, clazz);
+            //noinspection unchecked
+            QueingCallback<R> queingCallback = new QueingCallback<R>(new FinishedCallback<R>(this, clazz), callback);
             startRequest(clazz, queingCallback);
 
             dispatcher.execute(action, queingCallback);
@@ -150,5 +158,35 @@ import java.util.Map;
     protected void requestFinished(Class<? extends Action> clazz) {
         running.remove(clazz);
         eventBus.fireEvent(new DispatcherStateChange(running));
+    }
+
+// -------------------------- INNER CLASSES --------------------------
+
+    private class RetriggerCallback<A extends Action<R>, R extends Result> implements AsyncCallback<R> {
+        private A action;
+        private final QueingCallback<R> callbacks;
+
+        public RetriggerCallback(A action, AsyncCallback<R> callback) {
+            this.action = action;
+
+            //noinspection unchecked
+            this.callbacks = new QueingCallback<R>(callback);
+        }
+
+        @Override public void onFailure(Throwable caught) {
+            SingleRunDispatcher.this.executeOnce(action, callbacks);
+        }
+
+        @Override public void onSuccess(R result) {
+            SingleRunDispatcher.this.executeOnce(action, callbacks);
+        }
+
+        public void setAction(A action) {
+            this.action = action;
+        }
+
+        public void addCallback(AsyncCallback<R> callback) {
+            this.callbacks.add(callback);
+        }
     }
 }
