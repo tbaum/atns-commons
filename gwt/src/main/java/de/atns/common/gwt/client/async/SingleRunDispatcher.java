@@ -52,7 +52,7 @@ import java.util.Map;
         final Class<? extends Action> clazz = action.getClass();
 
         if (isRunning(clazz)) {
-            QueingCallback<R> queingCallback = (QueingCallback<R>) running.get(clazz);
+            QueingCallback<R> queingCallback = getCallback(clazz);
 
             queingCallback.add(new AsyncCallback<R>() {
                 @Override public void onFailure(Throwable caught) {
@@ -64,13 +64,17 @@ import java.util.Map;
                 }
             });
         } else {
-            System.err.println("first");
             executeOnce(action, callback);
         }
     }
 
     private boolean isRunning(Class<? extends Action> clazz) {
         return running.containsKey(clazz);
+    }
+
+    private <R extends Result> QueingCallback<R> getCallback(Class<? extends Action> clazz) {
+        //noinspection unchecked
+        return (QueingCallback<R>) running.get(clazz);
     }
 
     /**
@@ -93,12 +97,10 @@ import java.util.Map;
     public <A extends Action<R>, R extends Result> void executeOnce(A action, final AsyncCallback<R> callback) {
         final Class<? extends Action> clazz = action.getClass();
         if (isRunning(clazz)) {
-            //noinspection unchecked
-            QueingCallback<R> queingCallback = (QueingCallback<R>) running.get(clazz);
+            QueingCallback<R> queingCallback = getCallback(clazz);
             queingCallback.add(callback);
         } else {
-            //noinspection unchecked
-            QueingCallback<R> queingCallback = new QueingCallback<R>(new FinishedCallback<R>(clazz), callback);
+            QueingCallback<R> queingCallback = QueingCallback.queingCallback(this, callback, clazz);
             startRequest(clazz, queingCallback);
 
             dispatcher.execute(action, queingCallback);
@@ -129,7 +131,7 @@ import java.util.Map;
         final Class<? extends Action> clazz = action.getClass();
 
         if (isRunning(clazz)) {
-            QueingCallback<R> queingCallback = (QueingCallback<R>) running.get(clazz);
+            QueingCallback<R> queingCallback = getCallback(clazz);
 
             queingCallback.add(new AsyncCallback<R>() {
                 @Override public void onFailure(Throwable caught) {
@@ -145,26 +147,8 @@ import java.util.Map;
         }
     }
 
-    private void requestFinished(Class<? extends Action> clazz) {
+    protected void requestFinished(Class<? extends Action> clazz) {
         running.remove(clazz);
         eventBus.fireEvent(new DispatcherStateChange(running));
-    }
-
-// -------------------------- INNER CLASSES --------------------------
-
-    private class FinishedCallback<R extends Result> implements AsyncCallback<R> {
-        private final Class<? extends Action> clazz;
-
-        public FinishedCallback(Class<? extends Action> clazz) {
-            this.clazz = clazz;
-        }
-
-        @Override public void onFailure(Throwable caught) {
-            requestFinished(clazz);
-        }
-
-        @Override public void onSuccess(R result) {
-            requestFinished(clazz);
-        }
     }
 }

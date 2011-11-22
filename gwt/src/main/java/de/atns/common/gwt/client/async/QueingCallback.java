@@ -1,6 +1,7 @@
 package de.atns.common.gwt.client.async;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
 
 import java.util.Collection;
@@ -17,6 +18,14 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
 // ------------------------------ FIELDS ------------------------------
 
     private final Collection<AsyncCallback<R>> callbacks = new LinkedList<AsyncCallback<R>>();
+
+// -------------------------- STATIC METHODS --------------------------
+
+    static <R extends Result> QueingCallback<R> queingCallback(SingleRunDispatcher dispatcher,
+                                                               AsyncCallback<R> callback, Class<? extends Action> clazz) {
+        //noinspection unchecked
+        return new QueingCallback<R>(new FinishedCallback<R>(dispatcher, clazz), callback);
+    }
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -74,6 +83,7 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
     }
 
     @Override public <T> T[] toArray(T[] ts) {
+        //noinspection SuspiciousToArrayCall
         return callbacks.toArray(ts);
     }
 
