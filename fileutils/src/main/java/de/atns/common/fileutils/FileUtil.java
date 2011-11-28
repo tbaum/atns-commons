@@ -120,4 +120,21 @@ public abstract class FileUtil {
             }
         }
     }
+
+    public static File extractResource(File targetDir, String resourceName, Class sourceClass) throws IOException {
+        File file = new File(targetDir, resourceName);
+        if (!file.exists()) {
+            System.out.println("creating " + file);
+            file.getParentFile().mkdirs();
+            InputStream is = sourceClass.getResourceAsStream(resourceName);
+            FileOutputStream fo = new FileOutputStream(file);
+            byte[] buffer = new byte[2048];
+            int i;
+            while ((i = is.read(buffer)) > 0) {
+                fo.write(buffer, 0, i);
+            }
+            fo.close();
+        }
+        return file;
+    }
 }
