@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.INLINE;
@@ -178,12 +179,22 @@ public class GwtUtil {
         return image;
     }
 
+    public static void setEnabledWidget(boolean editable, HasEnabled focusWidget) {
+        focusWidget.setEnabled(editable);
+        toogleStyle((Widget) focusWidget, !editable, "gwt-TextBox-readonly");
+    }
+
     public static void toogleStyle(final Widget widget, final boolean b, String style) {
         if (b) {
             widget.addStyleName(style);
         } else {
             widget.removeStyleName(style);
         }
+    }
+
+    public static void setEnabledDateBox(boolean editable, DateBox dateBox) {
+        dateBox.setEnabled(editable);
+        toogleStyle(dateBox, !editable, "gwt-TextBox-readonly");
     }
 
 // -------------------------- ENUMERATIONS --------------------------
