@@ -4,10 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
+import de.atns.common.security.AdminRole;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
 import org.apache.commons.logging.Log;
@@ -38,7 +38,7 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(ADMIN.class) public Benutzer executeInternal(final BenutzerUpdate action) {
+    @Override @Transactional @Secured(AdminRole.class) public Benutzer executeInternal(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
         final Benutzer benutzer = em.find(Benutzer.class, action.getId());

@@ -1,6 +1,7 @@
 package de.atns.common.security.model;
 
 import de.atns.common.dao.BaseObject;
+import de.atns.common.security.AdminRole;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityUser;
@@ -110,11 +111,11 @@ public class Benutzer extends BaseObject implements SecurityUser {
     }
 
     public void addRolle(final Class<? extends SecurityRole> rolle) {
-        addRolle(rolle.getSimpleName());
+        addRolle(rolle.getName());
     }
 
     public boolean isAdmin() {
-        return hasAccessTo(ADMIN.class);
+        return hasAccessTo(AdminRole.class);
     }
 
     private boolean hasAccessTo(Class<? extends SecurityRole>... required) {

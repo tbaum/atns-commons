@@ -1,8 +1,8 @@
 package de.atns.common.security.benutzer.server;
 
+import de.atns.common.security.AdminRole;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
-import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
 
 /**
@@ -31,9 +31,9 @@ public class DefaultBenutzerRollenHandler implements BenutzerRollenHandler {
         benutzer.removeRolle(benutzer.getRolle());
         benutzer.addRolle(action.getRollen().split(","));
         if (action.isAdmin()) {
-            benutzer.addRolle(ADMIN.class);
+            benutzer.addRolle(AdminRole.class);
         } else {
-            benutzer.removeRolle(ADMIN.class);
+            benutzer.removeRolle(AdminRole.class);
         }
     }
 
@@ -41,9 +41,9 @@ public class DefaultBenutzerRollenHandler implements BenutzerRollenHandler {
         benutzer.removeRolle(benutzer.getRolle());
         benutzer.addRolle(action.getRollen().split(","));
         if (action.isAdmin()) {
-            benutzer.addRolle(ADMIN.class);
+            benutzer.addRolle(AdminRole.class);
         } else {
-            benutzer.removeRolle(ADMIN.class);
+            benutzer.removeRolle(AdminRole.class);
         }
     }
 }

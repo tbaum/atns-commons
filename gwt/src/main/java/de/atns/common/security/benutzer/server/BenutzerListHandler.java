@@ -4,10 +4,10 @@ import com.google.inject.Inject;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.server.ConvertingActionHandler;
+import de.atns.common.security.AdminRole;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
-import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.security.server.BenutzerRepository;
 
@@ -36,7 +36,7 @@ public class BenutzerListHandler
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Secured(ADMIN.class) public PartResult<Benutzer> executeInternal(final BenutzerList action) {
+    @Override @Secured(AdminRole.class) public PartResult<Benutzer> executeInternal(final BenutzerList action) {
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
             return createPartResult(action.getStartEntry(), repository.countBenutzer(text),
