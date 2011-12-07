@@ -2,6 +2,7 @@ package de.atns.common.security.model;
 
 import de.atns.common.dao.BaseObject;
 import de.atns.common.security.Secured;
+import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.util.StringUtils;
 
@@ -12,7 +13,6 @@ import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
-import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static java.util.Arrays.asList;
 import static javax.persistence.InheritanceType.JOINED;
 
@@ -94,18 +94,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
 // --------------------- Interface SecurityUser ---------------------
 
     @Override public boolean hasAccessTo(final Secured secured) {
-        final String[] required = secured.value();
-        if (required.length == 0) {
-            return true;
-        }
-
-        for (final String rolle : getRolle()) {
-            if (contains(required, rolle)) {
-                return true;
-            }
-        }
-
-        return false;
+        return hasAccessTo(secured.value());
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -120,13 +109,29 @@ public class Benutzer extends BaseObject implements SecurityUser {
         return rollen != null ? rollen.split(",") : new String[0];
     }
 
-    public boolean isAdmin() {
-        return contains(getRolle(), ADMIN);
+    public void addRolle(final Class<? extends SecurityRole> rolle) {
+        addRolle(rolle.getSimpleName());
     }
 
-    private boolean contains(final String[] required, final String rolle) {
-        for (final String s : required) {
-            if (s.equals(rolle)) {
+    public boolean isAdmin() {
+        return hasAccessTo(ADMIN.class);
+    }
+
+    private boolean hasAccessTo(Class<? extends SecurityRole>... required) {
+        if (required.length == 0) {
+            return true;
+        }
+        for (final String rolle : getRolle()) {
+            if (contains(rolle, required)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean contains(final String rolle, final Class<? extends SecurityRole>... required) {
+        for (final Class<? extends SecurityRole> s : required) {
+            if (s.getSimpleName().equals(rolle)) {
                 return true;
             }
         }
@@ -137,5 +142,9 @@ public class Benutzer extends BaseObject implements SecurityUser {
         final Set<String> rolle = new HashSet<String>(asList(getRolle()));
         rolle.removeAll(asList(rollen));
         this.rollen = StringUtils.join(",", rolle);
+    }
+
+    public void removeRolle(final Class<? extends SecurityRole> rolle) {
+        removeRolle(rolle.getSimpleName());
     }
 }

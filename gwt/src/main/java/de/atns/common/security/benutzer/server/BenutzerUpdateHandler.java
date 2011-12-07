@@ -7,6 +7,7 @@ import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
 import org.apache.commons.logging.Log;
@@ -15,8 +16,6 @@ import org.apache.commons.logging.LogFactory;
 import javax.persistence.EntityManager;
 
 import static de.atns.common.security.benutzer.server.BenutzerPresentationConverter.BENUTZER_CONVERTER;
-import static de.atns.common.security.model.DefaultRoles.ADMIN;
-
 
 /**
  * @author tbaum
@@ -39,7 +38,7 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(ADMIN) public Benutzer executeInternal(final BenutzerUpdate action) {
+    @Override @Transactional @Secured(ADMIN.class) public Benutzer executeInternal(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
         final Benutzer benutzer = em.find(Benutzer.class, action.getId());

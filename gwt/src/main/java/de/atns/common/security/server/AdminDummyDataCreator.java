@@ -3,8 +3,8 @@ package de.atns.common.security.server;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
+import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
-import de.atns.common.security.model.DefaultRoles;
 import de.atns.common.util.SHA1;
 
 import javax.persistence.EntityManager;
@@ -32,7 +32,7 @@ public class AdminDummyDataCreator {
 
     @Transactional public void createDefaultAdmin() {
         final Benutzer admin = new Benutzer("admin", SHA1.createSHA1Code("admin"), "", "");
-        admin.addRolle(DefaultRoles.ADMIN);
+        admin.addRolle(ADMIN.class.getSimpleName());
         entityManager.get().merge(admin);
     }
 

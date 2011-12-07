@@ -7,6 +7,7 @@ import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
 import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.model.ADMIN;
 import de.atns.common.security.model.Benutzer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,7 +15,6 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import javax.persistence.EntityManager;
 
-import static de.atns.common.security.model.DefaultRoles.ADMIN;
 import static de.atns.common.util.SHA1.createSHA1Code;
 
 
@@ -40,7 +40,7 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(ADMIN) public Benutzer executeInternal(final BenutzerCreate action) {
+    @Override @Transactional @Secured(ADMIN.class) public Benutzer executeInternal(final BenutzerCreate action) {
         final EntityManager em = this.em.get();
         try {
             final Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),
