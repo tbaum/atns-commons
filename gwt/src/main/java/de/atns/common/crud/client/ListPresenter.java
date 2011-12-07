@@ -78,9 +78,10 @@ public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerial
     protected abstract String bindRow(T presentation, String lastValue);
 
     public final void updateList() {
-        dispatcher.execute(
-                createLoadAction(),
-                loadCallback());
+        final Action loadAction = createLoadAction();
+        if (loadAction != null) {
+            dispatcher.execute(loadAction, loadCallback());
+        }
     }
 
     protected abstract Action createLoadAction();
