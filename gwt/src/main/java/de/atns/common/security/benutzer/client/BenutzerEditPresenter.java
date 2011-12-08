@@ -9,8 +9,8 @@ import de.atns.common.gwt.client.DialogBoxDisplay;
 import de.atns.common.gwt.client.DialogBoxPresenter;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
+import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.shared.ApplicationState;
 
 
@@ -22,7 +22,7 @@ import de.atns.common.security.shared.ApplicationState;
 public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresenter.Display> {
 // ------------------------------ FIELDS ------------------------------
 
-    private BenutzerPresentation presentation;
+    private UserPresentation presentation;
     private ApplicationState state;
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -34,7 +34,7 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void bind(final BenutzerPresentation presentation) {
+    public void bind(final UserPresentation presentation) {
         this.presentation = presentation;
         bind();
     }
@@ -48,9 +48,9 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
             @Override
             public void onClick(final ClickEvent event) {
                 final BenutzerUpdate update = BenutzerEditPresenter.this.display.getData();
-                dispatcher.execute(update, new Callback<BenutzerPresentation>(display) {
+                dispatcher.execute(update, new Callback<UserPresentation>(display) {
                     @Override
-                    public void callback(final BenutzerPresentation result) {
+                    public void callback(final UserPresentation result) {
                         eventBus.fireEvent(new BenutzerUpdateEvent(result));
                         display.hideDialogBox();
                     }
@@ -62,7 +62,7 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends DialogBoxDisplay {
-        void setData(BenutzerPresentation p, final boolean isAdmin);
+        void setData(UserPresentation p, final boolean isAdmin);
 
         HandlerRegistration forSafe(ClickHandler handler);
 

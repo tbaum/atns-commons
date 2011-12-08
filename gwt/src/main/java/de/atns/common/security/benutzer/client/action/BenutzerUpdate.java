@@ -1,6 +1,6 @@
 package de.atns.common.security.benutzer.client.action;
 
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
 
@@ -8,10 +8,10 @@ import net.customware.gwt.dispatch.shared.Action;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerUpdate implements Action<BenutzerPresentation> {
+public class BenutzerUpdate implements Action<UserPresentation> {
 // ------------------------------ FIELDS ------------------------------
 
-    private Long id;
+    private String id;
     private String login;
     private String email;
     private String passwort;
@@ -24,7 +24,7 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
     public BenutzerUpdate() {
     }
 
-    public BenutzerUpdate(final long id, final boolean admin, final String login, final String passwort,
+    public BenutzerUpdate(final String id, final boolean admin, final String login, final String passwort,
                           final String email, final String name, final String rollen) {
         this.id = id;
         this.admin = admin;
@@ -41,7 +41,7 @@ public class BenutzerUpdate implements Action<BenutzerPresentation> {
         return email;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

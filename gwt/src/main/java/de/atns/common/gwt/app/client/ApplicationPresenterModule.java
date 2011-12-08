@@ -9,9 +9,9 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;
@@ -19,6 +19,7 @@ import de.atns.common.gwt.client.window.EventSerializer;
 import de.atns.common.gwt.client.window.MasterWindowEventBus;
 import de.atns.common.gwt.client.window.PopupWindowEventBus;
 import de.atns.common.gwt.client.window.TransportAware;
+import de.atns.common.security.SecurityRolePresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
 
@@ -55,6 +56,7 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
         bind(ApplicationShell.class).in(Singleton.class);
         requestStaticInjection(ApplicationActivityMapper.class);
         requestStaticInjection(Navigation.class);
+        requestStaticInjection(SecurityRolePresentation.class);
 
         configureApplication();
     }

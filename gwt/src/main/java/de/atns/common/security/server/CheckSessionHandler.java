@@ -5,6 +5,7 @@ import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.SecurityFilter;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.security.UserProvider;
+import de.atns.common.security.benutzer.server.RoleServerConverter;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.model.UserPresentation;
 
@@ -32,12 +33,17 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
 // -------------------------- OTHER METHODS --------------------------
 
     @Override public final UserPresentation executeInternal(final CheckSession action) {
+        return checkSession();
+    }
+
+    public UserPresentation checkSession() {
         final SecurityUser user = this.user.get();
         final UUID token = securityFilter.getAuthToken();
         if (user == null || token == null) {
-            return new UserPresentation();
+            return UserPresentation.invalidUser();
         } else {
-            return new UserPresentation(user.getLogin(), token.toString());
+            return UserPresentation.nameToken(user.getLogin(), token.toString(),
+                    RoleServerConverter.convert(user.getRoles()));
         }
     }
 }

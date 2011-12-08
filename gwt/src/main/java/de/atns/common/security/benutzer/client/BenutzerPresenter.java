@@ -17,7 +17,7 @@ import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
 import de.atns.common.security.benutzer.client.gin.BenutzerInjector;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 
 /**
@@ -25,12 +25,12 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
  * @since 24.10.2009
  */
 @Singleton
-public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, BenutzerPresentation>
+public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, UserPresentation>
         implements PlacePresenter<BenutzerPlace> {
 // ------------------------------ FIELDS ------------------------------
 
-    private static final GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> LIST_EVENT =
-            new GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>>();
+    private static final GwtEvent.Type<LoadListEventHandler<UserPresentation>> LIST_EVENT =
+            new GwtEvent.Type<LoadListEventHandler<UserPresentation>>();
     private final BenutzerEditPresenter editPresenter;
     private final BenutzerInjector injector;
 
@@ -53,11 +53,11 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override public GwtEvent.Type<LoadListEventHandler<BenutzerPresentation>> _listEvent() {
+    @Override public GwtEvent.Type<LoadListEventHandler<UserPresentation>> _listEvent() {
         return LIST_EVENT;
     }
 
-    protected String bindRow(final BenutzerPresentation g, final String lastValue) {
+    protected String bindRow(final UserPresentation g, final String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
@@ -94,14 +94,14 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
 
 // -------------------------- INNER CLASSES --------------------------
 
-    public static interface Display extends ListDisplay<BenutzerPresentation> {
+    public static interface Display extends ListDisplay<UserPresentation> {
         HandlerRegistration forNeu(ClickHandler clickHandler);
 
         HandlerRegistration forSuche(ClickHandler clickHandler);
 
         StandardFilter getFilter();
 
-        HandlerRegistration addRow(BenutzerPresentation auftrag, ClickHandler edit);
+        HandlerRegistration addRow(UserPresentation auftrag, ClickHandler edit);
 
         HandlerRegistration forPressEnter(KeyPressHandler pressHandler);
     }

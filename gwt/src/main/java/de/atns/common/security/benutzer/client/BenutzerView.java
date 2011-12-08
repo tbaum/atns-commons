@@ -10,7 +10,7 @@ import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.ExtendedFlowPanel;
 import de.atns.common.gwt.client.Table;
 import de.atns.common.gwt.client.model.StandardFilter;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
@@ -74,7 +74,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return new StandardFilter(text.getValue());
     }
 
-    public HandlerRegistration addRow(final BenutzerPresentation g, final ClickHandler editHandler) {
+    public HandlerRegistration addRow(final UserPresentation g, final ClickHandler editHandler) {
         if (containsEmptyRow) {
             clearList();
             setPagination(pagePresenter.asWidget());
@@ -82,7 +82,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         final Button edit = new Button("Bearbeiten");
         table.add(row(
                 g.getLogin(),
-                g.isAdmin() ? "Admin" : "Nutzer",
+                "??",
                 g.getEmail(),
                 flowPanel(edit)
 

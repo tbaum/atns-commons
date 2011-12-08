@@ -2,7 +2,7 @@ package de.atns.common.security.benutzer.client.action;
 
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.client.model.StandardFilter;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
 
@@ -10,7 +10,7 @@ import net.customware.gwt.dispatch.shared.Action;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerList implements Action<ListPresentation<BenutzerPresentation>> {
+public class BenutzerList implements Action<ListPresentation<UserPresentation>> {
 // ------------------------------ FIELDS ------------------------------
 
     private StandardFilter filter;

@@ -14,8 +14,8 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static de.atns.common.security.client.event.ServerStatusEvent.loggedin;
 import static de.atns.common.security.client.event.ServerStatusEvent.toServerStatus;
+import static java.util.logging.Level.WARNING;
 
 /**
  * @author tbaum
@@ -55,17 +55,17 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     @Override
     public void onFailure(final Throwable originalCaught) {
-        LOG.log(Level.WARNING, "check session in callback ", originalCaught);
-
         if (originalCaught instanceof SecurityException) {
+            LOG.log(WARNING, "check session in callback '" + originalCaught.getMessage() + "'");
             eventBus.get().fireEvent(toServerStatus(originalCaught));
             display.stopProcessing();
         } else {
+            LOG.log(WARNING, "check session in callback ", originalCaught);
             display.showError(originalCaught.getMessage());
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
                 @Override
                 public void onFailure(final Throwable caught) {
-                    LOG.log(Level.WARNING, "failed-checksession", caught);
+                    LOG.log(WARNING, "failed-checksession", caught);
                     eventBus.get().fireEvent(toServerStatus(caught));
                     display.stopProcessing();
                 }

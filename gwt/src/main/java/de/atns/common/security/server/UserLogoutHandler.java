@@ -34,6 +34,6 @@ public class UserLogoutHandler extends DefaultActionHandler<UserLogout, UserPres
         final SecurityUser user = securityService.logout();
 
         LOG.info("loggedout " + (user != null ? user.getLogin() : ""));
-        return new UserPresentation(user != null ? user.getLogin() : null, null);
+        return UserPresentation.invalidUser();
     }
 }

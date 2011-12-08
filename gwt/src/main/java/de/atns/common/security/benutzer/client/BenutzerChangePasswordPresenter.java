@@ -8,8 +8,8 @@ import de.atns.common.gwt.client.DialogBoxDisplay;
 import de.atns.common.gwt.client.DialogBoxPresenter;
 import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 import de.atns.common.security.client.Callback;
+import de.atns.common.security.client.model.UserPresentation;
 
 
 /**
@@ -29,9 +29,9 @@ public class BenutzerChangePasswordPresenter extends DialogBoxPresenter<Benutzer
             @Override
             public void onClick(final ClickEvent event) {
                 dispatcher.execute(new BenutzerChangePassword(display.getPassword()),
-                        new Callback<BenutzerPresentation>(display) {
+                        new Callback<UserPresentation>(display) {
                             @Override
-                            public void callback(final BenutzerPresentation result) {
+                            public void callback(final UserPresentation result) {
                                 eventBus.fireEvent(new BenutzerUpdateEvent(result));
                                 display.hideDialogBox();
                             }

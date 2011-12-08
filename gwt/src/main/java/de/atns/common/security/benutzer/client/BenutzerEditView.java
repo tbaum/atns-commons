@@ -3,7 +3,7 @@ package de.atns.common.security.benutzer.client;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 /**
  * @author tbaum
@@ -12,20 +12,18 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 public class BenutzerEditView extends BenutzerDetailView implements BenutzerEditPresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
-    private long id;
-
+    private String id;
 // ------------------------ INTERFACE METHODS ------------------------
 
 
 // --------------------- Interface Display ---------------------
 
 
-    public void setData(final BenutzerPresentation p, final boolean isAdmin) {
-        this.id = p.getId();
+    public void setData(final UserPresentation p, final boolean isAdmin) {
+        this.id = p.getLogin();
         login.setValue(p.getLogin());
         email.setValue(p.getEmail());
-        rollen.setValue(p.getRollen());
-        admin.setValue(p.isAdmin());
+//        rollen.setValue(p.getRollen());    //TODO liste
         admin.setEnabled(!isAdmin);
         passwort1.setValue("");
         passwort2.setValue("");

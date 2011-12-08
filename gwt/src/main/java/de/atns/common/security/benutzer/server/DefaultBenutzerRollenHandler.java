@@ -1,8 +1,8 @@
 package de.atns.common.security.benutzer.server;
 
-import de.atns.common.security.AdminRole;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
+import de.atns.common.security.client.model.UserAdminRole;
 import de.atns.common.security.model.Benutzer;
 
 /**
@@ -28,22 +28,22 @@ public class DefaultBenutzerRollenHandler implements BenutzerRollenHandler {
 // -------------------------- OTHER METHODS --------------------------
 
     private void updateRollen(final Benutzer benutzer, final BenutzerCreate action) {
-        benutzer.removeRolle(benutzer.getRolle());
-        benutzer.addRolle(action.getRollen().split(","));
+//        benutzer.removeRolle(benutzer.getRolle());
+//        benutzer.addRolle(action.getRollen().split(","));
         if (action.isAdmin()) {
-            benutzer.addRolle(AdminRole.class);
+            benutzer.addRolle(UserAdminRole.class);
         } else {
-            benutzer.removeRolle(AdminRole.class);
+            benutzer.removeRolle(UserAdminRole.class);
         }
     }
 
     private void updateRollen(final Benutzer benutzer, final BenutzerUpdate action) {
-        benutzer.removeRolle(benutzer.getRolle());
-        benutzer.addRolle(action.getRollen().split(","));
+//        benutzer.removeRolle(benutzer.getRolle());
+//        benutzer.addRolle(action.getRollen().split(","));
         if (action.isAdmin()) {
-            benutzer.addRolle(AdminRole.class);
+            benutzer.addRolle(UserAdminRole.class);
         } else {
-            benutzer.removeRolle(AdminRole.class);
+            benutzer.removeRolle(UserAdminRole.class);
         }
     }
 }

@@ -1,20 +1,16 @@
 package de.atns.common.security.model;
 
 import de.atns.common.dao.BaseObject;
-import de.atns.common.security.AdminRole;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityUser;
-import de.atns.common.util.StringUtils;
+import de.atns.common.security.benutzer.server.RoleServerConverter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 
 @Entity @Inheritance(strategy = JOINED)
@@ -26,7 +22,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     private String passwort;
 
-    private String rollen;
+    @ElementCollection(fetch = EAGER, targetClass = Class.class)
+    private Set<Class<? extends SecurityRole>> roles = new HashSet<Class<? extends SecurityRole>>();
 
     private String email;
 
@@ -77,8 +74,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.passwort = passwort;
     }
 
-    public String getRollen() {
-        return rollen;
+    public Set<Class<? extends SecurityRole>> getRoles() {
+        return roles;
     }
 
     public String getToken() {
@@ -95,57 +92,32 @@ public class Benutzer extends BaseObject implements SecurityUser {
 // --------------------- Interface SecurityUser ---------------------
 
     @Override public boolean hasAccessTo(final Secured secured) {
-        return hasAccessTo(secured.value());
+        return inRole(secured.value());
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public void addRolle(final String... rollen) {
-        final Set<String> rolle = new HashSet<String>(asList(getRolle()));
-        rolle.addAll(asList(rollen));
-        this.rollen = StringUtils.join(",", rolle);
-    }
-
-    public String[] getRolle() {
-        return rollen != null ? rollen.split(",") : new String[0];
-    }
-
     public void addRolle(final Class<? extends SecurityRole> rolle) {
-        addRolle(rolle.getName());
+        roles.add(rolle);
     }
 
-    public boolean isAdmin() {
-        return hasAccessTo(AdminRole.class);
-    }
-
-    private boolean hasAccessTo(Class<? extends SecurityRole>... required) {
+    public boolean inRole(Class<? extends SecurityRole>... required) {
         if (required.length == 0) {
             return true;
         }
-        for (final String rolle : getRolle()) {
-            if (contains(rolle, required)) {
-                return true;
+
+        for (final Class<? extends SecurityRole> myRole : roles) {
+            for (final Class<? extends SecurityRole> s : required) {
+                if (RoleServerConverter.resolveAll(myRole).contains(s)) {
+                    return true;
+                }
             }
         }
         return false;
-    }
-
-    private boolean contains(final String rolle, final Class<? extends SecurityRole>... required) {
-        for (final Class<? extends SecurityRole> s : required) {
-            if (s.getSimpleName().equals(rolle)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void removeRolle(final String... rollen) {
-        final Set<String> rolle = new HashSet<String>(asList(getRolle()));
-        rolle.removeAll(asList(rollen));
-        this.rollen = StringUtils.join(",", rolle);
     }
 
     public void removeRolle(final Class<? extends SecurityRole> rolle) {
-        removeRolle(rolle.getSimpleName());
+        roles.remove(rolle);
     }
 }
+

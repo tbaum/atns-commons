@@ -1,7 +1,7 @@
 package de.atns.common.security.benutzer.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserPresentation;
 
 /**
  * @author tbaum
@@ -10,17 +10,17 @@ import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
 public class BenutzerUpdateEvent extends GwtEvent<BenutzerUpdateEventHandler> {
 // ------------------------------ FIELDS ------------------------------
 
-    private final BenutzerPresentation benutzer;
+    private final UserPresentation benutzer;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public BenutzerUpdateEvent(final BenutzerPresentation benutzer) {
+    public BenutzerUpdateEvent(final UserPresentation benutzer) {
         this.benutzer = benutzer;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public BenutzerPresentation getBenutzer() {
+    public UserPresentation getBenutzer() {
         return benutzer;
     }
 

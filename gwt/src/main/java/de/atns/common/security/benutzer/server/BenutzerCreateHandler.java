@@ -4,10 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
-import de.atns.common.security.AdminRole;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerCreate;
-import de.atns.common.security.benutzer.client.model.BenutzerPresentation;
+import de.atns.common.security.client.model.UserAdminRole;
+import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.model.Benutzer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +15,7 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import javax.persistence.EntityManager;
 
+import static de.atns.common.security.benutzer.server.RoleServerConverter.USER_CONVERTER;
 import static de.atns.common.util.SHA1.createSHA1Code;
 
 
@@ -22,7 +23,7 @@ import static de.atns.common.util.SHA1.createSHA1Code;
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreate, BenutzerPresentation, Benutzer> {
+public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreate, UserPresentation, Benutzer> {
 // ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(BenutzerCreateHandler.class);
@@ -33,14 +34,15 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerCreateHandler(final Provider<EntityManager> em, final BenutzerRollenHandler roleHandler) {
-        super(BenutzerPresentationConverter.BENUTZER_CONVERTER, BenutzerCreate.class);
+        super(USER_CONVERTER, BenutzerCreate.class);
         this.em = em;
         this.roleHandler = roleHandler;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(AdminRole.class) public Benutzer executeInternal(final BenutzerCreate action) {
+    @Override @Transactional @Secured(UserAdminRole.class)
+    public Benutzer executeInternal(final BenutzerCreate action) {
         final EntityManager em = this.em.get();
         try {
             final Benutzer m = new Benutzer(action.getLogin().toLowerCase(), createSHA1Code(action.getPasswort()),
