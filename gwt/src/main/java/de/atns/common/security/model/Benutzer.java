@@ -7,6 +7,7 @@ import de.atns.common.security.SecurityUser;
 import de.atns.common.security.benutzer.server.RoleServerConverter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +33,10 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     private String name;
 
+    private Date lastLogin;
+
+    private Date lastAccess;
+
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected Benutzer() {
@@ -52,6 +57,14 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    public Date getLastAccess() {
+        return lastAccess;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
     @Override public String getLogin() {
@@ -101,6 +114,10 @@ public class Benutzer extends BaseObject implements SecurityUser {
         roles.add(rolle);
     }
 
+    public void clearLastAccess() {
+        this.lastAccess = null;
+    }
+
     public boolean inRole(Class<? extends SecurityRole>... required) {
         if (required.length == 0) {
             return true;
@@ -114,6 +131,14 @@ public class Benutzer extends BaseObject implements SecurityUser {
             }
         }
         return false;
+    }
+
+    public void setLastAccess() {
+        this.lastAccess = new Date();
+    }
+
+    public void setLastLogin() {
+        this.lastLogin = new Date();
     }
 
     public void setRole(final Set<Class<? extends SecurityRole>> role) {

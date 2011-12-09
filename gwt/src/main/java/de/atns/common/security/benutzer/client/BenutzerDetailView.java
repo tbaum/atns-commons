@@ -129,12 +129,11 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
     }
 
     public UserPresentation getData(UserPresentation p) {
-        Set<SecurityRolePresentation> roles = getSelectedRoles();
         return new UserPresentation(p.getId(), login.getValue(), name.getValue(), passwort1.getValue(),
-                email.getValue(), roles);
+                email.getValue(), getSelectedRoles(), null, null);
     }
 
-    public void setData(final UserPresentation p, final boolean isAdmin) {
+    public void setData(final UserPresentation p) {
         login.setValue(p.getLogin());
         email.setValue(p.getEmail());
         name.setValue(p.getName());

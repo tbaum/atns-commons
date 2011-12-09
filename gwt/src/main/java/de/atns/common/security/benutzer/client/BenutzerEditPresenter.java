@@ -2,7 +2,6 @@ package de.atns.common.security.benutzer.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.DialogBoxDisplay;
@@ -11,7 +10,6 @@ import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.model.UserPresentation;
-import de.atns.common.security.shared.ApplicationState;
 
 
 /**
@@ -23,14 +21,6 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 // ------------------------------ FIELDS ------------------------------
 
     private UserPresentation presentation;
-    private ApplicationState state;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    @Inject
-    public void setState(final ApplicationState state) {
-        this.state = state;
-    }
 
 // -------------------------- OTHER METHODS --------------------------
 
@@ -42,7 +32,7 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
     @Override
     protected void onBind() {
         super.onBind();
-        display.setData(presentation, presentation.getLogin().equals(state.getUser().getLogin()));
+        display.setData(presentation);
 
         registerHandler(display.forSafe(new ClickHandler() {
             @Override
@@ -62,7 +52,7 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends DialogBoxDisplay {
-        void setData(UserPresentation p, final boolean isAdmin);
+        void setData(UserPresentation p);
 
         HandlerRegistration forSafe(ClickHandler handler);
 

@@ -37,12 +37,17 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(UserAdminRole.class) public Benutzer executeInternal(final BenutzerUpdate action) {
+    @Override @Transactional @Secured(UserAdminRole.class)
+    public Benutzer executeInternal(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
         UserPresentation p = action.getPresentation();
 
         final Benutzer benutzer = em.find(Benutzer.class, p.getId());
+
+        if (!p.getPasswort().isEmpty()) {
+            benutzer.setPasswort(SHA1.createSHA1Code(p.getPasswort()));
+        }
 
         benutzer.setEmail(p.getEmail());
         benutzer.setName(p.getName());

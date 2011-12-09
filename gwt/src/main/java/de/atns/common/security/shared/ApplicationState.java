@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import de.atns.common.security.SecurityRole;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
@@ -21,7 +22,7 @@ import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatu
 public class ApplicationState {
 // ------------------------------ FIELDS ------------------------------
 
-    private UserPresentation user = new UserPresentation();
+    private UserPresentation user = UserPresentation.invalidUser();
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -45,9 +46,13 @@ public class ApplicationState {
 
             @Override
             public void onSuccess(final UserPresentation user) {
-                ApplicationState.this.user = user;
+                update(user);
             }
         });
+    }
+
+    public void update(UserPresentation result) {
+        this.user = result;
     }
 
 // --------------------- GETTER / SETTER METHODS ---------------------
@@ -60,6 +65,10 @@ public class ApplicationState {
 
     public String getAuthToken() {
         return user.getAuthToken();
+    }
+
+    public boolean inRole(Class<? extends SecurityRole>... required) {
+        return user.inRole(required);
     }
 
     public boolean isValidUser() {

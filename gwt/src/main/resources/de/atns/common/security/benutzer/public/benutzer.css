@@ -1,5 +1,5 @@
 .benutzer table, .benutzer .pagination {
-    width: 395px;
+    width: 961px;
 }
 
 .benutzer .cell0 {
@@ -11,6 +11,22 @@
 }
 
 .benutzer .cell2 {
+    width: 150px;
+}
+
+.benutzer .cell3 {
+    width: 200px;
+}
+
+.benutzer .cell4 {
+    width: 100px;
+}
+
+.benutzer .cell5 {
+    width: 100px;
+}
+
+.benutzer .cell6 {
     width: 75px;
 }
 

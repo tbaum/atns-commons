@@ -2,6 +2,7 @@ package de.atns.common.security.benutzer.client;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.HandlerRegistration;
@@ -23,7 +24,8 @@ import static de.atns.common.gwt.client.Table.*;
  * @since 24.10.2009
  */
 public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresenter.Display {
-// ------------------------------ FIELDS ------------------------------
+    public static final DateTimeFormat DATE_TIME_FORMAT = DateTimeFormat.getFormat("dd.MM.yyyy hh:mm");
+    // ------------------------------ FIELDS ------------------------------
 
     private final Table table = table("benutzer datatable");
 
@@ -78,7 +80,11 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         }
         final Button edit = new Button("Bearbeiten");
 
-        table.add(row(presentation.getLogin(), getRolesAsString(presentation), flowPanel(edit)));
+        table.add(row(presentation.getLogin(), getRolesAsString(presentation), presentation.getName(),
+                presentation.getEmail(),
+                presentation.getLastLogin() != null ? DATE_TIME_FORMAT.format(presentation.getLastLogin()) : "",
+                presentation.getLastAccess() != null ? DATE_TIME_FORMAT.format(presentation.getLastAccess()) : "",
+                flowPanel(edit)));
 
         return edit.addClickHandler(editHandler);
     }
@@ -111,7 +117,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
     private void clearList() {
         containsEmptyRow = false;
         table.clear();
-        table.add(head("Login", "Rollen", ""));
+        table.add(head("Login", "Rollen", "Name", "Email", "letzter Login", "letzte Aktivität", ""));
     }
 
     private String getRolesAsString(UserPresentation userPresentation) {

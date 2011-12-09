@@ -5,6 +5,7 @@ import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.SecurityFilter;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.security.UserProvider;
+import de.atns.common.security.UserService;
 import de.atns.common.security.benutzer.server.RoleServerConverter;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.model.UserPresentation;
@@ -21,13 +22,16 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
 
     private final UserProvider user;
     private final SecurityFilter securityFilter;
+    private final UserService userService;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public CheckSessionHandler(final UserProvider user, final SecurityFilter securityFilter) {
+    @Inject public CheckSessionHandler(final UserProvider user, final SecurityFilter securityFilter,
+                                       UserService userService) {
         super(CheckSession.class);
         this.user = user;
         this.securityFilter = securityFilter;
+        this.userService = userService;
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -42,6 +46,7 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
         if (user == null || token == null) {
             return UserPresentation.invalidUser();
         } else {
+            userService.setActive(user);
             return UserPresentation.nameToken(token.toString(), user.getLogin(),
                     RoleServerConverter.convert(user.getRoles()));
         }

@@ -5,6 +5,7 @@ import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityRolePresentation;
 import net.customware.gwt.dispatch.shared.Result;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -22,6 +23,8 @@ public class UserPresentation implements Result, IsSerializable {
     private String passwort;
     private String email;
     private String name;
+    private Date lastLogin;
+    private Date lastAccess;
 
 // -------------------------- STATIC METHODS --------------------------
 
@@ -31,7 +34,8 @@ public class UserPresentation implements Result, IsSerializable {
 
     public static UserPresentation nameToken(String token, String login,
                                              Set<SecurityRolePresentation> roles) {
-        final UserPresentation userPresentation = new UserPresentation(null, login, null, null, null, roles);
+        final UserPresentation userPresentation = new UserPresentation(null, login, null, null, null, roles, null,
+                null);
         userPresentation.setAuthToken(token);
         return userPresentation;
     }
@@ -42,12 +46,14 @@ public class UserPresentation implements Result, IsSerializable {
     }
 
     public UserPresentation(Long id, String login, String name, String passwort, String email,
-                            Set<SecurityRolePresentation> roles) {
+                            Set<SecurityRolePresentation> roles, Date lastLogin, Date lastAccess) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.passwort = passwort;
         this.email = email;
+        this.lastLogin = lastLogin;
+        this.lastAccess = lastAccess;
         this.roles = new TreeSet<SecurityRolePresentation>(roles);
     }
 
@@ -106,5 +112,13 @@ public class UserPresentation implements Result, IsSerializable {
 
     public boolean isValid() {
         return authToken != null;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public Date getLastAccess() {
+        return lastAccess;
     }
 }

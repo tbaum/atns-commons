@@ -3,6 +3,8 @@ package de.atns.common.security.server;
 import com.google.inject.Inject;
 import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.SecurityFilter;
+import de.atns.common.security.SecurityService;
+import de.atns.common.security.UserService;
 import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.model.UserPresentation;
 import org.apache.commons.logging.Log;
@@ -21,13 +23,18 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
     private static final Log LOG = LogFactory.getLog(UserLoginHandler.class);
     private final SecurityFilter securityFilter;
     private final CheckSessionHandler checkSessionHandler;
+    private final UserService userService;
+    private final SecurityService securityService;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public UserLoginHandler(final SecurityFilter securityFilter, CheckSessionHandler checkSessionHandler) {
+    @Inject public UserLoginHandler(final SecurityFilter securityFilter, CheckSessionHandler checkSessionHandler,
+                                    UserService userService, SecurityService securityService) {
         super(UserLogin.class);
         this.securityFilter = securityFilter;
         this.checkSessionHandler = checkSessionHandler;
+        this.userService = userService;
+        this.securityService = securityService;
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -38,6 +45,8 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
         if (token == null) {
             throw new RuntimeException("invalid login");
         }
+        userService.successfullLogin(securityService.currentUser());
+
         return checkSessionHandler.checkSession();
     }
 }

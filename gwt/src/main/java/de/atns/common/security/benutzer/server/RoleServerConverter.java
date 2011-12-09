@@ -7,10 +7,7 @@ import de.atns.common.security.SecurityRolePresentation;
 import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.model.Benutzer;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author mwolter
@@ -24,8 +21,13 @@ public class RoleServerConverter implements Converter<Class<? extends SecurityRo
 
     public static Converter<Benutzer, UserPresentation> USER_CONVERTER = new Converter<Benutzer, UserPresentation>() {
         @Override public UserPresentation convert(Benutzer from) {
+            Date lastAccess = from.getLastAccess();
+            if (lastAccess != null && lastAccess.before(new Date(new Date().getTime() - 60000))) {
+                lastAccess = null;
+            }
+
             return new UserPresentation(from.getId(), from.getLogin(), from.getName(), from.getPasswort(),
-                    from.getEmail(), RoleServerConverter.convert(from.getRoles()));
+                    from.getEmail(), RoleServerConverter.convert(from.getRoles()), from.getLastLogin(), lastAccess);
         }
     };
 
