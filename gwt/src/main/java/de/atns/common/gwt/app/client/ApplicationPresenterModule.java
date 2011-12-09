@@ -2,7 +2,6 @@ package de.atns.common.gwt.app.client;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.json.client.JSONNull;
 import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.place.shared.Place;
@@ -11,7 +10,7 @@ import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.web.bindery.requestfactory.shared.RequestFactory;
+import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;

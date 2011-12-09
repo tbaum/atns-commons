@@ -1,9 +1,9 @@
 package de.atns.common.security.client;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;

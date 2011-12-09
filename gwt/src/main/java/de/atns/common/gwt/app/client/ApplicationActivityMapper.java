@@ -2,10 +2,10 @@ package de.atns.common.gwt.app.client;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.gin.*;
 import de.atns.common.security.benutzer.client.gin.BenutzerLoader;
 import de.atns.common.security.login.client.gin.LoginLoader;
