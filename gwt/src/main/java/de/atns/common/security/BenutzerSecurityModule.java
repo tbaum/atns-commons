@@ -1,8 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.AbstractModule;
-import de.atns.common.security.server.DummyDataCreator;
-import de.atns.common.security.server.UserServiceImpl;
 
 /**
  * @author tbaum

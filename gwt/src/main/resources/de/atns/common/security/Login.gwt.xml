@@ -8,6 +8,6 @@
     <inherits name="de.atns.common.security.Shared"/>
     <inherits name="de.atns.common.crud.Crud"/>
 
-    <source path="client"/>
+    <source path="client/login"/>
 
 </module>

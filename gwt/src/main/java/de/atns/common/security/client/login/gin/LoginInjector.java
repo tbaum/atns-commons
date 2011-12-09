@@ -1,8 +1,8 @@
-package de.atns.common.security.login.client.gin;
+package de.atns.common.security.client.login.gin;
 
 import com.google.gwt.inject.client.GinModules;
 import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
-import de.atns.common.security.login.client.LoginPresenter;
+import de.atns.common.security.client.login.LoginPresenter;
 
 /**
  * @author tbaum

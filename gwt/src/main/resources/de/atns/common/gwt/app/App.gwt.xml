@@ -9,8 +9,6 @@
     <inherits name="de.atns.common.gwt.Gwt"/>
     <inherits name="de.atns.common.gwt.base64.Base64"/>
     <inherits name="de.atns.common.security.Security"/>
-    <inherits name="de.atns.common.security.Shared"/>
-    <inherits name="de.atns.common.security.login.Login"/>
     <inherits name="de.atns.common.security.benutzer.Benutzer"/>
 
     <source path="client"/>

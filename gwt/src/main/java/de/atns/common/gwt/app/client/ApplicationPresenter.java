@@ -15,9 +15,9 @@ import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
+import de.atns.common.security.client.login.LoginPlace;
+import de.atns.common.security.client.login.LogoutPlace;
 import de.atns.common.security.client.model.UserPresentation;
-import de.atns.common.security.login.client.LoginPlace;
-import de.atns.common.security.login.client.LogoutPlace;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

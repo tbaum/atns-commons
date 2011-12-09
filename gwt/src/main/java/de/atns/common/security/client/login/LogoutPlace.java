@@ -1,4 +1,4 @@
-package de.atns.common.security.login.client;
+package de.atns.common.security.client.login;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;

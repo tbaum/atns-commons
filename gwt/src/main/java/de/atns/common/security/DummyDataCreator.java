@@ -1,4 +1,4 @@
-package de.atns.common.security.server;
+package de.atns.common.security;
 
 import com.google.inject.Inject;
 import org.apache.commons.logging.Log;

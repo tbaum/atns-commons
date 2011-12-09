@@ -1,4 +1,4 @@
-package de.atns.common.security.login.client;
+package de.atns.common.security.client.login;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.Style;

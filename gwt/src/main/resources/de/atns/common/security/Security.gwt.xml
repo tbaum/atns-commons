@@ -6,6 +6,9 @@
     <inherits name="de.atns.common.gwt.Gwt"/>
     <inherits name="de.atns.common.SecurityModel"/>
 
+    <inherits name="de.atns.common.security.Shared"/>
+    <inherits name="de.atns.common.security.Login"/>
+
     <source path="client"/>
     <source path="shared"/>
 </module>

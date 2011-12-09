@@ -1,11 +1,9 @@
 package de.atns.common.security;
 
 import de.atns.common.security.client.action.CheckSession;
+import de.atns.common.security.client.action.UserDetail;
 import de.atns.common.security.client.action.UserLogin;
 import de.atns.common.security.client.action.UserLogout;
-import de.atns.common.security.server.CheckSessionHandler;
-import de.atns.common.security.server.UserLoginHandler;
-import de.atns.common.security.server.UserLogoutHandler;
 import net.customware.gwt.dispatch.server.guice.ActionHandlerModule;
 
 /**
@@ -17,6 +15,7 @@ public class SecurityActionHandlerModule extends ActionHandlerModule {
 
     @Override protected void configureHandlers() {
         bindHandler(CheckSession.class, CheckSessionHandler.class);
+        bindHandler(UserDetail.class, UserLoadDetailHandler.class);
         bindHandler(UserLogin.class, UserLoginHandler.class);
         bindHandler(UserLogout.class, UserLogoutHandler.class);
     }

@@ -1,11 +1,8 @@
-package de.atns.common.security.server;
+package de.atns.common.security;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.DefaultActionHandler;
-import de.atns.common.security.SecurityService;
-import de.atns.common.security.SecurityUser;
-import de.atns.common.security.UserService;
 import de.atns.common.security.client.action.UserLogout;
 import de.atns.common.security.client.model.UserPresentation;
 import org.apache.commons.logging.Log;

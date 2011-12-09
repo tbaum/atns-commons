@@ -4,12 +4,12 @@ import com.google.inject.Inject;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.gwt.server.ConvertingActionHandler;
+import de.atns.common.security.BenutzerRepository;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.client.model.UserAdminRole;
 import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.model.Benutzer;
-import de.atns.common.security.server.BenutzerRepository;
 
 import static de.atns.common.dao.PartResult.createPartResult;
 import static de.atns.common.gwt.server.ListConverter.listConverter;

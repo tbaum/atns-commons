@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.gin.*;
 import de.atns.common.security.benutzer.client.gin.BenutzerLoader;
-import de.atns.common.security.login.client.gin.LoginLoader;
+import de.atns.common.security.client.login.gin.LoginLoader;
 
 import java.util.ArrayList;
 import java.util.List;

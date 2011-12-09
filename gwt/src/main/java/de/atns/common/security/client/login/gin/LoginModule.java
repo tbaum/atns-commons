@@ -1,8 +1,8 @@
-package de.atns.common.security.login.client.gin;
+package de.atns.common.security.client.login.gin;
 
 import de.atns.common.security.client.SharedServicesModule;
-import de.atns.common.security.login.client.LoginPresenter;
-import de.atns.common.security.login.client.LoginView;
+import de.atns.common.security.client.login.LoginPresenter;
+import de.atns.common.security.client.login.LoginView;
 
 /**
  * @author tbaum

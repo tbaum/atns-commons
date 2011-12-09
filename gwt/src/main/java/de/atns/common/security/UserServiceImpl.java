@@ -1,11 +1,9 @@
-package de.atns.common.security.server;
+package de.atns.common.security;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
-import de.atns.common.security.SecurityUser;
-import de.atns.common.security.UserService;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
 import org.apache.commons.logging.Log;

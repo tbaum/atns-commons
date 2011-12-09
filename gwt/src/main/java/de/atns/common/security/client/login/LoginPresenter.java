@@ -1,4 +1,4 @@
-package de.atns.common.security.login.client;
+package de.atns.common.security.client.login;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.core.client.Scheduler;

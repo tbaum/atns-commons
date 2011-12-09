@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import de.atns.common.security.login.client.LoginPlace;
+import de.atns.common.security.client.login.LoginPlace;
 
 public class NavigationNoAuth extends Composite {
 // ------------------------------ FIELDS ------------------------------
