@@ -5,15 +5,17 @@ import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
+import de.atns.common.security.SecurityRole;
+import de.atns.common.security.SecurityRolePresentation;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.client.model.UserAdminRole;
 import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.model.Benutzer;
 import de.atns.common.util.SHA1;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import javax.persistence.EntityManager;
+import java.util.HashSet;
+import java.util.Set;
 
 import static de.atns.common.security.benutzer.server.RoleServerConverter.USER_CONVERTER;
 
@@ -24,32 +26,33 @@ import static de.atns.common.security.benutzer.server.RoleServerConverter.USER_C
 public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdate, UserPresentation, Benutzer> {
 // ------------------------------ FIELDS ------------------------------
 
-    private static final Log LOG = LogFactory.getLog(BenutzerUpdateHandler.class);
     private final Provider<EntityManager> em;
-    private final BenutzerRollenHandler roleHandler;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em, final BenutzerRollenHandler roleHandler) {
+    @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em) {
         super(USER_CONVERTER, BenutzerUpdate.class);
         this.em = em;
-        this.roleHandler = roleHandler;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(UserAdminRole.class)
-    public Benutzer executeInternal(final BenutzerUpdate action) {
+    @Override @Transactional @Secured(UserAdminRole.class) public Benutzer executeInternal(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
-        final Benutzer benutzer = em.find(Benutzer.class, action.getId());
-        roleHandler.updateRollen(benutzer, action);
-        benutzer.setEmail(action.getEmail().toLowerCase());
-        benutzer.setName(action.getName());
+        UserPresentation p = action.getPresentation();
 
-        if (!action.getPasswort().isEmpty()) {
-            benutzer.setPasswort(SHA1.createSHA1Code(action.getPasswort()));
+        final Benutzer benutzer = em.find(Benutzer.class, p.getId());
+
+        benutzer.setEmail(p.getEmail());
+        benutzer.setName(p.getName());
+
+        Set<Class<? extends SecurityRole>> roles = new HashSet<Class<? extends SecurityRole>>();
+        for (SecurityRolePresentation presentation : p.getRoles()) {
+            roles.add(presentation.getRole());
         }
+        benutzer.setRole(roles);
+
         return benutzer;
     }
 }

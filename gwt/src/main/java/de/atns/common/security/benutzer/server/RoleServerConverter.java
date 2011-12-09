@@ -24,8 +24,8 @@ public class RoleServerConverter implements Converter<Class<? extends SecurityRo
 
     public static Converter<Benutzer, UserPresentation> USER_CONVERTER = new Converter<Benutzer, UserPresentation>() {
         @Override public UserPresentation convert(Benutzer from) {
-            return new UserPresentation(from.getId(), from.getLogin(), from.getPasswort(), from.getEmail(),
-                    from.getName(), RoleServerConverter.convert(from.getRoles()));
+            return new UserPresentation(from.getId(), from.getLogin(), from.getName(), from.getPasswort(),
+                    from.getEmail(), RoleServerConverter.convert(from.getRoles()));
         }
     };
 

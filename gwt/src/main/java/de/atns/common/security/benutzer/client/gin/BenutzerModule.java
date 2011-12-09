@@ -14,9 +14,7 @@ public class BenutzerModule extends CrudModule {
         super.configure();
 
         bindPresenter(BenutzerPresenter.class, BenutzerPresenter.Display.class, BenutzerView.class);
-        bindPresenter(BenutzerCreatePresenter.class, BenutzerCreatePresenter.Display.class, BenutzerCreateView.class);
-        bindPresenter(BenutzerEditPresenter.class, BenutzerEditPresenter.Display.class, BenutzerEditView.class);
-        bindPresenter(BenutzerChangePasswordPresenter.class, BenutzerChangePasswordPresenter.Display.class,
-                BenutzerChangePasswordView.class);
+        bindPresenter(BenutzerCreatePresenter.class, BenutzerCreatePresenter.Display.class, BenutzerDetailView.class);
+        bindPresenter(BenutzerEditPresenter.class, BenutzerEditPresenter.Display.class, BenutzerDetailView.class);
     }
 }

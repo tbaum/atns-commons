@@ -16,7 +16,6 @@ import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
-import de.atns.common.security.benutzer.client.gin.BenutzerInjector;
 import de.atns.common.security.client.model.UserPresentation;
 
 
@@ -32,14 +31,15 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
     private static final GwtEvent.Type<LoadListEventHandler<UserPresentation>> LIST_EVENT =
             new GwtEvent.Type<LoadListEventHandler<UserPresentation>>();
     private final BenutzerEditPresenter editPresenter;
-    private final BenutzerInjector injector;
+    private final BenutzerCreatePresenter benutzerCreatePresenter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerPresenter(final BenutzerEditPresenter editPresenter, final BenutzerInjector injector) {
+    public BenutzerPresenter(final BenutzerEditPresenter editPresenter,
+                             BenutzerCreatePresenter benutzerCreatePresenter) {
         this.editPresenter = editPresenter;
-        this.injector = injector;
+        this.benutzerCreatePresenter = benutzerCreatePresenter;
     }
 
 // ------------------------ INTERFACE METHODS ------------------------
@@ -77,16 +77,14 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
         super.onBind();
 
         registerHandler(display.forNeu(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                injector.getBenutzerCreatePresenter().bind();
+            @Override public void onClick(final ClickEvent event) {
+                benutzerCreatePresenter.bind();
             }
         }));
 
         registerHandler(eventBus.addHandler(BenutzerUpdateEventHandler.TYPE,
                 new BenutzerUpdateEventHandler() {
-                    @Override
-                    public void onUpdate(final BenutzerUpdateEvent event) {
+                    @Override public void onUpdate(final BenutzerUpdateEvent event) {
                         updateList();
                     }
                 }));

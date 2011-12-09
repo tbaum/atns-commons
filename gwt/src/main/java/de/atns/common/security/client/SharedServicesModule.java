@@ -4,13 +4,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.gwt.client.gin.SharedServicesAware;
 import de.atns.common.gwt.client.window.MasterWindowEventBus;
 import de.atns.common.gwt.client.window.PopupWindowEventBus;
+import de.atns.common.security.RoleConverter;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 /**
@@ -55,8 +55,8 @@ public class SharedServicesModule extends AbstractPresenterModule {
         return (PopupWindowEventBus) eventBus;
     }
 
-    @Provides public RequestFactory requestFactory(final SharedServices sharedServices) {
-        return sharedServices.requestFactory();
+    @Provides public RoleConverter roleConverter(final SharedServices sharedServices) {
+        return sharedServices.roleConverter();
     }
 
 // -------------------------- INNER CLASSES --------------------------

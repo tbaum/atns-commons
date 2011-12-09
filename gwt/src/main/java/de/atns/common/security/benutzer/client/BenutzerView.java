@@ -7,12 +7,14 @@ import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
-import de.atns.common.gwt.client.ExtendedFlowPanel;
 import de.atns.common.gwt.client.Table;
 import de.atns.common.gwt.client.model.StandardFilter;
+import de.atns.common.security.RoleConverter;
+import de.atns.common.security.SecurityRolePresentation;
 import de.atns.common.security.client.model.UserPresentation;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
+import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 import static de.atns.common.gwt.client.Table.*;
 
@@ -29,37 +31,32 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
     private final Button suche = new Button("Suchen");
     private final TextBox text = new TextBox();
     //    private final ListBox status = new ListBox();
-    private final Table.Row pagePresenterPanel = row();
+    private final Row pagePresenterPanel = row();
     private boolean containsEmptyRow;
     private PagePresenter.Display pagePresenter;
+
+    private final RoleConverter roleConverter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerView() {
-        final ExtendedFlowPanel extendedFlowPanel = ExtendedFlowPanel.extendedFlowPanel(5)
-                .add(getErrorPanel())
-                .add(getLoader())
-                .newLine()
-                .add("Benutzer:").addStyle("heading")
-                .newLine()
-                .add(neu)
-                .newLine()
+    public BenutzerView(RoleConverter roleConverter) {
+        this.roleConverter = roleConverter;
+
+        final FlowPanel panel = extendedFlowPanel(5)
+                .add(getErrorPanel()).add(getLoader()).newLine()
+                .add("Benutzer:").addStyle("heading").newLine()
+                .add(neu).newLine()
                 .add(flowPanel("benutzer",
-                        table("suche filtertable", head(
-                                "Suche:",
-                                flowPanel(text),
-                                suche
-                        )),
+                        table("suche filtertable", head("Suche:", flowPanel(text), suche)),
                         table,
                         pagePresenterPanel
-                ));
-
-        final FlowPanel panel = extendedFlowPanel.getPanel();
+                )).getPanel();
         panel.getElement().getStyle().setMarginLeft(20, PX);
         initWidget(panel);
         pagePresenterPanel.setWidth("640px");
     }
+
 
 // ------------------------ INTERFACE METHODS ------------------------
 
@@ -74,19 +71,14 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return new StandardFilter(text.getValue());
     }
 
-    public HandlerRegistration addRow(final UserPresentation g, final ClickHandler editHandler) {
+    public HandlerRegistration addRow(final UserPresentation presentation, final ClickHandler editHandler) {
         if (containsEmptyRow) {
             clearList();
             setPagination(pagePresenter.asWidget());
         }
         final Button edit = new Button("Bearbeiten");
-        table.add(row(
-                g.getLogin(),
-                "??",
-                g.getEmail(),
-                flowPanel(edit)
 
-        ));
+        table.add(row(presentation.getLogin(), getRolesAsString(presentation), flowPanel(edit)));
 
         return edit.addClickHandler(editHandler);
     }
@@ -119,12 +111,15 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
     private void clearList() {
         containsEmptyRow = false;
         table.clear();
-        table.add(head(
-                "Login",
-                "Rolle",
-                "Email",
-                ""
-        ));
+        table.add(head("Login", "Rollen", ""));
+    }
+
+    private String getRolesAsString(UserPresentation userPresentation) {
+        String roles = "";
+        for (SecurityRolePresentation presentation : userPresentation.getRoles()) {
+            roles += (roles.isEmpty() ? "" : ", ") + roleConverter.toString(presentation.getRole());
+        }
+        return roles;
     }
 
     private void setPagination(final Widget widget) {

@@ -6,32 +6,44 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
+import com.google.inject.Inject;
 import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
+import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.FieldSetPanel;
+import de.atns.common.security.RoleConverter;
+import de.atns.common.security.SecurityRole;
+import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.UserPresentation;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static de.atns.common.gwt.client.ExtendedFlowPanel.extendedFlowPanel;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
-
 
 /**
  * @author tbaum
  * @since 24.10.2009
  */
-public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
+public class BenutzerDetailView extends DefaultDialogBoxDisplay implements BenutzerEditPresenter.Display, BenutzerCreatePresenter.Display {
 // ------------------------------ FIELDS ------------------------------
 
     protected final TextBox login = new TextBox();
+    protected final PasswordTextBox passwort1 = new PasswordTextBox();
     protected final TextBox email = new TextBox();
     protected final TextBox name = new TextBox();
-    protected final TextBox rollen = new TextBox();
-    protected final PasswordTextBox passwort1 = new PasswordTextBox();
-    protected final CheckBox admin = new CheckBox();
     protected final Button speichern = new Button("Speichern");
     protected final PasswordTextBox passwort2 = new PasswordTextBox();
+    protected final Map<Class<? extends SecurityRole>, CheckBox> roles = new HashMap<Class<? extends SecurityRole>, CheckBox>();
+    private final RoleConverter roleConverter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    public BenutzerDetailView() {
+    @Inject
+    public BenutzerDetailView(RoleConverter roleConverter) {
+        this.roleConverter = roleConverter;
         final FlowPanel fp = flowPanel(speichern, getCancelButton());
         fp.getElement().getStyle().setProperty("textAlign", "center");
         fp.getElement().getStyle().setMargin(5, Style.Unit.PX);
@@ -49,20 +61,19 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
         passwort1.addValueChangeHandler(h);
         passwort2.addValueChangeHandler(h);
 
-
         setDialogBoxContent("Benutzer - Anlegen/Bearbeiten", flowPanel(
                 new FieldSetPanel("Benutzer", extendedFlowPanel()
                         .add("Login").widthPX(120).add(login).newLine()
-                        .add("Rollen").widthPX(120).add(rollen).newLine()
-                        .add("Admin").widthPX(120).add(admin).newLine()
                         .add("Email").widthPX(120).add(email).newLine()
                         .add("Name").widthPX(120).add(name).newLine()
                         .getPanel()
-                ), new FieldSetPanel("Passwort", extendedFlowPanel()
-                .add("Passwort").widthPX(120).add(passwort1).newLine()
-                .add("wiederholen").widthPX(120).add(passwort2).newLine()
-                .getPanel()
-        ),
+                ),
+                new FieldSetPanel("Rollen", createRolePanel()),
+                new FieldSetPanel("Passwort", extendedFlowPanel()
+                        .add("Passwort").widthPX(120).add(passwort1).newLine()
+                        .add("wiederholen").widthPX(120).add(passwort2).newLine()
+                        .getPanel()
+                ),
                 getErrorPanel(),
                 fp
         ));
@@ -70,10 +81,76 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
         updButton();
     }
 
-    protected abstract void updButton();
+    private Widget createRolePanel() {
+        roles.clear();
+        ExtendedFlexTable panel = ExtendedFlexTable.table();
+        final FlexTable table = panel.getTable();
+        table.setBorderWidth(0);
+        table.setCellPadding(5);
+        int i = 0;
+        for (String role : roleConverter) {
+            CheckBox checkBox = new CheckBox(role);
+            panel.cell(checkBox);
+            i++;
+            if (i % 3 == 0) {
+                panel.nextRow();
+            }
+            roles.put(roleConverter.toRole(role), checkBox);
+        }
+        return table;
+    }
+
+    protected void updButton() {
+        final String p1 = passwort1.getValue();
+        final String p2 = passwort2.getValue();
+        speichern.setEnabled((p1.isEmpty() && p2.isEmpty()) || (p1.length() > 5 && p1.equals(p2)));
+    }
+
+// --------------------- GETTER / SETTER METHODS ---------------------
+
+    private Set<SecurityRolePresentation> getSelectedRoles() {
+        Set<SecurityRolePresentation> selectedRoles = new HashSet<SecurityRolePresentation>();
+        for (Map.Entry<Class<? extends SecurityRole>, CheckBox> role : roles.entrySet()) {
+            final CheckBox checkBox = role.getValue();
+            if (checkBox.getValue()) {
+                selectedRoles.add(new SecurityRolePresentation(role.getKey()));
+            }
+        }
+        return selectedRoles;
+    }
 
 // ------------------------ INTERFACE METHODS ------------------------
 
+
+// --------------------- Interface Display ---------------------
+
+    @Override public HandlerRegistration forSafe(final ClickHandler handler) {
+        return speichern.addClickHandler(handler);
+    }
+
+    public UserPresentation getData(UserPresentation p) {
+        Set<SecurityRolePresentation> roles = getSelectedRoles();
+        return new UserPresentation(p.getId(), login.getValue(), name.getValue(), passwort1.getValue(),
+                email.getValue(), roles);
+    }
+
+    public void setData(final UserPresentation p, final boolean isAdmin) {
+        login.setValue(p.getLogin());
+        email.setValue(p.getEmail());
+        name.setValue(p.getName());
+        passwort1.setValue("");
+        passwort2.setValue("");
+
+        for (CheckBox checkBox : roles.values()) {
+            checkBox.setValue(false);
+        }
+
+        for (SecurityRolePresentation securityRolePresentation : p.getRoles()) {
+            roles.get(securityRolePresentation.getRole()).setValue(true);
+        }
+
+        updButton();
+    }
 
 // --------------------- Interface WidgetDisplay ---------------------
 
@@ -81,17 +158,9 @@ public abstract class BenutzerDetailView extends DefaultDialogBoxDisplay {
         login.setValue("");
         email.setValue("");
         name.setValue("");
-        rollen.setValue("");
-        admin.setValue(false);
         passwort1.setValue("");
         passwort2.setValue("");
         updButton();
-    }
-
-// -------------------------- OTHER METHODS --------------------------
-
-    public HandlerRegistration forSafe(final ClickHandler handler) {
-        return speichern.addClickHandler(handler);
     }
 
 // -------------------------- INNER CLASSES --------------------------

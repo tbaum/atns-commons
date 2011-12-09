@@ -2,7 +2,6 @@ package de.atns.common.security.benutzer.client.gin;
 
 import com.google.gwt.inject.client.GinModules;
 import de.atns.common.gwt.client.gin.WidgetPresenterGinjector;
-import de.atns.common.security.benutzer.client.BenutzerCreatePresenter;
 import de.atns.common.security.benutzer.client.BenutzerPresenter;
 
 /**
@@ -11,7 +10,4 @@ import de.atns.common.security.benutzer.client.BenutzerPresenter;
  */
 @GinModules(BenutzerModule.class)
 public interface BenutzerInjector extends WidgetPresenterGinjector<BenutzerPresenter> {
-// -------------------------- OTHER METHODS --------------------------
-
-    BenutzerCreatePresenter getBenutzerCreatePresenter();
 }

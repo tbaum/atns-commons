@@ -65,6 +65,10 @@ public class UserPresentation implements Result, IsSerializable {
         return email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getLogin() {
         return login;
     }

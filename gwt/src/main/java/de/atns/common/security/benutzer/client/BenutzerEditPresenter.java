@@ -47,10 +47,10 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
         registerHandler(display.forSafe(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                final BenutzerUpdate update = BenutzerEditPresenter.this.display.getData();
+                final BenutzerUpdate update = new BenutzerUpdate(
+                        BenutzerEditPresenter.this.display.getData(presentation));
                 dispatcher.execute(update, new Callback<UserPresentation>(display) {
-                    @Override
-                    public void callback(final UserPresentation result) {
+                    @Override public void callback(final UserPresentation result) {
                         eventBus.fireEvent(new BenutzerUpdateEvent(result));
                         display.hideDialogBox();
                     }
@@ -66,6 +66,6 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
 
         HandlerRegistration forSafe(ClickHandler handler);
 
-        BenutzerUpdate getData();
+        UserPresentation getData(UserPresentation userPresentation);
     }
 }

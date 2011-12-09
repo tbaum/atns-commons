@@ -116,8 +116,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
         return false;
     }
 
-    public void removeRolle(final Class<? extends SecurityRole> rolle) {
-        roles.remove(rolle);
+    public void setRole(final Set<Class<? extends SecurityRole>> role) {
+        this.roles = role;
     }
 }
 

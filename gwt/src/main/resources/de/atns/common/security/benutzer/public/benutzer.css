@@ -1,21 +1,17 @@
 .benutzer table, .benutzer .pagination {
-    width: 625px;
+    width: 395px;
 }
 
 .benutzer .cell0 {
-    width: 170px;
+    width: 75px;
 }
 
 .benutzer .cell1 {
-    width: 170px;
+    width: 230px;
 }
 
 .benutzer .cell2 {
-    width: 200px;
-}
-
-.benutzer .cell3 {
-    width: 85px;
+    width: 75px;
 }
 
 .benutzer .suche .cell0 {

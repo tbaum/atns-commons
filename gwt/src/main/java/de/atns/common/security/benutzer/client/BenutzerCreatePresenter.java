@@ -23,12 +23,9 @@ public class BenutzerCreatePresenter extends DialogBoxPresenter<BenutzerCreatePr
     @Override
     protected void onBind() {
         super.onBind();
-        display.reset();
-
         registerHandler(display.forSafe(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                dispatcher.execute(BenutzerCreatePresenter.this.display.getData(),
+            @Override public void onClick(final ClickEvent event) {
+                dispatcher.execute(new BenutzerCreate(display.getData(new UserPresentation())),
                         new Callback<UserPresentation>(display) {
                             @Override
                             public void callback(final UserPresentation result) {
@@ -45,6 +42,6 @@ public class BenutzerCreatePresenter extends DialogBoxPresenter<BenutzerCreatePr
     public static interface Display extends DialogBoxDisplay {
         HandlerRegistration forSafe(ClickHandler handler);
 
-        BenutzerCreate getData();
+        UserPresentation getData(UserPresentation userPresentation);
     }
 }

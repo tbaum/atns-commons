@@ -13,15 +13,12 @@ import de.atns.common.security.server.BenutzerRepository;
 
 import static de.atns.common.dao.PartResult.createPartResult;
 import static de.atns.common.gwt.server.ListConverter.listConverter;
-import static de.atns.common.security.benutzer.server.RoleServerConverter.USER_CONVERTER;
-
 
 /**
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerListHandler
-        extends ConvertingActionHandler<BenutzerList, ListPresentation<UserPresentation>, PartResult<Benutzer>> {
+public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, ListPresentation<UserPresentation>, PartResult<Benutzer>> {
 // ------------------------------ FIELDS ------------------------------
 
     private final BenutzerRepository repository;
@@ -30,7 +27,7 @@ public class BenutzerListHandler
 
     @Inject
     public BenutzerListHandler(final BenutzerRepository repository) {
-        super(listConverter(USER_CONVERTER), BenutzerList.class);
+        super(listConverter(RoleServerConverter.USER_CONVERTER), BenutzerList.class);
         this.repository = repository;
     }
 
