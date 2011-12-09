@@ -2,7 +2,7 @@ package de.atns.common.crud.client;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.WidgetDisplay;
 
 /**

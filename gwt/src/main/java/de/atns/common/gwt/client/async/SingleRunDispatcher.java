@@ -1,9 +1,9 @@
 package de.atns.common.gwt.client.async;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
@@ -48,7 +48,8 @@ import java.util.Map;
      * <li>9. (Action4-beendet).. Callback4 mit dem Ergebnis von Action4
      * <li>10. (Action5-beendet).. Callback5 mit dem Ergebnis von Action5
      */
-    public <A extends Action<R>, R extends Result> void executeOnceOrRunAfterOnce(final A action, final AsyncCallback<R> callback) {
+    public <A extends Action<R>, R extends Result> void executeOnceOrRunAfterOnce(final A action,
+                                                                                  final AsyncCallback<R> callback) {
         final Class<? extends Action> clazz = action.getClass();
 
         if (isRunning(clazz)) {
@@ -75,7 +76,8 @@ import java.util.Map;
         return (QueingCallback<R>) running.get(clazz);
     }
 
-    private <A extends Action<R>, R extends Result> RetriggerCallback<A, R> findRetriggerCallback(QueingCallback<R> queingCallback) {
+    private <A extends Action<R>, R extends Result> RetriggerCallback<A, R> findRetriggerCallback(
+            QueingCallback<R> queingCallback) {
         for (AsyncCallback<R> rAsyncCallback : queingCallback) {
             if (rAsyncCallback instanceof RetriggerCallback) {
                 return (RetriggerCallback<A, R>) rAsyncCallback;
@@ -135,7 +137,8 @@ import java.util.Map;
      * <li>7. (Action4-beendet).. Callback4 mit dem Ergebnis von Action4
      * <li>7. (Action5-beendet).. Callback5 mit dem Ergebnis von Action5
      */
-    public <A extends Action<R>, R extends Result> void executeOrRunAfter(final A action, final AsyncCallback<R> callback) {
+    public <A extends Action<R>, R extends Result> void executeOrRunAfter(final A action,
+                                                                          final AsyncCallback<R> callback) {
         final Class<? extends Action> clazz = action.getClass();
 
         if (isRunning(clazz)) {

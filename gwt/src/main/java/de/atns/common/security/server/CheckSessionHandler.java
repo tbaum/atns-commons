@@ -42,7 +42,7 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
         if (user == null || token == null) {
             return UserPresentation.invalidUser();
         } else {
-            return UserPresentation.nameToken(user.getLogin(), token.toString(),
+            return UserPresentation.nameToken(token.toString(), user.getLogin(),
                     RoleServerConverter.convert(user.getRoles()));
         }
     }

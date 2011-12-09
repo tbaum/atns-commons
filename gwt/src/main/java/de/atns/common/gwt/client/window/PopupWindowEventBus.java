@@ -3,11 +3,14 @@ package de.atns.common.gwt.client.window;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.shared.*;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.Event;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 
 import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocation;
 
@@ -51,11 +54,11 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
     }
 
     private native void _registerEventBus(PopupWindowEventBus windowEventbus) /*-{
-        $wnd._event_from_master = function(event) {
+        $wnd._event_from_master = function (event) {
             windowEventbus.@de.atns.common.gwt.client.window.PopupWindowEventBus::fire(Lcom/google/gwt/core/client/JavaScriptObject;)(event);
         };
 
-        $wnd._open_popup = function(url, name, para) {
+        $wnd._open_popup = function (url, name, para) {
             $wnd.opener._open_Window(url, name, para);
         };
     }-*/;
@@ -64,12 +67,26 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         $wnd.opener._popup_closed($wnd._myid);
     }-*/;
 
-// ------------------------ INTERFACE METHODS ------------------------
+// -------------------------- OTHER METHODS --------------------------
 
+    @Override
+    public <H> HandlerRegistration addHandler(Event.Type<H> type, H handler) {
+        // TODO unregister
+        return eventBus.addHandler(type, handler);
+    }
 
-// --------------------- Interface HasHandlers ---------------------
+    @Override
+    public <H> HandlerRegistration addHandlerToSource(Event.Type<H> type, Object source, H handler) {
+        return eventBus.addHandlerToSource(type, source, handler);
+    }
 
-    @Override public void fireEvent(GwtEvent<?> event) {
+    @SuppressWarnings({"UnusedDeclaration"})
+    private void fire(JavaScriptObject o) {
+        final TransportAware transportAware = serializer.deserialize(new JSONArray(o));
+        eventBus.fireEvent((Event<?>) transportAware);
+    }
+
+    @Override public void fireEvent(Event<?> event) {
         eventBus.fireEvent(event);
 
         if (event instanceof TransportAware) {
@@ -78,31 +95,11 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         }
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     private native void _event_fireEvent(JavaScriptObject event) /*-{
         $wnd.opener._event_from_popup($wnd, event);
     }-*/;
 
-    @Override
-    public <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type, H handler) {
-        // TODO unregister
-        return eventBus.addHandler(type, handler);
-    }
-
-    @Override
-    public <H extends EventHandler> HandlerRegistration addHandlerToSource(GwtEvent.Type<H> type, Object source,
-                                                                           H handler) {
-        return eventBus.addHandlerToSource(type, source, handler);
-    }
-
-    @SuppressWarnings({"UnusedDeclaration"})
-    private void fire(JavaScriptObject o) {
-        final TransportAware transportAware = serializer.deserialize(new JSONArray(o));
-        eventBus.fireEvent((GwtEvent<?>) transportAware);
-    }
-
-    @Override public void fireEventFromSource(GwtEvent event, Object source) {
+    @Override public void fireEventFromSource(Event event, Object source) {
         eventBus.fireEventFromSource(event, source);
     }
 

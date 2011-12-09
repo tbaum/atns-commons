@@ -1,11 +1,11 @@
 package de.atns.common.gwt.client;
 
 import com.google.gwt.activity.shared.Activity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 import java.util.Collections;
@@ -60,36 +60,12 @@ public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
         unbind();
     }
 
-    @Override public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
-        LOG.log(Level.FINE, "Activity: start()");
-
-        panel.setWidget(display.asWidget());
-        LOG.log(Level.FINE, "Activity: showPanel(" + display + ")");
-
-        bind();
+    @Override
+    public final void start(final AcceptsOneWidget panel, final com.google.gwt.event.shared.EventBus eventBus) {
+        start(panel, (EventBus) eventBus);
     }
 
 // -------------------------- OTHER METHODS --------------------------
-
-    public void bind() {
-        if (!bound) {
-            onBind();
-            bound = true;
-        }
-    }
-
-    /**
-     * This method is called when binding the presenter. Any additional bindings
-     * should be done here.
-     */
-    protected void onBind() {
-        if (display instanceof WidgetDisplay) {
-            ((WidgetDisplay) display).resetErrors();
-        }
-        if (display instanceof DefaultWidgetDisplay) {
-            ((DefaultWidgetDisplay) display).reset();
-        }
-    }
 
     /**
      * Any {@link HandlerRegistration}s added will be removed when
@@ -124,6 +100,35 @@ public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
 
         if (LOG.isLoggable(Level.FINEST)) {
             LOG.log(Level.FINEST, "setEventBus->" + Util.toString(eventBus));
+        }
+    }
+
+    public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
+        LOG.log(Level.FINE, "Activity: start()");
+
+        panel.setWidget(display.asWidget());
+        LOG.log(Level.FINE, "Activity: showPanel(" + display + ")");
+
+        bind();
+    }
+
+    public void bind() {
+        if (!bound) {
+            onBind();
+            bound = true;
+        }
+    }
+
+    /**
+     * This method is called when binding the presenter. Any additional bindings
+     * should be done here.
+     */
+    protected void onBind() {
+        if (display instanceof WidgetDisplay) {
+            ((WidgetDisplay) display).resetErrors();
+        }
+        if (display instanceof DefaultWidgetDisplay) {
+            ((DefaultWidgetDisplay) display).reset();
         }
     }
 

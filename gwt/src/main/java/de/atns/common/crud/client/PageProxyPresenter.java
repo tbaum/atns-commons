@@ -5,7 +5,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.crud.client.event.LoadListProxyEventHandler;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.gwt.client.WidgetPresenter;

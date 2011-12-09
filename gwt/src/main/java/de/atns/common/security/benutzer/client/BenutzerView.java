@@ -2,9 +2,9 @@ package de.atns.common.security.benutzer.client;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.crud.client.PagePresenter;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.Table;

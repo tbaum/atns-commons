@@ -3,11 +3,14 @@ package de.atns.common.gwt.client.window;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.shared.*;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.Event;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 
 import java.util.HashMap;
 
@@ -41,14 +44,14 @@ import java.util.HashMap;
     }
 
     private native void _registerEventBus(MasterWindowEventBus windowEventbus) /*-{
-        $wnd._event_from_popup = function(source, event) {
+        $wnd._event_from_popup = function (source, event) {
             windowEventbus.@de.atns.common.gwt.client.window.MasterWindowEventBus::fire(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(source,
                     event);
         };
-        $wnd._popup_closed = function(source) {
+        $wnd._popup_closed = function (source) {
             windowEventbus.@de.atns.common.gwt.client.window.MasterWindowEventBus::removeWindow(Ljava/lang/String;)(source);
         };
-        $wnd._open_popup = function(url, title, para) {
+        $wnd._open_popup = function (url, title, para) {
             windowEventbus.@de.atns.common.gwt.client.window.MasterWindowEventBus::openWindow(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(url,
                     title, para);
         };
@@ -58,40 +61,21 @@ import java.util.HashMap;
         window.close();
     }-*/;
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasHandlers ---------------------
-
-    @Override public void fireEvent(GwtEvent event) {
-        simpleEventBus.fireEvent(event);
-
-        if (event instanceof TransportAware) {
-            TransportAware transportAware = (TransportAware) event;
-            for (JavaScriptObject window : windows.values()) {
-                _event_fireEvent(JavaScriptObject.createObject(), window, serializer.serialize(transportAware));
-            }
-        }
-    }
-
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override
-    public <H extends EventHandler> HandlerRegistration addHandler(GwtEvent.Type<H> type, H handler) {
+    @Override public <H> HandlerRegistration addHandler(Event.Type<H> type, H handler) {
         // TODO unregister
         return simpleEventBus.addHandler(type, handler);
     }
 
-    @Override
-    public <H extends EventHandler> HandlerRegistration addHandlerToSource(GwtEvent.Type<H> type, Object source,
-                                                                           H handler) {
+    @Override public <H> HandlerRegistration addHandlerToSource(Event.Type<H> type, Object source, H handler) {
         return simpleEventBus.addHandlerToSource(type, source, handler);
     }
 
     @SuppressWarnings({"UnusedDeclaration"})
     private void fire(JavaScriptObject src, JavaScriptObject o) {
         final TransportAware transportAware = serializer.deserialize(new JSONArray(o));
-        simpleEventBus.fireEvent((GwtEvent<?>) transportAware);
+        simpleEventBus.fireEvent((Event<?>) transportAware);
 
         for (JavaScriptObject window : windows.values()) {
             _event_fireEvent(src, window, o);
@@ -105,7 +89,18 @@ import java.util.HashMap;
         }
     }-*/;
 
-    @Override public void fireEventFromSource(GwtEvent event, Object source) {
+    @Override public void fireEvent(Event event) {
+        simpleEventBus.fireEvent(event);
+
+        if (event instanceof TransportAware) {
+            TransportAware transportAware = (TransportAware) event;
+            for (JavaScriptObject window : windows.values()) {
+                _event_fireEvent(JavaScriptObject.createObject(), window, serializer.serialize(transportAware));
+            }
+        }
+    }
+
+    @Override public void fireEventFromSource(Event event, Object source) {
         simpleEventBus.fireEventFromSource(event, source);
         //TODO?
         //        for (JavaScriptObject window : windows) {
@@ -119,19 +114,6 @@ import java.util.HashMap;
                 para);
         windows.put(String.valueOf(myid), wnd);
     }
-
-    public static String currentLocation() {
-        String location = location();
-        int i = location.indexOf("#");
-        if (i > -1) {
-            location = location.substring(0, i);
-        }
-        return location;
-    }
-
-    private static native String location() /*-{
-        return $wnd.location.href
-    }-*/;
 
     private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
                                          String args) /*-{
@@ -149,6 +131,19 @@ import java.util.HashMap;
 
         }
         return newWindow;
+    }-*/;
+
+    public static String currentLocation() {
+        String location = location();
+        int i = location.indexOf("#");
+        if (i > -1) {
+            location = location.substring(0, i);
+        }
+        return location;
+    }
+
+    private static native String location() /*-{
+        return $wnd.location.href
     }-*/;
 
     private void removeWindow(String wnd) {

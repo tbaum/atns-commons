@@ -1,9 +1,9 @@
 package de.atns.common.crud.client.event;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.Callback;

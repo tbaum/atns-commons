@@ -1,9 +1,9 @@
 package de.atns.common.gwt.app.client;
 
 import com.google.gwt.activity.shared.ActivityManager;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.gin.SharedServices;
 
 /**

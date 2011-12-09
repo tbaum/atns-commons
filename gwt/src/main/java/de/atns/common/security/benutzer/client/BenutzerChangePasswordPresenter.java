@@ -2,8 +2,8 @@ package de.atns.common.security.benutzer.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.DialogBoxDisplay;
 import de.atns.common.gwt.client.DialogBoxPresenter;
 import de.atns.common.security.benutzer.client.action.BenutzerChangePassword;

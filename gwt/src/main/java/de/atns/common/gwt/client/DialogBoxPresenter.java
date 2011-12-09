@@ -3,9 +3,10 @@ package de.atns.common.gwt.client;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.web.bindery.event.shared.EventBus;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  * @author tbaum
  * @since 07.12.2009
  */
-public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends WidgetPresenter<D> {
+public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends WidgetPresenter<D> implements Command {
 // ------------------------------ FIELDS ------------------------------
 
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
@@ -22,11 +23,9 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface Activity ---------------------
+// --------------------- Interface ScheduledCommand ---------------------
 
-    @Override
-    public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
-        LOG.log(Level.FINE, "Activity: start()");
+    @Override public void execute() {
         bind();
     }
 
@@ -59,5 +58,11 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
         if (display.isShowing()) {
             display.hideDialogBox();
         }
+    }
+
+    @Override
+    public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
+        LOG.log(Level.FINE, "Activity: start()");
+        bind();
     }
 }

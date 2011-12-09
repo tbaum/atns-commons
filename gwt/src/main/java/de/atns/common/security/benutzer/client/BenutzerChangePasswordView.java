@@ -4,10 +4,10 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.DefaultDialogBoxDisplay;
 import de.atns.common.gwt.client.FieldSetPanel;
 
