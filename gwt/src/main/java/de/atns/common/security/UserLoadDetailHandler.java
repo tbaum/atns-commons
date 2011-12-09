@@ -20,6 +20,6 @@ public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDet
 // -------------------------- OTHER METHODS --------------------------
 
     @Override protected UserPresentation loadUserDetail(SecurityUser securityUser) {
-        return RoleServerConverter.USER_CONVERTER.convert((Benutzer) securityUser);
+        return RoleServerConverter.USER_CONVERTER_RESOLVED.convert((Benutzer) securityUser);
     }
 }

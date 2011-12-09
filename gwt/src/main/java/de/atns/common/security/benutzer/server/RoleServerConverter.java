@@ -20,14 +20,21 @@ public class RoleServerConverter implements Converter<Class<? extends SecurityRo
             new RoleServerConverter();
 
     public static Converter<Benutzer, UserPresentation> USER_CONVERTER = new Converter<Benutzer, UserPresentation>() {
-        @Override public UserPresentation convert(Benutzer from) {
-            Date lastAccess = from.getLastAccess();
+        @Override public UserPresentation convert(Benutzer b) {
+            Date lastAccess = b.getLastAccess();
             if (lastAccess != null && lastAccess.before(new Date(new Date().getTime() - 60000))) {
                 lastAccess = null;
             }
 
-            return new UserPresentation(from.getId(), from.getLogin(), from.getName(), from.getPasswort(),
-                    from.getEmail(), RoleServerConverter.convert(from.getRoles()), from.getLastLogin(), lastAccess);
+            final List<SecurityRolePresentation> r = Lambda.convert(b.getRoles(), RoleServerConverter.ROLE_CONVERTER);
+            return new UserPresentation(b.getId(), b.getLogin(), b.getName(), b.getPasswort(),
+                    b.getEmail(), new HashSet<SecurityRolePresentation>(r), b.getLastLogin(), lastAccess);
+        }
+    };
+    public static Converter<Benutzer, UserPresentation> USER_CONVERTER_RESOLVED = new Converter<Benutzer, UserPresentation>() {
+        @Override public UserPresentation convert(Benutzer b) {
+            return new UserPresentation(b.getId(), b.getLogin(), b.getName(), b.getPasswort(),
+                    b.getEmail(), RoleServerConverter.convert(b.getRoles()), b.getLastLogin(), b.getLastAccess());
         }
     };
 
@@ -73,7 +80,8 @@ public class RoleServerConverter implements Converter<Class<? extends SecurityRo
 
 // --------------------- Interface Converter ---------------------
 
-    @Override public SecurityRolePresentation convert(Class<? extends SecurityRole> from) {
+    @Override
+    public SecurityRolePresentation convert(Class<? extends SecurityRole> from) {
         return new SecurityRolePresentation(from);
     }
 }
