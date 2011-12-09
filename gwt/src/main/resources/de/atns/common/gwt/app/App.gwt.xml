@@ -4,7 +4,6 @@
 <module>
     <inherits name="com.google.gwt.user.User"/>
 
-    <inherits name="com.google.gwt.requestfactory.RequestFactory"/>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="de.atns.common.gwt.Gwt"/>
