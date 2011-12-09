@@ -31,8 +31,8 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
             }
         });
 
-        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-            @Override public void execute() {
+        GWT.runAsync(new AbstractRunAsyncCallback() {
+            @Override public void onSuccess() {
                 LOG.log(Level.FINE, "application startup");
 
                 final ApplicationInjector injector = create();
