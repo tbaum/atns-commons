@@ -1,7 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.client.action.LoadUserDetail;
 import de.atns.common.security.client.model.UserPresentation;
@@ -24,8 +23,7 @@ public abstract class AbstractLoadUserDetailHandler<A extends LoadUserDetail<R>,
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Transactional @Secured @Override
-    public R executeInternal(A action) {
+    @Override @Secured public R executeInternal(A action) {
         final SecurityUser securityUser = securityService.currentUser();
         return loadUserDetail(securityUser);
     }

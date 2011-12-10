@@ -2,7 +2,6 @@ package de.atns.common.security.benutzer.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityService;
@@ -39,7 +38,7 @@ public class BenutzerChangePasswordHandler
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Transactional @Secured @Override public Benutzer executeInternal(final BenutzerChangePassword action) {
+    @Override @Secured public Benutzer executeInternal(final BenutzerChangePassword action) {
         final Benutzer t = (Benutzer) securityService.currentUser();
 
         final Benutzer benutzer = em.get().find(Benutzer.class, t.getId());

@@ -1,7 +1,6 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.client.action.UserLogout;
 import de.atns.common.security.client.model.UserPresentation;
@@ -30,8 +29,7 @@ public class UserLogoutHandler extends DefaultActionHandler<UserLogout, UserPres
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional
-    public final UserPresentation executeInternal(final UserLogout action) {
+    @Override public final UserPresentation executeInternal(final UserLogout action) {
         final SecurityUser user = securityService.logout();
         userService.setInactive(user);
         LOG.info("loggedout " + (user != null ? user.getLogin() : ""));

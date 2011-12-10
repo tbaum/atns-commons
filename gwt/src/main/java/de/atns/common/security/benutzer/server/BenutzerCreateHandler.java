@@ -2,7 +2,6 @@ package de.atns.common.security.benutzer.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.ConvertingActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityRole;
@@ -40,7 +39,7 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(UserAdminRole.class)
+    @Override @Secured(UserAdminRole.class)
     public Benutzer executeInternal(final BenutzerCreate action) {
         final EntityManager em = this.em.get();
         UserPresentation p = action.getPresentation();
