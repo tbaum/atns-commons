@@ -156,7 +156,7 @@ public class DatabaseProtokolService {
         }
 
         final Class<?> valueClass = value.getClass();
-        if (valueClass.isPrimitive() || value instanceof Number) {
+        if (valueClass.isPrimitive() || value instanceof Number || value instanceof Boolean) {
             return String.valueOf(value);
         }
 
