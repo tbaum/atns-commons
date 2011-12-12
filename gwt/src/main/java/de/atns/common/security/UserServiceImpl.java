@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService {
 
     @Override @Transactional public void setInactive(final SecurityUser user) {
         Benutzer benutzer = (Benutzer) user;
-        em.get().refresh(benutzer);
         benutzer.clearLastAccess();
+        em.get().merge(benutzer);
     }
 
     @Override @Transactional public void successfullLogin(final SecurityUser user) {

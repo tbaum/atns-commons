@@ -30,8 +30,9 @@ public class UserLogoutHandler extends DefaultActionHandler<UserLogout, UserPres
 // -------------------------- OTHER METHODS --------------------------
 
     @Override public final UserPresentation executeInternal(final UserLogout action) {
-        final SecurityUser user = securityService.logout();
+        SecurityUser user = securityService.currentUser();
         userService.setInactive(user);
+        user = securityService.logout();
         LOG.info("loggedout " + (user != null ? user.getLogin() : ""));
         return UserPresentation.invalidUser();
     }
