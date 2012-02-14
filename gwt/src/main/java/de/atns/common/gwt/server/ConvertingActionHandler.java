@@ -14,7 +14,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         extends DefaultActionHandler<A, R> implements ActionHandler<A, R> {
 // ------------------------------ FIELDS ------------------------------
 
-    protected final Converter<S, R> converter;
+    private final Converter<S, R> converter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 

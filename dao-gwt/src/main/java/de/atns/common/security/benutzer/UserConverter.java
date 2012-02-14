@@ -15,24 +15,21 @@ import java.util.List;
  * @author mwolter
  * @since 14.02.12 19:02
  */
-public class UserConverter {
+public class UserConverter implements Converter<Benutzer, UserPresentation> {
+// ------------------------ INTERFACE METHODS ------------------------
 
-    public static Converter<Benutzer, UserPresentation> USER_CONVERTER = new Converter<Benutzer, UserPresentation>() {
-        @Override public UserPresentation convert(Benutzer b) {
-            Date lastAccess = b.getLastAccess();
-            if (lastAccess != null && lastAccess.before(new Date(new Date().getTime() - 60000))) {
-                lastAccess = null;
-            }
 
-            final List<SecurityRolePresentation> r = Lambda.convert(b.getRoles(), RoleServerConverter.ROLE_CONVERTER);
-            return new UserPresentation(b.getId(), b.getLogin(), b.getName(), b.getPasswort(),
-                    b.getEmail(), new HashSet<SecurityRolePresentation>(r), b.getLastLogin(), lastAccess);
+// --------------------- Interface Converter ---------------------
+
+    @Override
+    public UserPresentation convert(Benutzer b) {
+        Date lastAccess = b.getLastAccess();
+        if (lastAccess != null && lastAccess.before(new Date(new Date().getTime() - 60000))) {
+            lastAccess = null;
         }
-    };
-    public static Converter<Benutzer, UserPresentation> USER_CONVERTER_RESOLVED = new Converter<Benutzer, UserPresentation>() {
-        @Override public UserPresentation convert(Benutzer b) {
-            return new UserPresentation(b.getId(), b.getLogin(), b.getName(), b.getPasswort(),
-                    b.getEmail(), RoleServerConverter.convert(b.getRoles()), b.getLastLogin(), b.getLastAccess());
-        }
-    };
+
+        final List<SecurityRolePresentation> r = Lambda.convert(b.getRoles(), RoleServerConverter.ROLE_CONVERTER);
+        return new UserPresentation(b.getId(), b.getLogin(), b.getName(), b.getPasswort(),
+                b.getEmail(), new HashSet<SecurityRolePresentation>(r), b.getLastLogin(), lastAccess);
+    }
 }

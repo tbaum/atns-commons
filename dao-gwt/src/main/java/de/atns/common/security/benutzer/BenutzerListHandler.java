@@ -1,10 +1,11 @@
 package de.atns.common.security.benutzer;
 
+import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 import de.atns.common.dao.PartResult;
 import de.atns.common.gwt.client.model.ListPresentation;
-import de.atns.common.gwt.server.ConvertingActionHandler;
+import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.BenutzerRepository;
 import de.atns.common.security.Secured;
 import de.atns.common.security.benutzer.client.action.BenutzerList;
@@ -19,17 +20,19 @@ import static de.atns.common.gwt.server.ListConverter.listConverter;
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, ListPresentation<UserPresentation>, PartResult<Benutzer>> {
+public class BenutzerListHandler extends DefaultActionHandler<BenutzerList, ListPresentation<UserPresentation>> {
 // ------------------------------ FIELDS ------------------------------
 
     private final BenutzerRepository repository;
+    private final Converter<PartResult<Benutzer>, ListPresentation<UserPresentation>> converter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerListHandler(final BenutzerRepository repository) {
-        super(listConverter(UserConverter.USER_CONVERTER), BenutzerList.class);
+    public BenutzerListHandler(final BenutzerRepository repository, UserConverter converter) {
+        super(BenutzerList.class);
         this.repository = repository;
+        this.converter = listConverter(converter);
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -37,14 +40,16 @@ public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, L
     @Override
     @Transactional
     @Secured(UserAdminRole.class)
-    public PartResult<Benutzer> executeInternal2(final BenutzerList action) {
+    public ListPresentation<UserPresentation> executeInternal(final BenutzerList action) {
+        PartResult<Benutzer> result;
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
-            return createPartResult(action.getStartEntry(), repository.countBenutzer(text),
+            result = createPartResult(action.getStartEntry(), repository.countBenutzer(text),
                     repository.findBenutzer(text, action.getStartEntry(), action.getPageRange()));
         } else {
-            return createPartResult(action.getStartEntry(), repository.countAllBenutzer(),
+            result = createPartResult(action.getStartEntry(), repository.countAllBenutzer(),
                     repository.findAllBenutzer(action.getStartEntry(), action.getPageRange()));
         }
+        return converter.convert(result);
     }
 }

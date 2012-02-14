@@ -14,7 +14,8 @@ import java.util.Set;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 
-@Entity @Inheritance(strategy = JOINED)
+@Entity
+@Inheritance(strategy = JOINED)
 public class Benutzer extends BaseObject implements SecurityUser {
 // ------------------------------ FIELDS ------------------------------
 
@@ -67,7 +68,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
         return lastLogin;
     }
 
-    @Override public String getLogin() {
+    @Override
+    public String getLogin() {
         return login;
     }
 
@@ -104,7 +106,8 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
 // --------------------- Interface SecurityUser ---------------------
 
-    @Override public boolean hasAccessTo(final Secured secured) {
+    @Override
+    public boolean hasAccessTo(final Secured secured) {
         return inRole(secured.value());
     }
 

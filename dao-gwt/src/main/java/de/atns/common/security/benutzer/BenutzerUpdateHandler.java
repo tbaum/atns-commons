@@ -1,9 +1,10 @@
 package de.atns.common.security.benutzer;
 
+import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
-import de.atns.common.gwt.server.ConvertingActionHandler;
+import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityRolePresentation;
@@ -21,17 +22,19 @@ import java.util.Set;
  * @author tbaum
  * @since 23.10.2009
  */
-public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdate, UserPresentation, Benutzer> {
+public class BenutzerUpdateHandler extends DefaultActionHandler<BenutzerUpdate, UserPresentation> {
 // ------------------------------ FIELDS ------------------------------
 
     private final Provider<EntityManager> em;
+    private final Converter<Benutzer, UserPresentation> converter;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public BenutzerUpdateHandler(final Provider<EntityManager> em) {
-        super(UserConverter.USER_CONVERTER, BenutzerUpdate.class);
+    public BenutzerUpdateHandler(final Provider<EntityManager> em, UserConverter converter) {
+        super(BenutzerUpdate.class);
         this.em = em;
+        this.converter = converter;
     }
 
 // -------------------------- OTHER METHODS --------------------------
@@ -39,12 +42,10 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
     @Override
     @Transactional
     @Secured(UserAdminRole.class)
-    public Benutzer executeInternal2(final BenutzerUpdate action) {
-        final EntityManager em = this.em.get();
-
+    public UserPresentation executeInternal(final BenutzerUpdate action) {
         UserPresentation p = action.getPresentation();
 
-        final Benutzer benutzer = em.find(Benutzer.class, p.getId());
+        final Benutzer benutzer = em.get().find(Benutzer.class, p.getId());
 
         if (!p.getPasswort().isEmpty()) {
             benutzer.setPasswort(SHA1.createSHA1Code(p.getPasswort()));
@@ -59,6 +60,6 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
         }
         benutzer.setRole(roles);
 
-        return benutzer;
+        return converter.convert(benutzer);
     }
 }
