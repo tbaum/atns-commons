@@ -33,14 +33,17 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public BenutzerCreateHandler(final Provider<EntityManager> em) {
+    @Inject
+    public BenutzerCreateHandler(final Provider<EntityManager> em) {
         super(UserConverter.USER_CONVERTER, BenutzerCreate.class);
         this.em = em;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Secured(UserAdminRole.class) @Transactional
+    @Override
+    @Transactional
+    @Secured(UserAdminRole.class)
     public Benutzer executeInternal(final BenutzerCreate action) {
         final EntityManager em = this.em.get();
         UserPresentation p = action.getPresentation();
