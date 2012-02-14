@@ -1,7 +1,6 @@
 package de.atns.common.gwt.server;
 
 import ch.lambdaj.function.convert.Converter;
-import com.google.inject.persist.Transactional;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
 import net.customware.gwt.dispatch.shared.Action;
@@ -37,7 +36,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
         return clazz;
     }
 
-    @Override @Transactional
+    @Override
     public R execute(final A action, final ExecutionContext context) throws ActionException {
         final S result = executeInternal(action);
 //        if (LOG.isDebugEnabled()) {

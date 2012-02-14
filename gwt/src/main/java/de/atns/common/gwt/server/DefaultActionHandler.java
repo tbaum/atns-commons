@@ -1,6 +1,5 @@
 package de.atns.common.gwt.server;
 
-import com.google.inject.persist.Transactional;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ExecutionContext;
 import net.customware.gwt.dispatch.shared.Action;
@@ -34,7 +33,7 @@ public abstract class DefaultActionHandler<A extends Action<R>, R extends Result
         return clazz;
     }
 
-    @Override @Transactional
+    @Override
     public R execute(final A action, final ExecutionContext context) throws ActionException {
         final R result = executeInternal(action);
         if (LOG.isDebugEnabled()) {

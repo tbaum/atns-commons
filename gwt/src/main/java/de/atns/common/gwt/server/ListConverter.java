@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author mwolter
  * @since 26.02.2010 16:15:44
  */
-public class ListConverter<F extends Serializable, T extends IsSerializable>
+public class ListConverter<F extends Serializable, T extends Serializable>
         implements Converter<PartResult<F>, ListPresentation<T>> {
 // ------------------------------ FIELDS ------------------------------
 
@@ -20,7 +20,7 @@ public class ListConverter<F extends Serializable, T extends IsSerializable>
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <F extends Serializable, T extends IsSerializable> ListConverter<F, T> listConverter(
+    public static <F extends Serializable, T extends Serializable> ListConverter<F, T> listConverter(
             final Converter<F, T> converter) {
         return new ListConverter<F, T>(converter);
     }

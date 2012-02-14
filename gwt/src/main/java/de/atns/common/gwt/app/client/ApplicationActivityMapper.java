@@ -7,7 +7,6 @@ import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import de.atns.common.gwt.client.gin.*;
-import de.atns.common.security.benutzer.client.gin.BenutzerLoader;
 import de.atns.common.security.client.login.gin.LoginLoader;
 
 import java.util.ArrayList;
@@ -32,7 +31,6 @@ public abstract class ApplicationActivityMapper implements ActivityMapper, Modul
     public ApplicationActivityMapper() {
         moduleLoaders = new ArrayList<WidgetPresenterModuleLoader>(loadModules(sharedServices));
         moduleLoaders.add(new LoginLoader(sharedServices));
-        moduleLoaders.add(new BenutzerLoader(sharedServices));
 
         handlerRegistration = sharedServices.eventBus().addHandler(ModuleReadyEventHandler.type, this);
         onReady(null);

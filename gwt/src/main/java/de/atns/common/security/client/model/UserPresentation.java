@@ -1,10 +1,10 @@
 package de.atns.common.security.client.model;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 import de.atns.common.security.SecurityRole;
 import de.atns.common.security.SecurityRolePresentation;
 import net.customware.gwt.dispatch.shared.Result;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,7 +13,7 @@ import java.util.TreeSet;
  * @author tbaum
  * @since 11.02.2010
  */
-public class UserPresentation implements Result, IsSerializable {
+public class UserPresentation implements Result, Serializable {
 // ------------------------------ FIELDS ------------------------------
 
     private Long id;
