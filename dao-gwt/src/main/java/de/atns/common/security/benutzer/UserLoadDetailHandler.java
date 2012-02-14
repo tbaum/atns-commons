@@ -1,6 +1,7 @@
 package de.atns.common.security.benutzer;
 
 import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
 import de.atns.common.security.AbstractLoadUserDetailHandler;
 import de.atns.common.security.SecurityService;
 import de.atns.common.security.SecurityUser;
@@ -21,7 +22,7 @@ public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDet
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override protected UserPresentation loadUserDetail(SecurityUser securityUser) {
+    @Transactional @Override protected UserPresentation loadUserDetail(SecurityUser securityUser) {
         return UserConverter.USER_CONVERTER_RESOLVED.convert((Benutzer) securityUser);
     }
 }
