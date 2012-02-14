@@ -21,6 +21,7 @@
         <module>config</module>
         <module>dao</module>
         <module>dao-gwt</module>
+        <module>dao-gwt-crud</module>
         <module>dao-mail</module>
         <module>fileutils</module>
         <module>pdf</module>
@@ -75,6 +76,11 @@
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.atns.common</groupId>
+                <artifactId>dao-gwt-crud</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
