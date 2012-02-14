@@ -34,8 +34,10 @@ public class BenutzerListHandler extends ConvertingActionHandler<BenutzerList, L
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(UserAdminRole.class)
-    public PartResult<Benutzer> executeInternal(final BenutzerList action) {
+    @Override
+    @Transactional
+    @Secured(UserAdminRole.class)
+    public PartResult<Benutzer> executeInternal2(final BenutzerList action) {
         final String text = action.getFilter().getFilterText();
         if (text != null && !text.isEmpty()) {
             return createPartResult(action.getStartEntry(), repository.countBenutzer(text),

@@ -39,7 +39,10 @@ public class BenutzerChangePasswordHandler
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured public Benutzer executeInternal(final BenutzerChangePassword action) {
+    @Override
+    @Transactional
+    @Secured
+    public Benutzer executeInternal2(final BenutzerChangePassword action) {
         final Benutzer t = (Benutzer) securityService.currentUser();
 
         final Benutzer benutzer = em.get().find(Benutzer.class, t.getId());

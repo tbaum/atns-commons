@@ -28,15 +28,18 @@ public class BenutzerUpdateHandler extends ConvertingActionHandler<BenutzerUpdat
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em) {
+    @Inject
+    public BenutzerUpdateHandler(final Provider<EntityManager> em) {
         super(UserConverter.USER_CONVERTER, BenutzerUpdate.class);
         this.em = em;
     }
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @Override @Transactional @Secured(UserAdminRole.class)
-    public Benutzer executeInternal(final BenutzerUpdate action) {
+    @Override
+    @Transactional
+    @Secured(UserAdminRole.class)
+    public Benutzer executeInternal2(final BenutzerUpdate action) {
         final EntityManager em = this.em.get();
 
         UserPresentation p = action.getPresentation();

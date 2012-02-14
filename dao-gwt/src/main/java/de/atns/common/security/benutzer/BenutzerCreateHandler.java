@@ -44,7 +44,7 @@ public class BenutzerCreateHandler extends ConvertingActionHandler<BenutzerCreat
     @Override
     @Transactional
     @Secured(UserAdminRole.class)
-    public Benutzer executeInternal(final BenutzerCreate action) {
+    public Benutzer executeInternal2(BenutzerCreate action) {
         final EntityManager em = this.em.get();
         UserPresentation p = action.getPresentation();
 
