@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
-import static com.google.gwt.dom.client.Style.Display.INLINE;
+import static com.google.gwt.dom.client.Style.Display.*;
 import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
 
 /**
@@ -197,7 +197,14 @@ public class GwtUtil {
         toogleStyle(dateBox, !editable, "gwt-TextBox-readonly");
     }
 
-// -------------------------- ENUMERATIONS --------------------------
+    // -------------------------- ENUMERATIONS --------------------------
+    public static void setVisibleStyle(final Widget widget, final boolean editable) {
+        if (editable) {
+            widget.getElement().getStyle().setDisplay(INLINE_BLOCK);
+        } else {
+            widget.getElement().getStyle().setDisplay(NONE);
+        }
+    }
 
     public enum DivBoxColor {
         WEISS, BLAU, ROT
