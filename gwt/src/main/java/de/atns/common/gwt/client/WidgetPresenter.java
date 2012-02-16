@@ -107,7 +107,7 @@ public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
         LOG.log(Level.FINE, "Activity: start()");
 
         panel.setWidget(display.asWidget());
-        LOG.log(Level.FINE, "Activity: showPanel(" + display + ")");
+//        LOG.log(Level.FINE, "Activity: showPanel(" + display + ")");
 
         bind();
     }
