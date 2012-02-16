@@ -17,14 +17,12 @@ public class LogoutPlace extends Place {
 
     @Prefix("logout")
     public static class Tokenizer implements PlaceTokenizer<LogoutPlace> {
-        private static final String NO_ID = "n";
-
         public LogoutPlace getPlace(final String token) {
             return new LogoutPlace();
         }
 
         public String getToken(final LogoutPlace place) {
-            return NO_ID;
+            return "";
         }
     }
 }

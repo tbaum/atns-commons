@@ -19,7 +19,7 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
  * @since 03.02.11
  */
 
-@Singleton public class PopupWindowEventBus extends EventBus {
+@Singleton public class PopupWindowEventBus extends EventBus implements WindowEventBus {
 // ------------------------------ FIELDS ------------------------------
 
     private final EventBus eventBus = new SimpleEventBus();
@@ -67,6 +67,15 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         $wnd.opener._popup_closed($wnd._myid);
     }-*/;
 
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface WindowEventBus ---------------------
+
+    public native void openWindow(String url, String name, String para) /*-{
+        $wnd.opener._open_popup(url, name, para);
+    }-*/;
+
 // -------------------------- OTHER METHODS --------------------------
 
     @Override
@@ -102,8 +111,4 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
     @Override public void fireEventFromSource(Event event, Object source) {
         eventBus.fireEventFromSource(event, source);
     }
-
-    public native void openWindow(String url, String name, String para) /*-{
-        $wnd.opener._open_popup(url, name, para);
-    }-*/;
 }

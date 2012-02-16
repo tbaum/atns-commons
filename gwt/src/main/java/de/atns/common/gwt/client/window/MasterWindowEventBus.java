@@ -19,13 +19,28 @@ import java.util.HashMap;
  * @since 03.02.11
  */
 
-@Singleton public class MasterWindowEventBus extends EventBus {
+@Singleton public class MasterWindowEventBus extends EventBus implements WindowEventBus {
 // ------------------------------ FIELDS ------------------------------
 
     private final EventBus simpleEventBus = new SimpleEventBus();
     private final EventSerializer serializer;
     private HashMap<String, JavaScriptObject> windows = new HashMap<String, JavaScriptObject>();
     private final long myid = System.currentTimeMillis();
+
+// -------------------------- STATIC METHODS --------------------------
+
+    public static String currentLocation() {
+        String location = location();
+        int i = location.indexOf("#");
+        if (i > -1) {
+            location = location.substring(0, i);
+        }
+        return location;
+    }
+
+    private static native String location() /*-{
+        return $wnd.location.href
+    }-*/;
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
@@ -60,6 +75,18 @@ import java.util.HashMap;
     private native void closeWindow(JavaScriptObject window) /*-{
         window.close();
     }-*/;
+
+// ------------------------ INTERFACE METHODS ------------------------
+
+
+// --------------------- Interface WindowEventBus ---------------------
+
+    public void openWindow(String url, String name, String para) {
+        name = name + "_" + myid;
+        JavaScriptObject wnd = open(this, currentLocation() + url, name.replaceAll(":", "_"), String.valueOf(myid),
+                para);
+        windows.put(String.valueOf(myid), wnd);
+    }
 
 // -------------------------- OTHER METHODS --------------------------
 
@@ -108,13 +135,6 @@ import java.util.HashMap;
         //        }
     }
 
-    public void openWindow(String url, String name, String para) {
-        name = name + "_" + myid;
-        JavaScriptObject wnd = open(this, currentLocation() + url, name.replaceAll(":", "_"), String.valueOf(myid),
-                para);
-        windows.put(String.valueOf(myid), wnd);
-    }
-
     private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
                                          String args) /*-{
         var newWindow = $wnd.open(url, name, args)
@@ -131,19 +151,6 @@ import java.util.HashMap;
 
         }
         return newWindow;
-    }-*/;
-
-    public static String currentLocation() {
-        String location = location();
-        int i = location.indexOf("#");
-        if (i > -1) {
-            location = location.substring(0, i);
-        }
-        return location;
-    }
-
-    private static native String location() /*-{
-        return $wnd.location.href
     }-*/;
 
     private void removeWindow(String wnd) {
