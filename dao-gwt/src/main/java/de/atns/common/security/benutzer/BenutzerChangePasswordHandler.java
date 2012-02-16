@@ -28,9 +28,9 @@ public class BenutzerChangePasswordHandler extends DefaultActionHandler<Benutzer
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public BenutzerChangePasswordHandler(Provider<EntityManager> em, SecurityService securityService, UserConverter converter) {
-        super(BenutzerChangePassword.class);
+    @Inject public BenutzerChangePasswordHandler(final Provider<EntityManager> em,
+                                                 final SecurityService securityService,
+                                                 final UserConverter converter) {
         this.em = em;
         this.securityService = securityService;
         this.converter = converter;

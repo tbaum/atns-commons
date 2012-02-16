@@ -28,9 +28,7 @@ public class BenutzerListHandler extends DefaultActionHandler<BenutzerList, List
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public BenutzerListHandler(final BenutzerRepository repository, UserConverter converter) {
-        super(BenutzerList.class);
+    @Inject public BenutzerListHandler(final BenutzerRepository repository, final UserConverter converter) {
         this.repository = repository;
         this.converter = listConverter(converter);
     }

@@ -35,9 +35,7 @@ public class BenutzerCreateHandler extends DefaultActionHandler<BenutzerCreate, 
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public BenutzerCreateHandler(final Provider<EntityManager> em, UserConverter converter) {
-        super(BenutzerCreate.class);
+    @Inject public BenutzerCreateHandler(final Provider<EntityManager> em, final UserConverter converter) {
         this.em = em;
         this.converter = converter;
     }

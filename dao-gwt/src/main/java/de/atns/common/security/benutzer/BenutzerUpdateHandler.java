@@ -30,9 +30,7 @@ public class BenutzerUpdateHandler extends DefaultActionHandler<BenutzerUpdate, 
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public BenutzerUpdateHandler(final Provider<EntityManager> em, UserConverter converter) {
-        super(BenutzerUpdate.class);
+    @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em, final UserConverter converter) {
         this.em = em;
         this.converter = converter;
     }

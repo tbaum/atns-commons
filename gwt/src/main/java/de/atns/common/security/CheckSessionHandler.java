@@ -24,7 +24,6 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
 
     @Inject public CheckSessionHandler(final UserProvider user, final SecurityFilter securityFilter,
                                        UserService userService) {
-        super(CheckSession.class);
         this.user = user;
         this.securityFilter = securityFilter;
         this.userService = userService;

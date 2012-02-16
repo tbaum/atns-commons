@@ -18,8 +18,7 @@ public abstract class AbstractLoadUserDetailHandler<A extends LoadUserDetail<R>,
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
-    public AbstractLoadUserDetailHandler(Class<A> clazz, SecurityService securityService) {
-        super(clazz);
+    public AbstractLoadUserDetailHandler(SecurityService securityService) {
         this.securityService = securityService;
     }
 

@@ -22,7 +22,7 @@ public class UserLogoutHandler extends DefaultActionHandler<UserLogout, UserPres
 // --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public UserLogoutHandler(final SecurityService securityService, UserService userService) {
-        super(UserLogout.class);
+        super();
         this.securityService = securityService;
         this.userService = userService;
     }

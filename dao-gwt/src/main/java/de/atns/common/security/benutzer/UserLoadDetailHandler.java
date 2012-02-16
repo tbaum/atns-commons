@@ -24,9 +24,8 @@ public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDet
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public UserLoadDetailHandler(SecurityService securityService, Provider<EntityManager> em) {
-        super(UserDetail.class, securityService);
+    @Inject public UserLoadDetailHandler(final SecurityService securityService, final Provider<EntityManager> em) {
+        super(securityService);
         this.em = em;
     }
 

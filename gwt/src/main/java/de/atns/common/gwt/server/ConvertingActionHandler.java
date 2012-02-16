@@ -19,7 +19,6 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 // --------------------------- CONSTRUCTORS ---------------------------
 
     protected ConvertingActionHandler(final Converter<S, R> converter, final Class<A> clazz) {
-        super(clazz);
         this.converter = converter;
     }
 
