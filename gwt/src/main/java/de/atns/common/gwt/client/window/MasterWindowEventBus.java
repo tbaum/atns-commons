@@ -141,12 +141,12 @@ import java.util.HashMap;
         newWindow._myid = myid;
 
         try {
-            netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserWrite');
+//            netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserWrite');
             newWindow.menubar.visible = false;
             newWindow.toolbar.visible = false;
-            newWindow.locationbar.visible = false;
+//            newWindow.locationbar.visible = false;
             newWindow.statusbar.visible = false;
-            newWindow.linkbar.visible = false;
+//            newWindow.linkbar.visible = false;
         } catch (ignored) {
 
         }
