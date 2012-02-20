@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author mwolter
  * @since 22.09.2010 18:17:01
  */
-public class LoadListEvent<E extends Serializable> extends GwtEvent<LoadListEventHandler<E>> {
+public class LoadListEvent<E extends IsSerializable> extends GwtEvent<LoadListEventHandler<E>> {
 // ------------------------------ FIELDS ------------------------------
 
     @Inject private static Provider<EventBus> eventBus;
@@ -26,7 +26,7 @@ public class LoadListEvent<E extends Serializable> extends GwtEvent<LoadListEven
 
 // -------------------------- STATIC METHODS --------------------------
 
-    public static <T extends Serializable> Callback<ListPresentation<T>> eventCallback(
+    public static <T extends IsSerializable> Callback<ListPresentation<T>> eventCallback(
             final WidgetDisplay display, final Type<LoadListEventHandler<T>> type, final Object source) {
         return new Callback<ListPresentation<T>>(display) {
             @Override public void callback(final ListPresentation<T> result11) {
@@ -35,7 +35,7 @@ public class LoadListEvent<E extends Serializable> extends GwtEvent<LoadListEven
         };
     }
 
-    public static <T extends Serializable> void fireEvent(final ListPresentation<T> result,
+    public static <T extends IsSerializable> void fireEvent(final ListPresentation<T> result,
                                                             final Type<LoadListEventHandler<T>> type,
                                                             final Object source) {
         eventBus.get().fireEvent(new LoadListEvent<T>(result, type, source));

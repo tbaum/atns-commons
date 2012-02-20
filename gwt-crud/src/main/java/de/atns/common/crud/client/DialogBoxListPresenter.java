@@ -7,13 +7,11 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.ui.PopupPanel;
 import de.atns.common.gwt.client.DialogBoxDisplay;
 
-import java.io.Serializable;
-
 /**
  * @author tbaum
  * @since 05.10.2010
  */
-public abstract class DialogBoxListPresenter<D extends DialogBoxDisplay & ListDisplay<T>, T extends Serializable>
+public abstract class DialogBoxListPresenter<D extends DialogBoxDisplay & ListDisplay<T>, T extends IsSerializable>
         extends ListPresenter<D, T> {
 // -------------------------- OTHER METHODS --------------------------
 
