@@ -16,17 +16,17 @@ public abstract class DefaultActionHandler<A extends Action<R>, R extends Result
     private final Class<A> clazz;
 
     public DefaultActionHandler() {
+        //noinspection unchecked
         this.clazz = getActionClass();
     }
 
-    private Class<A> getActionClass() {
+    private Class getActionClass() {
         for (Method method : getClass().getDeclaredMethods()) {
             if (method.getName().equals("executeInternal")) {
                 final Class<?>[] parameterTypes = method.getParameterTypes();
-                if (parameterTypes.length != 1) {
-                    throw new IllegalStateException("can not determine ActionClass");
+                if (parameterTypes.length == 1) {
+                    return parameterTypes[0];
                 }
-                return (Class<A>) parameterTypes[0];
             }
         }
         throw new IllegalStateException("can not determine ActionClass");
