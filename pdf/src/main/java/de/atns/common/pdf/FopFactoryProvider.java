@@ -25,7 +25,7 @@ public class FopFactoryProvider implements Provider<FopFactory> {
 
 // --------------------- Interface Provider ---------------------
 
-    public FopFactory get() {
+    @Override public FopFactory get() {
         final FopFactory fopFactory = FopFactory.newInstance();
         fopFactory.setURIResolver(uriResolver.get());
 

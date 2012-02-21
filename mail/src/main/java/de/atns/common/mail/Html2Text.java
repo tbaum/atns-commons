@@ -75,7 +75,7 @@ public class Html2Text extends StringReader {
         return new Html2Text(body.toString()).getPlainText();
     }
 
-    public int read() throws IOException {
+    @Override public int read() throws IOException {
         int c = super.read();
 
         while (c == (int) '<') {
@@ -133,7 +133,7 @@ public class Html2Text extends StringReader {
         return plainText.toString().replaceAll("\n*\n\n", "\n\n");
     }
 
-    public int read(char[] tab, int off, int len) throws IOException {
+    @Override public int read(char[] tab, int off, int len) throws IOException {
         int indice = off;
         int c;
         while ((indice - off) < len) {

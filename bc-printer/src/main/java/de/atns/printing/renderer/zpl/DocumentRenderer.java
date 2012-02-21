@@ -51,7 +51,7 @@ public class DocumentRenderer extends AbstractDocumentRenderer {
 
 // --------------------- Interface Renderer ---------------------
 
-    @SuppressWarnings("unchecked")
+    @Override @SuppressWarnings("unchecked")
     public void render(final DocumentElement element) throws IOException {
         render(element, 1);
     }

@@ -73,7 +73,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return new StandardFilter(text.getValue());
     }
 
-    public HandlerRegistration addRow(final UserPresentation presentation, final ClickHandler editHandler) {
+    @Override public HandlerRegistration addRow(final UserPresentation presentation, final ClickHandler editHandler) {
         if (containsEmptyRow) {
             clearList();
             setPagination(pagePresenter.asWidget());
@@ -106,7 +106,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
 
 // --------------------- Interface WidgetDisplay ---------------------
 
-    public void reset() {
+    @Override public void reset() {
         clearList();
         containsEmptyRow = true;
         setPagination(new HTML("- keine Benutzer gefunden -"));

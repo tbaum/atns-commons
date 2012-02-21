@@ -31,11 +31,11 @@ public class LoginPlace extends Place {
 
     @Prefix("login")
     public static class Tokenizer implements PlaceTokenizer<LoginPlace> {
-        public LoginPlace getPlace(final String token) {
+        @Override public LoginPlace getPlace(final String token) {
             return new LoginPlace(token);
         }
 
-        public String getToken(final LoginPlace place) {
+        @Override public String getToken(final LoginPlace place) {
             return place.getToken();
         }
     }

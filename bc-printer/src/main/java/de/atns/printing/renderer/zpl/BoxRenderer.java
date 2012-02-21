@@ -33,7 +33,7 @@ public class BoxRenderer extends AbstractRenderer<BoxElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final BoxElement element) throws UnsupportedEncodingException {
+    @Override public void render(final BoxElement element) throws UnsupportedEncodingException {
         final int w = Converter.convertMMToDots(element.getX2(), this.dr.getResolution());
         final int h = Converter.convertMMToDots(element.getY2(), this.dr.getResolution());
 

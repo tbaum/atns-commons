@@ -30,11 +30,11 @@ public abstract class SharedServicesModuleLoader<I extends SharedServicesGinject
 
 // --------------------- Interface RunAsyncCallback ---------------------
 
-    public void onFailure(final Throwable reason) {
+    @Override public void onFailure(final Throwable reason) {
         Window.alert("Failed to load module");
     }
 
-    public void onSuccess() {
+    @Override public void onSuccess() {
         if (injector == null) {
             injector = create();
             injector.sharedServicesAware().setSharedServices(sharedServices);

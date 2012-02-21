@@ -89,15 +89,15 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.passwort = passwort;
     }
 
-    public Set<Class<? extends SecurityRole>> getRoles() {
+    @Override public Set<Class<? extends SecurityRole>> getRoles() {
         return roles;
     }
 
-    public String getToken() {
+    @Override public String getToken() {
         return token;
     }
 
-    public void setToken(final String token) {
+    @Override public void setToken(final String token) {
         this.token = token;
     }
 

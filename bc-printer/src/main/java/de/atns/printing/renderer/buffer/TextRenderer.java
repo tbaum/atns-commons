@@ -38,7 +38,7 @@ public class TextRenderer implements Renderer<TextElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final TextElement element) {
+    @Override public void render(final TextElement element) {
         final Font font = new Font("sans", Font.PLAIN,
                 Converter.convertMMToDots(element.getSize() * 0.9, this.dr.getResolution()));
         final Graphics graphics = this.dr.getGraphics();

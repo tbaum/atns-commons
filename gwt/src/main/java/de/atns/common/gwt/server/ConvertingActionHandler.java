@@ -24,7 +24,7 @@ public abstract class ConvertingActionHandler<A extends Action<R>, R extends Res
 
 // -------------------------- OTHER METHODS --------------------------
 
-    public final R executeInternal(final A action) throws ActionException {
+    @Override public final R executeInternal(final A action) throws ActionException {
         return converter.convert(executeInternal2(action));
     }
 

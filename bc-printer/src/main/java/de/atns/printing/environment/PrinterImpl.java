@@ -23,7 +23,7 @@ public class PrinterImpl extends AbstractPrinterImpl {
 
 // --------------------- Interface Printer ---------------------
 
-    public boolean canPrint(final Label lf) {
+    @Override public boolean canPrint(final Label lf) {
         if (this.material.equals(lf.getMaterial())) {
             try {
                 updateState();
@@ -36,21 +36,21 @@ public class PrinterImpl extends AbstractPrinterImpl {
         return false;
     }
 
-    public void reset() {
+    @Override public void reset() {
         updatePrinterParameter(this.material);
         safePrinterConfiguration();
         sendToPrinter("^XA~JR~XZ");
     }
 
-    public void safePrinterConfiguration() {
+    @Override public void safePrinterConfiguration() {
         sendToPrinter("^XA~JC^JUS^XZ");
     }
 
-    public boolean statusOk() {
+    @Override public boolean statusOk() {
         return this.state.statusOk();
     }
 
-    public boolean testMaterial(final Material mat) throws IOException {
+    @Override public boolean testMaterial(final Material mat) throws IOException {
         updatePrinterParameter(mat);
         try {
             Thread.sleep(2000);
@@ -62,7 +62,7 @@ public class PrinterImpl extends AbstractPrinterImpl {
         return this.state.statusOk();
     }
 
-    public void updateState() throws IOException {
+    @Override public void updateState() throws IOException {
         String line1 = null;
         String line2 = null;
         final Socket s = getSocket();
@@ -80,7 +80,7 @@ public class PrinterImpl extends AbstractPrinterImpl {
         parseLine2(line2);
     }
 
-    public boolean waitForPrinter() {
+    @Override public boolean waitForPrinter() {
         int waiting = 0;
         LOG.info("START WAITING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting() + ", jobs: "
                 + this.state.getJobs() + ", waiting (max 120): " + waiting);

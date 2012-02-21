@@ -41,7 +41,7 @@ public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> impl
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public DOC getDocumentRenderer() {
+    @Override public DOC getDocumentRenderer() {
         return this.documentRenderer;
     }
 
@@ -50,14 +50,14 @@ public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> impl
 
 // --------------------- Interface RendererFactory ---------------------
 
-    public Renderer getRender(final Element element) {
+    @Override public Renderer getRender(final Element element) {
         final Renderer r = this.renderes.get(element.getClass());
         if (r == null)
             throw new RuntimeException("missing Renderer for class " + element.getClass());
         return r;
     }
 
-    public void renderDocument(final DocumentElement document) throws IOException {
+    @Override public void renderDocument(final DocumentElement document) throws IOException {
         getDocumentRenderer().render(document);
     }
 }

@@ -34,7 +34,7 @@ public class ImageRenderer extends AbstractRenderer<ImageElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final ImageElement element) {
+    @Override public void render(final ImageElement element) {
         final StringBuffer buffer = this.dr.getBuffer();
         ImageIcon ic = new ImageIcon(element.getImage());
 

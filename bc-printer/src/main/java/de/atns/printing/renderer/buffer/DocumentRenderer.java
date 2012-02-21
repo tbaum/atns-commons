@@ -59,7 +59,7 @@ public class DocumentRenderer extends AbstractDocumentRenderer {
 
 // --------------------- Interface Renderer ---------------------
 
-    @SuppressWarnings("unchecked")
+    @Override @SuppressWarnings("unchecked")
     public void render(final DocumentElement element) throws IOException {
         final int width = convertMMToDots(element.getWidth(), getResolution());
         final int height = convertMMToDots(element.getHeight(), getResolution());

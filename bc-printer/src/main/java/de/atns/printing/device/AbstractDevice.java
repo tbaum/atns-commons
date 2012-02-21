@@ -11,7 +11,7 @@ public abstract class AbstractDevice implements Device {
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public int getDpi() {
+    @Override public int getDpi() {
         return this.dpi;
     }
 
@@ -20,5 +20,5 @@ public abstract class AbstractDevice implements Device {
 
 // --------------------- Interface Device ---------------------
 
-    public abstract void renderDocument(DocumentElement doc) throws IOException;
+    @Override public abstract void renderDocument(DocumentElement doc) throws IOException;
 }

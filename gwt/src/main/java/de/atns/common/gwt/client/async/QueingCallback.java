@@ -33,7 +33,7 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
         addAll(asList(callbacks));
     }
 
-    public boolean addAll(Collection<? extends AsyncCallback<R>> asyncCallbacks) {
+    @Override public boolean addAll(Collection<? extends AsyncCallback<R>> asyncCallbacks) {
         return callbacks.addAll(asyncCallbacks);
     }
 
@@ -87,7 +87,7 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
         return callbacks.toArray(ts);
     }
 
-    public boolean add(AsyncCallback<R> callback) {
+    @Override public boolean add(AsyncCallback<R> callback) {
         return callbacks.add(callback);
     }
 

@@ -33,7 +33,7 @@ public abstract class AbstractDocumentRenderer implements DocumentRenderer {
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public void setFactory(final RendererFactory factory) {
+    @Override public void setFactory(final RendererFactory factory) {
         this.factory = factory;
     }
 

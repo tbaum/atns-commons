@@ -34,7 +34,7 @@ public class LoginLoader extends WidgetPresenterModuleLoader<LoginPresenter> {
         return GWT.create(LoginInjector.class);
     }
 
-    public void load() {
+    @Override public void load() {
         GWT.runAsync(LoginLoader.class, this);
     }
 }

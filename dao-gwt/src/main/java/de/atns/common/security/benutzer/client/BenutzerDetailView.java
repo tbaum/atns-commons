@@ -128,12 +128,12 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
         return speichern.addClickHandler(handler);
     }
 
-    public UserPresentation getData(UserPresentation p) {
+    @Override public UserPresentation getData(UserPresentation p) {
         return new UserPresentation(p.getId(), login.getValue(), name.getValue(), passwort1.getValue(),
                 email.getValue(), getSelectedRoles(), null, null);
     }
 
-    public void setData(final UserPresentation p) {
+    @Override public void setData(final UserPresentation p) {
         login.setValue(p.getLogin());
         email.setValue(p.getEmail());
         name.setValue(p.getName());

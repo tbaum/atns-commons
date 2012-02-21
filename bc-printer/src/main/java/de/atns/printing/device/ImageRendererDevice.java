@@ -16,7 +16,7 @@ public class ImageRendererDevice extends BufferedImageRenderDevice {
 
 // --------------------- Interface Device ---------------------
 
-    public void renderDocument(final DocumentElement doc, final int quantity) throws IOException {
+    @Override public void renderDocument(final DocumentElement doc, final int quantity) throws IOException {
         // TODO Auto-generated method stub
     }
 

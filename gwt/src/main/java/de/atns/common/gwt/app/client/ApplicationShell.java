@@ -42,7 +42,7 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
         show(false);
     }
 
-    public void show(final boolean isAuth) {
+    @Override public void show(final boolean isAuth) {
         if (PopupWindowEventBus.isRunningInPopup()) {
             navigation.setVisible(false);
         } else {
@@ -52,7 +52,7 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
-    public String getAppName() {
+    @Override public String getAppName() {
         return appName;
     }
 

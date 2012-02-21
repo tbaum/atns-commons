@@ -63,7 +63,7 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
     }-*/;
 
 
-    public native void openWindow(String url, String name, String para) /*-{
+    @Override @Override public native void openWindow(String url, String name, String para) /*-{
         $wnd.opener._open_popup(url, name, para);
     }-*/;
 

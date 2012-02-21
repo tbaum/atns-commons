@@ -38,7 +38,7 @@ public class BoxRenderer implements Renderer<BoxElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final BoxElement element) {
+    @Override public void render(final BoxElement element) {
         final Graphics graphics = this.dr.getGraphics();
 
         final int x = Converter.convertMMToDots(element.getX(), dr.getResolution());

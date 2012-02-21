@@ -33,7 +33,7 @@ public class TextRenderer extends AbstractRenderer<TextElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final TextElement element) throws UnsupportedEncodingException {
+    @Override public void render(final TextElement element) throws UnsupportedEncodingException {
         if (element.getText().length() > 3072)
             throw new IllegalArgumentException("Text too long, only 3072 characters supported");
 

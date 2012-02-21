@@ -30,11 +30,11 @@ public class DispatcherStateChange extends GwtEvent<DispatcherStateChangeHandler
 
 // -------------------------- OTHER METHODS --------------------------
 
-    protected void dispatch(DispatcherStateChangeHandler handler) {
+    @Override protected void dispatch(DispatcherStateChangeHandler handler) {
         handler.onDispatcherStateChange(this);
     }
 
-    public Type<DispatcherStateChangeHandler> getAssociatedType() {
+    @Override public Type<DispatcherStateChangeHandler> getAssociatedType() {
         return TYPE;
     }
 }

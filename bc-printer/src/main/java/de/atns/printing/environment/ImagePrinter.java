@@ -16,34 +16,34 @@ public class ImagePrinter extends AbstractPrinterImpl {
 
 // --------------------- Interface Printer ---------------------
 
-    public boolean canPrint(@SuppressWarnings("unused") final
+    @Override public boolean canPrint(@SuppressWarnings("unused") final
                             Label lf) {
         return true;
     }
 
-    public void reset() {
+    @Override public void reset() {
         // ignored
     }
 
-    public void safePrinterConfiguration() {
+    @Override public void safePrinterConfiguration() {
         // ignored
     }
 
-    public boolean statusOk() {
+    @Override public boolean statusOk() {
         return true;
     }
 
-    public boolean testMaterial(@SuppressWarnings("unused") final
+    @Override public boolean testMaterial(@SuppressWarnings("unused") final
                                 Material mat) {
         // ignored
         return true;
     }
 
-    public void updateState() {
+    @Override public void updateState() {
         // ignored
     }
 
-    public boolean waitForPrinter() {
+    @Override public boolean waitForPrinter() {
         // ignored
         return false;
     }

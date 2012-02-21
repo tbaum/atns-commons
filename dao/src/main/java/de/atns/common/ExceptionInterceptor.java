@@ -21,7 +21,7 @@ public class ExceptionInterceptor implements MethodInterceptor {
 
 // --------------------- Interface MethodInterceptor ---------------------
 
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
+    @Override public Object invoke(final MethodInvocation invocation) throws Throwable {
         try {
             return invocation.proceed();
         } catch (PersistenceException e) {

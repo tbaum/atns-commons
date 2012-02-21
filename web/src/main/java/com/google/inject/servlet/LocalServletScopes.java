@@ -28,13 +28,13 @@ public class LocalServletScopes {
                     }
                 }
 
-                public String toString() {
+                @Override public String toString() {
                     return String.format("%s[%s]", creator, LOCAL_REQUEST);
                 }
             };
         }
 
-        public String toString() {
+        @Override public String toString() {
             return "ServletScopes.REQUEST";
         }
     };

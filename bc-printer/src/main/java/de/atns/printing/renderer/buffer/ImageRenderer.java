@@ -39,7 +39,7 @@ public class ImageRenderer implements Renderer<ImageElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final ImageElement element) {
+    @Override public void render(final ImageElement element) {
         // Image i = element.getImage();
         ImageIcon ic = new ImageIcon(element.getImage());
 

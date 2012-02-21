@@ -106,7 +106,7 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
 // -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends WidgetDisplay {
-        void reset();
+        @Override void reset();
 
         HandlerRegistration addSeitenButton(int site, ClickHandler clickHandler, boolean active);
 

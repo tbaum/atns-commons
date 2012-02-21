@@ -73,7 +73,7 @@ import static java.lang.System.currentTimeMillis;
         window.close();
     }-*/;
 
-    public void openWindow(String url, String name, String args) {
+    @Override public void openWindow(String url, String name, String args) {
         JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args);
         windows.put(id, wnd);
     }

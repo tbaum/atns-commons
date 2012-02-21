@@ -33,7 +33,7 @@ public class BarcodeRenderer extends AbstractRenderer<BarcodeElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final BarcodeElement element) throws UnsupportedEncodingException {
+    @Override public void render(final BarcodeElement element) throws UnsupportedEncodingException {
         final StringBuffer buffer = new StringBuffer();
         String dataPrefix = "";
 

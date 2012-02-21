@@ -29,21 +29,21 @@ public class MailUtilImpl implements MailUtil {
 
 // --------------------- Interface MailUtil ---------------------
 
-    @Transactional
+    @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName,
                                  final MailTemplate template, final HashMap<String, Object> context,
                                  final MailTemplateResource... attachments) {
         return sendMail(recipient, recipientName, null, null, template, context, attachments);
     }
 
-    @Transactional
+    @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
                                  final MailTemplate template, final HashMap<String, Object> context,
                                  final MailTemplateResource... attachments) {
         return sendMail(recipient, recipientName, ccRecipient, null, template, context, attachments);
     }
 
-    @Transactional
+    @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
                                  final String bccRecipient,
                                  final MailTemplate template, final Map<String, Object> context,
@@ -58,7 +58,7 @@ public class MailUtilImpl implements MailUtil {
         return sendMail(recipient, recipientName, ccRecipient, bccRecipient, template, context, at);
     }
 
-    @Transactional
+    @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName, final String ccRecipient,
                                  final String bccRecipient,
                                  final MailTemplate template, final Map<String, Object> context,

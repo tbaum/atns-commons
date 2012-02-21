@@ -57,7 +57,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
         return LIST_EVENT;
     }
 
-    protected String bindRow(final UserPresentation g, final String lastValue) {
+    @Override protected String bindRow(final UserPresentation g, final String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
@@ -68,7 +68,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
         return lastValue;
     }
 
-    protected BenutzerList createLoadAction() {
+    @Override protected BenutzerList createLoadAction() {
         return new BenutzerList(display.getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange());
     }
 
@@ -95,12 +95,12 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
     public static interface Display extends ListDisplay<UserPresentation> {
         HandlerRegistration forNeu(ClickHandler clickHandler);
 
-        HandlerRegistration forSuche(ClickHandler clickHandler);
+        @Override HandlerRegistration forSuche(ClickHandler clickHandler);
 
         StandardFilter getFilter();
 
         HandlerRegistration addRow(UserPresentation auftrag, ClickHandler edit);
 
-        HandlerRegistration forPressEnter(KeyPressHandler pressHandler);
+        @Override HandlerRegistration forPressEnter(KeyPressHandler pressHandler);
     }
 }

@@ -65,11 +65,11 @@ public class SharedServicesModule extends AbstractPresenterModule {
     public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
         private SharedServices services;
 
-        public void setSharedServices(final SharedServices services) {
+        @Override public void setSharedServices(final SharedServices services) {
             this.services = services;
         }
 
-        public SharedServices get() {
+        @Override public SharedServices get() {
             return services;
         }
     }

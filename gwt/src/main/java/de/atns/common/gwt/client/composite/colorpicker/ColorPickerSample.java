@@ -4,21 +4,31 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 
-public class ColorPickerSample implements EntryPoint, ClickHandler
-{
-    private static class ColorPickerDialog extends DialogBox
-    {
+public class ColorPickerSample implements EntryPoint, ClickHandler {
+
+    private ColorPickerDialog pickerDialog;
+
+    @Override public void onClick(ClickEvent event) {
+        // Show the dialog box.
+        pickerDialog.show();
+    }
+
+    @Override public void onModuleLoad() {
+        pickerDialog = new ColorPickerDialog();
+
+        Button b = new Button("Click me");
+        b.addClickHandler(this);
+
+        RootPanel.get().add(b);
+    }
+
+    private static class ColorPickerDialog extends DialogBox {
+
         private ColorPicker picker;
 
-        public ColorPickerDialog()
-        {
+        public ColorPickerDialog() {
             setText("Choose a color");
 
             setWidth("435px");
@@ -31,20 +41,16 @@ public class ColorPickerSample implements EntryPoint, ClickHandler
 
             // Define the buttons
             Button ok = new Button("Ok");   // ok button
-            ok.addClickHandler(new ClickHandler()
-            {
-                public void onClick(ClickEvent event)
-                {
+            ok.addClickHandler(new ClickHandler() {
+                @Override public void onClick(ClickEvent event) {
                     Window.alert("You chose " + picker.getHexColor());
                     ColorPickerDialog.this.hide();
                 }
             });
 
             Button cancel = new Button("Cancel");   // cancel button
-            cancel.addClickHandler(new ClickHandler()
-            {
-                public void onClick(ClickEvent event)
-                {
+            cancel.addClickHandler(new ClickHandler() {
+                @Override public void onClick(ClickEvent event) {
                     ColorPickerDialog.this.hide();
                 }
             });
@@ -58,22 +64,5 @@ public class ColorPickerSample implements EntryPoint, ClickHandler
 
             setWidget(panel);
         }
-    }
-
-    private ColorPickerDialog pickerDialog;
-
-    public void onClick(ClickEvent event) {
-        // Show the dialog box.
-        pickerDialog.show();
-    }
-
-    public void onModuleLoad()
-    {
-        pickerDialog = new ColorPickerDialog();
-
-        Button b = new Button("Click me");
-        b.addClickHandler(this);
-
-        RootPanel.get().add(b);
     }
 }

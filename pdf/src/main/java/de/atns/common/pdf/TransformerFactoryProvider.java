@@ -26,7 +26,7 @@ public class TransformerFactoryProvider implements Provider<TransformerFactory> 
 
 // --------------------- Interface Provider ---------------------
 
-    public TransformerFactory get() {
+    @Override public TransformerFactory get() {
         final TransformerFactory fac = TransformerFactory.newInstance();
         fac.setURIResolver(uriResolver.get());
         return fac;

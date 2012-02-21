@@ -17,11 +17,11 @@ public class LogoutPlace extends Place {
 
     @Prefix("logout")
     public static class Tokenizer implements PlaceTokenizer<LogoutPlace> {
-        public LogoutPlace getPlace(final String token) {
+        @Override public LogoutPlace getPlace(final String token) {
             return new LogoutPlace();
         }
 
-        public String getToken(final LogoutPlace place) {
+        @Override public String getToken(final LogoutPlace place) {
             return "";
         }
     }

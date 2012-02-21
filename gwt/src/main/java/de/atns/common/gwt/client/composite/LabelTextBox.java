@@ -79,7 +79,7 @@ public class LabelTextBox extends Composite
 
 // --------------------- Interface KeyUpHandler ---------------------
 
-    public void onKeyUp(final KeyUpEvent keyUpEvent) {
+    @Override public void onKeyUp(final KeyUpEvent keyUpEvent) {
         updateLabelState();
     }
 
@@ -89,7 +89,7 @@ public class LabelTextBox extends Composite
         return textBox.getValue();
     }
 
-    public void setValue(final String text) {
+    @Override public void setValue(final String text) {
         textBox.setValue(text);
         updateLabelState();
     }

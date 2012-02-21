@@ -32,7 +32,7 @@ public class BarcodeRenderer implements Renderer<BarcodeElement> {
 
 // --------------------- Interface Renderer ---------------------
 
-    public void render(final BarcodeElement element) throws IOException {
+    @Override public void render(final BarcodeElement element) throws IOException {
         final AbstractBarcodeBean bean;
         String dataPrefix = "";
 

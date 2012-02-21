@@ -19,11 +19,11 @@ public class BenutzerPlace extends Place {
     public static class Tokenizer implements PlaceTokenizer<BenutzerPlace> {
         private static final String NO_ID = "n";
 
-        public BenutzerPlace getPlace(final String token) {
+        @Override public BenutzerPlace getPlace(final String token) {
             return new BenutzerPlace();
         }
 
-        public String getToken(final BenutzerPlace place) {
+        @Override public String getToken(final BenutzerPlace place) {
             return NO_ID;
         }
     }

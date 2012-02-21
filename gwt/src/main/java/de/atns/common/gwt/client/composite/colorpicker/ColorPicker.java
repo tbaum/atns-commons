@@ -456,7 +456,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
      * (non-Javadoc)
      * @see com.google.gwt.event.dom.client.ChangeHandler#onChange(com.google.gwt.event.dom.client.ChangeEvent)
      */
-    public void onChange(ChangeEvent event)
+    @Override public void onChange(ChangeEvent event)
     {
         onChange((Widget)event.getSource());
     }
@@ -586,7 +586,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
      * (non-Javadoc)
      * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
      */
-    public void onClick(ClickEvent event)
+    @Override public void onClick(ClickEvent event)
     {
         onClick((Widget)event.getSource());
     }
@@ -762,7 +762,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         }
     }
 
-    public void onKeyPress(KeyPressEvent event)
+    @Override public void onKeyPress(KeyPressEvent event)
     {
         Widget sender = (Widget) event.getSource();
         char keyCode = event.getCharCode();

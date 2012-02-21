@@ -18,8 +18,7 @@ import de.atns.common.security.benutzer.client.BenutzerPresenter;
 public class BenutzerLoader extends WidgetPresenterModuleLoader<BenutzerPresenter> {
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public BenutzerLoader(final SharedServices sharedServices) {
+    @Inject public BenutzerLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
 
@@ -33,7 +32,7 @@ public class BenutzerLoader extends WidgetPresenterModuleLoader<BenutzerPresente
         return GWT.create(BenutzerInjector.class);
     }
 
-    public void load() {
+    @Override public void load() {
         GWT.runAsync(BenutzerLoader.class, this);
     }
 }

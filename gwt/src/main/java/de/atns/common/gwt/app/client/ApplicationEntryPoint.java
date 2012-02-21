@@ -24,7 +24,7 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
 
 // --------------------- Interface EntryPoint ---------------------
 
-    public void onModuleLoad() {
+    @Override public void onModuleLoad() {
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
             @Override public void onUncaughtException(final Throwable e) {
                 LOG.log(Level.WARNING, e.getMessage(), e);
