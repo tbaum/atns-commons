@@ -20,12 +20,9 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
  */
 
 @Singleton public class PopupWindowEventBus extends EventBus implements WindowEventBus {
-// ------------------------------ FIELDS ------------------------------
 
     private final EventBus eventBus = new SimpleEventBus();
     private final EventSerializer serializer;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static native boolean isRunningInPopup() /*-{
         return $wnd.opener != null && $wnd.opener._event_from_popup != null;
@@ -39,8 +36,6 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         $wnd.location.href = name
         $wnd.name = name2 + "_" + $wnd._myid
     }-*/;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public PopupWindowEventBus(EventSerializer serializer) {
         this.serializer = serializer;
@@ -67,25 +62,17 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         $wnd.opener._popup_closed($wnd._myid);
     }-*/;
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface WindowEventBus ---------------------
 
     public native void openWindow(String url, String name, String para) /*-{
         $wnd.opener._open_popup(url, name, para);
     }-*/;
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    public <H> HandlerRegistration addHandler(Event.Type<H> type, H handler) {
+    @Override public <H> HandlerRegistration addHandler(Event.Type<H> type, H handler) {
         // TODO unregister
         return eventBus.addHandler(type, handler);
     }
 
-    @Override
-    public <H> HandlerRegistration addHandlerToSource(Event.Type<H> type, Object source, H handler) {
+    @Override public <H> HandlerRegistration addHandlerToSource(Event.Type<H> type, Object source, H handler) {
         return eventBus.addHandlerToSource(type, source, handler);
     }
 

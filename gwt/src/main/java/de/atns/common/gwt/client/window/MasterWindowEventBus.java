@@ -14,20 +14,19 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 
 import java.util.HashMap;
 
+import static java.lang.System.currentTimeMillis;
+
 /**
  * @author tbaum
  * @since 03.02.11
  */
 
 @Singleton public class MasterWindowEventBus extends EventBus implements WindowEventBus {
-// ------------------------------ FIELDS ------------------------------
 
     private final EventBus simpleEventBus = new SimpleEventBus();
     private final EventSerializer serializer;
     private HashMap<String, JavaScriptObject> windows = new HashMap<String, JavaScriptObject>();
-    private final long myid = System.currentTimeMillis();
-
-// -------------------------- STATIC METHODS --------------------------
+    private final String id = String.valueOf(currentTimeMillis());
 
     public static String currentLocation() {
         String location = location();
@@ -41,8 +40,6 @@ import java.util.HashMap;
     private static native String location() /*-{
         return $wnd.location.href
     }-*/;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public MasterWindowEventBus(EventSerializer eventSerializer) {
         this.serializer = eventSerializer;
@@ -76,19 +73,10 @@ import java.util.HashMap;
         window.close();
     }-*/;
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface WindowEventBus ---------------------
-
-    public void openWindow(String url, String name, String para) {
-        name = name + "_" + myid;
-        JavaScriptObject wnd = open(this, currentLocation() + url, name.replaceAll(":", "_"), String.valueOf(myid),
-                para);
-        windows.put(String.valueOf(myid), wnd);
+    public void openWindow(String url, String name, String args) {
+        JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args);
+        windows.put(id, wnd);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public <H> HandlerRegistration addHandler(Event.Type<H> type, H handler) {
         // TODO unregister
@@ -144,11 +132,11 @@ import java.util.HashMap;
 //            netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserWrite');
             newWindow.menubar.visible = false;
             newWindow.toolbar.visible = false;
-//            newWindow.locationbar.visible = false;
+            newWindow.locationbar.visible = false;
             newWindow.statusbar.visible = false;
-//            newWindow.linkbar.visible = false;
+            newWindow.linkbar.visible = false;
         } catch (ignored) {
-
+            if (Console && Console.log) Console.log(ignored);
         }
         return newWindow;
     }-*/;
