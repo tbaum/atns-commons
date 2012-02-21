@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
  * @since 12.02.2010
  */
 public abstract class DefaultActionHandler<A extends Action<R>, R extends Result> implements ActionHandler<A, R> {
+
     private final Class<A> clazz;
 
     public DefaultActionHandler() {
@@ -36,13 +37,11 @@ public abstract class DefaultActionHandler<A extends Action<R>, R extends Result
         return clazz;
     }
 
-    @Override
-    public R execute(final A action, final ExecutionContext context) throws ActionException {
+    @Override public R execute(final A action, final ExecutionContext context) throws ActionException {
         return executeInternal(action);
     }
 
-    @Override
-    public final void rollback(final A action, final R result, final ExecutionContext context) {
+    @Override public final void rollback(final A action, final R result, final ExecutionContext context) {
     }
 
     public abstract R executeInternal(final A action) throws ActionException;

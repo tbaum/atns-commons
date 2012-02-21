@@ -15,11 +15,11 @@ import java.util.TimerTask;
  * @since 25.05.11 18:13
  */
 public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
+
+    private static final Log LOG = LogFactory.getLog(DebugUnitOfWorkInterceptor.class);
     int open = 0;
     int deep = 0;
     ThreadLocal<Timer> t = new ThreadLocal<Timer>();
-
-    private static final Log LOG = LogFactory.getLog(DebugUnitOfWorkInterceptor.class);
 
     @Override public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
         deep++;
@@ -42,13 +42,13 @@ public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
             t.set(tt);
 
             tt.schedule(new TimerTask() {
-                        @Override public void run() {
-                            LOG.debug("long transaction, or unclosed unit-of-work found !!!");
-                            for (String r : rs) {
-                                LOG.debug(r);
-                            }
-                        }
-                    }, 10000);
+                @Override public void run() {
+                    LOG.debug("long transaction, or unclosed unit-of-work found !!!");
+                    for (String r : rs) {
+                        LOG.debug(r);
+                    }
+                }
+            }, 30000);
         }
         try {
             return methodInvocation.proceed();

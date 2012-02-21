@@ -19,25 +19,16 @@ import javax.persistence.NoResultException;
  * @author tbaum
  * @since 27.11.2009
  */
-@Singleton
-public class UserServiceImpl implements UserService {
-// ------------------------------ FIELDS ------------------------------
+@Singleton public class UserServiceImpl implements UserService {
 
     private static final Log LOG = LogFactory.getLog(UserServiceImpl.class);
     private final BenutzerRepository repository;
     private final Provider<EntityManager> em;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject public UserServiceImpl(final BenutzerRepository repository, Provider<EntityManager> em) {
         this.repository = repository;
         this.em = em;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface UserService ---------------------
 
     @Override public Benutzer findUser(final String login, final String pass) {
         final Benutzer user = refreshUser(login);
@@ -63,20 +54,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override @Transactional public void setActive(final SecurityUser user) {
-        Benutzer benutzer = (Benutzer) user;
-        em.get().refresh(benutzer);
+        final Benutzer benutzer = em.get().find(Benutzer.class, ((Benutzer) user).getId());
         benutzer.setLastAccess();
     }
 
     @Override @Transactional public void setInactive(final SecurityUser user) {
-        Benutzer benutzer = (Benutzer) user;
+        final Benutzer benutzer = em.get().find(Benutzer.class, ((Benutzer) user).getId());
         benutzer.clearLastAccess();
         em.get().merge(benutzer);
     }
 
     @Override @Transactional public void successfullLogin(final SecurityUser user) {
-        Benutzer benutzer = (Benutzer) user;
-        em.get().refresh(benutzer);
+        final Benutzer benutzer = em.get().find(Benutzer.class, ((Benutzer) user).getId());
         benutzer.setLastLogin();
     }
 }
