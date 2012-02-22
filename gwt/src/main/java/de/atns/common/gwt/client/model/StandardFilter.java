@@ -1,13 +1,14 @@
 package de.atns.common.gwt.client.model;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 /**
  * @author mwolter
  * @since 01.03.2010 12:07:01
  */
-public class StandardFilter implements Serializable {
+public class StandardFilter implements IsSerializable {
+
     private String filterText;
 
     protected StandardFilter() {
