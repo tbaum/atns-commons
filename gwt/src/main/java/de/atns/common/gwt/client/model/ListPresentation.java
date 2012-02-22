@@ -3,7 +3,6 @@ package de.atns.common.gwt.client.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import net.customware.gwt.dispatch.shared.Result;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 

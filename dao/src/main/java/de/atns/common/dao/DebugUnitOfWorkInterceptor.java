@@ -43,9 +43,9 @@ public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
 
             tt.schedule(new TimerTask() {
                 @Override public void run() {
-                    LOG.debug("long transaction, or unclosed unit-of-work found !!!");
+                    LOG.error("long transaction, or unclosed unit-of-work found !!!");
                     for (String r : rs) {
-                        LOG.debug(r);
+                        LOG.error(r);
                     }
                 }
             }, 30000);
