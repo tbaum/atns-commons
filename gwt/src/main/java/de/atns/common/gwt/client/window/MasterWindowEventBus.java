@@ -136,7 +136,7 @@ import static java.lang.System.currentTimeMillis;
             newWindow.statusbar.visible = false;
             newWindow.linkbar.visible = false;
         } catch (ignored) {
-            if (Console && Console.log) Console.log(ignored);
+            if ($wnd.Console && $wnd.Console.log) $wnd.Console.log(ignored);
         }
         return newWindow;
     }-*/;
