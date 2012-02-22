@@ -8,21 +8,15 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 12.02.2010
  */
 public class ExtendedFlexTable {
-// ------------------------------ FIELDS ------------------------------
 
     private final FlexTable table = new FlexTable();
-
     private int row = 0;
     private int rowx = 0;
     private int col = 0;
 
-// -------------------------- STATIC METHODS --------------------------
-
     public static ExtendedFlexTable table(final String... styles) {
         return new ExtendedFlexTable(styles);
     }
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     private ExtendedFlexTable(final String... styles) {
         table.setCellPadding(0);
@@ -33,13 +27,9 @@ public class ExtendedFlexTable {
         }
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public FlexTable getTable() {
         return table;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public ExtendedFlexTable cell(final Widget widget) {
         table.setWidget(row, col++, widget);

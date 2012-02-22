@@ -16,7 +16,6 @@ import java.math.BigDecimal;
  */
 public class NumberBox extends Composite
         implements HasValue<Number>, ValueChangeHandler<Number>, Focusable, HasEnabled {
-// ------------------------------ FIELDS ------------------------------
 
     public static final String DEFAULT_STYLENAME = "gwt-NumberBox";
 
@@ -26,8 +25,6 @@ public class NumberBox extends Composite
     private final TextBox box = new TextBox();
     private NumberBox.Format format;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public NumberBox() {
         this(null, DEFAULT_FORMAT);
     }
@@ -35,7 +32,6 @@ public class NumberBox extends Composite
     public NumberBox(final Number number, final NumberBox.Format format) {
         assert format != null : "You may not construct a number box with a null format";
         this.format = format;
-
 
         initWidget(box);
         setStyleName(DEFAULT_STYLENAME);
@@ -88,11 +84,6 @@ public class NumberBox extends Composite
         setValue(number, false);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Focusable ---------------------
-
     @Override public int getTabIndex() {
         return box.getTabIndex();
     }
@@ -109,16 +100,13 @@ public class NumberBox extends Composite
         box.setTabIndex(index);
     }
 
-// --------------------- Interface HasEnabled ---------------------
-
-//    public int getCursorPos() {
+    //    public int getCursorPos() {
 //        return box.getCursorPos();
 //    }
 //
 //    public TextBox getTextBox() {
 //        return box;
 //    }
-
     @Override public boolean isEnabled() {
         return box.isEnabled();
     }
@@ -127,26 +115,18 @@ public class NumberBox extends Composite
         box.setEnabled(enabled);
     }
 
-// --------------------- Interface HasValue ---------------------
-
     @Override public void setValue(final Number number, final boolean fireEvents) {
         setValue(numberValue, number, fireEvents);
     }
-
-// --------------------- Interface HasValueChangeHandlers ---------------------
 
     @Override public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<Number> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
-// --------------------- Interface ValueChangeHandler ---------------------
-
     @Override public void onValueChange(final ValueChangeEvent<Number> event) {
         setValue(parseNumber(false), event.getValue(), true);
         box.setFocus(true);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public HandlerRegistration addBlurHandler(BlurHandler handler) {
         return box.addBlurHandler(handler);
@@ -181,9 +161,8 @@ public class NumberBox extends Composite
         return parseNumber(true);
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static class DefaultFormat implements NumberBox.Format {
+
         private final NumberFormat numberFormat;
 
         public DefaultFormat() {
@@ -232,6 +211,7 @@ public class NumberBox extends Composite
     }
 
     public interface Format {
+
         String format(NumberBox numberBox, Number number);
 
         Number parse(NumberBox numberBox, String text, boolean reportError);
@@ -239,4 +219,3 @@ public class NumberBox extends Composite
         void reset(NumberBox numberBox, boolean abandon);
     }
 }
-

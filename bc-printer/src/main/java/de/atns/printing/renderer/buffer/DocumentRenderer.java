@@ -30,7 +30,6 @@ import static de.atns.printing.Converter.convertMMToDots;
  * @author Thomas Baum
  */
 public class DocumentRenderer extends AbstractDocumentRenderer {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(DocumentRenderer.class);
 
@@ -38,13 +37,9 @@ public class DocumentRenderer extends AbstractDocumentRenderer {
 
     private BufferedImage image;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     protected DocumentRenderer(final Device device) {
         super(device);
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Graphics getGraphics() {
         return this.graphics;
@@ -53,11 +48,6 @@ public class DocumentRenderer extends AbstractDocumentRenderer {
     public BufferedImage getImage() {
         return this.image;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override @SuppressWarnings("unchecked")
     public void render(final DocumentElement element) throws IOException {
@@ -78,8 +68,6 @@ public class DocumentRenderer extends AbstractDocumentRenderer {
             this.factory.getRender(e).render(e);
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void reset() {
         this.image = null;

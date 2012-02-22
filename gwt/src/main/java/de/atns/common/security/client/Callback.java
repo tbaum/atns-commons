@@ -22,13 +22,12 @@ import static java.util.logging.Level.WARNING;
  * @since 05.10.2010
  */
 public abstract class Callback<T> implements AsyncCallback<T> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Logger LOG = Logger.getLogger(Callback.class.getName());
 
     private static final WidgetDisplay NULL_DISPLAY = new DefaultWidgetDisplay() {
-        @Override
-        public void reset() {
+
+        @Override public void reset() {
         }
     };
 
@@ -36,8 +35,6 @@ public abstract class Callback<T> implements AsyncCallback<T> {
     @Inject private static Provider<EventBus> eventBus;
 
     private final WidgetDisplay display;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public Callback() {
         this(NULL_DISPLAY);
@@ -48,13 +45,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         this.display.startProcessing();
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface AsyncCallback ---------------------
-
-    @Override
-    public void onFailure(final Throwable originalCaught) {
+    @Override public void onFailure(final Throwable originalCaught) {
         if (originalCaught instanceof SecurityException) {
             LOG.log(WARNING, "check session in callback '" + originalCaught.getMessage() + "'");
             eventBus.get().fireEvent(toServerStatus(originalCaught));
@@ -63,15 +54,13 @@ public abstract class Callback<T> implements AsyncCallback<T> {
             LOG.log(WARNING, "check session in callback ", originalCaught);
             display.showError(originalCaught.getMessage());
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
-                @Override
-                public void onFailure(final Throwable caught) {
+                @Override public void onFailure(final Throwable caught) {
                     LOG.log(WARNING, "failed-checksession", caught);
                     eventBus.get().fireEvent(toServerStatus(caught));
                     display.stopProcessing();
                 }
 
-                @Override
-                public void onSuccess(final UserPresentation result) {
+                @Override public void onSuccess(final UserPresentation result) {
                     LOG.log(Level.FINE, "success-checksession");
                     display.stopProcessing();
                 }
@@ -79,8 +68,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         }
     }
 
-    @Override
-    public void onSuccess(final T result) {
+    @Override public void onSuccess(final T result) {
         LOG.log(Level.FINE, "success-call " + getClass());
         // eventBus.fireEvent(AVAILABLE);
 
@@ -89,8 +77,5 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         display.stopProcessing();
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public abstract void callback(T result);
 }
-

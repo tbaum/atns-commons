@@ -11,13 +11,11 @@ import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.gwt.client.WidgetPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final int PAGING = 2;
     private ListPresenter parentPresenter;
@@ -25,13 +23,9 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
     private int range = 20;
     private GwtEvent.Type<LoadListEventHandler> type;
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public int getStartEntry() {
         return startEntry;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void bind(final ListPresenter parentPresenter) {
         this.parentPresenter = parentPresenter;
@@ -47,13 +41,11 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
         return range;
     }
 
-    @Override
-    public void onBind() {
+    @Override public void onBind() {
         super.onBind();
 
         registerHandler(this.display.addLengthButton(new ChangeHandler() {
-            @Override
-            public void onChange(final ChangeEvent event) {
+            @Override public void onChange(final ChangeEvent event) {
                 range = PagePresenter.this.display.selectedRange();
                 startEntry = (startEntry / range) * range;
                 parentPresenter.updateList();
@@ -61,8 +53,7 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
         }, range, 20, 50, 100));
 
         registerHandler(eventBus.addHandler(type, new LoadListEventHandler() {
-            @Override
-            public void onLoad(final ListPresentation result, final Object source) {
+            @Override public void onLoad(final ListPresentation result, final Object source) {
                 if (parentPresenter.equals(source)) {
                     display.reset();
                     createButtons(result.getTotal(), result.getStart());
@@ -103,8 +94,6 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
         registerHandler(display.addSeitenButton(startX, new PageClickHandler(startX, range), start == startX));
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static interface Display extends WidgetDisplay {
         @Override void reset();
 
@@ -126,8 +115,7 @@ public class PagePresenter extends WidgetPresenter<PagePresenter.Display> {
             this.range = range;
         }
 
-        @Override
-        public void onClick(final ClickEvent event) {
+        @Override public void onClick(final ClickEvent event) {
             startEntry = (startX - 1) * range;
             parentPresenter.updateList();
         }

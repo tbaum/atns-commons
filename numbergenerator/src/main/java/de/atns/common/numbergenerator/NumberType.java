@@ -5,7 +5,6 @@ package de.atns.common.numbergenerator;
  * @since 13.01.2010
  */
 public interface NumberType {
-// -------------------------- OTHER METHODS --------------------------
 
     String name();
 

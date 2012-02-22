@@ -7,7 +7,6 @@ import com.google.gwt.user.client.ui.IsWidget;
  * @since 22.02.2010 16:18:05
  */
 public interface WidgetDisplay extends IsWidget {
-// -------------------------- OTHER METHODS --------------------------
 
     void reset();
 

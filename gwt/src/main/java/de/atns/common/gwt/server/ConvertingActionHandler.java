@@ -12,17 +12,12 @@ import net.customware.gwt.dispatch.shared.Result;
  */
 public abstract class ConvertingActionHandler<A extends Action<R>, R extends Result, S>
         extends DefaultActionHandler<A, R> implements ActionHandler<A, R> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Converter<S, R> converter;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected ConvertingActionHandler(final Converter<S, R> converter, final Class<A> clazz) {
         this.converter = converter;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public final R executeInternal(final A action) throws ActionException {
         return converter.convert(executeInternal2(action));

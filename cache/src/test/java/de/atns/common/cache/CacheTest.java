@@ -1,19 +1,16 @@
 package de.atns.common.cache;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNull;
 
-
 /**
  * @author tbaum
  * @since 13.02.2010
  */
 public class CacheTest {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Object
             KEY_1 = 1, ENTRY_1 = "test 1",
@@ -22,8 +19,6 @@ public class CacheTest {
 
     private long time;
     private TimeoutCache<Object, Object> cache;
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Before
     public void setUp() {

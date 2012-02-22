@@ -11,7 +11,6 @@ import static javax.persistence.GenerationType.IDENTITY;
  * @since 9.07.2011
  */
 @Entity public class LogEntry {
-// ------------------------------ FIELDS ------------------------------
 
     @Id @GeneratedValue(strategy = IDENTITY) private Long id;
     private Date datum;
@@ -22,12 +21,11 @@ import static javax.persistence.GenerationType.IDENTITY;
     private String entityId;
     private String entityVersion;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     protected LogEntry() {
     }
 
-    public LogEntry(String benutzer, Action action, String entity, String entityId, String entityVersion, String daten) {
+    public LogEntry(String benutzer, Action action, String entity, String entityId, String entityVersion,
+                    String daten) {
         this.benutzer = benutzer;
         this.action = action;
         this.entity = entity;
@@ -36,8 +34,6 @@ import static javax.persistence.GenerationType.IDENTITY;
         this.entityId = entityId;
         this.entityVersion = entityVersion;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Action getAction() {
         return action;
@@ -71,14 +67,10 @@ import static javax.persistence.GenerationType.IDENTITY;
         return id;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public String toAssertString() {
         return String.format("assertLogEntryEquals(\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\", entity)",
                 getBenutzer(), getAction(), getEntity(), getEntityId(), getEntityVersion(), getDaten());
     }
-
-// -------------------------- ENUMERATIONS --------------------------
 
     public enum Action {
         remove, persist, update

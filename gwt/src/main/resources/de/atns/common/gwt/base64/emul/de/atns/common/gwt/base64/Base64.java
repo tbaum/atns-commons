@@ -1,7 +1,6 @@
 package de.atns.common.gwt.base64;
 
 public class Base64 {
-// -------------------------- STATIC METHODS --------------------------
 
     public static native String encodeString(String data) /*-{
         var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -25,7 +24,6 @@ public class Base64 {
         return out;
 
     }-*/;
-
 
     public static native String decodeString(String data) /*-{
         var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";

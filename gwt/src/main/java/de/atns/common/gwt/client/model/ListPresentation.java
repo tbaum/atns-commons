@@ -11,14 +11,11 @@ import java.util.Collection;
  * @since 12.02.2010
  */
 public class ListPresentation<E extends IsSerializable> implements Result {
-// ------------------------------ FIELDS ------------------------------
 
     private ArrayList<E> list;
     private boolean moreResults;
     private int start;
     private int total;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public ListPresentation() {
     }
@@ -34,8 +31,6 @@ public class ListPresentation<E extends IsSerializable> implements Result {
         this.total = total;
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public int getStart() {
         return start;
     }
@@ -47,8 +42,6 @@ public class ListPresentation<E extends IsSerializable> implements Result {
     public boolean isMoreResults() {
         return moreResults;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public ArrayList<E> getEntries() {
         return list;

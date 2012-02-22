@@ -9,9 +9,7 @@ import java.util.Map;
  * Date: 15.04.2009
  * Time: 02:54:24
  */
-@ImplementedBy(DefaultTemplateRenderer.class)
-public interface MailTemplateRenderer {
-// -------------------------- OTHER METHODS --------------------------
+@ImplementedBy(DefaultTemplateRenderer.class) public interface MailTemplateRenderer {
 
     String renderHtmlTemplate(MailTemplate template, Map<String, Object> context);
 

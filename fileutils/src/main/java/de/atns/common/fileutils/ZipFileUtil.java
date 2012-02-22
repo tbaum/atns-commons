@@ -17,11 +17,8 @@ import java.util.zip.ZipFile;
  * @since 04.01.2010
  */
 public class ZipFileUtil {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ZipFileUtil.class);
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static File[] extractZipFile(final ZipFile zipFile, final File targetDir, final ZipFileFilter filter)
             throws IOException {

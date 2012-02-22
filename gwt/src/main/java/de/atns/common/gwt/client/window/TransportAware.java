@@ -7,7 +7,6 @@ import com.google.gwt.json.client.JSONValue;
  * @since 25.01.11 11:12
  */
 public interface TransportAware {
-// -------------------------- OTHER METHODS --------------------------
 
     public void fromJson(JSONValue data);
 

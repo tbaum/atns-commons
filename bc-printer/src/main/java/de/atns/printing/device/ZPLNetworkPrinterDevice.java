@@ -10,7 +10,6 @@ import java.net.Socket;
  * @author Thomas Baum
  */
 public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
-// ------------------------------ FIELDS ------------------------------
 
     private final String adress;
 
@@ -19,15 +18,11 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
     private OutputStream stream = null;
     private Socket socket;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public ZPLNetworkPrinterDevice(final String adress, final int port, final int dpi) {
         super(dpi);
         this.adress = adress;
         this.port = port;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getAdress() {
         return this.adress;
@@ -37,15 +32,12 @@ public class ZPLNetworkPrinterDevice extends ZPLPrinterDevice {
         return this.port;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public void close() {
         FileUtil.closeSilent(socket);
         FileUtil.closeSilent(stream);
     }
 
-    @Override
-    protected void processInstructions(final StringBuffer sb) throws IOException {
+    @Override protected void processInstructions(final StringBuffer sb) throws IOException {
         final OutputStream stream = openSocket();
         stream.write(sb.toString().getBytes("iso-8859-1"));
         stream.flush();

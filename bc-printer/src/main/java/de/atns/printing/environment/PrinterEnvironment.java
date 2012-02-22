@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrinterEnvironment {
-// ------------------------------ FIELDS ------------------------------
 
     protected List<Printer> printers = new ArrayList<Printer>();
 
     private ImagePrinter imagePrinter = new ImagePrinter();
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public ImagePrinter getImagePrinter() {
         return this.imagePrinter;
@@ -25,12 +22,8 @@ public class PrinterEnvironment {
         return this.printers;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     /**
      * Adds a printer to the environment
-     *
-     * @param p
      */
     public void addPrinter(final Printer p) {
         if (!this.printers.contains(p))
@@ -39,9 +32,6 @@ public class PrinterEnvironment {
 
     /**
      * Returns a <code>List</code> of printers which are capable of printing the given material
-     *
-     * @param material
-     * @return
      */
     public List<Printer> getPrintersForMaterial(final String material) {
         final List<Printer> result = new ArrayList<Printer>();
@@ -64,9 +54,6 @@ public class PrinterEnvironment {
     /**
      * Trys to print <code>label</code> on the <code>printer</code> <code>quantity</code> times
      *
-     * @param label
-     * @param printer
-     * @param quantity
      * @return true if successfully rendered, false otherwise
      */
     public boolean print(final Label label, final Printer printer, final int quantity) {

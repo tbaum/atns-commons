@@ -14,7 +14,6 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
  */
 public abstract class GenericManagerNamedDeleteFlagImpl<TYPE extends LongIdObject & DeleteFlagAware & NameFieldObject>
         extends GenericManagerDeleteFlagImpl<TYPE> {
-// -------------------------- OTHER METHODS --------------------------
 
     @Transactional(readOnly = true, propagation = REQUIRES_NEW)
     public Map<Long, String> loadNameList() {

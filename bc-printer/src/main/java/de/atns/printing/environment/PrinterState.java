@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrinterState {
-// ------------------------------ FIELDS ------------------------------
 
     private boolean paperOut = false;
 
@@ -29,8 +28,6 @@ public class PrinterState {
     private int jobs = 0;
 
     private boolean ribbonIn = false;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public int getJobs() {
         return this.jobs;
@@ -116,11 +113,8 @@ public class PrinterState {
         this.ribbonIn = ribbonIn;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer();
+    @Override public String toString() {
+        final StringBuilder sb = new StringBuilder();
         sb.append("Paper out  : ").append(this.paperOut).append("\n");
         sb.append("Paused     : ").append(this.paused).append("\n");
         sb.append("Head up    : ").append(this.headUp).append("\n");
@@ -133,8 +127,6 @@ public class PrinterState {
         sb.append("Jobs : ").append(this.jobs).append("\n");
         return sb.toString();
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public List<String> getErrorMessages() {
         final ArrayList<String> result = new ArrayList<String>();

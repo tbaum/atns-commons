@@ -12,28 +12,18 @@ import de.atns.common.gwt.client.Table;
 import java.util.ArrayList;
 
 public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColumn<FIELD>> {
-// ------------------------------ FIELDS ------------------------------
 
     private final ArrayList<SortHeading> headers = new ArrayList<SortHeading>();
     private SortColumn<FIELD> sortColumn = new SortColumn<FIELD>(null, null);
-
     private final ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers =
             new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
     private final Table.Row headerRow = Table.head();
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Table.Row getHeaderRow() {
         return headerRow;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasHandlers ---------------------
-
-    @Override
-    public void fireEvent(final GwtEvent<?> gwtEvent) {
+    @Override public void fireEvent(final GwtEvent<?> gwtEvent) {
         if (gwtEvent instanceof ValueChangeEvent) {
             final ValueChangeEvent event = (ValueChangeEvent) gwtEvent;
             for (final ValueChangeHandler<SortColumn<FIELD>> header : handlers) {
@@ -43,32 +33,22 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         }
     }
 
-// --------------------- Interface HasValueChangeHandlers ---------------------
-
-    @Override
-    public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<SortColumn<FIELD>> handler) {
+    @Override public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<SortColumn<FIELD>> handler) {
         handlers.add(handler);
         return new HandlerRegistration() {
-            @Override
-            public void removeHandler() {
+            @Override public void removeHandler() {
                 handlers.remove(handler);
             }
         };
     }
 
-// --------------------- Interface TakesValue ---------------------
-
-    @Override
-    public SortColumn<FIELD> getValue() {
+    @Override public SortColumn<FIELD> getValue() {
         return sortColumn;
     }
 
-    @Override
-    public void setValue(final SortColumn<FIELD> sortColumn) {
+    @Override public void setValue(final SortColumn<FIELD> sortColumn) {
         setValue(sortColumn, false);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public Widget addHeader(final String s) {
         final Label label = new Label(s);
@@ -81,8 +61,7 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         headers.add(widget);
 
         widget.addValueChangeHandler(new ValueChangeHandler<OrderField.Sort>() {
-            @Override
-            public void onValueChange(final ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
+            @Override public void onValueChange(final ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
                 for (final SortHeading sortHeading : headers) {
                     if (sortHeading != widget)
                         sortHeading.setSort(OrderField.Sort.NONE);
@@ -96,8 +75,7 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         return widget;
     }
 
-    @Override
-    public void setValue(final SortColumn<FIELD> sortColumn, final boolean b) {
+    @Override public void setValue(final SortColumn<FIELD> sortColumn, final boolean b) {
         final boolean shouldFire = this.sortColumn == null || !this.sortColumn.equals(sortColumn);
 
         this.sortColumn = new SortColumn<FIELD>(sortColumn.field, sortColumn.value);

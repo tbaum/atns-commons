@@ -11,24 +11,20 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.model.UserPresentation;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 @Singleton
 public class BenutzerCreatePresenter extends DialogBoxPresenter<BenutzerCreatePresenter.Display> {
-// -------------------------- OTHER METHODS --------------------------
 
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
         registerHandler(display.forSafe(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 dispatcher.execute(new BenutzerCreate(display.getData(new UserPresentation())),
                         new Callback<UserPresentation>(display) {
-                            @Override
-                            public void callback(final UserPresentation result) {
+                            @Override public void callback(final UserPresentation result) {
                                 eventBus.fireEvent(new BenutzerUpdateEvent(result));
                                 display.hideDialogBox();
                             }
@@ -36,8 +32,6 @@ public class BenutzerCreatePresenter extends DialogBoxPresenter<BenutzerCreatePr
             }
         }));
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends DialogBoxDisplay {
         HandlerRegistration forSafe(ClickHandler handler);

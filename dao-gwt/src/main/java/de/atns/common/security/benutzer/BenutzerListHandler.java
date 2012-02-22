@@ -21,23 +21,16 @@ import static de.atns.common.gwt.server.ListConverter.listConverter;
  * @since 23.10.2009
  */
 public class BenutzerListHandler extends DefaultActionHandler<BenutzerList, ListPresentation<UserPresentation>> {
-// ------------------------------ FIELDS ------------------------------
 
     private final BenutzerRepository repository;
     private final Converter<PartResult<Benutzer>, ListPresentation<UserPresentation>> converter;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerListHandler(final BenutzerRepository repository, final UserConverter converter) {
         this.repository = repository;
         this.converter = listConverter(converter);
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Transactional
-    @Secured(UserAdminRole.class)
+    @Override @Transactional @Secured(UserAdminRole.class)
     public ListPresentation<UserPresentation> executeInternal(final BenutzerList action) {
         PartResult<Benutzer> result;
         final String text = action.getFilter().getFilterText();

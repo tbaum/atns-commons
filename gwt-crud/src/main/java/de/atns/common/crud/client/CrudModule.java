@@ -11,7 +11,6 @@ import de.atns.common.security.client.SharedServicesModule;
  * @since 24.10.2009
  */
 public class CrudModule extends SharedServicesModule {
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configure() {
         super.configure();

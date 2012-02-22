@@ -19,18 +19,12 @@ import java.util.List;
  * @since 05.10.2010
  */
 public abstract class ListProxyPresenter<D extends ListProxyDisplay<T>, T extends EntityProxy> extends WidgetPresenter<D> {
-// ------------------------------ FIELDS ------------------------------
 
     protected PageProxyPresenter pageProxyPresenter;
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    @Inject
-    public void setPageProxyPresenter(final PageProxyPresenter pageProxyPresenter) {
+    @Inject public void setPageProxyPresenter(final PageProxyPresenter pageProxyPresenter) {
         this.pageProxyPresenter = pageProxyPresenter;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract Request createLoadAction();
 

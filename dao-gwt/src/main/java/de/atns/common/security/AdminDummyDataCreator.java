@@ -15,20 +15,15 @@ import javax.persistence.NoResultException;
  * @since 17.06.2010
  */
 public class AdminDummyDataCreator {
-// ------------------------------ FIELDS ------------------------------
 
     private final BenutzerRepository repository;
     private final Provider<EntityManager> entityManager;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public AdminDummyDataCreator(final BenutzerRepository repository, final Provider<EntityManager> entityManager) {
         this.repository = repository;
         this.entityManager = entityManager;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Transactional public void createDefaultAdmin() {
         final Benutzer admin = new Benutzer("admin", SHA1.createSHA1Code("admin"), "", "");

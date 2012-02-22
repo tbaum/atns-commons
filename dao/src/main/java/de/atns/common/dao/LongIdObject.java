@@ -6,15 +6,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public interface LongIdObject extends Serializable {
-// ------------------------------ FIELDS ------------------------------
 
     Converter<LongIdObject, Long> CONVERTER = new Converter<LongIdObject, Long>() {
         @Override public Long convert(final LongIdObject from) {
             return from.getId();
         }
     };
-
-// -------------------------- OTHER METHODS --------------------------
 
     Date getCreateTimestamp();
 

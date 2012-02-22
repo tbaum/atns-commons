@@ -19,16 +19,11 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
  * @since 30.09.2009
  */
 @Singleton public class JSONPFilter implements Filter {
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Filter ---------------------
 
     @Override public void init(final FilterConfig filterConfig) throws ServletException {
     }
 
-    @Override public void doFilter(final ServletRequest request,
-                                   final ServletResponse response,
+    @Override public void doFilter(final ServletRequest request, final ServletResponse response,
                                    final FilterChain chain) throws IOException, ServletException {
         response.setContentType("application/javascript");
         final int[] status = new int[]{SC_OK};

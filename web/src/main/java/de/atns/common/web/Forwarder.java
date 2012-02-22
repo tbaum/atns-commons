@@ -12,20 +12,14 @@ import java.io.IOException;
  * @since 21.10.2009
  */
 public class Forwarder {
-// ------------------------------ FIELDS ------------------------------
 
     private final HttpServletRequest request;
     private final HttpServletResponse response;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public Forwarder(final HttpServletRequest request, final HttpServletResponse response) {
+    @Inject public Forwarder(final HttpServletRequest request, final HttpServletResponse response) {
         this.response = response;
         this.request = request;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void forward(String target) throws ServletException, IOException {
         final String ctxPath = request.getContextPath();

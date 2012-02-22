@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
  * @since 13.10.2009 11:12:24
  */
 public class LocalServletScopes {
-// ------------------------------ FIELDS ------------------------------
 
     public static final Scope LOCAL_REQUEST = new Scope() {
         @Override public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
@@ -38,8 +37,6 @@ public class LocalServletScopes {
             return "ServletScopes.REQUEST";
         }
     };
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     private LocalServletScopes() {
     }

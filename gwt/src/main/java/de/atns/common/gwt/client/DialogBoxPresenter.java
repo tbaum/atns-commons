@@ -16,35 +16,24 @@ import java.util.logging.Logger;
  * @since 07.12.2009
  */
 public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends WidgetPresenter<D> implements Command {
-// ------------------------------ FIELDS ------------------------------
 
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ScheduledCommand ---------------------
 
     @Override public void execute() {
         bind();
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
 
         display.addDialogBoxCloseCommand(new CloseHandler<PopupPanel>() {
-            @Override
-            public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
+            @Override public void onClose(final CloseEvent<PopupPanel> popupPanelCloseEvent) {
                 unbind();
             }
         });
 
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-            @Override
-            public void execute() {
+            @Override public void execute() {
                 if (isBound()) {
                     display.showDialogBox();
                 }
@@ -52,16 +41,14 @@ public abstract class DialogBoxPresenter<D extends DialogBoxDisplay> extends Wid
         });
     }
 
-    @Override
-    public void unbind() {
+    @Override public void unbind() {
         super.unbind();
         if (display.isShowing()) {
             display.hideDialogBox();
         }
     }
 
-    @Override
-    public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
+    @Override public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
         LOG.log(Level.FINE, "Activity: start()");
         bind();
     }

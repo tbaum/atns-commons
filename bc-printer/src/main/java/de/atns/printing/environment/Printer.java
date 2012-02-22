@@ -5,7 +5,6 @@ import de.atns.printing.device.Device;
 import java.io.IOException;
 
 public interface Printer {
-// -------------------------- OTHER METHODS --------------------------
 
     public abstract boolean canPrint(Label lf);
 

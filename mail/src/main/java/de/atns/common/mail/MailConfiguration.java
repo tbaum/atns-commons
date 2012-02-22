@@ -7,7 +7,6 @@ import java.util.Properties;
  * @since 26.05.11 04:38
  */
 public class MailConfiguration extends Properties {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public MailConfiguration() {
         this(new Properties());
@@ -28,8 +27,6 @@ public class MailConfiguration extends Properties {
         return "true".equalsIgnoreCase(getProperty("mail.smtp.ssl")) ||
                 "true".equalsIgnoreCase(getProperty("mail.smtps.ssl"));
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public String getHost() {
         return (String) get("mail." + getProtocol() + ".host");

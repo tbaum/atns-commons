@@ -9,14 +9,10 @@ import com.google.gwt.place.shared.Prefix;
  * @since 18.11.10
  */
 public class LogoutPlace extends Place {
-// ------------------------------ FIELDS ------------------------------
 
     public static final LogoutPlace ALL = new LogoutPlace();
 
-// -------------------------- INNER CLASSES --------------------------
-
-    @Prefix("logout")
-    public static class Tokenizer implements PlaceTokenizer<LogoutPlace> {
+    @Prefix("logout") public static class Tokenizer implements PlaceTokenizer<LogoutPlace> {
         @Override public LogoutPlace getPlace(final String token) {
             return new LogoutPlace();
         }

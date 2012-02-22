@@ -17,24 +17,16 @@ import java.util.Map;
  */
 @Singleton
 public class DispatchServlet extends HttpServlet {
-// ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = -8267730268526925897L;
     private final Map<String, Provider<Action>> actionMap;
     private final Provider<Result> result;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public DispatchServlet(final Map<String, Provider<Action>> actionMap, final Provider<Result> result) {
+    @Inject public DispatchServlet(final Map<String, Provider<Action>> actionMap, final Provider<Result> result) {
         this.actionMap = actionMap;
         this.result = result;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void service(final HttpServletRequest request, final HttpServletResponse response)
+    @Override protected void service(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         final String path = request.getPathInfo();
         final Provider<Action> actionProvider = lookupProvider(path);

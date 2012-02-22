@@ -32,23 +32,19 @@ import static de.atns.common.security.client.event.ServerStatusEvent.loggedin;
  */
 @Singleton
 public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.Display> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final int CHECK_INTERVAL = 15000;
     private final Place defaultPlace;
     private final Logger LOG = Logger.getLogger("ApplicationPresenter");
 
-
     private final Timer checkSessionTimer = new Timer() {
         private boolean running = false;
 
-        @Override
-        public void run() {
+        @Override public void run() {
             if (!running) {
                 running = true;
                 checkSession(new Command() {
-                    @Override
-                    public void execute() {
+                    @Override public void execute() {
                         running = false;
                     }
                 });
@@ -59,8 +55,6 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
     private final PlaceController placeController;
     private final PlaceHistoryMapper historyMapper;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject
     public ApplicationPresenter(final PlaceController placeController, final PlaceHistoryMapper historyMapper,
                                 @ApplicationDefaultPlace final Place defaultPlace) {
@@ -69,17 +63,13 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
         this.defaultPlace = defaultPlace;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public void checkSession(final Command command) {
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
-            @Override
-            public void onFailure(final Throwable caught) {
+            @Override public void onFailure(final Throwable caught) {
                 command.execute();
             }
 
-            @Override
-            public void onSuccess(final UserPresentation user) {
+            @Override public void onSuccess(final UserPresentation user) {
                 if (!user.isValid()) {
                     doLogin();
                 }
@@ -88,8 +78,7 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
         });
     }
 
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
 
         registerHandler(eventBus.addHandler(ServerStatusEventHandler.TYPE, new ServerStatusEventHandler() {
@@ -144,8 +133,6 @@ public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.D
     @Override protected void onUnbind() {
         super.onUnbind();
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     public static interface Display extends WidgetDisplay {
         void setUser(UserPresentation user);

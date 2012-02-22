@@ -16,8 +16,6 @@ import java.util.Map;
  * @since 13.06.2010
  */
 public class Util {
-// -------------------------- STATIC METHODS --------------------------
-
     public static Date parseDate(final String text, final Date defaultValue) {
         try {
             if (text != null && !text.isEmpty()) {

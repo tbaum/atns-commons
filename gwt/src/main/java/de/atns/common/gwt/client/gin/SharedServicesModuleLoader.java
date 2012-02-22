@@ -10,13 +10,10 @@ import java.util.logging.Logger;
  * @since 04.02.11
  */
 public abstract class SharedServicesModuleLoader<I extends SharedServicesGinjector> implements RunAsyncCallback {
-// ------------------------------ FIELDS ------------------------------
 
     private I injector;
     private final SharedServices sharedServices;
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public SharedServicesModuleLoader(final SharedServices sharedServices) {
         this.sharedServices = sharedServices;
@@ -24,11 +21,6 @@ public abstract class SharedServicesModuleLoader<I extends SharedServicesGinject
     }
 
     protected abstract void load();
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface RunAsyncCallback ---------------------
 
     @Override public void onFailure(final Throwable reason) {
         Window.alert("Failed to load module");
@@ -42,8 +34,6 @@ public abstract class SharedServicesModuleLoader<I extends SharedServicesGinject
             sharedServices.eventBus().fireEvent(new ModuleReadyEvent(this));
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract I create();
 

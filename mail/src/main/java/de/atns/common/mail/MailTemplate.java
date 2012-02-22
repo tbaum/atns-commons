@@ -1,7 +1,6 @@
 package de.atns.common.mail;
 
 public interface MailTemplate {
-// -------------------------- OTHER METHODS --------------------------
 
     String getHtmlText();
 

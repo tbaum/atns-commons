@@ -10,13 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractRenderer<E extends AbstractElement> implements Renderer<E> {
-// ------------------------------ FIELDS ------------------------------
 
     protected static final Map<Rotation, String> rotations = new HashMap<Rotation, String>();
 
     protected DocumentRenderer dr;
-
-// -------------------------- STATIC METHODS --------------------------
 
     static {
         rotations.put(Rotation.NORMAL, "^FWN");
@@ -25,13 +22,9 @@ public abstract class AbstractRenderer<E extends AbstractElement> implements Ren
         rotations.put(Rotation.BOTTOMUP, "^FWB");
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public AbstractRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void appendEscaped(final StringBuffer buffer, final String txt) throws UnsupportedEncodingException {
         for (int i = 0; i < txt.length(); i++) {

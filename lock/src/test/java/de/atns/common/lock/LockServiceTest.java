@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
  * @since 08.12.2010
  */
 public class LockServiceTest {
-// -------------------------- OTHER METHODS --------------------------
 
     @Test
     public void testDifferent() throws Exception {
@@ -67,8 +66,6 @@ public class LockServiceTest {
 
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     private static class TestRunner implements Runnable {
         private final TestService testService;
         private final String id;
@@ -78,8 +75,7 @@ public class LockServiceTest {
             this.id = id;
         }
 
-        @Override
-        public void run() {
+        @Override public void run() {
             try {
                 testService.doTest(id);
             } catch (InterruptedException e) {

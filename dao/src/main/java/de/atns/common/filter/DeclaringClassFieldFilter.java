@@ -7,20 +7,12 @@ import java.lang.reflect.Field;
  * @since 09.07.11
  */
 public class DeclaringClassFieldFilter implements Filter<Field> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Class<?> aClass;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public DeclaringClassFieldFilter(Class<?> aClass) {
         this.aClass = aClass;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Filter ---------------------
 
     @Override public boolean isInFilter(Field o) {
         return Iterable.class.isAssignableFrom(o.getType()) || o.getDeclaringClass().equals(aClass);

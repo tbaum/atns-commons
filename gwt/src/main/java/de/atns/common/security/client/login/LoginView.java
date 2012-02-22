@@ -18,14 +18,11 @@ import static com.google.gwt.event.dom.client.KeyCodes.KEY_ENTER;
  * @since 24.10.2009
  */
 public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandler, LoginPresenter.Display {
-// ------------------------------ FIELDS ------------------------------
 
     private final Button login;
     private final TextBox username;
     private final PasswordTextBox password;
     private final CheckBox automatic;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public LoginView(final AppShell appShell) {
         username = new TextBox();
@@ -84,10 +81,6 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         login.setEnabled(username.getText().length() > 0 && password.getText().length() > 0);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
 
     @Override public HandlerRegistration addLoginClick(final ClickHandler clickHandler) {
         return login.addClickHandler(clickHandler);
@@ -119,8 +112,6 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         updateLoginButton();
     }
 
-// --------------------- Interface KeyPressHandler ---------------------
-
     @Override public void onKeyPress(final KeyPressEvent event) {
         updateLoginButton();
 
@@ -136,8 +127,6 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
             }
         }
     }
-
-// --------------------- Interface WidgetDisplay ---------------------
 
     @Override public void reset() {
         username.setValue("");

@@ -17,7 +17,6 @@ import static de.atns.common.crud.client.sortheader.OrderField.Sort.*;
 import static de.atns.common.gwt.client.GwtUtil.flowPanel;
 
 public class SortHeading extends Composite implements HasValueChangeHandlers<OrderField.Sort> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Anchor label = new Anchor();
     private final Image labelUp = new Image("arrow_up.png");
@@ -27,15 +26,12 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
     private final ArrayList<ValueChangeHandler<OrderField.Sort>> handlers =
             new ArrayList<ValueChangeHandler<OrderField.Sort>>();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public SortHeading() {
         setSort(NONE);
         initWidget(flowPanel(label, labelUp, labelDown));
         label.getElement().getStyle().setCursor(POINTER);
         label.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent clickEvent) {
+            @Override public void onClick(final ClickEvent clickEvent) {
                 setSort(sort.next());
 
                 final ValueChangeEvent<OrderField.Sort> valueChangeEvent = new ValueChangeEvent<OrderField.Sort>(sort) {
@@ -63,17 +59,11 @@ public class SortHeading extends Composite implements HasValueChangeHandlers<Ord
         label.setText(text);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasValueChangeHandlers ---------------------
-
     @Override
     public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<OrderField.Sort> sortValueChangeHandler) {
         handlers.add(sortValueChangeHandler);
         return new HandlerRegistration() {
-            @Override
-            public void removeHandler() {
+            @Override public void removeHandler() {
                 handlers.remove(sortValueChangeHandler);
             }
         };

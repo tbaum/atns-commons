@@ -8,11 +8,8 @@ import com.google.gwt.event.shared.GwtEvent;
  * @since 24.10.2009
  */
 public interface BenutzerUpdateEventHandler extends EventHandler {
-// ------------------------------ FIELDS ------------------------------
 
     GwtEvent.Type<BenutzerUpdateEventHandler> TYPE = new GwtEvent.Type<BenutzerUpdateEventHandler>();
-
-// -------------------------- OTHER METHODS --------------------------
 
     void onUpdate(BenutzerUpdateEvent event);
 }

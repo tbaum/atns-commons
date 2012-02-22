@@ -14,18 +14,14 @@ import java.util.Date;
  * @since 08.01.2009 09:23:28
  */
 public class ModificationTimeInterceptor extends EmptyInterceptor {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ModificationTimeInterceptor.class);
     private static final long serialVersionUID = 5698498007655555145L;
     private int updates;
     private int creates;
     private int loads;
-
     //    private JspUpdateService jspUpdateService;
     private HibernateInterceptorHandler deleteHandler = null;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public HibernateInterceptorHandler getDeleteHandler() {
         return deleteHandler;
@@ -35,26 +31,16 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         this.deleteHandler = deleteHandler;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Interceptor ---------------------
-
 //    public void setJspUpdateService(final JspUpdateService jspUpdateService) {
 //        this.jspUpdateService = jspUpdateService;
 //    }
 
-// ------------------------ INTERFACE METHODS ------------------------
 
-
-// --------------------- Interface Interceptor ---------------------
-
-    @Override
-    public boolean onLoad(final Object entity,
-                          final Serializable id,
-                          final Object[] state,
-                          final String[] propertyNames,
-                          final Type[] types) {
+    @Override public boolean onLoad(final Object entity,
+                                    final Serializable id,
+                                    final Object[] state,
+                                    final String[] propertyNames,
+                                    final Type[] types) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("@onLoad:" + entity.getClass() + "/" + id);
         }
@@ -64,13 +50,12 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         return false;
     }
 
-    @Override
-    public boolean onFlushDirty(final Object entity,
-                                final Serializable id,
-                                final Object[] currentState,
-                                final Object[] previousState,
-                                final String[] propertyNames,
-                                final Type[] types) {
+    @Override public boolean onFlushDirty(final Object entity,
+                                          final Serializable id,
+                                          final Object[] currentState,
+                                          final Object[] previousState,
+                                          final String[] propertyNames,
+                                          final Type[] types) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("@onFlushDirty:" + entity.getClass() + "/" + id);
         }
@@ -82,12 +67,11 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         return update;
     }
 
-    @Override
-    public boolean onSave(final Object entity,
-                          final Serializable id,
-                          final Object[] state,
-                          final String[] propertyNames,
-                          final Type[] types) {
+    @Override public boolean onSave(final Object entity,
+                                    final Serializable id,
+                                    final Object[] state,
+                                    final String[] propertyNames,
+                                    final Type[] types) {
         boolean update = false;
         if (LOG.isDebugEnabled()) {
             LOG.debug("@onSave:" + entity.getClass() + "/" + id);
@@ -100,12 +84,11 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         return update;
     }
 
-    @Override
-    public void onDelete(final Object entity,
-                         final Serializable id,
-                         final Object[] state,
-                         final String[] propertyNames,
-                         final Type[] types) {
+    @Override public void onDelete(final Object entity,
+                                   final Serializable id,
+                                   final Object[] state,
+                                   final String[] propertyNames,
+                                   final Type[] types) {
         if (deleteHandler != null) {
             deleteHandler.execute(entity, id, state, propertyNames, types);
         }
@@ -114,8 +97,7 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         }
     }
 
-    @Override
-    public void afterTransactionCompletion(final Transaction tx) {
+    @Override public void afterTransactionCompletion(final Transaction tx) {
 //        if (tx.wasCommitted()) {
 //            if (LOG.isDebugEnabled()) {
 //                LOG.debug("Creations: " + creates + ", Updates: " + updates + ", Loads: " + loads);
@@ -130,8 +112,6 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
         creates = 0;
         loads = 0;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private boolean updateProperty(final Object[] state, final String[] propertyNames, final String name,
                                    final Object value) {

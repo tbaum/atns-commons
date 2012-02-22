@@ -7,18 +7,11 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @MappedSuperclass public class BaseObject implements Serializable {
-// ------------------------------ FIELDS ------------------------------
 
-    @Id @GeneratedValue(strategy = IDENTITY)
-    private long id;
-
-    @Version
-    private int version;
-
+    @Id @GeneratedValue(strategy = IDENTITY) private long id;
+    @Version private int version;
     private Date lastUpdateTimestamp;
     private Date createTimestamp;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BaseObject() {
     }
@@ -26,8 +19,6 @@ import static javax.persistence.GenerationType.IDENTITY;
     protected BaseObject(final long id) {
         this.id = id;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Date getCreateTimestamp() {
         return createTimestamp;
@@ -45,17 +36,11 @@ import static javax.persistence.GenerationType.IDENTITY;
         return version;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public String toString() {
         return "{id=" + id + "}";
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @PreUpdate
-    @PrePersist
-    private void updateTimeStamps() {
+    @PreUpdate @PrePersist private void updateTimeStamps() {
         lastUpdateTimestamp = new Date();
         if (createTimestamp == null) {
             createTimestamp = lastUpdateTimestamp;

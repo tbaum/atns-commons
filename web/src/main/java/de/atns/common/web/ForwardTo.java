@@ -9,7 +9,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE})
 @Retention(RUNTIME)
 public @interface ForwardTo {
-// -------------------------- OTHER METHODS --------------------------
 
     public abstract String value();
 }

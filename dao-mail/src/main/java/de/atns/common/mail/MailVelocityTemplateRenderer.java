@@ -14,21 +14,12 @@ import java.util.Map;
  * Time: 02:54:24
  */
 public class MailVelocityTemplateRenderer implements MailTemplateRenderer {
-// ------------------------------ FIELDS ------------------------------
 
     private VelocityEngine velocityEngine;
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    @Required
-    public void setVelocityEngine(final VelocityEngine velocityEngine) {
+    @Required public void setVelocityEngine(final VelocityEngine velocityEngine) {
         this.velocityEngine = velocityEngine;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MailTemplateRenderer ---------------------
 
     @Override public String renderHtmlTemplate(final MailTemplate template, final Map<String, Object> context) {
         return renderTemplate(template.getHtmlText(), context);
@@ -37,8 +28,6 @@ public class MailVelocityTemplateRenderer implements MailTemplateRenderer {
     @Override public String renderPlainTemplate(final MailTemplate template, final Map<String, Object> context) {
         return renderTemplate(template.getText(), context);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private String renderTemplate(final String template, final Map<String, Object> context) {
         try {

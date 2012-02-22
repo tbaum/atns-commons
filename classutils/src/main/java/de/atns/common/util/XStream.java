@@ -11,19 +11,14 @@ import java.io.Writer;
  */
 
 public class XStream {
-// ------------------------------ FIELDS ------------------------------
 
     private final com.thoughtworks.xstream.XStream xStream = new com.thoughtworks.xstream.XStream();
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static XStream xstream() {
         final XStream xs = new XStream();
         xs.xStream.autodetectAnnotations(true);
         return xs;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @SuppressWarnings("unchecked")
     public <T> T fromXML(final String xml) {

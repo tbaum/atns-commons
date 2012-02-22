@@ -17,12 +17,9 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
  * @since 28.04.2010 11:45:37
  */
 public class StyledFileUpload extends Composite implements HasChangeHandlers, HasName {
-// ------------------------------ FIELDS ------------------------------
 
     private final FileUpload fileUpload = new FileUpload();
     private final Button label;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public StyledFileUpload(final String text, final int width, final int height) {
         label = new Button(text);
@@ -54,16 +51,9 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
         initWidget(flowPanel);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasChangeHandlers ---------------------
-
     @Override public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
         return fileUpload.addChangeHandler(handler);
     }
-
-// --------------------- Interface HasName ---------------------
 
     @Override public void setName(final String name) {
         fileUpload.setName(name);
@@ -72,8 +62,6 @@ public class StyledFileUpload extends Composite implements HasChangeHandlers, Ha
     @Override public String getName() {
         return fileUpload.getName();
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public String getFilename() {
         return fileUpload.getFilename();

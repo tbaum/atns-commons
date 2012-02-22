@@ -8,8 +8,6 @@ import de.atns.common.security.benutzer.client.*;
  * @since 24.10.2009
  */
 public class BenutzerModule extends CrudModule {
-// -------------------------- OTHER METHODS --------------------------
-
     @Override protected void configure() {
         super.configure();
 

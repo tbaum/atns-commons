@@ -22,15 +22,11 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @since 24.10.2009
  */
 public class PageView extends DefaultWidgetDisplay implements PagePresenter.Display {
-// ------------------------------ FIELDS ------------------------------
 
     private final ListBox rangeBox = new ListBox();
     private final ExtendedFlowPanel leftPanel = extendedFlowPanel();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public PageView() {
+    @Inject public PageView() {
         leftPanel.setPadding(5);
 
         final Label items = createLabel("Anzahl:");
@@ -49,11 +45,6 @@ public class PageView extends DefaultWidgetDisplay implements PagePresenter.Disp
         initWidget(p);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
-
     @Override
     public HandlerRegistration addSeitenButton(final int site, final ClickHandler clickHandler, final boolean active) {
         final Label label = new Label("" + site);
@@ -70,8 +61,7 @@ public class PageView extends DefaultWidgetDisplay implements PagePresenter.Disp
         return label.addClickHandler(clickHandler);
     }
 
-    @Override
-    public void addDots() {
+    @Override public void addDots() {
         leftPanel.add("...");
     }
 
@@ -89,17 +79,12 @@ public class PageView extends DefaultWidgetDisplay implements PagePresenter.Disp
         return rangeBox.addChangeHandler(handler);
     }
 
-    @Override
-    public int selectedRange() {
+    @Override public int selectedRange() {
         final int selectedIndex = rangeBox.getSelectedIndex();
         return Integer.parseInt(rangeBox.getValue(selectedIndex));
     }
 
-// --------------------- Interface WidgetDisplay ---------------------
-
-
-    @Override
-    public void reset() {
+    @Override public void reset() {
         leftPanel.clear();
     }
 }

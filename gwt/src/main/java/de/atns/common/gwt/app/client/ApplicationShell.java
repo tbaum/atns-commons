@@ -18,18 +18,14 @@ import de.atns.common.security.client.model.UserPresentation;
  * @since 05.11.10
  */
 public class ApplicationShell extends DefaultWidgetDisplay implements ApplicationPresenter.Display, AppShell {
-// ------------------------------ FIELDS ------------------------------
 
     private static final ShellUiBinder UI_BINDER = GWT.create(ShellUiBinder.class);
 
     @UiField SimplePanel contentPanel;
     @UiField SimplePanel navigation;
-
     private final Navigation loginMenu;
     private final String appName;
     private final NavigationNoAuth logoutMenu;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public ApplicationShell(final NavigationNoAuth logoutMenu, final Navigation loginMenu,
                                     @ApplicationName final String appName) {
@@ -50,16 +46,9 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
         }
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     @Override public String getAppName() {
         return appName;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
 
     @Override public AcceptsOneWidget getContentWidget() {
         return contentPanel;
@@ -69,13 +58,9 @@ public class ApplicationShell extends DefaultWidgetDisplay implements Applicatio
         loginMenu.setUsername(user != null ? user.getLogin() : "");
     }
 
-// --------------------- Interface WidgetDisplay ---------------------
-
     @Override public void reset() {
         show(false);
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     interface ShellUiBinder extends UiBinder<Widget, ApplicationShell> {
     }

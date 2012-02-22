@@ -10,15 +10,12 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 public class SimpleResourceLoader extends ResourceLoader {
-// -------------------------- OTHER METHODS --------------------------
 
-    @Override
-    public long getLastModified(final Resource resource) {
+    @Override public long getLastModified(final Resource resource) {
         return 0;
     }
 
-    @Override
-    public InputStream getResourceStream(final String s) throws ResourceNotFoundException {
+    @Override public InputStream getResourceStream(final String s) throws ResourceNotFoundException {
         byte[] data;
         try {
             data = s.getBytes("utf-8");
@@ -28,13 +25,11 @@ public class SimpleResourceLoader extends ResourceLoader {
         return new ByteArrayInputStream(data);
     }
 
-    @Override
-    public void init(final ExtendedProperties extendedProperties) {
+    @Override public void init(final ExtendedProperties extendedProperties) {
         //
     }
 
-    @Override
-    public boolean isSourceModified(final Resource resource) {
+    @Override public boolean isSourceModified(final Resource resource) {
         return false;
     }
 }

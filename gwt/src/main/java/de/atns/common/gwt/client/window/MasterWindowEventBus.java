@@ -45,7 +45,6 @@ import static java.lang.System.currentTimeMillis;
         this.serializer = eventSerializer;
         _registerEventBus(this);
 
-
         Window.addCloseHandler(new CloseHandler<Window>() {
             @Override public void onClose(CloseEvent<Window> windowCloseEvent) {
                 for (JavaScriptObject window : windows.values()) {

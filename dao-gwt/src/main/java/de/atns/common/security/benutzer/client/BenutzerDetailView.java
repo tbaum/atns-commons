@@ -28,7 +28,6 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @since 24.10.2009
  */
 public class BenutzerDetailView extends DefaultDialogBoxDisplay implements BenutzerEditPresenter.Display, BenutzerCreatePresenter.Display {
-// ------------------------------ FIELDS ------------------------------
 
     protected final TextBox login = new TextBox();
     protected final PasswordTextBox passwort1 = new PasswordTextBox();
@@ -39,10 +38,7 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
     protected final Map<Class<? extends SecurityRole>, CheckBox> roles = new HashMap<Class<? extends SecurityRole>, CheckBox>();
     private final RoleConverter roleConverter;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public BenutzerDetailView(RoleConverter roleConverter) {
+    @Inject public BenutzerDetailView(RoleConverter roleConverter) {
         this.roleConverter = roleConverter;
         final FlowPanel fp = flowPanel(speichern, getCancelButton());
         fp.getElement().getStyle().setProperty("textAlign", "center");
@@ -106,8 +102,6 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
         speichern.setEnabled((p1.isEmpty() && p2.isEmpty()) || (p1.length() > 5 && p1.equals(p2)));
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     private Set<SecurityRolePresentation> getSelectedRoles() {
         Set<SecurityRolePresentation> selectedRoles = new HashSet<SecurityRolePresentation>();
         for (Map.Entry<Class<? extends SecurityRole>, CheckBox> role : roles.entrySet()) {
@@ -117,20 +111,6 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
             }
         }
         return selectedRoles;
-    }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
-
-    @Override public HandlerRegistration forSafe(final ClickHandler handler) {
-        return speichern.addClickHandler(handler);
-    }
-
-    @Override public UserPresentation getData(UserPresentation p) {
-        return new UserPresentation(p.getId(), login.getValue(), name.getValue(), passwort1.getValue(),
-                email.getValue(), getSelectedRoles(), null, null);
     }
 
     @Override public void setData(final UserPresentation p) {
@@ -151,7 +131,14 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
         updButton();
     }
 
-// --------------------- Interface WidgetDisplay ---------------------
+    @Override public HandlerRegistration forSafe(final ClickHandler handler) {
+        return speichern.addClickHandler(handler);
+    }
+
+    @Override public UserPresentation getData(UserPresentation p) {
+        return new UserPresentation(p.getId(), login.getValue(), name.getValue(), passwort1.getValue(),
+                email.getValue(), getSelectedRoles(), null, null);
+    }
 
     @Override public void reset() {
         login.setValue("");
@@ -161,8 +148,6 @@ public class BenutzerDetailView extends DefaultDialogBoxDisplay implements Benut
         passwort2.setValue("");
         updButton();
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     private class Handler implements ValueChangeHandler<String>, KeyPressHandler, KeyUpHandler {
         @Override public void onKeyPress(final KeyPressEvent event) {

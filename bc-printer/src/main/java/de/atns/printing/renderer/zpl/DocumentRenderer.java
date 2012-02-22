@@ -28,35 +28,23 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public class DocumentRenderer extends AbstractDocumentRenderer {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(DocumentRenderer.class);
 
     private StringBuffer buffer;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public DocumentRenderer(final Device device) {
         super(device);
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public StringBuffer getBuffer() {
         return this.buffer;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
-
     @Override @SuppressWarnings("unchecked")
     public void render(final DocumentElement element) throws IOException {
         render(element, 1);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @SuppressWarnings("unchecked")
     public void render(final DocumentElement element, final int quantity) throws IOException {

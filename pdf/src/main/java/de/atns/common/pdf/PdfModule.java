@@ -11,7 +11,6 @@ import javax.xml.transform.TransformerFactory;
  * @since 02.11.10
  */
 public class PdfModule extends AbstractModule {
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configure() {
         bind(FopFactory.class).toProvider(FopFactoryProvider.class);

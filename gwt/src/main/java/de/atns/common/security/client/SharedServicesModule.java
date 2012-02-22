@@ -18,7 +18,6 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
  * @since 24.10.2009
  */
 public class SharedServicesModule extends AbstractPresenterModule {
-// -------------------------- OTHER METHODS --------------------------
 
     @Provides public AppShell appshell(final SharedServices sharedServices) {
         return sharedServices.appShell();
@@ -59,10 +58,7 @@ public class SharedServicesModule extends AbstractPresenterModule {
         return sharedServices.roleConverter();
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
-    @Singleton
-    public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
+    @Singleton public static class SharedServicesAdapter implements Provider<SharedServices>, SharedServicesAware {
         private SharedServices services;
 
         @Override public void setSharedServices(final SharedServices services) {

@@ -23,16 +23,10 @@ import java.awt.image.BufferedImage;
  * @author Thomas Baum
  */
 public class ImageRenderer extends AbstractRenderer<ImageElement> {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public ImageRenderer(final DocumentRenderer dr) {
         super(dr);
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final ImageElement element) {
         final StringBuffer buffer = this.dr.getBuffer();
@@ -69,8 +63,6 @@ public class ImageRenderer extends AbstractRenderer<ImageElement> {
         }
         buffer.append("\r\n");
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private String toHex(final int ret) {
         return (ret < 0x10 ? "0" : "") + Integer.toHexString(ret).toUpperCase();

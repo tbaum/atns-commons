@@ -1,6 +1,5 @@
 package de.atns.common.mail;
 
-
 import javax.activation.DataHandler;
 import javax.mail.MessagingException;
 import javax.mail.Part;
@@ -21,19 +20,10 @@ import static java.util.Arrays.asList;
  * Time: 18:53:01
  */
 @Entity class HtmlMessagePreparator extends MessagePreparator {
-// ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = 4957245309057720941L;
-
-    @Basic(optional = false)
-    @Lob
-    private String html;
-
-    @OneToMany(targetEntity = MailResource.class)
-    @JoinColumn(name = "resources")
+    @Basic(optional = false) @Lob private String html;
+    @OneToMany(targetEntity = MailResource.class) @JoinColumn(name = "resources")
     private List<MailResource> resources;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     HtmlMessagePreparator() {
     }
@@ -55,8 +45,6 @@ import static java.util.Arrays.asList;
         this.resources = asList(resources);
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public String getHtml() {
         return html;
     }
@@ -65,10 +53,7 @@ import static java.util.Arrays.asList;
         return resources;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void createTextMessage(final MimePart messagePart) throws MessagingException {
+    @Override protected void createTextMessage(final MimePart messagePart) throws MessagingException {
         messagePart.setContent(
                 resources.size() > 0 ?
                         createRelatedPart(html, resources) :

@@ -182,7 +182,6 @@ package de.atns.common.gwt.client.composite.colorpicker;
  * DAMAGE.
  */
 
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -194,8 +193,8 @@ import com.google.gwt.user.client.ui.Image;
 /**
  * Implements the SliderBar control.
  */
-public final class SliderBar extends HTML
-{
+public final class SliderBar extends HTML {
+
     public static final int BarA = 1;
     public static final int BarB = 2;
     public static final int BarC = 3;
@@ -218,11 +217,10 @@ public final class SliderBar extends HTML
 
     private boolean capturedMouse = false;
 
-    /***
+    /**
      * Initialize the SliderMap -- default mode is Saturation.
      */
-    public SliderBar(ColorPicker parent)
-    {
+    public SliderBar(ColorPicker parent) {
         super();
 
         this.parent = parent;
@@ -251,12 +249,42 @@ public final class SliderBar extends HTML
         DOM.setStyleAttribute(colorD.getElement(), "border", "1px solid black");
     }
 
-    /***
+    /**
+     * Fired whenever a browser event is received.
+     *
+     * @param event Event to process
+     */
+    @Override public void onBrowserEvent(Event event) {
+        switch (DOM.eventGetType(event)) {
+            case Event.ONMOUSEUP:
+                Event.releaseCapture(this.getElement());
+                capturedMouse = false;
+                break;
+            case Event.ONMOUSEDOWN:
+                Event.setCapture(this.getElement());
+                capturedMouse = true;
+            case Event.ONMOUSEMOVE:
+                if (capturedMouse) {
+                    DOM.eventPreventDefault(event);
+
+                    int y = DOM.eventGetClientY(event) - getAbsoluteTop() + Window.getScrollTop();
+
+                    if (y < 0) y = 0;
+                    if (y > 256) y = 256;
+
+                    DOM.setStyleAttribute(slider.getElement(), "top", y - 4 + "px");
+
+                    if (parent != null) {
+                        parent.onBarSelected(y);
+                    }
+                }
+        }
+    }
+
+    /**
      * This method is called when a widget is attached to the browser's document.
      */
-    @Override
-    public void onAttach()
-    {
+    @Override public void onAttach() {
         super.onAttach();
 
         DOM.setStyleAttribute(colorA.getElement(), "position", "absolute");
@@ -276,46 +304,11 @@ public final class SliderBar extends HTML
         DOM.setStyleAttribute(slider.getElement(), "top", "0px");
     }
 
-    /**
-     * Fired whenever a browser event is received.
-     * @param event Event to process
-     */
-    @Override
-    public void onBrowserEvent(Event event)
-    {
-        switch (DOM.eventGetType(event))
-        {
-            case Event.ONMOUSEUP:
-                Event.releaseCapture(this.getElement());
-                capturedMouse = false;
-                break;
-            case Event.ONMOUSEDOWN:
-                Event.setCapture(this.getElement());
-                capturedMouse = true;
-            case Event.ONMOUSEMOVE:
-                if (capturedMouse)
-                {
-                    DOM.eventPreventDefault(event);
-
-                    int y = DOM.eventGetClientY(event) - getAbsoluteTop() + Window.getScrollTop();
-
-                    if (y < 0) y = 0;
-                    if (y > 256) y = 256;
-
-                    DOM.setStyleAttribute(slider.getElement(), "top", y - 4 + "px");
-
-                    if (parent != null) { parent.onBarSelected(y); }
-                }
-        }
-    }
-
     /*
      * (non-Javadoc)
      * @see com.google.gwt.user.client.ui.Widget#onLoad()
      */
-    @Override
-    public void onLoad()
-    {
+    @Override public void onLoad() {
         this.sinkEvents(Event.MOUSEEVENTS);
     }
 
@@ -323,77 +316,75 @@ public final class SliderBar extends HTML
      * (non-Javadoc)
      * @see com.google.gwt.user.client.ui.Widget#onUnload()
      */
-    @Override
-    public void onUnload()
-    {
+    @Override public void onUnload() {
         this.unsinkEvents(Event.MOUSEEVENTS);
     }
 
     /**
      * Sets the color selection mode
+     *
      * @param mode Can be one of: ColorBar.Saturation, ColorBar.Hue, ColorBar.Brightness, ColorBar.Red, ColorBar.Green, ColorBar.Blue, ColorBar.Red.
      */
-    public void setColorSelectMode(int mode)
-    {
-        if (!isAttached()) { return; }
+    public void setColorSelectMode(int mode) {
+        if (!isAttached()) {
+            return;
+        }
 
-        switch (mode)
-        {
+        switch (mode) {
             case Saturation:
                 colorA.setResource(cpImageBundle.bar_white());
                 colorB.setResource(cpImageBundle.bar_white());
                 colorC.setResource(cpImageBundle.bar_white());
                 colorD.setResource(cpImageBundle.bar_saturation());
-            break;
+                break;
 
             case Brightness:
                 colorA.setResource(cpImageBundle.bar_white());
                 colorB.setResource(cpImageBundle.bar_white());
                 colorC.setResource(cpImageBundle.bar_white());
                 colorD.setResource(cpImageBundle.bar_brightness());
-            break;
+                break;
 
             case Hue:
-            	colorA.setResource(cpImageBundle.bar_white());
-            	colorB.setResource(cpImageBundle.bar_white());
-            	colorC.setResource(cpImageBundle.bar_white());
-            	colorD.setResource(cpImageBundle.bar_hue());
-            break;
+                colorA.setResource(cpImageBundle.bar_white());
+                colorB.setResource(cpImageBundle.bar_white());
+                colorC.setResource(cpImageBundle.bar_white());
+                colorD.setResource(cpImageBundle.bar_hue());
+                break;
 
             case Red:
-            	colorA.setResource(cpImageBundle.bar_red_tl());
-            	colorB.setResource(cpImageBundle.bar_red_tr());
-            	colorC.setResource(cpImageBundle.bar_red_br());
-            	colorD.setResource(cpImageBundle.bar_red_bl());
-            break;
+                colorA.setResource(cpImageBundle.bar_red_tl());
+                colorB.setResource(cpImageBundle.bar_red_tr());
+                colorC.setResource(cpImageBundle.bar_red_br());
+                colorD.setResource(cpImageBundle.bar_red_bl());
+                break;
 
             case Green:
-            	colorA.setResource(cpImageBundle.bar_green_tl());
-            	colorB.setResource(cpImageBundle.bar_green_tr());
-            	colorC.setResource(cpImageBundle.bar_green_br());
-            	colorD.setResource(cpImageBundle.bar_green_bl());
-            break;
+                colorA.setResource(cpImageBundle.bar_green_tl());
+                colorB.setResource(cpImageBundle.bar_green_tr());
+                colorC.setResource(cpImageBundle.bar_green_br());
+                colorD.setResource(cpImageBundle.bar_green_bl());
+                break;
 
             case Blue:
-            	colorA.setResource(cpImageBundle.bar_blue_tl());
-            	colorB.setResource(cpImageBundle.bar_blue_tr());
-            	colorC.setResource(cpImageBundle.bar_blue_br());
-            	colorD.setResource(cpImageBundle.bar_blue_bl());
-            break;
+                colorA.setResource(cpImageBundle.bar_blue_tl());
+                colorB.setResource(cpImageBundle.bar_blue_tr());
+                colorC.setResource(cpImageBundle.bar_blue_br());
+                colorD.setResource(cpImageBundle.bar_blue_bl());
+                break;
         }
     }
 
     /**
      * Sets the color of a particular layer
+     *
      * @param color Hexadecimal notation of RGB to change the layer's color
      * @param layer Which layer to affect
      */
-    public void setLayerColor(String color, int layer)
-    {
+    public void setLayerColor(String color, int layer) {
         Element colorbar;
 
-        switch (layer)
-        {
+        switch (layer) {
             case BarA:
                 colorbar = colorA.getElement();
                 break;
@@ -415,17 +406,15 @@ public final class SliderBar extends HTML
 
     /**
      * Set overlay's opacity.
+     *
      * @param alpha An opacity percentage, between 100 (fully opaque) and 0 (invisible).
      * @param layer which bar to change opacity for, 1-4
      */
-    public void setLayerOpacity(int alpha, int layer)
-    {
-        if (alpha >= 0 && alpha <= 100 && isAttached())
-        {
+    public void setLayerOpacity(int alpha, int layer) {
+        if (alpha >= 0 && alpha <= 100 && isAttached()) {
             Element colorbar;
 
-            switch (layer)
-            {
+            switch (layer) {
                 case BarA:
                     colorbar = colorA.getElement();
                     break;
@@ -448,10 +437,10 @@ public final class SliderBar extends HTML
 
     /**
      * Sets the slider's position on the y-axis.
+     *
      * @param y Position along the y-axis to set the slider's position to.
      */
-    public void setSliderPosition(int y)
-    {
+    public void setSliderPosition(int y) {
         if (y < 0) y = 0;
         if (y > 256) y = 256;
         DOM.setStyleAttribute(slider.getElement(), "top", y - 4 + "px");

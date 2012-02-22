@@ -12,14 +12,10 @@ import static com.google.gwt.dom.client.Style.Display.BLOCK;
  * @since 12.02.2010
  */
 public class ExtendedFlowPanel {
-// ------------------------------ FIELDS ------------------------------
 
     private final FlowPanel panel = new FlowPanel();
-
     private int count = 0;
     private int padding = 0;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static ExtendedFlowPanel extendedFlowPanel(final Widget... items) {
         final ExtendedFlowPanel flowPanel = new ExtendedFlowPanel();
@@ -61,18 +57,12 @@ public class ExtendedFlowPanel {
         return this;
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     private ExtendedFlowPanel() {
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public FlowPanel getPanel() {
         return panel;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public ExtendedFlowPanel add(final Object text) {
         return add(GwtUtil.createLabel(text != null ? text.toString() : ""));

@@ -11,32 +11,26 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.model.UserPresentation;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 @Singleton
 public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresenter.Display> {
-// ------------------------------ FIELDS ------------------------------
 
     private UserPresentation presentation;
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void bind(final UserPresentation presentation) {
         this.presentation = presentation;
         bind();
     }
 
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
         display.setData(presentation);
 
         registerHandler(display.forSafe(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
+            @Override public void onClick(final ClickEvent event) {
                 final BenutzerUpdate update = new BenutzerUpdate(
                         BenutzerEditPresenter.this.display.getData(presentation));
                 dispatcher.execute(update, new Callback<UserPresentation>(display) {
@@ -49,9 +43,8 @@ public class BenutzerEditPresenter extends DialogBoxPresenter<BenutzerEditPresen
         }));
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static interface Display extends DialogBoxDisplay {
+
         void setData(UserPresentation p);
 
         HandlerRegistration forSafe(ClickHandler handler);

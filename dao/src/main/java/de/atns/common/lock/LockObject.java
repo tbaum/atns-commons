@@ -6,14 +6,10 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 
 public class LockObject<TYPE extends LongIdObject> implements Serializable {
-// ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = -2270842625663700543L;
     private final Long id;
     private final Class<? extends LongIdObject> clazz;
     private final int hashCode;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public LockObject(final TYPE object) {
         this.id = object.getId();
@@ -21,10 +17,7 @@ public class LockObject<TYPE extends LongIdObject> implements Serializable {
         hashCode = object.hashCode();
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
-    @Override
-    public boolean equals(final Object o) {
+    @Override public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -47,13 +40,11 @@ public class LockObject<TYPE extends LongIdObject> implements Serializable {
         return true;
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         return (int) (id ^ (id >>> 32) + (clazz.hashCode()));
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return MessageFormat.format("LockObject {1}@{2}", clazz, id);
     }
 }

@@ -18,13 +18,10 @@ import java.util.Map;
 
 @Service("mailUtil")
 public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUtil {
-// ------------------------------ FIELDS ------------------------------
 
     @Autowired(required = true) private JavaMailSenderImpl mailSender;
     @Autowired(required = true) private MailResourceResolver resourceResolver;
     @Autowired(required = true) private MailTemplateRenderer templateRenderer;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public void setMailSender(final JavaMailSenderImpl mailSender) {
         this.mailSender = mailSender;
@@ -38,10 +35,6 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
         this.templateRenderer = templateRenderer;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MailUtil ---------------------
 
     @Override @Transactional(propagation = Propagation.REQUIRED)
     public MessagePreparator sendMail(final String recipient, final String recipientName,
@@ -77,8 +70,7 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
         }
 
         executeCallback(new NonReturningHibernateCallback() {
-            @Override
-            protected void executeInHibernate(final Session session) throws HibernateException, SQLException {
+            @Override protected void executeInHibernate(final Session session) throws HibernateException, SQLException {
                 session.save(preparator);
             }
         });

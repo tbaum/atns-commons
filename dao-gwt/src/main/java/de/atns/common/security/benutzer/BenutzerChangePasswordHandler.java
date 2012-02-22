@@ -20,13 +20,10 @@ import javax.persistence.EntityManager;
  * @since 23.10.2009
  */
 public class BenutzerChangePasswordHandler extends DefaultActionHandler<BenutzerChangePassword, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Converter<Benutzer, UserPresentation> converter;
     private final Provider<EntityManager> em;
     private final SecurityService securityService;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerChangePasswordHandler(final Provider<EntityManager> em,
                                                  final SecurityService securityService,
@@ -36,12 +33,7 @@ public class BenutzerChangePasswordHandler extends DefaultActionHandler<Benutzer
         this.converter = converter;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Transactional
-    @Secured
-    public UserPresentation executeInternal(final BenutzerChangePassword action) {
+    @Override @Transactional @Secured public UserPresentation executeInternal(final BenutzerChangePassword action) {
         final Benutzer t = (Benutzer) securityService.currentUser();
 
         final Benutzer benutzer = em.get().find(Benutzer.class, t.getId());

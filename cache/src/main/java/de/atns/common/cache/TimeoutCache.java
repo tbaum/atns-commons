@@ -7,20 +7,15 @@ import java.util.*;
  * @since 13.02.2010
  */
 public class TimeoutCache<K, V> {
-// ------------------------------ FIELDS ------------------------------
 
     private final long ttl;
     private final Map<K, V> cache = new HashMap<K, V>();
     private final Map<K, AccessTime> accessMap = new HashMap<K, AccessTime>();
     private final SortedSet<AccessTime> lastAccess = new TreeSet<AccessTime>();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public TimeoutCache(final long ttl) {
         this.ttl = ttl;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public V get(final K key) {
         flushCache();
@@ -29,7 +24,7 @@ public class TimeoutCache<K, V> {
 
     private void flushCache() {
         synchronized (this) {
-            for (Iterator<AccessTime> iterator = lastAccess.iterator(); iterator.hasNext();) {
+            for (Iterator<AccessTime> iterator = lastAccess.iterator(); iterator.hasNext(); ) {
                 final AccessTime lastAcces = iterator.next();
                 if (lastAcces.isTimeout()) {
                     cache.remove(lastAcces.key);
@@ -75,19 +70,15 @@ public class TimeoutCache<K, V> {
         }
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     private class AccessTime implements Comparable<AccessTime> {
         private final Long time;
         private final K key;
-
 
         private boolean isTimeout() {
             return getTime() - time >= ttl;
         }
 
-        @Override
-        public boolean equals(final Object o) {
+        @Override public boolean equals(final Object o) {
             if (this == o) {
                 return true;
             }
@@ -101,8 +92,7 @@ public class TimeoutCache<K, V> {
             return key.equals(that.key);
         }
 
-        @Override
-        public int hashCode() {
+        @Override public int hashCode() {
             return 31 * time.hashCode() + key.hashCode();
         }
 

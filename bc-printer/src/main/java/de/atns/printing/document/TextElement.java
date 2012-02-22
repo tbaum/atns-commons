@@ -17,13 +17,10 @@ package de.atns.printing.document;
  * @author Steffen Schoenwiese
  */
 public class TextElement extends AbstractElement {
-// ------------------------------ FIELDS ------------------------------
 
     private double size;
 
     private String text;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected TextElement(final double x, final double y, final double size) {
         super(x, y);
@@ -39,8 +36,6 @@ public class TextElement extends AbstractElement {
         this(x, y, size);
         this.text = text;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public double getSize() {
         return this.size;
@@ -58,9 +53,7 @@ public class TextElement extends AbstractElement {
         this.text = text;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public String toString() {
         return "TextElement{text='" + text + "', " + super.toString() + "}";
     }
-} 
+}

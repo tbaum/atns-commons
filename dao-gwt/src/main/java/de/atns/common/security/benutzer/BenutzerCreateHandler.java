@@ -27,24 +27,17 @@ import static de.atns.common.util.SHA1.createSHA1Code;
  * @since 23.10.2009
  */
 public class BenutzerCreateHandler extends DefaultActionHandler<BenutzerCreate, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(BenutzerCreateHandler.class);
     private final Provider<EntityManager> em;
     private final Converter<Benutzer, UserPresentation> converter;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerCreateHandler(final Provider<EntityManager> em, final UserConverter converter) {
         this.em = em;
         this.converter = converter;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Transactional
-    @Secured(UserAdminRole.class)
+    @Override @Transactional @Secured(UserAdminRole.class)
     public UserPresentation executeInternal(final BenutzerCreate action) {
         UserPresentation p = action.getPresentation();
 

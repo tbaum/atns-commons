@@ -25,13 +25,10 @@ import de.atns.printing.document.TextElement;
  * @author Steffen Schoenwiese
  */
 public class Tester {
-// ------------------------------ FIELDS ------------------------------
 
     private final String address = "10.1.1.19";
 
     private final int port = 9100;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public Tester() throws Exception {
         final DocumentElement label = createLabel();
@@ -79,14 +76,10 @@ public class Tester {
         f.renderDocument(label);
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public void testSwing(final DocumentElement label) throws Exception {
         final Device device = new SwingGUIRenderDevice();
         device.renderDocument(label);
     }
-
-// --------------------------- main() method ---------------------------
 
     public static void main(final String[] args) throws Exception {
         new Tester();

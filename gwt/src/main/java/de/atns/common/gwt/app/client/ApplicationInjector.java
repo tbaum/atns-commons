@@ -11,7 +11,6 @@ import de.atns.common.gwt.client.gin.SharedServices;
  * @since 22.11.10
  */
 public interface ApplicationInjector extends Ginjector {
-// -------------------------- OTHER METHODS --------------------------
 
     ActivityManager activityManager();
 

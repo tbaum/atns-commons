@@ -8,7 +8,6 @@ import java.util.EnumSet;
  * @since 17.06.2010
  */
 public class StringUtils {
-// -------------------------- STATIC METHODS --------------------------
 
     public static <T> String join(final String delimiter, final Iterable<T> iterable) {
         final StringBuilder b = new StringBuilder();

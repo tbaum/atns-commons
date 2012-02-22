@@ -25,29 +25,13 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public interface RendererFactory<DOC extends DocumentRenderer> {
-// -------------------------- OTHER METHODS --------------------------
 
-    /**
-     * returns the document-renderer
-     *
-     * @param element
-     * @return
-     */
     public DOC getDocumentRenderer();
 
     /**
      * returns the renderer for this type of element
-     *
-     * @param element
-     * @return
      */
     public Renderer getRender(Element element);
 
-    /**
-     * call: getDocumentRenderer().render(document)
-     *
-     * @param document
-     * @throws IOException
-     */
     public void renderDocument(DocumentElement document) throws IOException;
 }

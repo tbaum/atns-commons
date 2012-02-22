@@ -27,9 +27,7 @@ import static de.atns.common.dao.LogEntry.Action.*;
  * @author tbaum
  * @since 09.07.11
  */
-@Singleton
-public class DatabaseProtokolService {
-// ------------------------------ FIELDS ------------------------------
+@Singleton public class DatabaseProtokolService {
 
     private static final Log LOG = LogFactory.getLog(DatabaseProtokolService.class);
 
@@ -45,8 +43,6 @@ public class DatabaseProtokolService {
 
     private final Provider<EntityManager> em;
     private final SecurityService securityService;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static void logPersist(Object object) {
         instance.writeLogEntry(object, persist);
@@ -96,8 +92,6 @@ public class DatabaseProtokolService {
         instance.writeLogEntry(object, update);
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject public DatabaseProtokolService(Provider<EntityManager> em, SecurityService securityService) {
         this.em = em;
         this.securityService = securityService;
@@ -106,8 +100,6 @@ public class DatabaseProtokolService {
         }
         instance = this;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private StringBuilder dumpClass(Object object, Class<?> aClass, String delimiter, boolean showFieldName,
                                     Filter<Field> filter) {

@@ -17,11 +17,6 @@ package de.atns.printing.exception;
  * @author Steffen Schoenwiese
  */
 public class PrintingException extends Exception {
-// ------------------------------ FIELDS ------------------------------
-
-    private static final long serialVersionUID = 4617924704602168802L;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public PrintingException(final String string, final Exception e) {
         super(string, e);

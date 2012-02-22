@@ -16,13 +16,8 @@ import java.util.List;
  * @since 14.02.12 19:02
  */
 public class UserConverter implements Converter<Benutzer, UserPresentation> {
-// ------------------------ INTERFACE METHODS ------------------------
 
-
-// --------------------- Interface Converter ---------------------
-
-    @Override
-    public UserPresentation convert(Benutzer b) {
+    @Override public UserPresentation convert(Benutzer b) {
         Date lastAccess = b.getLastAccess();
         if (lastAccess != null && lastAccess.before(new Date(new Date().getTime() - 60000))) {
             lastAccess = null;

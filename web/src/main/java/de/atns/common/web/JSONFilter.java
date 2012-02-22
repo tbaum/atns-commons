@@ -18,27 +18,19 @@ import java.io.PrintWriter;
  * @since 30.09.2009
  */
 @Singleton public class JSONFilter implements Filter {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(JSONFilter.class);
     private final Provider<Result> result;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public JSONFilter(final Provider<Result> result) {
         this.result = result;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Filter ---------------------
 
     @Override public void init(final FilterConfig filterConfig) throws ServletException {
     }
 
-    @Override public void doFilter(final ServletRequest request,
-                                   final ServletResponse response,
+    @Override public void doFilter(final ServletRequest request, final ServletResponse response,
                                    final FilterChain chain) throws IOException {
         final PrintWriter printWriter = response.getWriter();
         response.setContentType("application/json");
@@ -55,8 +47,6 @@ import java.io.PrintWriter;
 
     @Override public void destroy() {
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private String mapException(final Throwable e) {
         try {

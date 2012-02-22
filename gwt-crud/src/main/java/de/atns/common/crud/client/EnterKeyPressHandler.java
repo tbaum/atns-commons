@@ -9,18 +9,12 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
  * @since 08.01.2010
  */
 public abstract class EnterKeyPressHandler implements KeyPressHandler {
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface KeyPressHandler ---------------------
 
     @Override public void onKeyPress(final KeyPressEvent event) {
         if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
             onEnterPressed();
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract void onEnterPressed();
 }

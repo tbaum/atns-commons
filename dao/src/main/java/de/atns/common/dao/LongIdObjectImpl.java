@@ -4,17 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@MappedSuperclass
-public class LongIdObjectImpl implements LongIdObject, Serializable {
-// ------------------------------ FIELDS ------------------------------
+@MappedSuperclass public class LongIdObjectImpl implements LongIdObject, Serializable {
 
-    private static final long serialVersionUID = 4222536000799678624L;
     private Long id;
     private long version;
     private Date lastUpdateTimestamp;
     private Date createTimestamp;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     @Override public Date getCreateTimestamp() {
         return createTimestamp;
@@ -50,11 +45,8 @@ public class LongIdObjectImpl implements LongIdObject, Serializable {
         this.version = version;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass"})
-    @Override
-    public boolean equals(final Object o) {
+    @Override public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -83,8 +75,7 @@ public class LongIdObjectImpl implements LongIdObject, Serializable {
         return super.hashCode();
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         if (isNew()) {
             return super.hashCode();
         }
@@ -92,8 +83,7 @@ public class LongIdObjectImpl implements LongIdObject, Serializable {
         return (int) (id ^ (id >>> 32));
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "id=" + id + "." + version;
     }
 }

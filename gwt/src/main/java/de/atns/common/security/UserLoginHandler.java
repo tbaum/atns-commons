@@ -9,21 +9,17 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.UUID;
 
-
 /**
  * @author tbaum
  * @since 23.10.2009
  */
 public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(UserLoginHandler.class);
     private final SecurityFilter securityFilter;
     private final CheckSessionHandler checkSessionHandler;
     private final UserService userService;
     private final SecurityService securityService;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public UserLoginHandler(final SecurityFilter securityFilter, CheckSessionHandler checkSessionHandler,
                                     UserService userService, SecurityService securityService) {
@@ -33,8 +29,6 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
         this.userService = userService;
         this.securityService = securityService;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public final UserPresentation executeInternal(final UserLogin action) {
         LOG.info("login " + action.getUserName());

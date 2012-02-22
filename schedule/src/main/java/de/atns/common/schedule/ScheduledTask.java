@@ -5,13 +5,10 @@ package de.atns.common.schedule;
  * @since 13.02.2010
  */
 public class ScheduledTask {
-// ------------------------------ FIELDS ------------------------------
 
     private final Long delay;
     private final Long period;
     private final Class<? extends Runnable> targetClass;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static ScheduledTask task() {
         return new ScheduledTask(0, null, null);
@@ -29,15 +26,11 @@ public class ScheduledTask {
         return new ScheduledTask(delay, period, targetClass);
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     private ScheduledTask(final long delay, final Long period, final Class<? extends Runnable> targetClass) {
         this.delay = delay;
         this.period = period;
         this.targetClass = targetClass;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public long getDelay() {
         return delay;
@@ -50,8 +43,6 @@ public class ScheduledTask {
     public Class<? extends Runnable> getTargetClass() {
         return targetClass;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public ScheduledTask delay(final long delay) {
         return new ScheduledTask(delay, period, targetClass);

@@ -8,11 +8,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class FieldSetPanel extends ComplexPanel implements InsertPanel {
-// ------------------------------ FIELDS ------------------------------
 
     private FieldSetPanel.LegendPanel legendPanel;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public FieldSetPanel(final Widget legend) {
         this(legend, null);
@@ -25,11 +22,6 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
 
     public FieldSetPanel(final String text, final Widget content) {
         this(new Label(text), content);
-    }
-
-    public FieldSetPanel(final String style, final String text, final Widget content) {
-        this(new Label(text), content);
-        addStyleName(style);
     }
 
     public FieldSetPanel(final String text, final ExtendedFlowPanel content) {
@@ -46,26 +38,23 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         }
     }
 
+    @Override public void add(final Widget w) {
+        add(w, getElement());
+    }
+
+    public FieldSetPanel(final String style, final String text, final Widget content) {
+        this(new Label(text), content);
+        addStyleName(style);
+    }
+
     public FieldSetPanel(final String style, final Widget legend, final Widget content) {
         this(legend, content);
         addStyleName(style);
     }
 
-    @Override
-    public void add(final Widget w) {
-        add(w, getElement());
-    }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface InsertPanel ---------------------
-
     @Override public void insert(final Widget w, final int beforeIndex) {
         insert(w, getElement(), beforeIndex, true);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void addLegend(final Widget legend) {
         legendPanel.add(legend);
@@ -89,20 +78,16 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         }
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     private class LegendPanel extends ComplexPanel implements InsertPanel {
         public LegendPanel() {
             setElement(DOM.createLegend());
         }
 
-        @Override
-        public void add(final Widget w) {
+        @Override public void add(final Widget w) {
             add(w, getElement());
         }
 
-        @Override
-        public void clear() {
+        @Override public void clear() {
             for (int i = 0; i < getWidgetCount(); i++) {
                 getWidget(i).removeFromParent();
                 remove(i);
@@ -114,5 +99,3 @@ public class FieldSetPanel extends ComplexPanel implements InsertPanel {
         }
     }
 }
-
-

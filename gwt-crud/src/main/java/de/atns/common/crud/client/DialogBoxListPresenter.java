@@ -13,7 +13,6 @@ import de.atns.common.gwt.client.DialogBoxDisplay;
  */
 public abstract class DialogBoxListPresenter<D extends DialogBoxDisplay & ListDisplay<T>, T extends IsSerializable>
         extends ListPresenter<D, T> {
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public D getDisplay() {
         return super.getDisplay();

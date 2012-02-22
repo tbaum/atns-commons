@@ -14,31 +14,18 @@ import java.util.Set;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 
-@Entity
-@Inheritance(strategy = JOINED)
+@Entity @Inheritance(strategy = JOINED)
 public class Benutzer extends BaseObject implements SecurityUser {
-// ------------------------------ FIELDS ------------------------------
 
-    @Column(unique = true, nullable = false)
-    private String login;
-
+    @Column(unique = true, nullable = false) private String login;
     private String passwort;
-
     @ElementCollection(fetch = EAGER, targetClass = Class.class)
     private Set<Class<? extends SecurityRole>> roles = new HashSet<Class<? extends SecurityRole>>();
-
     private String email;
-
-    @Transient
-    private String token;
-
+    @Transient private String token;
     private String name;
-
     private Date lastLogin;
-
     private Date lastAccess;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected Benutzer() {
     }
@@ -49,8 +36,6 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.email = email;
         this.name = name;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getEmail() {
         return email;
@@ -68,8 +53,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
         return lastLogin;
     }
 
-    @Override
-    public String getLogin() {
+    @Override public String getLogin() {
         return login;
     }
 
@@ -101,17 +85,9 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.token = token;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface SecurityUser ---------------------
-
-    @Override
-    public boolean hasAccessTo(final Secured secured) {
+    @Override public boolean hasAccessTo(final Secured secured) {
         return inRole(secured.value());
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void addRolle(final Class<? extends SecurityRole> rolle) {
         roles.add(rolle);
@@ -148,4 +124,3 @@ public class Benutzer extends BaseObject implements SecurityUser {
         this.roles = role;
     }
 }
-

@@ -12,12 +12,9 @@ import java.util.Map;
  * @since 02.11.10
  */
 public class QueryBuilder {
-// ------------------------------ FIELDS ------------------------------
 
     private final StringBuilder filter = new StringBuilder();
     private final Map<String, Object> params = new HashMap<String, Object>();
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void and(final String crit, final Object... values) {
         addOp(crit, "AND", values);

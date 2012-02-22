@@ -11,22 +11,14 @@ import de.atns.common.security.client.model.UserPresentation;
  */
 public abstract class AbstractLoadUserDetailHandler<A extends LoadUserDetail<R>, R extends UserPresentation>
         extends DefaultActionHandler<A, R> {
-// ------------------------------ FIELDS ------------------------------
 
     private final SecurityService securityService;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public AbstractLoadUserDetailHandler(SecurityService securityService) {
+    @Inject public AbstractLoadUserDetailHandler(SecurityService securityService) {
         this.securityService = securityService;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Secured
-    public R executeInternal(A action) {
+    @Override @Secured public R executeInternal(A action) {
         final SecurityUser securityUser = securityService.currentUser();
         return loadUserDetail(securityUser);
     }

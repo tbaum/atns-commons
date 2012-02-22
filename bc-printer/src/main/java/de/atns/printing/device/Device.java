@@ -21,7 +21,6 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public interface Device {
-// -------------------------- OTHER METHODS --------------------------
 
     public int getDpi();
 

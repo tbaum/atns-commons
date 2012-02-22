@@ -9,7 +9,6 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
  * @since 14.06.2010
  */
 public interface SharedServices {
-// -------------------------- OTHER METHODS --------------------------
 
     AppShell appShell();
 

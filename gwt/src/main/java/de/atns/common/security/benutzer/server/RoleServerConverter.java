@@ -15,14 +15,11 @@ import java.util.Set;
  * @since 08.12.11 12:46
  */
 public class RoleServerConverter implements Converter<Class<? extends SecurityRole>, SecurityRolePresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     public static final Converter<Class<? extends SecurityRole>, SecurityRolePresentation> ROLE_CONVERTER =
             new RoleServerConverter();
 
     private static Map<Class<? extends SecurityRole>, Set<Class<? extends SecurityRole>>> cache = new HashMap<Class<? extends SecurityRole>, Set<Class<? extends SecurityRole>>>();
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static HashSet<SecurityRolePresentation> convert(Set<Class<? extends SecurityRole>> roles) {
         Set<Class<? extends SecurityRole>> allRoles = new HashSet<Class<? extends SecurityRole>>();
@@ -57,13 +54,7 @@ public class RoleServerConverter implements Converter<Class<? extends SecurityRo
         return allRoles;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Converter ---------------------
-
-    @Override
-    public SecurityRolePresentation convert(Class<? extends SecurityRole> from) {
+    @Override public SecurityRolePresentation convert(Class<? extends SecurityRole> from) {
         return new SecurityRolePresentation(from);
     }
 }

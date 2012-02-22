@@ -151,7 +151,6 @@ import java.util.Vector;
  * @author Marco Schmidt
  */
 public class ImageInfo {
-// ------------------------------ FIELDS ------------------------------
 
     /**
      * Return value of {@link #getFormat()} for JPEG streams.
@@ -269,8 +268,6 @@ public class ImageInfo {
     private int physicalHeightDpi;
     private int physicalWidthDpi;
 
-// -------------------------- STATIC METHODS --------------------------
-
     public static String getMimeType(final byte[] data) {
         final ImageInfo imageInfo = new ImageInfo();
         imageInfo.setInput(new ByteArrayInputStream(data));
@@ -287,8 +284,6 @@ public class ImageInfo {
         in = inputStream;
         din = null;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     /**
      * If {@link #check()} was successful, returns the image's number of bits per pixel.
@@ -390,8 +385,6 @@ public class ImageInfo {
     public void setCollectComments(final boolean newValue) {
         collectComments = newValue;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     /**
      * Call this method after you have provided an input stream or file

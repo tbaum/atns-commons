@@ -9,7 +9,6 @@ import com.google.gwt.event.shared.HasHandlers;
  * @since 08.09.2010
  */
 class NumberChangeEvent extends ValueChangeEvent<Number> {
-// -------------------------- STATIC METHODS --------------------------
 
     public static <S extends HasValueChangeHandlers<Number> & HasHandlers> void fireIfNotEqualNumbers(
             final S source, final Number oldValue, final Number newValue) {
@@ -17,8 +16,6 @@ class NumberChangeEvent extends ValueChangeEvent<Number> {
             source.fireEvent(new NumberChangeEvent(newValue));
         }
     }
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected NumberChangeEvent(final Number value) {
         super(value);

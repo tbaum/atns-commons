@@ -24,7 +24,6 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public interface Renderer<E extends Element> {
-// -------------------------- OTHER METHODS --------------------------
 
     public void render(E element) throws IOException;
 }

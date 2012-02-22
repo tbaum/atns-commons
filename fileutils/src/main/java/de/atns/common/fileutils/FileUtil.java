@@ -9,12 +9,9 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 public abstract class FileUtil {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(FileUtil.class);
     private static final int BUFFER_SIZE = 1024 * 10;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static void removeAndCreateDir(final File dir) {
         if (dir.exists()) {

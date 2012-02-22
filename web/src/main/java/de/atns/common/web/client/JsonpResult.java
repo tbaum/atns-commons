@@ -8,12 +8,9 @@ import com.google.gwt.core.client.JsArrayString;
  * @since 14.02.2010
  */
 public class JsonpResult<R extends JavaScriptObject> extends JavaScriptObject {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected JsonpResult() {
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public final Error error() {
         return getStatus().equals("error") ? (Error) getResult() : null;
@@ -30,8 +27,6 @@ public class JsonpResult<R extends JavaScriptObject> extends JavaScriptObject {
     public final R result() {
         return getStatus().equals("ok") ? getResult() : null;
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     public static class Error extends JavaScriptObject {
         protected Error() {

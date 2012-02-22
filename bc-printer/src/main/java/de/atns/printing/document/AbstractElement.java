@@ -17,15 +17,12 @@ package de.atns.printing.document;
  * @author Steffen Schoenwiese
  */
 public abstract class AbstractElement implements Element {
-// ------------------------------ FIELDS ------------------------------
 
     private Rotation rot;
 
     private double x;
 
     private double y;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected AbstractElement(final double x, final double y) {
         this(x, y, Rotation.NORMAL);
@@ -36,8 +33,6 @@ public abstract class AbstractElement implements Element {
         this.y = y;
         this.rot = rot;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Rotation getRot() {
         return this.rot;
@@ -63,13 +58,9 @@ public abstract class AbstractElement implements Element {
         this.y = y;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public String toString() {
         return "rot=" + rot + ", x=" + x + ", y=" + y;
     }
-
-// -------------------------- ENUMERATIONS --------------------------
 
     public enum Rotation {
         NORMAL, ROTATED, INVERTED, BOTTOMUP;

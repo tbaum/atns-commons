@@ -25,62 +25,25 @@ import static org.hibernate.annotations.CascadeType.ALL;
  * User: tbaum
  * Date: 26.02.2008
  */
-@Entity
-public class EmailMessage implements Serializable {
-// ------------------------------ FIELDS ------------------------------
+@Entity public class EmailMessage implements Serializable {
 
-    private static final long serialVersionUID = -7417533601085246546L;
-
-    @Transient
-    protected final String MAIL_DEFAULT_CHARSET = "UTF-8";
-
+    @Transient protected final String MAIL_DEFAULT_CHARSET = "UTF-8";
     @OneToMany(mappedBy = "message") @Cascade(ALL)
     protected Collection<EmailMessageResource> messageResources = new ArrayList<EmailMessageResource>();
-
-    @Transient
-    private final String debugMode = System.getProperty("debug.email");
-
-    @Basic(optional = false) @Lob
-    private String text;
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
-
-    @Basic(optional = true)
-    private String cc;
-
-    @Basic(optional = true)
-    private String bcc;
-
-    @Basic(optional = false)
-    private String sender;
-
-    @Basic(optional = false)
-    private String senderName;
-
-    @Basic(optional = false)
-    private String recipient;
-
-    @Basic(optional = false)
-    private String recipientName;
-
-    @Basic(optional = false)
-    private String subject;
-
-    @Basic(optional = true)
-    private Date sent;
-
-    @Basic(optional = true)
-    private String error;
-
-    @Basic(optional = true)
-    private String replyTo;
-
-    @Basic(optional = true) @Lob
-    private String html;
-
-// --------------------------- CONSTRUCTORS ---------------------------
+    @Transient private final String debugMode = System.getProperty("debug.email");
+    @Basic(optional = false) @Lob private String text;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false) private long id;
+    @Basic(optional = true) private String cc;
+    @Basic(optional = true) private String bcc;
+    @Basic(optional = false) private String sender;
+    @Basic(optional = false) private String senderName;
+    @Basic(optional = false) private String recipient;
+    @Basic(optional = false) private String recipientName;
+    @Basic(optional = false) private String subject;
+    @Basic(optional = true) private Date sent;
+    @Basic(optional = true) private String error;
+    @Basic(optional = true) private String replyTo;
+    @Basic(optional = true) @Lob private String html;
 
     EmailMessage() {
     }
@@ -114,8 +77,6 @@ public class EmailMessage implements Serializable {
         this(sender, senderName, recipient, recipientName, cc, bcc, subject, text, html, asList(messageResources));
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public String getHtml() {
         return html;
     }
@@ -143,8 +104,6 @@ public class EmailMessage implements Serializable {
     public void setSent(final Date sent) {
         this.sent = sent;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void prepare(final MimeMessage mesg) throws MessagingException {
         mesg.setSubject(subject, MAIL_DEFAULT_CHARSET);

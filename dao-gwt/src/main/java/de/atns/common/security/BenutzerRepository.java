@@ -14,24 +14,20 @@ import java.util.List;
  * @since 17.08.2010
  */
 public interface BenutzerRepository {
-// ------------------------------ FIELDS ------------------------------
 
     String QRY_BENUTZER = "(lower(login) like lower(:aLogin) or lower(email) like lower(:aLogin) " +
             " or lower(name) like lower(:aLogin))";
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin") Benutzer benutzerByLogin(
-            @Named("aLogin") String login);
+    @Finder(query = "SELECT m FROM Benutzer m WHERE login = :aLogin")
+    Benutzer benutzerByLogin(@Named("aLogin") String login);
 
     @Finder(query = "SELECT count(distinct b) FROM Benutzer b ") Long countAllBenutzer();
 
-    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER) Long countBenutzer(
-            @Named("aLogin") String name);
+    @Finder(query = "SELECT count(distinct b) FROM Benutzer b where " + QRY_BENUTZER)
+    Long countBenutzer(@Named("aLogin") String name);
 
     @Finder(query = "SELECT distinct b FROM Benutzer b order by b.login", returnAs = ArrayList.class)
-    List<Benutzer> findAllBenutzer(
-            @FirstResult int start, @MaxResults int paging);
+    List<Benutzer> findAllBenutzer(@FirstResult int start, @MaxResults int paging);
 
     @Finder(query = "SELECT distinct b FROM Benutzer b where " + QRY_BENUTZER + " order by b.login",
             returnAs = ArrayList.class)

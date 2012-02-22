@@ -17,7 +17,6 @@ package de.atns.printing.document;
  * @author Steffen Schoenwiese
  */
 public class BarcodeElement extends AbstractElement {
-// ------------------------------ FIELDS ------------------------------
 
     public static final double MODULO1 = 0.254 / 3;
 
@@ -41,40 +40,17 @@ public class BarcodeElement extends AbstractElement {
 
     private boolean interpretationLine = true;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    /**
-     * @param x
-     * @param y
-     * @param height
-     * @param type
-     */
     public BarcodeElement(final double x, final double y, final double height, final Type type) {
         super(x, y);
         this.type = type;
         this.height = height;
     }
 
-    /**
-     * @param x
-     * @param y
-     * @param height
-     * @param type
-     * @param msg
-     */
     public BarcodeElement(final double x, final double y, final double height, final Type type, final String msg) {
         this(x, y, height, type);
         this.barcode = msg;
     }
 
-    /**
-     * @param x
-     * @param y
-     * @param height
-     * @param type
-     * @param modulo
-     * @param msg
-     */
     public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo,
                           final String msg) {
         this(x, y, height, type);
@@ -82,15 +58,6 @@ public class BarcodeElement extends AbstractElement {
         this.modulo = modulo;
     }
 
-    /**
-     * @param x
-     * @param y
-     * @param height
-     * @param type
-     * @param modulo
-     * @param interpretationLine
-     * @param msg
-     */
     public BarcodeElement(final double x, final double y, final double height, final Type type, final double modulo,
                           final boolean interpretationLine, final String msg) {
         this(x, y, height, type);
@@ -98,8 +65,6 @@ public class BarcodeElement extends AbstractElement {
         this.modulo = modulo;
         this.interpretationLine = interpretationLine;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getBarcode() {
         return this.barcode;
@@ -137,14 +102,10 @@ public class BarcodeElement extends AbstractElement {
         this.interpretationLine = interpretationLine;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public String toString() {
         return "BarcodeElement{type=" + type + ", text=" + interpretationLine + ", barcode='" + barcode + "', " +
                 super.toString() + "}";
     }
-
-// -------------------------- ENUMERATIONS --------------------------
 
     public enum Type {
         CODE128, CODE39, EAN13, EAN128;

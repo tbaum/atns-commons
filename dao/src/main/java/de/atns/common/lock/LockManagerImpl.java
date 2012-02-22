@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Service("lockManager")
 public class LockManagerImpl<TYPE extends LongIdObject> implements LockManager<TYPE> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(LockManagerImpl.class);
 
@@ -56,17 +55,10 @@ public class LockManagerImpl<TYPE extends LongIdObject> implements LockManager<T
     private long waitTime = 5000;
     private long timeoutTime = 15000;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public LockManagerImpl() {
         lockClear.setDaemon(true);
         lockClear.start();
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface LockManager ---------------------
 
     @Override public LockState createLock(final TYPE objectx) {
         synchronized (locks) {
@@ -134,8 +126,6 @@ public class LockManagerImpl<TYPE extends LongIdObject> implements LockManager<T
             return lock;
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void setWaitTime(final long waitTime) {
         this.waitTime = waitTime;

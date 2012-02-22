@@ -23,29 +23,18 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public abstract class BufferedImageRenderDevice extends AbstractDevice {
-// ------------------------------ FIELDS ------------------------------
 
     private final RendererFactory factory;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BufferedImageRenderDevice() {
         this.factory = new RendererFactory(this);
         this.dpi = 300;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Device ---------------------
-
-    @Override
-    public void renderDocument(final DocumentElement doc) throws IOException {
+    @Override public void renderDocument(final DocumentElement doc) throws IOException {
         this.factory.getDocumentRenderer().render(doc);
         processImage(this.factory.getDocumentRenderer().getImage());
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract void processImage(BufferedImage image);
 }

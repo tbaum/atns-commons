@@ -5,27 +5,13 @@ import de.atns.common.util.ImageInfo;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "email_spool_resource")
+@Entity @Table(name = "email_spool_resource")
 public class MailResource implements Serializable {
-// ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = 6311733671520162881L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
-
-    @Basic(optional = false)
-    private String name;
-
-    @Basic(optional = false)
-    private String mimeType;
-
-    @Basic(optional = false)
-    private byte[] data;
-
-// --------------------------- CONSTRUCTORS ---------------------------
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false) private long id;
+    @Basic(optional = false) private String name;
+    @Basic(optional = false) private String mimeType;
+    @Basic(optional = false) private byte[] data;
 
     public MailResource() {
     }
@@ -42,8 +28,6 @@ public class MailResource implements Serializable {
         this.mimeType = mimeType;
         this.data = data;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public byte[] getData() {
         return data;

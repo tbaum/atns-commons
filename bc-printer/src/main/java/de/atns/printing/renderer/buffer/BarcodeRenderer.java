@@ -17,20 +17,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class BarcodeRenderer implements Renderer<BarcodeElement> {
-// ------------------------------ FIELDS ------------------------------
 
     private final DocumentRenderer dr;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BarcodeRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final BarcodeElement element) throws IOException {
         final AbstractBarcodeBean bean;

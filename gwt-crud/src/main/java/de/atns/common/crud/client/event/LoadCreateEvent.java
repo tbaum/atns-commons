@@ -8,20 +8,16 @@ import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.Callback;
 
-
 /**
  * @author mwolter
  * @since 22.09.2010 18:17:01
  */
 public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCreateEventHandler<E>> {
-// ------------------------------ FIELDS ------------------------------
 
     @Inject private static Provider<EventBus> eventBus;
     private final E result;
     private final Type<LoadCreateEventHandler<E>> type;
     private final Object source;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static <T extends IsSerializable> Callback<T> eventCallback(final WidgetDisplay display,
                                                                        final Type<LoadCreateEventHandler<T>> type,
@@ -40,15 +36,11 @@ public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCrea
         display.stopProcessing();
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public LoadCreateEvent(final E result, final Type<LoadCreateEventHandler<E>> type, final Object source) {
         this.result = result;
         this.type = type;
         this.source = source;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void dispatch(final LoadCreateEventHandler<E> handler) {
         handler.onCreate(result, source);

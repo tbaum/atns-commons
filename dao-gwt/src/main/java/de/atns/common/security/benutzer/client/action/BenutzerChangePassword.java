@@ -3,17 +3,13 @@ package de.atns.common.security.benutzer.client.action;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 public class BenutzerChangePassword implements Action<UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private String pass;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BenutzerChangePassword() {
     }
@@ -21,8 +17,6 @@ public class BenutzerChangePassword implements Action<UserPresentation> {
     public BenutzerChangePassword(final String pass) {
         this.pass = pass;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getPass() {
         return pass;

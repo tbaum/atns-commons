@@ -8,18 +8,14 @@ import java.io.*;
 
 import static java.lang.Long.parseLong;
 
-
 /**
  * @author tbaum
  * @since 06.11.2009
  */
 @Singleton
 public class NumberGenerator {
-// ------------------------------ FIELDS ------------------------------
 
     private final File orderNumberDir;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public NumberGenerator(@NumberDir final String numberDir) {
         this.orderNumberDir = new File(numberDir);
@@ -29,8 +25,6 @@ public class NumberGenerator {
             }
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public long next(final NumberType type, final String subType, final Object... data) {
         synchronized (orderNumberDir) {
@@ -47,7 +41,6 @@ public class NumberGenerator {
             if (f.length > 1) {
                 throw new RuntimeException("more than one numbercounter in " + d1);
             }
-
 
             final long current;
             switch (type.period()) {

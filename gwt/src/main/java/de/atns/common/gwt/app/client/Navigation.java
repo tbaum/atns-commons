@@ -11,15 +11,10 @@ import com.google.inject.Inject;
  * @since 22.11.10
  */
 public abstract class Navigation extends Composite {
-// ------------------------------ FIELDS ------------------------------
 
     @Inject private static PlaceController placeController;
 
-// -------------------------- OTHER METHODS --------------------------
-
     public abstract void setUsername(String s);
-
-// -------------------------- INNER CLASSES --------------------------
 
     protected class GoToPlaceCommand implements Command {
         private final Place place;

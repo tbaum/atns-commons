@@ -18,21 +18,15 @@ import javax.persistence.EntityManager;
  * @since 09.12.11 13:32
  */
 public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDetail, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private Provider<EntityManager> em;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public UserLoadDetailHandler(final SecurityService securityService, final Provider<EntityManager> em) {
         super(securityService);
         this.em = em;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Transactional
+    @Override @Transactional
     protected UserPresentation loadUserDetail(SecurityUser securityUser) {
         final Benutzer benutzer = this.em.get().find(Benutzer.class, securityUser.getLogin());
 

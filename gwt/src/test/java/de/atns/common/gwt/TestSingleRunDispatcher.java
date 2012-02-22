@@ -22,7 +22,6 @@ import static junit.framework.Assert.assertEquals;
  * @since 22.11.11
  */
 public class TestSingleRunDispatcher {
-// ------------------------------ FIELDS ------------------------------
 
     private final LinkedList<Call> jobs = new LinkedList<Call>();
     private final LinkedList<String> results = new LinkedList<String>();
@@ -32,8 +31,6 @@ public class TestSingleRunDispatcher {
             jobs.add(new Call((TestAction) action, (AsyncCallback<StringResult>) callback));
         }
     }, new SimpleEventBus());
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Before public void setup() {
         jobs.clear();
@@ -115,8 +112,6 @@ public class TestSingleRunDispatcher {
                 "a6", "c6>a6", "c7>a6"),
                 results);
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     private static class StringResultCallback extends Callback<StringResult> {
         private final List<String> results;

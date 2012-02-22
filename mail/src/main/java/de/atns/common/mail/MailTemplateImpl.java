@@ -5,15 +5,12 @@ package de.atns.common.mail;
  * @since 27.11.2009
  */
 public class MailTemplateImpl implements MailTemplate {
-// ------------------------------ FIELDS ------------------------------
 
     private final String senderName;
     private final String senderEmail;
     private final String subject;
     private final String text;
     private final String html;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public MailTemplateImpl(final String senderEmail, final String senderName, final String subject,
                             final String text) {
@@ -28,8 +25,6 @@ public class MailTemplateImpl implements MailTemplate {
         this.senderEmail = senderEmail;
         this.subject = subject;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     @Override public String getSenderEmail() {
         return senderEmail;
@@ -46,11 +41,6 @@ public class MailTemplateImpl implements MailTemplate {
     @Override public String getText() {
         return text;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MailTemplate ---------------------
 
     @Override public String getHtmlText() {
         return html;

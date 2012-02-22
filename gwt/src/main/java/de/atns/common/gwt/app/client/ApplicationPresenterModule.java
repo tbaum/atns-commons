@@ -28,7 +28,6 @@ import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
  * @since 22.11.10
  */
 public abstract class ApplicationPresenterModule extends AbstractPresenterModule {
-// ------------------------------ FIELDS ------------------------------
 
     private static final TransportAware NOOP_TRANSPORT = new TransportAware() {
         @Override public void fromJson(JSONValue data) {
@@ -38,8 +37,6 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
             return JSONNull.getInstance();
         }
     };
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected void bindApplication(final Class<? extends ApplicationActivityMapper> activityMapperClass,
                                    final Class<? extends PlaceHistoryMapper> historyMapperClass,

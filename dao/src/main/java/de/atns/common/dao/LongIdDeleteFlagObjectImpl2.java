@@ -4,15 +4,9 @@ import de.atns.common.filter.DeleteFlagAware;
 
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-public class LongIdDeleteFlagObjectImpl2 extends LongIdObjectImpl2 implements DeleteFlagAware {
-// ------------------------------ FIELDS ------------------------------
-
-    private static final long serialVersionUID = 4081932716830230456L;
+@MappedSuperclass public class LongIdDeleteFlagObjectImpl2 extends LongIdObjectImpl2 implements DeleteFlagAware {
 
     private boolean deleted;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     @Override public boolean isDeleted() {
         return deleted;
@@ -22,10 +16,7 @@ public class LongIdDeleteFlagObjectImpl2 extends LongIdObjectImpl2 implements De
         this.deleted = deleted;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return deleted ? "(" + super.toString() + ")" : super.toString();
     }
 }

@@ -17,12 +17,9 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
  */
 public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
         implements DialogBoxDisplay {
-// ------------------------------ FIELDS ------------------------------
 
     private final DialogBox dialogBox = new DialogBox(false, false);
     private final Button cancelButton = new Button("Abbrechen");
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected DefaultDialogBoxDisplay() {
         super();
@@ -44,16 +41,13 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
         dialogBox.hide();
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     @Override public Button getCancelButton() {
         return cancelButton;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface DialogBoxDisplay ---------------------
+    @Override public void setTitle(String titel) {
+        dialogBox.setText(titel);
+    }
 
     @Override public HandlerRegistration addCancelButtonClickHandler(final ClickHandler clickHandler) {
         return cancelButton.addClickHandler(clickHandler);
@@ -74,10 +68,6 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
     @Override public void setDialogBoxContent(final String titel, final Widget widget) {
         dialogBox.setText(titel);
         dialogBox.setWidget(widget);
-    }
-
-    @Override public void setTitle(String titel) {
-        dialogBox.setText(titel);
     }
 
     @Override public void showDialogBox() {

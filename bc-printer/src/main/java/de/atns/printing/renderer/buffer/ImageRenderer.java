@@ -24,20 +24,12 @@ import java.awt.*;
  * @author Thomas Baum
  */
 public class ImageRenderer implements Renderer<ImageElement> {
-// ------------------------------ FIELDS ------------------------------
 
     private final DocumentRenderer dr;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public ImageRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final ImageElement element) {
         // Image i = element.getImage();

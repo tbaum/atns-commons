@@ -9,7 +9,6 @@ import java.util.Collection;
  * @since 11.05.2010
  */
 public class ArrayUtils {
-// -------------------------- STATIC METHODS --------------------------
 
     public static <T> T[] toArray(T... verarbeitung) {
         return verarbeitung;

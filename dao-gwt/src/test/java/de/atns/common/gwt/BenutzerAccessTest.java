@@ -16,7 +16,6 @@ import static org.junit.Assert.assertTrue;
  * @since 10.12.11
  */
 public class BenutzerAccessTest {
-// -------------------------- OTHER METHODS --------------------------
 
     @Test
     public void hasAccessTo() throws Exception {
@@ -30,13 +29,11 @@ public class BenutzerAccessTest {
 
     private Secured createSecured(final Class<? extends SecurityRole>... roles) {
         return new Secured() {
-            @Override
-            public Class<? extends SecurityRole>[] value() {
+            @Override public Class<? extends SecurityRole>[] value() {
                 return roles;
             }
 
-            @Override
-            public Class<? extends Annotation> annotationType() {
+            @Override public Class<? extends Annotation> annotationType() {
                 return null;
             }
         };
@@ -62,8 +59,6 @@ public class BenutzerAccessTest {
         assertTrue(mitarbeiter.hasAccessTo(createSecured(TestRole3.class)));
         assertTrue(mitarbeiter.hasAccessTo(createSecured()));
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     private interface AdminRole extends SecurityRole, UserAdminRole {
     }

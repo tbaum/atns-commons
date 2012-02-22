@@ -22,63 +22,24 @@ import static org.hibernate.annotations.CascadeType.ALL;
  * User: tbaum
  * Date: 26.02.2008
  */
-@Entity
-@Table(name = "email_spool")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity @Table(name = "email_spool") @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class MessagePreparator implements MimeMessagePreparator, Serializable {
-// ------------------------------ FIELDS ------------------------------
 
-    private static final long serialVersionUID = -7417533601085246546L;
-
-    @Transient
-    protected final String MAIL_DEFAULT_CHARSET = "ISO-8859-15";
-
-    @Transient
-    private final String debugMode = System.getProperty("debug.email");
-
-    @Basic(optional = false)
-    @Lob
-    private String text;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
-
-
-    @OneToMany(targetEntity = MailResource.class)
-    @Cascade(ALL)
-    @JoinColumn(name = "attachment")
+    @Transient protected final String MAIL_DEFAULT_CHARSET = "ISO-8859-15";
+    @Transient private final String debugMode = System.getProperty("debug.email");
+    @Basic(optional = false) @Lob private String text;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false) private long id;
+    @OneToMany(targetEntity = MailResource.class) @Cascade(ALL) @JoinColumn(name = "attachment")
     private Collection<MailResource> attachments = new ArrayList<MailResource>();
-
-    @Basic(optional = true)
-    private String bcc;
-
-    @Basic(optional = false)
-    private String sender;
-
-    @Basic(optional = false)
-    private String senderName;
-
-    @Basic(optional = false)
-    private String recipient;
-
-    @Basic(optional = false)
-    private String recipientName;
-
-    @Basic(optional = false)
-    private String subject;
-
-    @Basic(optional = true)
-    private Date sent;
-
-    @Basic(optional = true)
-    private String error;
-
-    @Basic(optional = true)
-    private String replyTo;
-
-// --------------------------- CONSTRUCTORS ---------------------------
+    @Basic(optional = true) private String bcc;
+    @Basic(optional = false) private String sender;
+    @Basic(optional = false) private String senderName;
+    @Basic(optional = false) private String recipient;
+    @Basic(optional = false) private String recipientName;
+    @Basic(optional = false) private String subject;
+    @Basic(optional = true) private Date sent;
+    @Basic(optional = true) private String error;
+    @Basic(optional = true) private String replyTo;
 
     MessagePreparator() {
     }
@@ -95,8 +56,6 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
         this.text = text;
         this.attachments = new ArrayList<MailResource>(asList(attachments));
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Collection<MailResource> getAttachments() {
         return attachments;
@@ -162,13 +121,7 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
         return text;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MimeMessagePreparator ---------------------
-
-    @Override
-    public void prepare(final MimeMessage mesg) throws MessagingException {
+    @Override public void prepare(final MimeMessage mesg) throws MessagingException {
         mesg.setSubject(subject, MAIL_DEFAULT_CHARSET);
         mesg.setFrom(createAddress(sender, senderName));
         if (replyTo != null) {
@@ -184,8 +137,6 @@ public class MessagePreparator implements MimeMessagePreparator, Serializable {
         }
         prepareContent(mesg);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private InternetAddress createAddress(final String mail) {
         try {

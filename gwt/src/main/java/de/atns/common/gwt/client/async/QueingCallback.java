@@ -15,19 +15,14 @@ import static java.util.Arrays.asList;
  * @since 19.11.11
  */
 public class QueingCallback<R extends Result> implements AsyncCallback<R>, Collection<AsyncCallback<R>> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Collection<AsyncCallback<R>> callbacks = new LinkedList<AsyncCallback<R>>();
-
-// -------------------------- STATIC METHODS --------------------------
 
     static <R extends Result> QueingCallback<R> queingCallback(SingleRunDispatcher dispatcher,
                                                                AsyncCallback<R> callback, Class<? extends Action> clazz) {
         //noinspection unchecked
         return new QueingCallback<R>(new FinishedCallback<R>(dispatcher, clazz), callback);
     }
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public QueingCallback(AsyncCallback<R>... callbacks) {
         addAll(asList(callbacks));
@@ -37,8 +32,6 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
         return callbacks.addAll(asyncCallbacks);
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public boolean equals(Object o) {
         return callbacks.equals(o);
     }
@@ -46,11 +39,6 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
     @Override public int hashCode() {
         return callbacks.hashCode();
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface AsyncCallback ---------------------
 
     @Override public void onFailure(Throwable caught) {
         for (AsyncCallback<R> callback : callbacks) {
@@ -63,8 +51,6 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
             callback.onSuccess(result);
         }
     }
-
-// --------------------- Interface Collection ---------------------
 
     @Override public int size() {
         return callbacks.size();
@@ -110,8 +96,6 @@ public class QueingCallback<R extends Result> implements AsyncCallback<R>, Colle
     @Override public void clear() {
         callbacks.clear();
     }
-
-// --------------------- Interface Iterable ---------------------
 
     @Override public Iterator<AsyncCallback<R>> iterator() {
         return callbacks.iterator();

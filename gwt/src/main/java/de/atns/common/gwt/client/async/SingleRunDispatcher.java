@@ -16,21 +16,16 @@ import java.util.Map;
  * @since 19.11.11
  */
 @Singleton public class SingleRunDispatcher {
-// ------------------------------ FIELDS ------------------------------
 
     private final DispatchAsync dispatcher;
     private final EventBus eventBus;
     private final Map<Class<? extends Action>, QueingCallback<? extends Result>> running =
             new HashMap<Class<? extends Action>, QueingCallback<? extends Result>>();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject public SingleRunDispatcher(DispatchAsync dispatcher, EventBus eventBus) {
         this.dispatcher = dispatcher;
         this.eventBus = eventBus;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     /**
      * Läuft bereits eine Action der selben Klasse wird nach Abschluss die übergebene Action ausgeführt, alle dannach
@@ -163,9 +158,8 @@ import java.util.Map;
         eventBus.fireEvent(new DispatcherStateChange(running));
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     private class RetriggerCallback<A extends Action<R>, R extends Result> implements AsyncCallback<R> {
+
         private A action;
         private final QueingCallback<R> callbacks;
 

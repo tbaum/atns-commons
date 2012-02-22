@@ -10,24 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MailUtilImpl implements MailUtil {
-// ------------------------------ FIELDS ------------------------------
 
     private final MailTemplateRenderer templateRenderer;
 
     private final Provider<EntityManager> em;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public MailUtilImpl(final MailTemplateRenderer templateRenderer, final Provider<EntityManager> em) {
+    @Inject public MailUtilImpl(final MailTemplateRenderer templateRenderer, final Provider<EntityManager> em) {
         this.templateRenderer = templateRenderer;
         this.em = em;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MailUtil ---------------------
 
     @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName,
@@ -81,8 +73,6 @@ public class MailUtilImpl implements MailUtil {
 
         return em.get().merge(message);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private String createPlainText(final String html) {
         try {

@@ -9,13 +9,10 @@ import java.util.Properties;
 import static java.net.InetAddress.getLocalHost;
 
 public class Configurator {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(Configurator.class);
     private final Properties configProperties = new Properties();
     private String configName = null;
-
-// -------------------------- OTHER METHODS --------------------------
 
     public synchronized String get(final String key) {
         ensureLoaded();

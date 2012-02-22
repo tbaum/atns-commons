@@ -18,12 +18,9 @@ import java.lang.reflect.Field;
  * @since 22.01.2010
  */
 public class ConfigModule extends AbstractModule {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ConfigModule.class);
     private final Configurator config = new Configurator();
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected final void configure() {
         bindListener(Matchers.any(), new TypeListener() {

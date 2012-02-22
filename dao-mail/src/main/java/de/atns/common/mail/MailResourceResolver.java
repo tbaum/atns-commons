@@ -19,13 +19,9 @@ import static java.lang.String.format;
  * Time: 02:46:36
  */
 public class MailResourceResolver {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(MailResourceResolver.class);
-
     private String marker = "embed:";
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getMarker() {
         return marker;
@@ -34,8 +30,6 @@ public class MailResourceResolver {
     public void setMarker(final String marker) {
         this.marker = marker;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public ResolvedMail extractResources(final String str, final Map<String, Object> context) {
         final Map<String, MailResource> result = new HashMap<String, MailResource>();
@@ -92,8 +86,6 @@ public class MailResourceResolver {
             return new byte[0];
         }
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     public class ResolvedMail {
         public final MailResource[] result;

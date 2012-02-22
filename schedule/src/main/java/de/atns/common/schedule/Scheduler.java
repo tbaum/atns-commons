@@ -15,12 +15,9 @@ import java.util.TimerTask;
  * @since 27.11.2009
  */
 @Singleton public class Scheduler {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(Scheduler.class);
     private Timer timer;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public Scheduler(final Set<ScheduledTask> tasks, final Injector injector) {
         LOG.debug("start scheduler");
@@ -45,8 +42,6 @@ import java.util.TimerTask;
             }
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void shutdown() {
         LOG.debug("shutdown scheduler");

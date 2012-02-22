@@ -1,7 +1,6 @@
 package de.atns.printing;
 
 public class Converter {
-// -------------------------- STATIC METHODS --------------------------
 
     public static double convertToMM(final double inches) {
         return inches * 25.4;

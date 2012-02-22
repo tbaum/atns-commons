@@ -4,21 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@MappedSuperclass
-public class LongIdObjectImpl2 implements LongIdObject, Serializable {
-// ------------------------------ FIELDS ------------------------------
+@MappedSuperclass public class LongIdObjectImpl2 implements LongIdObject, Serializable {
 
-    private static final long serialVersionUID = 6011149800155482007L;
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false)
-    private Long id;
-
-    @Version
-    private long version;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false) private Long id;
+    @Version private long version;
     private Date lastUpdateTimestamp;
     private Date createTimestamp;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     @Override public Date getCreateTimestamp() {
         return createTimestamp;
@@ -52,10 +43,7 @@ public class LongIdObjectImpl2 implements LongIdObject, Serializable {
         this.version = version;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
-    @Override
-    public boolean equals(final Object o) {
+    @Override public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -67,8 +55,7 @@ public class LongIdObjectImpl2 implements LongIdObject, Serializable {
         return true;
     }
 
-    @Override
-    public int hashCode() {
+    @Override public int hashCode() {
         if (isNew()) {
             return super.hashCode();
         }
@@ -76,18 +63,14 @@ public class LongIdObjectImpl2 implements LongIdObject, Serializable {
         return (int) (id ^ (id >>> 32));
     }
 
-    @Override
-    public boolean isNew() {
+    @Override public boolean isNew() {
         //TODO !!
         return id == null || id == -1;
     }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "id=" + id + "." + version;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private int originalHashCode() {
         return super.hashCode();

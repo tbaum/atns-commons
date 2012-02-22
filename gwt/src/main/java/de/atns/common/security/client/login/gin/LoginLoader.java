@@ -17,14 +17,10 @@ import de.atns.common.security.client.login.LogoutPlace;
  */
 @Singleton
 public class LoginLoader extends WidgetPresenterModuleLoader<LoginPresenter> {
-// --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject
-    public LoginLoader(final SharedServices sharedServices) {
+    @Inject public LoginLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public boolean canHandlePlace(final Place place) {
         return place instanceof LoginPlace || place instanceof LogoutPlace;

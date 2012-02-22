@@ -31,21 +31,14 @@ import static de.atns.common.security.client.event.ServerStatusEvent.loggedin;
  */
 @Singleton
 public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> implements PlacePresenter {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Logger LOG = Logger.getLogger(LoginPresenter.class.getName());
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface PlacePresenter ---------------------
 
     @Override public Activity updateForPlace(final Place place) {
         if (place instanceof LogoutPlace) {
             Cookies.removeCookie("l");
             dispatcher.execute(new UserLogout(), new Callback<UserPresentation>() {
-                @Override
-                public void callback(final UserPresentation user) {
+                @Override public void callback(final UserPresentation user) {
                     eventBus.fireEvent(ServerStatusEvent.loggedout());
                 }
             });
@@ -54,15 +47,11 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
         return this;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
 
         registerHandler(display.addLoginClick(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent clickEvent) {
+            @Override public void onClick(final ClickEvent clickEvent) {
                 doLogin(display.setUsername(), display.getPassword());
             }
         }));
@@ -76,8 +65,7 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
             display.setAutomaticLogin(true);
 
             Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-                @Override
-                public void execute() {
+                @Override public void execute() {
                     doLogin(username, password);
                 }
             });
@@ -105,9 +93,8 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
         });
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static interface Display extends DialogBoxDisplay {
+
         HandlerRegistration addLoginClick(final ClickHandler clickHandler);
 
         String getPassword();

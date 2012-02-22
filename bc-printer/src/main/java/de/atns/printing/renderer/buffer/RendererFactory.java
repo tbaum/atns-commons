@@ -23,7 +23,6 @@ import de.atns.printing.renderer.AbstractRendererFactory;
  * @author Thomas Baum
  */
 public class RendererFactory extends AbstractRendererFactory<DocumentRenderer> {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public RendererFactory(final Device device) {
         super(new DocumentRenderer(device));

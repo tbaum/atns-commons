@@ -12,14 +12,8 @@ import javax.persistence.PersistenceException;
  * @since 25.10.2009
  */
 public class ExceptionInterceptor implements MethodInterceptor {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ExceptionInterceptor.class);
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MethodInterceptor ---------------------
 
     @Override public Object invoke(final MethodInvocation invocation) throws Throwable {
         try {

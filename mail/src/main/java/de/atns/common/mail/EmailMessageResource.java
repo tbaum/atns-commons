@@ -5,31 +5,14 @@ import de.atns.common.util.ImageInfo;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-public class EmailMessageResource implements Serializable {
-// ------------------------------ FIELDS ------------------------------
+@Entity public class EmailMessageResource implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
-
-    @Basic(optional = false)
-    private String name;
-
-    @Basic(optional = false)
-    private String mimeType;
-
-    @Basic(optional = false)
-    private byte[] data;
-
-    @Basic
-    private boolean embedded;
-
-    @ManyToOne
-    private EmailMessage message;
-
-// --------------------------- CONSTRUCTORS ---------------------------
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(nullable = false) private long id;
+    @Basic(optional = false) private String name;
+    @Basic(optional = false) private String mimeType;
+    @Basic(optional = false) private byte[] data;
+    @Basic private boolean embedded;
+    @ManyToOne private EmailMessage message;
 
     public EmailMessageResource() {
     }
@@ -48,8 +31,6 @@ public class EmailMessageResource implements Serializable {
         this.data = data;
         this.embedded = embedded;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public byte[] getData() {
         return data;

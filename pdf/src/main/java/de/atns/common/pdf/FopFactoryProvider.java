@@ -10,20 +10,12 @@ import org.apache.fop.apps.FopFactory;
  * @since 28.11.2009
  */
 public class FopFactoryProvider implements Provider<FopFactory> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Provider<FOURIResolver> uriResolver;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public FopFactoryProvider(final Provider<FOURIResolver> uriResolver) {
         this.uriResolver = uriResolver;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Provider ---------------------
 
     @Override public FopFactory get() {
         final FopFactory fopFactory = FopFactory.newInstance();

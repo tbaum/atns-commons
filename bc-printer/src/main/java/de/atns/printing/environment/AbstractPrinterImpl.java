@@ -3,7 +3,6 @@ package de.atns.printing.environment;
 import de.atns.printing.device.Device;
 
 public abstract class AbstractPrinterImpl implements Printer {
-// ------------------------------ FIELDS ------------------------------
 
     protected Device device;
 
@@ -13,40 +12,18 @@ public abstract class AbstractPrinterImpl implements Printer {
 
     protected PrinterState state = new PrinterState();
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.atns.printing.environment.Printer#getDevice()
-     */
     @Override public Device getDevice() {
         return this.device;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.atns.printing.environment.Printer#setDevice(de.atns.printing.device.Device)
-     */
     @Override public void setDevice(final Device device) {
         this.device = device;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.atns.printing.environment.Printer#getMaterial()
-     */
     @Override public Material getMaterial() {
         return this.material;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.atns.printing.environment.Printer#setMaterial(de.atns.printing.environment.Material)
-     */
     @Override public void setMaterial(final Material material) {
         this.material = material;
     }

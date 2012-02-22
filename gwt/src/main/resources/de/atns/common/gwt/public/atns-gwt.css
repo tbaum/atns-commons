@@ -12,7 +12,7 @@
     padding: 0 10px;
 }
 
-.gwt-TextBox, .gwt-DateBox, .gwt-ListBox{
+.gwt-TextBox, .gwt-DateBox, .gwt-ListBox {
     padding: 2px;
     font-size: small;
     font-family: sans-serif;

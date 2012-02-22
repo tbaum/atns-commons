@@ -18,40 +18,27 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.benutzer.client.event.BenutzerUpdateEventHandler;
 import de.atns.common.security.client.model.UserPresentation;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
-@Singleton
-public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, UserPresentation>
+@Singleton public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, UserPresentation>
         implements PlacePresenter<BenutzerPlace> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final GwtEvent.Type<LoadListEventHandler<UserPresentation>> LIST_EVENT =
             new GwtEvent.Type<LoadListEventHandler<UserPresentation>>();
     private final BenutzerEditPresenter editPresenter;
     private final BenutzerCreatePresenter benutzerCreatePresenter;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject
-    public BenutzerPresenter(final BenutzerEditPresenter editPresenter,
-                             BenutzerCreatePresenter benutzerCreatePresenter) {
+    public BenutzerPresenter(BenutzerEditPresenter editPresenter, BenutzerCreatePresenter benutzerCreatePresenter) {
         this.editPresenter = editPresenter;
         this.benutzerCreatePresenter = benutzerCreatePresenter;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface PlacePresenter ---------------------
-
     @Override public Activity updateForPlace(final BenutzerPlace place) {
         return this;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public GwtEvent.Type<LoadListEventHandler<UserPresentation>> _listEvent() {
         return LIST_EVENT;
@@ -59,8 +46,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
 
     @Override protected String bindRow(final UserPresentation g, final String lastValue) {
         registerHandler(display.addRow(g, new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
+            @Override public void onClick(final ClickEvent event) {
                 editPresenter.bind(g);
             }
         }));
@@ -72,8 +58,7 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
         return new BenutzerList(display.getFilter(), pagePresenter.getStartEntry(), pagePresenter.getPageRange());
     }
 
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
 
         registerHandler(display.forNeu(new ClickHandler() {
@@ -90,9 +75,8 @@ public class BenutzerPresenter extends ListPresenter<BenutzerPresenter.Display, 
                 }));
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static interface Display extends ListDisplay<UserPresentation> {
+
         HandlerRegistration forNeu(ClickHandler clickHandler);
 
         @Override HandlerRegistration forSuche(ClickHandler clickHandler);

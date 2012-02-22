@@ -23,11 +23,8 @@ import static org.hibernate.criterion.Restrictions.*;
  * @since 12.09.2008
  */
 public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ExtendedHibernateDaoSupport.class);
-
-// -------------------------- OTHER METHODS --------------------------
 
     @SuppressWarnings({"unchecked"})
     protected <TYPE> TYPE executeCallback(final HibernateCallback callback) {
@@ -102,7 +99,6 @@ public class ExtendedHibernateDaoSupport extends HibernateDaoSupport {
         } else {
             results = new ArrayList<TYPE>();
         }
-
 
         return PartResult.createPartResult(start, count.intValue(), results);
     }

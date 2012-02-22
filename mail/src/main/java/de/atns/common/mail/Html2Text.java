@@ -15,15 +15,12 @@ import static java.util.Arrays.asList;
  * @since 26.05.11 20:02
  */
 public class Html2Text extends StringReader {
-// ------------------------------ FIELDS ------------------------------
 
     private static final HashMap<String, Character> specialTag = new HashMap<String, Character>();
     private static final HashMap<String, Character> basicTag = new HashMap<String, Character>();
 
     StringBuffer plainText = new StringBuffer();
     private boolean escapeCharacter = false;
-
-// -------------------------- STATIC METHODS --------------------------
 
     static {
         specialTag.put("quot", '"');
@@ -47,17 +44,13 @@ public class Html2Text extends StringReader {
             basicTag.put(s, '\t');
         }
 
-
         for (String s : asList("form", "input", "select", "option", "textarea")) {
             basicTag.put(s, ' ');
         }
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public Html2Text(String htmlString) {
         super(htmlString);
-
 
         int c;
         try {
@@ -126,8 +119,6 @@ public class Html2Text extends StringReader {
 
         return c;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public String getPlainText() {
         return plainText.toString().replaceAll("\n*\n\n", "\n\n");

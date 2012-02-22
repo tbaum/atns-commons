@@ -23,20 +23,12 @@ import java.awt.*;
  * @author Thomas Baum
  */
 public class TextRenderer implements Renderer<TextElement> {
-// ------------------------------ FIELDS ------------------------------
 
     private final DocumentRenderer dr;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public TextRenderer(final DocumentRenderer dr) {
         this.dr = dr;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final TextElement element) {
         final Font font = new Font("sans", Font.PLAIN,

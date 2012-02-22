@@ -12,22 +12,16 @@ import org.apache.commons.logging.LogFactory;
  * @since 23.10.2009
  */
 public class UserLogoutHandler extends DefaultActionHandler<UserLogout, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(UserLogoutHandler.class);
     private final SecurityService securityService;
     private final UserService userService;
-
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public UserLogoutHandler(final SecurityService securityService, UserService userService) {
         super();
         this.securityService = securityService;
         this.userService = userService;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public final UserPresentation executeInternal(final UserLogout action) {
         SecurityUser user = securityService.currentUser();

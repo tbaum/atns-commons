@@ -18,15 +18,12 @@ import java.util.logging.Logger;
  * @since 22.11.10
  */
 public abstract class ApplicationActivityMapper implements ActivityMapper, ModuleReadyEventHandler {
-// ------------------------------ FIELDS ------------------------------
 
     @Inject private static ApplicationPresenter application;
     @Inject private static SharedServices sharedServices;
     private final List<WidgetPresenterModuleLoader> moduleLoaders;
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
     private HandlerRegistration handlerRegistration;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public ApplicationActivityMapper() {
         moduleLoaders = new ArrayList<WidgetPresenterModuleLoader>(loadModules(sharedServices));
@@ -46,13 +43,7 @@ public abstract class ApplicationActivityMapper implements ActivityMapper, Modul
         }
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface ActivityMapper ---------------------
-
-    @Override
-    public Activity getActivity(final Place place) {
+    @Override public Activity getActivity(final Place place) {
         for (final WidgetPresenterModuleLoader moduleLoader : moduleLoaders) {
             if (!moduleLoader.canHandlePlace(place)) {
                 continue;
@@ -69,8 +60,6 @@ public abstract class ApplicationActivityMapper implements ActivityMapper, Modul
 
         return null;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private int getLoadedCount() {
         int loaded = 0;

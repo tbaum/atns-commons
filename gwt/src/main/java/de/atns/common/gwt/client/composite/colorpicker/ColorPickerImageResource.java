@@ -27,35 +27,63 @@ import com.google.gwt.resources.client.ImageResource;
     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     OTHER DEALINGS IN THE SOFTWARE.
     */
-public interface ColorPickerImageResource extends ClientBundle
-{
-     ImageResource bar_blue_bl();
-     ImageResource bar_blue_br();
-     ImageResource bar_blue_tl();
-     ImageResource bar_blue_tr();
-     ImageResource bar_brightness();
-     ImageResource bar_green_bl();
-     ImageResource bar_green_br();
-     ImageResource bar_green_tl();
-     ImageResource bar_green_tr();
-     ImageResource bar_red_bl();
-     ImageResource bar_red_br();
-     ImageResource bar_red_tl();
-     ImageResource bar_red_tr();
-     ImageResource bar_saturation();
-     ImageResource bar_hue();
-     ImageResource bar_white();
-     ImageResource rangearrows();
-     ImageResource map_blue_max();
-     ImageResource map_blue_min();
-     ImageResource map_brightness();
-     ImageResource map_green_max();
-     ImageResource map_green_min();
-     ImageResource map_hue();
-     ImageResource mappoint();
-     ImageResource map_red_max();
-     ImageResource map_red_min();
-     ImageResource map_saturation();
-     ImageResource map_saturation_overlay();
-     ImageResource map_white();
+public interface ColorPickerImageResource extends ClientBundle {
+
+    ImageResource bar_blue_bl();
+
+    ImageResource bar_blue_br();
+
+    ImageResource bar_blue_tl();
+
+    ImageResource bar_blue_tr();
+
+    ImageResource bar_brightness();
+
+    ImageResource bar_green_bl();
+
+    ImageResource bar_green_br();
+
+    ImageResource bar_green_tl();
+
+    ImageResource bar_green_tr();
+
+    ImageResource bar_hue();
+
+    ImageResource bar_red_bl();
+
+    ImageResource bar_red_br();
+
+    ImageResource bar_red_tl();
+
+    ImageResource bar_red_tr();
+
+    ImageResource bar_saturation();
+
+    ImageResource bar_white();
+
+    ImageResource map_blue_max();
+
+    ImageResource map_blue_min();
+
+    ImageResource map_brightness();
+
+    ImageResource map_green_max();
+
+    ImageResource map_green_min();
+
+    ImageResource map_hue();
+
+    ImageResource map_red_max();
+
+    ImageResource map_red_min();
+
+    ImageResource map_saturation();
+
+    ImageResource map_saturation_overlay();
+
+    ImageResource map_white();
+
+    ImageResource mappoint();
+
+    ImageResource rangearrows();
 }

@@ -7,7 +7,6 @@ import de.atns.common.gwt.client.WidgetPresenter;
  * @since 18.11.10
  */
 public interface WidgetPresenterGinjector<T extends WidgetPresenter> extends SharedServicesGinjector {
-// -------------------------- OTHER METHODS --------------------------
 
     T presenter();
 }

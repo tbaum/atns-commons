@@ -10,7 +10,6 @@ import static java.math.BigDecimal.*;
  * @since 14.07.2009 10:44:08
  */
 public class NumberUtils {
-// -------------------------- STATIC METHODS --------------------------
 
     public static String formatNumber(final BigDecimal number, final int fractions) {
         return number.setScale(fractions, ROUND_HALF_UP).toString();

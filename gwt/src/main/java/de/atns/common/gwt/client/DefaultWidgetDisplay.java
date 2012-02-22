@@ -12,13 +12,10 @@ import static com.google.gwt.dom.client.Style.Unit.PX;
  * @since 07.12.2009
  */
 public abstract class DefaultWidgetDisplay extends Composite implements WidgetDisplay {
-// ------------------------------ FIELDS ------------------------------
 
     private final FlowPanel errorPanel = new FlowPanel();
     private final Label errorLabel = GwtUtil.createLabel("", "errorPanelText");
     private final FlowPanel loader = GwtUtil.flowPanel(new Image("spinner.gif"));
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected DefaultWidgetDisplay() {
         final Style style = loader.getElement().getStyle();
@@ -39,8 +36,6 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
         errorPanel.setVisible(false);
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public FlowPanel getErrorPanel() {
         return errorPanel;
     }
@@ -48,11 +43,6 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
     public FlowPanel getLoader() {
         return loader;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface WidgetDisplay ---------------------
 
     @Override public Widget asWidget() {
         return this;
@@ -79,5 +69,3 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
         loader.setVisible(false);
     }
 }
-
-

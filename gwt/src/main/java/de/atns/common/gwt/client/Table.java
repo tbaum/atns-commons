@@ -11,8 +11,6 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 20.10.10
  */
 public class Table extends ComplexPanel {
-// -------------------------- STATIC METHODS --------------------------
-
     public static Table table(final Row... w) {
         final Table fp = new Table();
         fp.add(w);
@@ -61,8 +59,6 @@ public class Table extends ComplexPanel {
         return new Cell(style, s);
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     Table() {
         setElement(DOM.createElement("table"));
         setCellspacing(0);
@@ -77,19 +73,12 @@ public class Table extends ComplexPanel {
         setCellspacing(cellspacing);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasWidgets ---------------------
-
-    @Override
-    public void add(final Widget child) {
+    @Override public void add(final Widget child) {
         add(child, getElement());
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static class Cell extends SimplePanel {
+
         private String style;
 
         Cell(final String style, final IsWidget w) {
@@ -131,8 +120,7 @@ public class Table extends ComplexPanel {
     }
 
     public static class Row extends ComplexPanel {
-        @Override
-        public void add(final Widget w) {
+        @Override public void add(final Widget w) {
             add(w, getElement());
         }
 

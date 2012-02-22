@@ -62,7 +62,6 @@ import static de.atns.common.gwt.client.window.MasterWindowEventBus.currentLocat
         $wnd.opener._popup_closed($wnd._myid);
     }-*/;
 
-
     @Override public native void openWindow(String url, String name, String para) /*-{
         $wnd.opener._open_popup(url, name, para);
     }-*/;

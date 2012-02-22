@@ -14,7 +14,6 @@ import java.util.TreeSet;
  * @since 11.02.2010
  */
 public class UserPresentation implements Result, Serializable {
-// ------------------------------ FIELDS ------------------------------
 
     private Long id;
     private String login;
@@ -25,8 +24,6 @@ public class UserPresentation implements Result, Serializable {
     private String name;
     private Date lastLogin;
     private Date lastAccess;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static UserPresentation invalidUser() {
         return new UserPresentation();
@@ -39,8 +36,6 @@ public class UserPresentation implements Result, Serializable {
         userPresentation.setAuthToken(token);
         return userPresentation;
     }
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public UserPresentation() {
     }
@@ -56,8 +51,6 @@ public class UserPresentation implements Result, Serializable {
         this.lastAccess = lastAccess;
         this.roles = new TreeSet<SecurityRolePresentation>(roles);
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public String getAuthToken() {
         return authToken;
@@ -90,8 +83,6 @@ public class UserPresentation implements Result, Serializable {
     public Set<SecurityRolePresentation> getRoles() {
         return roles;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public boolean inRole(Class<? extends SecurityRole>... required) {
         if (required.length == 0) {

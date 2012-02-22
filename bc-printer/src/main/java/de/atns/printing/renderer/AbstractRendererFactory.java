@@ -25,13 +25,10 @@ import java.util.Map;
  * @author Thomas Baum
  */
 public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> implements RendererFactory<DocumentRenderer> {
-// ------------------------------ FIELDS ------------------------------
 
     protected Map<Class, Renderer> renderes = new HashMap<Class, Renderer>();
 
     private final DOC documentRenderer;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected AbstractRendererFactory(final DOC documentRenderer) {
         this.documentRenderer = documentRenderer;
@@ -39,16 +36,9 @@ public abstract class AbstractRendererFactory<DOC extends DocumentRenderer> impl
         this.renderes.put(DocumentElement.class, documentRenderer);
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     @Override public DOC getDocumentRenderer() {
         return this.documentRenderer;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface RendererFactory ---------------------
 
     @Override public Renderer getRender(final Element element) {
         final Renderer r = this.renderes.get(element.getClass());

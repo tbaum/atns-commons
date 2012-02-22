@@ -11,27 +11,21 @@ import de.atns.common.security.benutzer.client.event.BenutzerUpdateEvent;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.model.UserPresentation;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 @Singleton
 public class BenutzerChangePasswordPresenter extends DialogBoxPresenter<BenutzerChangePasswordPresenter.Display> {
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void onBind() {
+    @Override protected void onBind() {
         super.onBind();
         display.reset();
 
         registerHandler(display.addSafeHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
+            @Override public void onClick(final ClickEvent event) {
                 dispatcher.execute(new BenutzerChangePassword(display.getPassword()),
                         new Callback<UserPresentation>(display) {
-                            @Override
-                            public void callback(final UserPresentation result) {
+                            @Override public void callback(final UserPresentation result) {
                                 eventBus.fireEvent(new BenutzerUpdateEvent(result));
                                 display.hideDialogBox();
                             }
@@ -40,9 +34,8 @@ public class BenutzerChangePasswordPresenter extends DialogBoxPresenter<Benutzer
         }));
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     public static interface Display extends DialogBoxDisplay {
+
         public HandlerRegistration addSafeHandler(ClickHandler handler);
 
         String getPassword();

@@ -13,15 +13,11 @@ import com.google.inject.Inject;
 import de.atns.common.security.client.login.LoginPlace;
 
 public class NavigationNoAuth extends Composite {
-// ------------------------------ FIELDS ------------------------------
 
     @UiField MenuItem login;
     private final PlaceController placeController;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public NavigationNoAuth(final PlaceController placeController) {
+    @Inject public NavigationNoAuth(final PlaceController placeController) {
         this.placeController = placeController;
 
         final ShellUiBinder uiBinder = GWT.create(ShellUiBinder.class);
@@ -29,8 +25,6 @@ public class NavigationNoAuth extends Composite {
 
         login.setCommand(new GoToPlaceCommand(LoginPlace.ALL));
     }
-
-// -------------------------- INNER CLASSES --------------------------
 
     interface ShellUiBinder extends UiBinder<Widget, NavigationNoAuth> {
     }

@@ -5,24 +5,10 @@ import de.atns.printing.document.DocumentElement;
 import java.io.Serializable;
 
 public class Label implements Serializable {
-// ------------------------------ FIELDS ------------------------------
-
-    @Override public String toString() {
-        return "Label{" +
-                "anzahl=" + anzahl +
-                ", material=" + material +
-                ", document=" + document +
-                '}';
-    }
-
-    private static final long serialVersionUID = -328921583065260180L;
 
     protected DocumentElement document;
-
     protected Material material = Material.TD_21786;
     private final int anzahl;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public Label(final DocumentElement element) {
         this.document = element;
@@ -35,8 +21,6 @@ public class Label implements Serializable {
         this.anzahl = anzahl;
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public int getAnzahl() {
         return anzahl;
     }
@@ -47,5 +31,9 @@ public class Label implements Serializable {
 
     public Material getMaterial() {
         return this.material;
+    }
+
+    @Override public String toString() {
+        return "Label{anzahl=" + anzahl + ", material=" + material + ", document=" + document + '}';
     }
 }

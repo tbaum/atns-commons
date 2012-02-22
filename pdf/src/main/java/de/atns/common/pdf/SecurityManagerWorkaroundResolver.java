@@ -12,28 +12,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-
 /**
  * @author tbaum
  * @since 28.11.2009
  */
 public class SecurityManagerWorkaroundResolver extends FOURIResolver {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(SecurityManagerWorkaroundResolver.class);
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface URIResolver ---------------------
 
     // TODO Remove me!
     // This is a workaround for the security manager problem under windows.
     // While the webstart app has all-permissions an exception is thrown
     // upon File.exists -> hence the resolving doesn't work with the base
     // FOURIResolver. When this problem is solved this class can be removed!
-    @Override
-    public Source resolve(final String href, final String base) throws TransformerException {
+    @Override public Source resolve(final String href, final String base) throws TransformerException {
         if (base == null && href != null && href.startsWith("http://")) {
             try {
                 final URL absoluteURL = new URL(href);

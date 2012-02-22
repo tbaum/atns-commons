@@ -9,8 +9,6 @@ import com.google.gwt.json.client.JSONString;
  * @since 25.01.11 11:07
  */
 public abstract class EventSerializer {
-// -------------------------- OTHER METHODS --------------------------
-
     protected boolean checkClass(Class aClass, String clazz) {
         return aClass.toString().equals(clazz);
     }

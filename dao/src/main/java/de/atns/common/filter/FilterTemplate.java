@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 public class FilterTemplate {
-// -------------------------- STATIC METHODS --------------------------
 
     public static <F, E extends F> Set<E> filter(final Set<E> types, final Filter<F> filter) {
         final Set<E> fc = new HashSet<E>(10);

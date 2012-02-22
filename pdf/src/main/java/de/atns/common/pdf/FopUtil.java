@@ -24,20 +24,15 @@ import java.util.Map;
  * @since 28.11.2009
  */
 public class FopUtil {
-// ------------------------------ FIELDS ------------------------------
 
     private final Provider<FopFactory> fopFactory;
     private final Provider<TransformerFactory> transformerFactory;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject
     public FopUtil(final Provider<TransformerFactory> transformerFactory, final Provider<FopFactory> fopFactory) {
         this.transformerFactory = transformerFactory;
         this.fopFactory = fopFactory;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void convertFo2Awt(final String data, final URL xsltSource) {
         try {

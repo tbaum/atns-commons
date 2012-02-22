@@ -8,11 +8,8 @@ import com.google.gwt.event.shared.GwtEvent;
  * @since 24.10.2009
  */
 public interface ServerStatusEventHandler extends EventHandler {
-// ------------------------------ FIELDS ------------------------------
 
     GwtEvent.Type<ServerStatusEventHandler> TYPE = new GwtEvent.Type<ServerStatusEventHandler>();
-
-// -------------------------- OTHER METHODS --------------------------
 
     void onServerStatusChange(ServerStatusEvent event);
 }

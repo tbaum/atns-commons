@@ -9,7 +9,6 @@ import de.atns.common.security.client.login.LoginView;
  * @since 24.10.2009
  */
 public class LoginModule extends SharedServicesModule {
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configure() {
         super.configure();

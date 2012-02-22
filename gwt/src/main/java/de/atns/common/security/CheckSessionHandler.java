@@ -8,19 +8,15 @@ import de.atns.common.security.client.model.UserPresentation;
 
 import java.util.UUID;
 
-
 /**
  * @author tbaum
  * @since 23.10.2009
  */
 public class CheckSessionHandler extends DefaultActionHandler<CheckSession, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private final UserProvider user;
     private final SecurityFilter securityFilter;
     private final UserService userService;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public CheckSessionHandler(final UserProvider user, final SecurityFilter securityFilter,
                                        UserService userService) {
@@ -28,8 +24,6 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
         this.securityFilter = securityFilter;
         this.userService = userService;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public final UserPresentation executeInternal(final CheckSession action) {
         return checkSession();

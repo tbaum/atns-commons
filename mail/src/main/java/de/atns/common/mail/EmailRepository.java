@@ -10,7 +10,6 @@ import java.util.List;
  * @since 12.06.2010
  */
 public interface EmailRepository {
-// -------------------------- OTHER METHODS --------------------------
 
     @Finder(query = "from EmailMessage where sent is null AND error is null", returnAs = ArrayList.class)
     List<EmailMessage> getAllUnsentMails();

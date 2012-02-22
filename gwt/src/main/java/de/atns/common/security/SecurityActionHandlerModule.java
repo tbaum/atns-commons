@@ -10,7 +10,6 @@ import net.customware.gwt.dispatch.server.guice.ActionHandlerModule;
  * @since 13.06.2010
  */
 public class SecurityActionHandlerModule extends ActionHandlerModule {
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void configureHandlers() {
         bindHandler(CheckSession.class, CheckSessionHandler.class);

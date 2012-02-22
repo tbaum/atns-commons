@@ -5,19 +5,15 @@ import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.shared.Action;
 
-
 /**
  * @author tbaum
  * @since 24.10.2009
  */
 public class BenutzerList implements Action<ListPresentation<UserPresentation>> {
-// ------------------------------ FIELDS ------------------------------
 
     private StandardFilter filter;
     private int startEntry;
     private int pageRange;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected BenutzerList() {
     }
@@ -27,8 +23,6 @@ public class BenutzerList implements Action<ListPresentation<UserPresentation>> 
         this.startEntry = startEntry;
         this.pageRange = pageRange;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public StandardFilter getFilter() {
         return filter;

@@ -8,7 +8,6 @@ import de.atns.common.security.benutzer.UserServiceImpl;
  * @since 17.08.2010
  */
 public class BenutzerSecurityModule extends SecurityModule {
-// -------------------------- OTHER METHODS --------------------------
 
 //
 //    @Override protected void configure() {

@@ -8,7 +8,6 @@ import java.util.Map;
  * Time: 02:54:24
  */
 public interface MailTemplateRenderer {
-// -------------------------- OTHER METHODS --------------------------
 
     //TODO use on method!!
     String renderHtmlTemplate(MailTemplate template, Map<String, Object> context);

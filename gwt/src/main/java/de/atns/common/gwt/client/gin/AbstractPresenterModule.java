@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 import de.atns.common.gwt.client.WidgetPresenter;
 
 public abstract class AbstractPresenterModule extends AbstractGinModule {
-// -------------------------- OTHER METHODS --------------------------
 
     protected <D extends IsWidget> void bindPresenter(
             final Class<? extends WidgetPresenter<D>> presenter, final Class<D> display,

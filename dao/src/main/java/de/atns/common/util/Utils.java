@@ -34,13 +34,10 @@ import java.util.*;
 import java.util.jar.Manifest;
 
 public abstract class Utils {
-// ------------------------------ FIELDS ------------------------------
 
     public final static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
     public static final Log LOG = LogFactory.getLog(Utils.class);
     private static final SecureRandom random;
-
-// -------------------------- STATIC METHODS --------------------------
 
     static {
         try {

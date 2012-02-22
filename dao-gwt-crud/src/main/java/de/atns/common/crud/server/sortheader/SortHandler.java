@@ -19,18 +19,12 @@ import static de.atns.common.crud.client.sortheader.OrderField.Sort.NONE;
  * @since 19.07.11 12:01
  */
 public class SortHandler {
-// ------------------------------ FIELDS ------------------------------
 
     private final Provider<EntityManager> em;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public SortHandler(Provider<EntityManager> em) {
+    @Inject public SortHandler(Provider<EntityManager> em) {
         this.em = em;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public <A> Long getCount(Class<A> clazz, String where) {
         Query count = em.get().createQuery(

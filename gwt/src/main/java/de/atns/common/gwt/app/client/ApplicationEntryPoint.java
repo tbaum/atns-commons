@@ -15,14 +15,8 @@ import java.util.logging.Logger;
  * @since 22.11.10
  */
 public abstract class ApplicationEntryPoint implements EntryPoint {
-// ------------------------------ FIELDS ------------------------------
 
     private final Logger LOG = Logger.getLogger("Application");
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface EntryPoint ---------------------
 
     @Override public void onModuleLoad() {
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
@@ -56,8 +50,6 @@ public abstract class ApplicationEntryPoint implements EntryPoint {
             }
         });
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract ApplicationInjector create();
 }

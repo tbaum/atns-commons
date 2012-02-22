@@ -24,11 +24,8 @@ import java.io.IOException;
  * @author Thomas Baum
  */
 public class SwingGUIRenderDevice extends BufferedImageRenderDevice implements Device {
-// ------------------------------ FIELDS ------------------------------
 
     private final JLabel output;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public SwingGUIRenderDevice() {
         this.dpi = 300;
@@ -41,19 +38,11 @@ public class SwingGUIRenderDevice extends BufferedImageRenderDevice implements D
         frame.setVisible(true);
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Device ---------------------
-
     @Override public void renderDocument(final DocumentElement doc, final int quantity) throws IOException {
         // TODO Auto-generated method stub
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void processImage(final BufferedImage image) {
+    @Override protected void processImage(final BufferedImage image) {
         this.output.setIcon(new ImageIcon(image.getScaledInstance(-1, 1100, Image.SCALE_AREA_AVERAGING)));
     }
 }

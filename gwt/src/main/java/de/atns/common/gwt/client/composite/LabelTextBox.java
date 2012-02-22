@@ -17,13 +17,10 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  */
 public class LabelTextBox extends Composite
         implements /*TODO HasFocus, */ HasValue<String>, FocusHandler, BlurHandler, KeyUpHandler {
-// ------------------------------ FIELDS ------------------------------
 
     private final TextBox textBox = new TextBox();
 
     private final InlineLabel infoLabel = new InlineLabel();
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public LabelTextBox(final String stdText, final int length, final int left) {
         textBox.setVisibleLength(length);
@@ -48,42 +45,27 @@ public class LabelTextBox extends Composite
         initWidget(flowPanel("defValueTextBox", textBox, infoLabel));
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface BlurHandler ---------------------
-
     @Override public void onBlur(final BlurEvent blurEvent) {
         updateLabelState();
     }
 
-// --------------------- Interface FocusHandler ---------------------
-
     @Override public void onFocus(final FocusEvent focusEvent) {
         updateLabelState();
     }
-
-// --------------------- Interface HasValue ---------------------
 
     @Override public void setValue(final String value, final boolean fireEvents) {
         textBox.setValue(value, fireEvents);
         updateLabelState();
     }
 
-// --------------------- Interface HasValueChangeHandlers ---------------------
-
     @Override
     public HandlerRegistration addValueChangeHandler(final ValueChangeHandler<String> stringValueChangeHandler) {
         return textBox.addValueChangeHandler(stringValueChangeHandler);
     }
 
-// --------------------- Interface KeyUpHandler ---------------------
-
     @Override public void onKeyUp(final KeyUpEvent keyUpEvent) {
         updateLabelState();
     }
-
-// --------------------- Interface TakesValue ---------------------
 
     @Override public String getValue() {
         return textBox.getValue();
@@ -93,8 +75,6 @@ public class LabelTextBox extends Composite
         textBox.setValue(text);
         updateLabelState();
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void addKeyPressHandler(final KeyPressHandler keyPressHandler) {
         textBox.addKeyPressHandler(keyPressHandler);

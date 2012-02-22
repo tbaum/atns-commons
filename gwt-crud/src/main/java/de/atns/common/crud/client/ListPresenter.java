@@ -18,18 +18,12 @@ import net.customware.gwt.dispatch.shared.Action;
  * @since 05.10.2010
  */
 public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerializable> extends WidgetPresenter<D> {
-// ------------------------------ FIELDS ------------------------------
 
     protected PagePresenter pagePresenter;
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    @Inject
-    public void setPagePresenter(final PagePresenter pagePresenter) {
+    @Inject public void setPagePresenter(final PagePresenter pagePresenter) {
         this.pagePresenter = pagePresenter;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override protected void onBind() {
         super.onBind();

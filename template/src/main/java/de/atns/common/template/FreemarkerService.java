@@ -24,19 +24,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @since 27.11.2009
  */
 public class FreemarkerService {
-// ------------------------------ FIELDS ------------------------------
 
     private boolean isInit = false;
     private final Configuration configuration = new Configuration();
     private final Locale locale = Locale.ENGLISH;
     @TemplateDir private final String templateDir = null;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject public FreemarkerService() {
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public String renderTemplate(final String templateName, final Map<String, Object> context, final Object... params) {
         try {
@@ -74,11 +69,7 @@ public class FreemarkerService {
         return values;
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
-    @ConfigurationName("template-dir")
-    @Retention(RUNTIME)
-    @Target(FIELD)
+    @ConfigurationName("template-dir") @Retention(RUNTIME) @Target(FIELD)
     public static @interface TemplateDir {
     }
 }

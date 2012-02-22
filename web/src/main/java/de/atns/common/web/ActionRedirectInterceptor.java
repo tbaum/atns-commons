@@ -17,20 +17,13 @@ import java.lang.reflect.Method;
  *        any(), redirectInterceptor);
  */
 public class ActionRedirectInterceptor implements MethodInterceptor {
-// ------------------------------ FIELDS ------------------------------
 
     private Provider<Forwarder> forwarder;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     @Inject public void setForwarder(final Provider<Forwarder> forwarder) {
         this.forwarder = forwarder;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface MethodInterceptor ---------------------
 
     @Override public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Object result = invocation.proceed();

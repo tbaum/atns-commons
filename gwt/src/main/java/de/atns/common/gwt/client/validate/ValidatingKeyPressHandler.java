@@ -5,17 +5,11 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.ui.TextBox;
 import de.atns.common.gwt.client.composite.LabelTextBox;
 
-
 /**
  * @author mwolter
  * @since 02.08.2010 19:40:32
  */
 public abstract class ValidatingKeyPressHandler implements KeyPressHandler {
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface KeyPressHandler ---------------------
-
     @Override public void onKeyPress(final KeyPressEvent event) {
         // erlaube cursor, control, meta-tasten ....
         if (event.isAltKeyDown() || event.isControlKeyDown() || event.isMetaKeyDown() ||
@@ -34,8 +28,6 @@ public abstract class ValidatingKeyPressHandler implements KeyPressHandler {
             }
         }
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract boolean isValid(final KeyPressEvent event);
 }

@@ -7,7 +7,6 @@ import java.util.Map;
  * @since 22.10.2009
  */
 public class Util {
-// -------------------------- STATIC METHODS --------------------------
 
     public static String extractParameter(final Map<String, String[]> params, final String field,
                                           final String defaultValue) {

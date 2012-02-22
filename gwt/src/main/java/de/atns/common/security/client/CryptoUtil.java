@@ -8,14 +8,11 @@ import com.googlecode.gwt.crypto.client.TripleDesCipher;
  * @since 18.06.2010
  */
 public class CryptoUtil {
-// ------------------------------ FIELDS ------------------------------
 
     public static final byte[] DES_KEY = {
             37, 16, -88, -20, 110, 69, -38, -63, -122, -60, -85, 94, -45, 103, -17, 55, 97, 69, -111, 25, -85, -125, 16,
             49
     };
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static String encrypt(final String l) throws InvalidCipherTextException {
         final TripleDesCipher cipher = new TripleDesCipher();

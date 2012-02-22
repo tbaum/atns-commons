@@ -13,12 +13,9 @@ import static java.util.Arrays.asList;
  * @since 12.09.2008
  */
 public class ConstructorRef<TYPE> {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(ConstructorRef.class);
     private final Constructor<TYPE> constructor;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static <TYPE> ConstructorRef<TYPE> lookupContructor(final Class<TYPE> clazz, final Class... args) {
         try {
@@ -29,16 +26,12 @@ public class ConstructorRef<TYPE> {
         }
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     private ConstructorRef(final Constructor<TYPE> constructor) {
         if (constructor == null) {
             throw new IllegalArgumentException("no constructor given");
         }
         this.constructor = constructor;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public TYPE createInstance(final Object... args) throws RuntimeException {
         try {

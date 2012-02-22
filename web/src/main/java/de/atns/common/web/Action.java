@@ -8,7 +8,6 @@ import java.io.IOException;
  * @since 21.10.2009
  */
 public interface Action {
-// -------------------------- OTHER METHODS --------------------------
 
     void service() throws IOException, ServletException;
 }

@@ -23,23 +23,16 @@ import java.util.Set;
  * @since 23.10.2009
  */
 public class BenutzerUpdateHandler extends DefaultActionHandler<BenutzerUpdate, UserPresentation> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Provider<EntityManager> em;
     private final Converter<Benutzer, UserPresentation> converter;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public BenutzerUpdateHandler(final Provider<EntityManager> em, final UserConverter converter) {
         this.em = em;
         this.converter = converter;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    @Transactional
-    @Secured(UserAdminRole.class)
+    @Override @Transactional @Secured(UserAdminRole.class)
     public UserPresentation executeInternal(final BenutzerUpdate action) {
         UserPresentation p = action.getPresentation();
 

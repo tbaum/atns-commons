@@ -18,19 +18,13 @@ import java.util.logging.Logger;
  * @since 07.12.2009
  */
 public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
-// ------------------------------ FIELDS ------------------------------
 
     protected DispatchAsync dispatcher;
-
-
     protected D display;
     protected EventBus eventBus;
     private final Logger LOG = Logger.getLogger(this.getClass().toString());
     private final List<HandlerRegistration> handlerRegistrations = new java.util.ArrayList<HandlerRegistration>();
-
     private boolean bound = false;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public D getDisplay() {
         return display;
@@ -39,11 +33,6 @@ public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
     public boolean isBound() {
         return bound;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Activity ---------------------
 
     @Override public String mayStop() {
         return null;
@@ -64,8 +53,6 @@ public abstract class WidgetPresenter<D extends IsWidget> implements Activity {
     public final void start(final AcceptsOneWidget panel, final com.google.gwt.event.shared.EventBus eventBus) {
         start(panel, (EventBus) eventBus);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     /**
      * Any {@link HandlerRegistration}s added will be removed when

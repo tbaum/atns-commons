@@ -13,7 +13,6 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
  */
 public abstract class GenericManagerNamedImpl<TYPE extends LongIdObject & NameFieldObject>
         extends GenericManagerImpl<TYPE> {
-// -------------------------- OTHER METHODS --------------------------
 
     @Transactional(readOnly = true, propagation = REQUIRES_NEW)
     public Map<Long, String> loadNameList() {

@@ -22,16 +22,10 @@ import java.io.UnsupportedEncodingException;
  * @author Thomas Baum
  */
 public class BarcodeRenderer extends AbstractRenderer<BarcodeElement> {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BarcodeRenderer(final DocumentRenderer dr) {
         super(dr);
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final BarcodeElement element) throws UnsupportedEncodingException {
         final StringBuffer buffer = new StringBuffer();

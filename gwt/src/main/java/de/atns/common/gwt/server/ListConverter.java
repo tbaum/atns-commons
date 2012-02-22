@@ -14,30 +14,19 @@ import java.io.Serializable;
  */
 public class ListConverter<F extends Serializable, T extends IsSerializable>
         implements Converter<PartResult<F>, ListPresentation<T>> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Converter<F, T> converter;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static <F extends Serializable, T extends IsSerializable> ListConverter<F, T> listConverter(
             final Converter<F, T> converter) {
         return new ListConverter<F, T>(converter);
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     protected ListConverter(final Converter<F, T> converter) {
         this.converter = converter;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Converter ---------------------
-
-    @Override
-    public ListPresentation<T> convert(final PartResult<F> result) {
+    @Override public ListPresentation<T> convert(final PartResult<F> result) {
         return new ListPresentation<T>(Lambda.convert(result.getItems(), converter),
                 result.getStart(), result.getTotal());
     }

@@ -22,9 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author tbaum
  * @since 27.11.2009
  */
-@Singleton
-public class EmailSenderTask extends TimerTask implements Runnable {
-// ------------------------------ FIELDS ------------------------------
+@Singleton public class EmailSenderTask extends TimerTask implements Runnable {
 
     private static final Log LOG = LogFactory.getLog(EmailSenderTask.class);
     private final Provider<MailConfiguration> mailConfiguration;
@@ -33,8 +31,6 @@ public class EmailSenderTask extends TimerTask implements Runnable {
     private final AtomicBoolean running = new AtomicBoolean(false);
     private ThreadLocal<Transport> transport = new ThreadLocal<Transport>();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject
     public EmailSenderTask(final Provider<EntityManager> em, final Provider<MailConfiguration> mailConfiguration,
                            final EmailRepository repository) {
@@ -42,8 +38,6 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         this.mailConfiguration = mailConfiguration;
         this.repository = repository;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private Transport prepareTransport(final Session session) throws MessagingException {
         if (transport.get() == null) {
@@ -83,13 +77,11 @@ public class EmailSenderTask extends TimerTask implements Runnable {
         }
     }
 
-    @Transactional
-    protected List<EmailMessage> allUnsentMessages() {
+    @Transactional protected List<EmailMessage> allUnsentMessages() {
         return repository.getAllUnsentMails();
     }
 
-    @Transactional
-    protected void sendMessage(final Session session, final EmailMessage id) {
+    @Transactional protected void sendMessage(final Session session, final EmailMessage id) {
         EmailMessage message = em.get().find(EmailMessage.class, id.getId());
         try {
             final MimeMessage mimeMessage = new MimeMessage(session);
@@ -110,10 +102,10 @@ public class EmailSenderTask extends TimerTask implements Runnable {
 
     public void trigger() {
         new Timer().schedule(new TimerTask() {
-                    @Override public void run() {
-                        EmailSenderTask.this.run();
-                    }
-                }, 500);
+            @Override public void run() {
+                EmailSenderTask.this.run();
+            }
+        }, 500);
     }
 
     @Override public void run() {

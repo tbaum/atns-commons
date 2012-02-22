@@ -5,7 +5,6 @@ package de.atns.common.mail;
  * @since 23.05.11 11:52
  */
 public interface MailTemplateResource {
-// -------------------------- OTHER METHODS --------------------------
 
     byte[] getData();
 

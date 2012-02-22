@@ -22,7 +22,6 @@ import de.atns.printing.document.DocumentElement;
  * @author Thomas Baum
  */
 public interface DocumentRenderer extends Renderer<DocumentElement> {
-// -------------------------- OTHER METHODS --------------------------
 
     public void setFactory(RendererFactory factory);
 }

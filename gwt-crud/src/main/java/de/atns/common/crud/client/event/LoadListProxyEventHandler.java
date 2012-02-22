@@ -10,7 +10,6 @@ import java.util.List;
  * @since 22.09.2010 18:16:46
  */
 public interface LoadListProxyEventHandler<E extends EntityProxy> extends EventHandler {
-// -------------------------- OTHER METHODS --------------------------
 
     void onLoad(List<E> event, Object source);
 }

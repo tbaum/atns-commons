@@ -16,13 +16,9 @@ import de.atns.common.security.benutzer.client.BenutzerPresenter;
  */
 @Singleton
 public class BenutzerLoader extends WidgetPresenterModuleLoader<BenutzerPresenter> {
-// --------------------------- CONSTRUCTORS ---------------------------
-
     @Inject public BenutzerLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     @Override public boolean canHandlePlace(final Place place) {
         return place instanceof BenutzerPlace;

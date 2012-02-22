@@ -22,7 +22,6 @@ import java.util.List;
  * @author Steffen Schoenwiese
  */
 public class DocumentElement implements Element {
-// ------------------------------ FIELDS ------------------------------
 
     private static final long serialVersionUID = -4996631267175741673L;
 
@@ -34,8 +33,6 @@ public class DocumentElement implements Element {
 
     private Mode mode = Mode.TD;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public DocumentElement(final Material m) {
         this(m.getWidth(), m.getHeight(), m.getMode());
     }
@@ -45,8 +42,6 @@ public class DocumentElement implements Element {
         this.height = height;
         this.mode = mode;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public double getHeight() {
         return this.height;
@@ -72,14 +67,10 @@ public class DocumentElement implements Element {
         this.width = width;
     }
 
-// ------------------------ CANONICAL METHODS ------------------------
-
     @Override public String toString() {
         return "DocumentElement{mode=" + mode + ", width=" + width + ", height=" + height + ", elements=" +
                 elements + '}';
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void addElement(final Element elem) {
         if (!this.elements.contains(elem))

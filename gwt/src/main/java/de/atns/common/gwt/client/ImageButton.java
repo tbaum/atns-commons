@@ -12,8 +12,6 @@ import com.google.gwt.user.client.ui.ButtonBase;
  * @since 25.05.2010 11:46:07
  */
 public class ImageButton extends ButtonBase {
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public ImageButton() {
         super(Document.get().createImageElement());
         getElement().getStyle().setCursor(Style.Cursor.POINTER);
@@ -38,8 +36,6 @@ public class ImageButton extends ButtonBase {
         this(src);
         getElement().setTitle(alt);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void click() {
         getButtonElement().click();

@@ -10,7 +10,6 @@ import de.atns.common.gwt.client.WidgetDisplay;
  * @since 05.10.2010
  */
 public interface ListProxyDisplay<T> extends WidgetDisplay {
-// -------------------------- OTHER METHODS --------------------------
 
     HandlerRegistration forPressEnter(KeyPressHandler keyPressHandler);
 

@@ -24,11 +24,9 @@ import static de.atns.common.gwt.client.Table.*;
  * @since 24.10.2009
  */
 public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresenter.Display {
+
     public static final DateTimeFormat DATE_TIME_FORMAT = DateTimeFormat.getFormat("dd.MM.yyyy hh:mm");
-    // ------------------------------ FIELDS ------------------------------
-
     private final Table table = table("benutzer datatable");
-
     private final Button neu = new Button("Neuer Benutzer");
     private final Button suche = new Button("Suchen");
     private final TextBox text = new TextBox();
@@ -36,13 +34,9 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
     private final Row pagePresenterPanel = row();
     private boolean containsEmptyRow;
     private PagePresenter.Display pagePresenter;
-
     private final RoleConverter roleConverter;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public BenutzerView(RoleConverter roleConverter) {
+    @Inject public BenutzerView(RoleConverter roleConverter) {
         this.roleConverter = roleConverter;
 
         final FlowPanel panel = extendedFlowPanel(5)
@@ -58,12 +52,6 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         initWidget(panel);
         pagePresenterPanel.setWidth("640px");
     }
-
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Display ---------------------
 
     @Override public HandlerRegistration forNeu(final ClickHandler clickHandler) {
         return neu.addClickHandler(clickHandler);
@@ -89,8 +77,6 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return edit.addClickHandler(editHandler);
     }
 
-// --------------------- Interface ListDisplay ---------------------
-
     @Override public void setPagePresenter(final PagePresenter.Display display) {
         pagePresenter = display;
         setPagination(pagePresenter.asWidget());
@@ -104,15 +90,11 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         return text.addKeyPressHandler(handler);
     }
 
-// --------------------- Interface WidgetDisplay ---------------------
-
     @Override public void reset() {
         clearList();
         containsEmptyRow = true;
         setPagination(new HTML("- keine Benutzer gefunden -"));
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private void clearList() {
         containsEmptyRow = false;

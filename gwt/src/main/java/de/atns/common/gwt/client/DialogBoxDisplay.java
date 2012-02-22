@@ -12,7 +12,6 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
  * @since 18.03.2010 14:52:56
  */
 public interface DialogBoxDisplay extends WidgetDisplay {
-// -------------------------- OTHER METHODS --------------------------
 
     HandlerRegistration addCancelButtonClickHandler(ClickHandler clickHandler);
 
@@ -28,7 +27,7 @@ public interface DialogBoxDisplay extends WidgetDisplay {
 
     void setDialogBoxContent(String titel, Widget widget);
 
-    void showDialogBox();
-
     void setTitle(String titel);
+
+    void showDialogBox();
 }

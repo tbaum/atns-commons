@@ -14,14 +14,8 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 public class PrinterImpl extends AbstractPrinterImpl {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(PrinterImpl.class);
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Printer ---------------------
 
     @Override public boolean canPrint(final Label lf) {
         if (this.material.equals(lf.getMaterial())) {
@@ -82,8 +76,8 @@ public class PrinterImpl extends AbstractPrinterImpl {
 
     @Override public boolean waitForPrinter() {
         int waiting = 0;
-        LOG.info("START WAITING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting() + ", jobs: "
-                + this.state.getJobs() + ", waiting (max 120): " + waiting);
+        LOG.info("START WAITING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting() +
+                ", jobs: " + this.state.getJobs() + ", waiting (max 120): " + waiting);
         do {
             LOG.info("STILL WAITING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting()
                     + ", jobs: " + this.state.getJobs() + ", waiting (max 120): " + waiting);
@@ -95,12 +89,10 @@ public class PrinterImpl extends AbstractPrinterImpl {
                 LOG.error("Interrupted while waiting: " + e.getMessage());
             }
         } while (this.state.statusOk() && this.state.isPrinting() && waiting < 120);
-        LOG.info("RETURNING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting() + ", jobs: "
-                + this.state.getJobs() + ", waiting (max 120): " + waiting);
+        LOG.info("RETURNING: Status ok? " + this.state.statusOk() + ", isPrinting? " + this.state.isPrinting() +
+                ", jobs: " + this.state.getJobs() + ", waiting (max 120): " + waiting);
         return this.state.statusOk();
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     private void parseLine1(final String line1) {
         final String[] tokens = line1.split(",");

@@ -11,20 +11,12 @@ import javax.xml.transform.TransformerFactory;
  * @since 28.11.2009
  */
 public class TransformerFactoryProvider implements Provider<TransformerFactory> {
-// ------------------------------ FIELDS ------------------------------
 
     private final Provider<FOURIResolver> uriResolver;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public TransformerFactoryProvider(final Provider<FOURIResolver> uriResolver) {
         this.uriResolver = uriResolver;
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Provider ---------------------
 
     @Override public TransformerFactory get() {
         final TransformerFactory fac = TransformerFactory.newInstance();

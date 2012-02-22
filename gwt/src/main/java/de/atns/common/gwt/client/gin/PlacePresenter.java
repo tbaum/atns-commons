@@ -8,7 +8,6 @@ import com.google.gwt.place.shared.Place;
  * @since 18.11.10
  */
 public interface PlacePresenter<P extends Place> {
-// -------------------------- OTHER METHODS --------------------------
 
     Activity updateForPlace(P place);
 }

@@ -8,11 +8,8 @@ import java.util.concurrent.Semaphore;
  * @since 08.12.2010
  */
 public class LockService<T> {
-// ------------------------------ FIELDS ------------------------------
 
     private final ConcurrentHashMap<T, Semaphore> lockMap = new ConcurrentHashMap<T, Semaphore>();
-
-// -------------------------- OTHER METHODS --------------------------
 
     public void lock(T uuid) {
         if (uuid == null) {

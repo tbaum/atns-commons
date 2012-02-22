@@ -19,25 +19,18 @@ import de.atns.printing.device.Device;
  * @author Thomas Baum
  */
 public abstract class AbstractDocumentRenderer implements DocumentRenderer {
-// ------------------------------ FIELDS ------------------------------
 
     protected Device device;
 
     protected RendererFactory factory;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     protected AbstractDocumentRenderer(final Device device) {
         this.device = device;
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     @Override public void setFactory(final RendererFactory factory) {
         this.factory = factory;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public int getResolution() {
         return this.device.getDpi();

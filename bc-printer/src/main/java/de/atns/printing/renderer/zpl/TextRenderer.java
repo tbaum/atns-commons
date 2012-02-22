@@ -22,16 +22,10 @@ import java.io.UnsupportedEncodingException;
  * @author Thomas Baum
  */
 public class TextRenderer extends AbstractRenderer<TextElement> {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public TextRenderer(final DocumentRenderer dr) {
         super(dr);
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Renderer ---------------------
 
     @Override public void render(final TextElement element) throws UnsupportedEncodingException {
         if (element.getText().length() > 3072)

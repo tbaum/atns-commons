@@ -2,7 +2,6 @@ package de.atns.common.gwt.client.model;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-
 /**
  * @author mwolter
  * @since 01.03.2010 12:07:01

@@ -11,18 +11,13 @@ import static java.lang.reflect.Proxy.getProxyClass;
  */
 
 public class MethodSignature<TARGET> {
-// ------------------------------ FIELDS ------------------------------
 
     private final TARGET instance;
     private final ThreadLocal<Method> called = new ThreadLocal<Method>();
 
-// -------------------------- STATIC METHODS --------------------------
-
     public static <T> MethodSignature<T> signature(Class<T> target) {
         return new MethodSignature<T>(target);
     }
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     private MethodSignature(final Class<TARGET> target) {
         try {
@@ -41,8 +36,6 @@ public class MethodSignature<TARGET> {
         }
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     public TARGET call() {
         called.set(null);
         return instance;
@@ -52,11 +45,8 @@ public class MethodSignature<TARGET> {
         return called.get();
     }
 
-// -------------------------- INNER CLASSES --------------------------
-
     class InvocationHandler implements java.lang.reflect.InvocationHandler {
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) {
+        @Override public Object invoke(Object proxy, Method method, Object[] args) {
             called.set(method);
             return null;
         }

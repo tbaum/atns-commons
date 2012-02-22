@@ -18,16 +18,11 @@ import static de.atns.common.gwt.client.GwtUtil.flowPanel;
  * @author tbaum
  * @since 24.10.2009
  */
-public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
-        implements BenutzerChangePasswordPresenter.Display {
-// ------------------------------ FIELDS ------------------------------
+public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay implements BenutzerChangePasswordPresenter.Display {
 
     private final Button speichern = new Button("Speichern");
-
     private final PasswordTextBox passwort1 = new PasswordTextBox();
     private final PasswordTextBox passwort2 = new PasswordTextBox();
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BenutzerChangePasswordView() {
         final FlowPanel fp = flowPanel(speichern, getCancelButton());
@@ -83,18 +78,10 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
         speichern.setEnabled(passwort1.getValue().length() > 5 && passwort1.getValue().equals(passwort2.getValue()));
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface DialogBoxDisplay ---------------------
-
     @Override public void showDialogBox() {
         super.showDialogBox();
         passwort1.setFocus(true);
     }
-
-// --------------------- Interface Display ---------------------
-
 
     @Override public HandlerRegistration addSafeHandler(final ClickHandler handler) {
         return speichern.addClickHandler(handler);
@@ -103,8 +90,6 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay
     @Override public String getPassword() {
         return passwort1.getValue();
     }
-
-// --------------------- Interface WidgetDisplay ---------------------
 
     @Override public void reset() {
         passwort1.setValue("");

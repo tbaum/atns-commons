@@ -182,59 +182,48 @@ package de.atns.common.gwt.client.composite.colorpicker;
  * DAMAGE.
  */
 
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 /**
  * This is the implementation of the Colorpicker. It defines the user interface, the glue and calculations necessary for colorpicker functionality.
- *
+ * <p/>
  * <h1>Example</h1>
  * <CODE>
  * public class ColorPickerExample implements EntryPoint {
- *
- *  public void onModuleLoad() {
- *    // Make a new colorpicker
- *    ColorPicker picker = new ColorPicker();
- *
- *    // Add it to the root panel.
- *    RootPanel.get().add(picker);
- *
- *    // Make a new button that does something when you click it.
- *    Button b = new Button("Pick!", new ClickListener() {
- *      public void onClick(Widget sender) {
- *        Window.alert("You chose " + picker.getHexColor());
- *      }
- *    });
- *
- *    // Add it to the root panel.
- *    RootPanel.get().add(b);
- *  }
+ * <p/>
+ * public void onModuleLoad() {
+ * // Make a new colorpicker
+ * ColorPicker picker = new ColorPicker();
+ * <p/>
+ * // Add it to the root panel.
+ * RootPanel.get().add(picker);
+ * <p/>
+ * // Make a new button that does something when you click it.
+ * Button b = new Button("Pick!", new ClickListener() {
+ * public void onClick(Widget sender) {
+ * Window.alert("You chose " + picker.getHexColor());
+ * }
+ * });
+ * <p/>
+ * // Add it to the root panel.
+ * RootPanel.get().add(b);
+ * }
  * }
  * </CODE>
+ *
  * @author AurorisNET
  * @copyright (C) 2007 AurorisNET. All Rights Reserved.
  */
-public class ColorPicker extends Composite implements KeyPressHandler, ClickHandler, ChangeHandler
-{
+public class ColorPicker extends Composite implements KeyPressHandler, ClickHandler, ChangeHandler {
+
     private int blue;
     private int brightness;
     private int colorMode; // Which color picking mode we are in
 
     // Elements
-        private HTML colorpreview;
+    private HTML colorpreview;
     private int green;
     private int hue;
     private RadioButton rbBlue;
@@ -259,8 +248,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     private TextBox tbRed;
     private TextBox tbSaturation;
 
-    public ColorPicker()
-    {
+    public ColorPicker() {
         // UI Drawing
         //------------------
 
@@ -370,8 +358,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         table.setWidget(5, 1, tbGreen);
         table.setWidget(6, 0, rbBlue);
         table.setWidget(6, 1, tbBlue);
-        table.setText(7,0, "#:");
-        table.setWidget(7,1, tbHexColor);
+        table.setText(7, 0, "#:");
+        table.setWidget(7, 1, tbHexColor);
         table.getFlexCellFormatter().setColSpan(7, 1, 2);
 
         // Final setup
@@ -387,22 +375,241 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     }
 
     /**
+     * Called when the widget wants to update the preview color sample box in the top-right corner of the UI.
+     *
+     * @param hex Hexadecimal notation of RGB
+     */
+    private void setPreview(String hex) {
+        DOM.setStyleAttribute(colorpreview.getElement(), "backgroundColor", "#" + hex);
+    }
+
+    /**
+     * Fired when the user clicks on a widget.
+     * <p/>
+     * Subclasses that override this method must call <tt>super.onClick(sender)</tt> to ensure that the Widget recieves its events.
+     *
+     * @param sender the widget sending the event.
+     */
+    public void onClick(Widget sender) {
+        if (sender == rbHue) {
+            if (colorMode != SliderMap.Hue) {
+                colorMode = SliderMap.Hue;
+                slidermap.setColorSelectMode(SliderMap.Hue);
+                sliderbar.setColorSelectMode(SliderBar.Hue);
+                slidermap.setOverlayOpacity(100);
+                sliderbar.setLayerOpacity(100, SliderBar.BarD);
+            }
+
+            try {
+                Color color = new Color();
+                color.setHSV(hue, 100, 100);
+                slidermap.setOverlayColor("#" + color.getHex());
+            } catch (Exception e) {
+            }
+
+            sliderbar.setSliderPosition(256 - (int) ((new Integer(hue).floatValue() / 360) * 256));
+            slidermap.setSliderPosition((int) ((new Integer(saturation).floatValue() / 100) * 256),
+                    256 - (int) ((new Integer(brightness).floatValue() / 100) * 256));
+        } else if (sender == rbSaturation) {
+            if (colorMode != SliderMap.Saturation) {
+                colorMode = SliderMap.Saturation;
+                slidermap.setColorSelectMode(SliderMap.Saturation);
+                sliderbar.setColorSelectMode(SliderBar.Saturation);
+                slidermap.setOverlayColor("transparent");
+                sliderbar.setLayerOpacity(100, SliderBar.BarD);
+            }
+
+            try {
+                Color color = new Color();
+                color.setHSV(hue, 100, brightness);
+                sliderbar.setLayerColor("#" + color.getHex(), SliderBar.BarD);
+            } catch (Exception e) {
+            }
+
+            slidermap.setOverlayOpacity(100 - saturation);
+
+            sliderbar.setSliderPosition(256 - (int) ((new Integer(saturation).floatValue() / 100) * 256));
+            slidermap.setSliderPosition((int) ((new Integer(hue).floatValue() / 360) * 256),
+                    256 - (int) ((new Integer(brightness).floatValue() / 100) * 256));
+        } else if (sender == rbBrightness) {
+            if (colorMode != SliderMap.Brightness) {
+                colorMode = SliderMap.Brightness;
+                slidermap.setColorSelectMode(SliderMap.Brightness);
+                sliderbar.setColorSelectMode(SliderBar.Brightness);
+                slidermap.setUnderlayColor("#000000");
+                slidermap.setOverlayColor("transparent");
+                sliderbar.setLayerOpacity(100, SliderBar.BarD);
+            }
+
+            try {
+                Color color = new Color();
+                color.setHSV(hue, saturation, 100);
+                sliderbar.setLayerColor("#" + color.getHex(), SliderBar.BarD);
+            } catch (Exception ignored) {
+            }
+
+            slidermap.setOverlayOpacity(brightness);
+
+            sliderbar.setSliderPosition(256 - (int) ((new Integer(brightness).floatValue() / 100) * 256));
+            slidermap.setSliderPosition((int) ((new Integer(hue).floatValue() / 360) * 256),
+                    256 - (int) ((new Integer(saturation).floatValue() / 100) * 256));
+        } else if (sender == rbRed) {
+            if (colorMode != SliderMap.Red) {
+                colorMode = SliderMap.Red;
+                slidermap.setColorSelectMode(SliderMap.Red);
+                sliderbar.setColorSelectMode(SliderBar.Red);
+            }
+            slidermap.setOverlayOpacity(percentOf(red, 100));
+
+            sliderbar.setSliderPosition(256 - red);
+            slidermap.setSliderPosition(blue, 256 - green);
+        } else if (sender == rbGreen) {
+            if (colorMode != SliderMap.Green) {
+                colorMode = SliderMap.Green;
+                slidermap.setColorSelectMode(SliderMap.Green);
+                sliderbar.setColorSelectMode(SliderBar.Green);
+            }
+
+            slidermap.setOverlayOpacity(percentOf(green, 100));
+
+            sliderbar.setSliderPosition(256 - green);
+            slidermap.setSliderPosition(blue, 256 - red);
+        } else if (sender == rbBlue) {
+            if (colorMode != SliderMap.Blue) {
+                colorMode = SliderMap.Blue;
+                slidermap.setColorSelectMode(SliderMap.Blue);
+                sliderbar.setColorSelectMode(SliderBar.Blue);
+            }
+
+            slidermap.setOverlayOpacity(percentOf(blue, 100));
+
+            sliderbar.setSliderPosition(256 - blue);
+            slidermap.setSliderPosition(red, 256 - green);
+        }
+
+        if (colorMode == SliderMap.Red || colorMode == SliderMap.Green || colorMode == SliderMap.Blue) {
+            int x = 0;
+            int y = 0;
+
+            if (colorMode == SliderMap.Red) {
+                x = blue;
+                y = green;
+            }
+
+            if (colorMode == SliderMap.Green) {
+                x = blue;
+                y = red;
+            }
+
+            if (colorMode == SliderMap.Blue) {
+                x = red;
+                y = green;
+            }
+
+            int horzPer = (int) ((new Float(x).floatValue() / 256) * 100);
+            int vertPer = (int) ((new Float(y).floatValue() / 256) * 100);
+            int horzPerRev = (int) (((256 - new Float(x).floatValue()) / 256) * 100);
+            int vertPerRev = (int) (((256 - new Float(y).floatValue()) / 256) * 100);
+
+            if (vertPerRev > horzPerRev)
+                sliderbar.setLayerOpacity(horzPerRev, SliderBar.BarD);
+            else
+                sliderbar.setLayerOpacity(vertPerRev, SliderBar.BarD);
+            if (vertPerRev > horzPer)
+                sliderbar.setLayerOpacity(horzPer, SliderBar.BarC);
+            else
+                sliderbar.setLayerOpacity(vertPerRev, SliderBar.BarC);
+            if (vertPer > horzPer)
+                sliderbar.setLayerOpacity(horzPer, SliderBar.BarB);
+            else
+                sliderbar.setLayerOpacity(vertPer, SliderBar.BarB);
+            if (vertPer > horzPerRev)
+                sliderbar.setLayerOpacity(horzPerRev, SliderBar.BarA);
+            else
+                sliderbar.setLayerOpacity(vertPer, SliderBar.BarA);
+        }
+    }
+
+    /*Helper functions -- for common calculations
+     */
+
+    /**
+     * Divides the first value by 256, then multiplies it by the second value.
+     *
+     * @param val1 first value.
+     * @param val2 second value.
+     * @return result.
+     */
+    private int percentOf(int val1, int val2) {
+        return (int) (new Float(val1).floatValue() / 256 * val2);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.google.gwt.event.dom.client.ChangeHandler#onChange(com.google.gwt.event.dom.client.ChangeEvent)
+     */
+    @Override public void onChange(ChangeEvent event) {
+        onChange((Widget) event.getSource());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
+     */
+    @Override public void onClick(ClickEvent event) {
+        onClick((Widget) event.getSource());
+    }
+
+    @Override public void onKeyPress(KeyPressEvent event) {
+        Widget sender = (Widget) event.getSource();
+        char keyCode = event.getCharCode();
+
+        if (sender == tbHexColor) {
+            // Disallow non-hex in hexadecimal boxes
+            if ((!Character.isDigit(keyCode))
+                    && (keyCode != 'A') && (keyCode != 'a')
+                    && (keyCode != 'B') && (keyCode != 'b')
+                    && (keyCode != 'C') && (keyCode != 'c')
+                    && (keyCode != 'D') && (keyCode != 'd')
+                    && (keyCode != 'E') && (keyCode != 'e')
+                    && (keyCode != 'F') && (keyCode != 'f')
+                    && (keyCode != (char) KeyCodes.KEY_TAB)
+                    && (keyCode != (char) KeyCodes.KEY_BACKSPACE)
+                    && (keyCode != (char) KeyCodes.KEY_DELETE) && (keyCode != (char) KeyCodes.KEY_ENTER)
+                    && (keyCode != (char) KeyCodes.KEY_HOME) && (keyCode != (char) KeyCodes.KEY_END)
+                    && (keyCode != (char) KeyCodes.KEY_LEFT) && (keyCode != (char) KeyCodes.KEY_UP)
+                    && (keyCode != (char) KeyCodes.KEY_RIGHT) && (keyCode != (char) KeyCodes.KEY_DOWN)) {
+                ((TextBox) sender).cancelKey();
+            }
+        } else {
+            // Disallow non-numerics in numeric boxes
+            if ((!Character.isDigit(keyCode))
+                    && (keyCode != (char) KeyCodes.KEY_TAB)
+                    && (keyCode != (char) KeyCodes.KEY_BACKSPACE)
+                    && (keyCode != (char) KeyCodes.KEY_DELETE) && (keyCode != (char) KeyCodes.KEY_ENTER)
+                    && (keyCode != (char) KeyCodes.KEY_HOME) && (keyCode != (char) KeyCodes.KEY_END)
+                    && (keyCode != (char) KeyCodes.KEY_LEFT) && (keyCode != (char) KeyCodes.KEY_UP)
+                    && (keyCode != (char) KeyCodes.KEY_RIGHT) && (keyCode != (char) KeyCodes.KEY_DOWN)) {
+                ((TextBox) sender).cancelKey();
+            }
+        }
+    }
+
+    /**
      * Returns the hexadecimal notation of the current selected color.
+     *
      * @return Hexadecimal in the range of 000000-FFFFFF
      */
-    public String getHexColor()
-    {
+    public String getHexColor() {
         return tbHexColor.getText();
     }
 
     /**
      * This method is called when a widget is attached to the browser's document. To receive notification after a Widget has been added to the document, override the Widget.onLoad() method.
-     *
+     * <p/>
      * Subclasses that override this method must call <tt>super.onAttach()</tt> before doing anything else to ensure that the Widget has been properly attached to its underlying Element.
      */
-    @Override
-    public void onAttach()
-    {
+    @Override public void onAttach() {
         // Called when we are shown (from being hidden)
         super.onAttach();
         colorMode = -1;
@@ -410,15 +617,27 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     }
 
     /**
+     * Called whenever the internal state has been changed and needs to synchronize the other components.
+     */
+    private void updateSliders() {
+        // Let the sliders know something's changed
+        if (rbHue.getValue()) onClick(rbHue);
+        if (rbSaturation.getValue()) onClick(rbSaturation);
+        if (rbBrightness.getValue()) onClick(rbBrightness);
+        if (rbRed.getValue()) onClick(rbRed);
+        if (rbGreen.getValue()) onClick(rbGreen);
+        if (rbBlue.getValue()) onClick(rbBlue);
+    }
+
+    /**
      * Fires whenever the user generates picking events along the color picker bar.
-     *
+     * <p/>
      * Subclasses that override this method must call <tt>super.onBarSelected(y)</tt> to ensure that the Widget recieves its events.
+     *
      * @param y the distance along the y-axis of the user's selection, between 0 and 255, inclusive.
      */
-    public void onBarSelected(int y)
-    {
-        switch (colorMode)
-        {
+    public void onBarSelected(int y) {
+        switch (colorMode) {
             case SliderMap.Hue:
                 hue = 360 - percentOf(y, 360);
                 tbHue.setText(Integer.toString(hue));
@@ -452,29 +671,18 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.google.gwt.event.dom.client.ChangeHandler#onChange(com.google.gwt.event.dom.client.ChangeEvent)
-     */
-    @Override public void onChange(ChangeEvent event)
-    {
-        onChange((Widget)event.getSource());
-    }
-
     /**
      * Fired whenever something in this widget changes.
-     *
+     * <p/>
      * Subclasses that override this method must call <tt>super.onChange(sender)</tt> to ensure that the Widget recieves its events.
+     *
      * @param sender the widget that has changed.
      */
-    public void onChange(Widget sender)
-    {
-        if (sender == tbHexColor)
-        {
+    public void onChange(Widget sender) {
+        if (sender == tbHexColor) {
             // Figure out colors
             // Color class will do bounds check on hex input
-            try
-            {
+            try {
                 Color color = new Color();
                 color.setHex(tbHexColor.getText());
                 tbHue.setText(Integer.toString(color.getHue()));
@@ -485,28 +693,20 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 tbBlue.setText(Integer.toString(color.getBlue()));
                 tbHexColor.setText(color.getHex());
                 setPreview(color.getHex());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
 
-        if (sender == tbRed || sender == tbGreen || sender == tbBlue)
-        {
+        if (sender == tbRed || sender == tbGreen || sender == tbBlue) {
             // Don't allow this value to overflow or underflow
-            try
-            {
-                if (Integer.parseInt(((TextBox)sender).getText()) > 255)
-                {
-                    ((TextBox)sender).setText("255");
+            try {
+                if (Integer.parseInt(((TextBox) sender).getText()) > 255) {
+                    ((TextBox) sender).setText("255");
                 }
-                if (Integer.parseInt(((TextBox)sender).getText()) < 0)
-                {
-                    ((TextBox)sender).setText("0");
+                if (Integer.parseInt(((TextBox) sender).getText()) < 0) {
+                    ((TextBox) sender).setText("0");
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
 
             red = Integer.parseInt(tbRed.getText());
@@ -517,8 +717,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
             brightness = Integer.parseInt(tbBrightness.getText());
 
             // Figure out the colors
-            try
-            {
+            try {
                 Color color = new Color();
                 color.setRGB(red, green, blue);
                 tbHue.setText(Integer.toString(color.getHue()));
@@ -526,33 +725,23 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 tbBrightness.setText(Integer.toString(color.getValue()));
                 tbHexColor.setText(color.getHex());
                 setPreview(color.getHex());
+            } catch (Exception e) {
             }
-            catch (Exception e)
-            {
-            }
-        }
-        else if (sender == tbHue || sender == tbSaturation || sender == tbBrightness)
-        {
+        } else if (sender == tbHue || sender == tbSaturation || sender == tbBrightness) {
             // Don't allow this value to overflow
-            try
-            {
-                if (Integer.parseInt(tbHue.getText()) > 359)
-                {
+            try {
+                if (Integer.parseInt(tbHue.getText()) > 359) {
                     tbHue.setText("359");
                 }
 
-                if (Integer.parseInt(tbSaturation.getText()) > 100)
-                {
+                if (Integer.parseInt(tbSaturation.getText()) > 100) {
                     tbSaturation.setText("100");
                 }
 
-                if (Integer.parseInt(tbBrightness.getText()) > 100)
-                {
+                if (Integer.parseInt(tbBrightness.getText()) > 100) {
                     tbBrightness.setText("100");
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
 
             red = Integer.parseInt(tbRed.getText());
@@ -563,8 +752,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
             brightness = Integer.parseInt(tbBrightness.getText());
 
             // Figure out colors
-            try
-            {
+            try {
                 Color color = new Color();
                 color.setHSV(hue, saturation, brightness);
                 tbRed.setText(Integer.toString(color.getRed()));
@@ -572,9 +760,7 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
                 tbBlue.setText(Integer.toString(color.getBlue()));
                 tbHexColor.setText(color.getHex());
                 setPreview(color.getHex());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
 
@@ -582,238 +768,16 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         updateSliders();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
-     */
-    @Override public void onClick(ClickEvent event)
-    {
-        onClick((Widget)event.getSource());
-    }
-
-    /**
-     * Fired when the user clicks on a widget.
-     *
-     * Subclasses that override this method must call <tt>super.onClick(sender)</tt> to ensure that the Widget recieves its events.
-     * @param sender the widget sending the event.
-     */
-    public void onClick(Widget sender)
-    {
-        if (sender == rbHue)
-        {
-            if (colorMode != SliderMap.Hue)
-            {
-                colorMode = SliderMap.Hue;
-                slidermap.setColorSelectMode(SliderMap.Hue);
-                sliderbar.setColorSelectMode(SliderBar.Hue);
-                slidermap.setOverlayOpacity(100);
-                sliderbar.setLayerOpacity(100, SliderBar.BarD);
-            }
-
-            try
-            {
-                Color color = new Color();
-                color.setHSV(hue, 100, 100);
-                slidermap.setOverlayColor("#" + color.getHex());
-            }
-            catch (Exception e) {}
-
-            sliderbar.setSliderPosition(256 - (int)((new Integer(hue).floatValue() / 360) * 256));
-            slidermap.setSliderPosition((int)((new Integer(saturation).floatValue() / 100) * 256),
-                                        256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
-        }
-        else if(sender == rbSaturation)
-        {
-            if (colorMode != SliderMap.Saturation)
-            {
-                colorMode = SliderMap.Saturation;
-                slidermap.setColorSelectMode(SliderMap.Saturation);
-                sliderbar.setColorSelectMode(SliderBar.Saturation);
-                slidermap.setOverlayColor("transparent");
-                sliderbar.setLayerOpacity(100, SliderBar.BarD);
-            }
-            
-            try
-            {
-                Color color = new Color();
-                color.setHSV(hue, 100, brightness);
-                sliderbar.setLayerColor("#" + color.getHex(), SliderBar.BarD);
-            }
-            catch (Exception e) {}
-
-            slidermap.setOverlayOpacity(100 - saturation);
-
-            sliderbar.setSliderPosition(256 - (int)((new Integer(saturation).floatValue() / 100) * 256));
-            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 256),
-                                        256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
-        }
-        else if(sender == rbBrightness)
-        {
-            if (colorMode != SliderMap.Brightness)
-            {
-                colorMode = SliderMap.Brightness;
-                slidermap.setColorSelectMode(SliderMap.Brightness);
-                sliderbar.setColorSelectMode(SliderBar.Brightness);
-                slidermap.setUnderlayColor("#000000");
-                slidermap.setOverlayColor("transparent");
-                sliderbar.setLayerOpacity(100, SliderBar.BarD);
-            }
-
-            try
-            {
-                Color color = new Color();
-                color.setHSV(hue, saturation, 100);
-                sliderbar.setLayerColor("#" + color.getHex(), SliderBar.BarD);
-            }
-            catch (Exception ignored) {}
-
-            slidermap.setOverlayOpacity(brightness);
-
-            sliderbar.setSliderPosition(256 - (int)((new Integer(brightness).floatValue() / 100) * 256));
-            slidermap.setSliderPosition((int)((new Integer(hue).floatValue() / 360) * 256),
-                                        256 - (int)((new Integer(saturation).floatValue() / 100) * 256));
-        }
-        else if(sender == rbRed)
-        {
-            if (colorMode != SliderMap.Red)
-            {
-                colorMode = SliderMap.Red;
-                slidermap.setColorSelectMode(SliderMap.Red);
-                sliderbar.setColorSelectMode(SliderBar.Red);
-            }
-            slidermap.setOverlayOpacity(percentOf(red, 100));
-
-            sliderbar.setSliderPosition(256 - red);
-            slidermap.setSliderPosition(blue, 256 - green);
-        }
-        else if(sender == rbGreen)
-        {
-            if (colorMode != SliderMap.Green)
-            {
-                colorMode = SliderMap.Green;
-                slidermap.setColorSelectMode(SliderMap.Green);
-                sliderbar.setColorSelectMode(SliderBar.Green);
-            }
-
-            slidermap.setOverlayOpacity(percentOf(green, 100));
-
-            sliderbar.setSliderPosition(256 - green);
-            slidermap.setSliderPosition(blue, 256 - red);
-        }
-        else if(sender == rbBlue)
-        {
-            if (colorMode != SliderMap.Blue)
-            {
-                colorMode = SliderMap.Blue;
-                slidermap.setColorSelectMode(SliderMap.Blue);
-                sliderbar.setColorSelectMode(SliderBar.Blue);
-            }
-
-            slidermap.setOverlayOpacity(percentOf(blue, 100));
-
-            sliderbar.setSliderPosition(256 - blue);
-            slidermap.setSliderPosition(red, 256 - green);
-        }
-
-        if (colorMode == SliderMap.Red || colorMode == SliderMap.Green || colorMode == SliderMap.Blue)
-        {
-            int x = 0;
-            int y = 0;
-
-            if (colorMode == SliderMap.Red)
-            {
-                x = blue;
-                y = green;
-            }
-
-            if (colorMode == SliderMap.Green)
-            {
-                x = blue;
-                y = red;
-            }
-
-            if (colorMode == SliderMap.Blue)
-            {
-                x = red;
-                y = green;
-            }
-
-            int horzPer = (int)((new Float(x).floatValue() / 256) * 100);
-            int vertPer = (int)((new Float(y).floatValue() / 256) * 100);
-            int horzPerRev = (int)(((256 - new Float(x).floatValue()) / 256) * 100);
-            int vertPerRev = (int)(((256 - new Float(y).floatValue()) / 256) * 100);
-
-            if (vertPerRev > horzPerRev)
-                sliderbar.setLayerOpacity(horzPerRev, SliderBar.BarD);
-            else
-                sliderbar.setLayerOpacity(vertPerRev, SliderBar.BarD);
-            if (vertPerRev > horzPer)
-                sliderbar.setLayerOpacity(horzPer, SliderBar.BarC);
-            else
-                sliderbar.setLayerOpacity(vertPerRev, SliderBar.BarC);
-            if (vertPer > horzPer)
-                sliderbar.setLayerOpacity(horzPer, SliderBar.BarB);
-            else
-                sliderbar.setLayerOpacity(vertPer, SliderBar.BarB);
-            if (vertPer > horzPerRev)
-                sliderbar.setLayerOpacity(horzPerRev, SliderBar.BarA);
-            else
-                sliderbar.setLayerOpacity(vertPer, SliderBar.BarA);
-        }
-    }
-
-    @Override public void onKeyPress(KeyPressEvent event)
-    {
-        Widget sender = (Widget) event.getSource();
-        char keyCode = event.getCharCode();
-
-        if (sender == tbHexColor)
-        {
-            // Disallow non-hex in hexadecimal boxes
-            if ((!Character.isDigit(keyCode))
-                && (keyCode != 'A') && (keyCode != 'a')
-                && (keyCode != 'B') && (keyCode != 'b')
-                && (keyCode != 'C') && (keyCode != 'c')
-                && (keyCode != 'D') && (keyCode != 'd')
-                && (keyCode != 'E') && (keyCode != 'e')
-                && (keyCode != 'F') && (keyCode != 'f')
-                && (keyCode != (char) KeyCodes.KEY_TAB)
-                && (keyCode != (char) KeyCodes.KEY_BACKSPACE)
-                && (keyCode != (char) KeyCodes.KEY_DELETE) && (keyCode != (char) KeyCodes.KEY_ENTER)
-                && (keyCode != (char) KeyCodes.KEY_HOME) && (keyCode != (char) KeyCodes.KEY_END)
-                && (keyCode != (char) KeyCodes.KEY_LEFT) && (keyCode != (char) KeyCodes.KEY_UP)
-                && (keyCode != (char) KeyCodes.KEY_RIGHT) && (keyCode != (char) KeyCodes.KEY_DOWN))
-            {
-                ((TextBox)sender).cancelKey();
-            }
-        }
-        else
-        {
-            // Disallow non-numerics in numeric boxes
-            if ((!Character.isDigit(keyCode))
-                && (keyCode != (char) KeyCodes.KEY_TAB)
-                && (keyCode != (char) KeyCodes.KEY_BACKSPACE)
-                && (keyCode != (char) KeyCodes.KEY_DELETE) && (keyCode != (char) KeyCodes.KEY_ENTER)
-                && (keyCode != (char) KeyCodes.KEY_HOME) && (keyCode != (char) KeyCodes.KEY_END)
-                && (keyCode != (char) KeyCodes.KEY_LEFT) && (keyCode != (char) KeyCodes.KEY_UP)
-                && (keyCode != (char) KeyCodes.KEY_RIGHT) && (keyCode != (char) KeyCodes.KEY_DOWN))
-            {
-                ((TextBox)sender).cancelKey();
-            }
-        }
-    }
-
     /**
      * Fires whenever the user generates picking events on the color picker map.
-     *
+     * <p/>
      * Subclasses that override this method must call <tt>super.onMapSelected(x,y)</tt> to ensure that the Widget recieves its events.
+     *
      * @param x the distance along the x-axis of the user's selection, between 0 and 255, inclusive.
      * @param y the distance along the y-axis of the user's selection, between 0 and 255, inclusive.
      */
-    public void onMapSelected(int x, int y)
-    {
-        switch (colorMode)
-        {
+    public void onMapSelected(int x, int y) {
+        switch (colorMode) {
             case SliderMap.Hue:
                 saturation = percentOf(x, 100);
                 brightness = 100 - percentOf(y, 100);
@@ -859,59 +823,17 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         }
     }
 
-    /*Helper functions -- for common calculations
-     */
-    /**
-     * Divides the first value by 256, then multiplies it by the second value.
-     * @param val1 first value.
-     * @param val2 second value.
-     * @return result.
-     */
-    private int percentOf(int val1, int val2)
-    {
-        return (int)(new Float(val1).floatValue() / 256 * val2);
-    }
-
-    /**
-     * Sets the hexadecimal notation for Red, Green, and Blue. This will automatically populate all the other fields, too.
-     * @param hex Hexadecimal notation of Red, Green and Blue in the range of 000000-FFFFFF
-     * @throws java.lang.Exception A generic exception if the hexadecimal notation is bad.
-     */
-    public void setHex(String hex) throws Exception
-    {
-        Color color = new Color();
-        color.setHex(hex);
-
-        this.red = color.getRed();
-        this.green = color.getGreen();
-        this.blue = color.getBlue();
-        this.hue = color.getHue();
-        this.saturation = color.getSaturation();
-        this.brightness = color.getValue();
-
-        tbRed.setText(Integer.toString(this.red));
-        tbGreen.setText(Integer.toString(this.green));
-        tbBlue.setText(Integer.toString(this.blue));
-        tbHue.setText(Integer.toString(this.hue));
-        tbSaturation.setText(Integer.toString(this.saturation));
-        tbBrightness.setText(Integer.toString(this.brightness));
-        tbHexColor.setText(color.getHex());
-        setPreview(color.getHex());
-
-        updateSliders();
-    }
-
     /**
      * Set the Hue, Saturation and Value (Brightness) variables. This will automatically populate the Red, Green, Blue, and Hexadecimal fields, too.
-     *
+     * <p/>
      * HSV represents points in the RGB color space, which attempt to describe perceptual color relationships more accurately than RGB. HSV describes colors as points in a cylinder whose central axis ranges from black at the bottom to white at the top with neutral colors between them, where angle around the axis corresponds to �hue�, distance from the axis corresponds to �saturation�, and distance along the axis corresponds to �lightness�, �value�, or �brightness�.
-     * @param hue angle - valid range is 0-359
+     *
+     * @param hue        angle - valid range is 0-359
      * @param saturation percent - valid range is 0-100
-     * @param value percent (Brightness) - valid range is 0-100
+     * @param value      percent (Brightness) - valid range is 0-100
      * @throws java.lang.Exception A general exception if the Hue, Saturation, or Value variables are out of range.
      */
-    public void setHSV(int hue, int saturation, int value) throws Exception
-    {
+    public void setHSV(int hue, int saturation, int value) throws Exception {
         Color color = new Color();
         color.setHSV(hue, saturation, value);
 
@@ -935,25 +857,45 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
     }
 
     /**
-     * Called when the widget wants to update the preview color sample box in the top-right corner of the UI.
-     * @param hex Hexadecimal notation of RGB
+     * Sets the hexadecimal notation for Red, Green, and Blue. This will automatically populate all the other fields, too.
+     *
+     * @param hex Hexadecimal notation of Red, Green and Blue in the range of 000000-FFFFFF
+     * @throws java.lang.Exception A generic exception if the hexadecimal notation is bad.
      */
-    private void setPreview(String hex)
-    {
-        DOM.setStyleAttribute(colorpreview.getElement(), "backgroundColor", "#" + hex);
+    public void setHex(String hex) throws Exception {
+        Color color = new Color();
+        color.setHex(hex);
+
+        this.red = color.getRed();
+        this.green = color.getGreen();
+        this.blue = color.getBlue();
+        this.hue = color.getHue();
+        this.saturation = color.getSaturation();
+        this.brightness = color.getValue();
+
+        tbRed.setText(Integer.toString(this.red));
+        tbGreen.setText(Integer.toString(this.green));
+        tbBlue.setText(Integer.toString(this.blue));
+        tbHue.setText(Integer.toString(this.hue));
+        tbSaturation.setText(Integer.toString(this.saturation));
+        tbBrightness.setText(Integer.toString(this.brightness));
+        tbHexColor.setText(color.getHex());
+        setPreview(color.getHex());
+
+        updateSliders();
     }
 
     /**
      * Sets the Red, Green, and Blue color variables. This will automatically populate the Hue, Saturation and Brightness and Hexadecimal fields, too.
-     *
+     * <p/>
      * The RGB color model is an additive color model in which red, green, and blue light are added together in various ways to reproduce a broad array of colors. The name of the model comes from the initials of the three additive primary colors, red, green, and blue.
-     * @param red strength - valid range is 0-255
+     *
+     * @param red   strength - valid range is 0-255
      * @param green strength - valid range is 0-255
-     * @param blue strength - valid range is 0-255
+     * @param blue  strength - valid range is 0-255
      * @throws java.lang.Exception Exception if the Red, Green or Blue variables are out of range.
      */
-    public void setRGB(int red, int green, int blue) throws Exception
-    {
+    public void setRGB(int red, int green, int blue) throws Exception {
         Color color = new Color();
         color.setRGB(red, green, blue);
 
@@ -974,19 +916,5 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
         setPreview(color.getHex());
 
         updateSliders();
-    }
-
-    /**
-     * Called whenever the internal state has been changed and needs to synchronize the other components.
-     */
-    private void updateSliders()
-    {
-        // Let the sliders know something's changed
-        if (rbHue.getValue()) onClick(rbHue);
-        if (rbSaturation.getValue()) onClick(rbSaturation);
-        if (rbBrightness.getValue()) onClick(rbBrightness);
-        if (rbRed.getValue()) onClick(rbRed);
-        if (rbGreen.getValue()) onClick(rbGreen);
-        if (rbBlue.getValue()) onClick(rbBlue);
     }
 }

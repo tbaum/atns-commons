@@ -12,12 +12,9 @@ import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatu
  * @since 07.12.2009
  */
 public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
-// ------------------------------ FIELDS ------------------------------
 
     private final ServerStatus status;
     private final UserPresentation user;
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static ServerStatusEvent loggedin(final UserPresentation user) {
         if (user == null) return toServerStatus(null);
@@ -38,14 +35,10 @@ public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
         return new ServerStatusEvent(LOGGED_OUT, null);
     }
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     private ServerStatusEvent(final ServerStatus status, final UserPresentation user) {
         this.status = status;
         this.user = user;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public ServerStatus getStatus() {
         return status;
@@ -55,19 +48,13 @@ public class ServerStatusEvent extends GwtEvent<ServerStatusEventHandler> {
         return user;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
-    @Override
-    protected void dispatch(final ServerStatusEventHandler handler) {
+    @Override protected void dispatch(final ServerStatusEventHandler handler) {
         handler.onServerStatusChange(this);
     }
 
-    @Override
-    public Type<ServerStatusEventHandler> getAssociatedType() {
+    @Override public Type<ServerStatusEventHandler> getAssociatedType() {
         return ServerStatusEventHandler.TYPE;
     }
-
-// -------------------------- ENUMERATIONS --------------------------
 
     public static enum ServerStatus {
         LOGGED_IN, LOGGED_OUT, SECURITY, UNAVAILABLE

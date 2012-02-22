@@ -15,11 +15,8 @@ import java.util.List;
  * @since 11.05.2010
  */
 public class ClassUtils {
-// ------------------------------ FIELDS ------------------------------
 
     public static final Log LOG = LogFactory.getLog(ClassUtils.class);
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static <T> T construct(final Class<? extends T> judgeClass, final Object... args) {
         final Class[] argsC = getClasses(args);

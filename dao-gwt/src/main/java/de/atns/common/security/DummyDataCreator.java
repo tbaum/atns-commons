@@ -9,11 +9,8 @@ import org.apache.commons.logging.LogFactory;
  * @since 17.06.2010
  */
 public class DummyDataCreator {
-// ------------------------------ FIELDS ------------------------------
 
     private static final Log LOG = LogFactory.getLog(DummyDataCreator.class);
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     @Inject public DummyDataCreator(final AdminDummyDataCreator ad) {
         if (!ad.hasDefaultAdmin()) {

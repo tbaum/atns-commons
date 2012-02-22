@@ -8,7 +8,6 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * @since 22.09.2010 18:16:46
  */
 public interface LoadCreateEventHandler<E extends IsSerializable> extends EventHandler {
-// -------------------------- OTHER METHODS --------------------------
 
     void onCreate(E event, Object source);
 }

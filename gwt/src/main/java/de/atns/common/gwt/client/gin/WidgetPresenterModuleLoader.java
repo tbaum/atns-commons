@@ -11,13 +11,10 @@ import de.atns.common.gwt.client.WidgetPresenter;
 public abstract class WidgetPresenterModuleLoader<T extends WidgetPresenter & PlacePresenter>
         extends SharedServicesModuleLoader<WidgetPresenterGinjector<T>>
         implements RunAsyncCallback {
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public WidgetPresenterModuleLoader(final SharedServices sharedServices) {
         super(sharedServices);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public abstract boolean canHandlePlace(Place place);
 

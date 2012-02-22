@@ -17,15 +17,12 @@ import static com.google.gwt.dom.client.Style.TextDecoration.UNDERLINE;
  * @since 19.11.2009 20:03:32
  */
 public class GwtUtil {
-// ------------------------------ FIELDS ------------------------------
 
     public static final Command NOOP = new Command() {
-        @Override
-        public void execute() {
+
+        @Override public void execute() {
         }
     };
-
-// -------------------------- STATIC METHODS --------------------------
 
     public static FlowPanel flowPanel(final IsWidget... w) {
         final FlowPanel fp = new FlowPanel();
@@ -98,8 +95,7 @@ public class GwtUtil {
         labelStyle.setTextDecoration(UNDERLINE);
 
         label.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent clickEvent) {
+            @Override public void onClick(final ClickEvent clickEvent) {
                 History.newItem(historyLink);
             }
         });
@@ -197,7 +193,6 @@ public class GwtUtil {
         toogleStyle(dateBox, !editable, "gwt-TextBox-readonly");
     }
 
-    // -------------------------- ENUMERATIONS --------------------------
     public static void setVisibleStyle(final Widget widget, final boolean editable) {
         if (editable) {
             widget.getElement().getStyle().setDisplay(INLINE_BLOCK);
@@ -207,6 +202,7 @@ public class GwtUtil {
     }
 
     public enum DivBoxColor {
+
         WEISS, BLAU, ROT
     }
 }

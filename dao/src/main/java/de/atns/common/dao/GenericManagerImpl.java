@@ -28,22 +28,14 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 
 public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends ExtendedHibernateDaoSupport
         implements GenericManager<TYPE> {
-// ------------------------------ FIELDS ------------------------------
 
     @Autowired(required = true) @Qualifier("lockManager")
     private LockManager<TYPE> lockManager;
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Converter ---------------------
 
     @Override @Transactional(readOnly = true, propagation = REQUIRES_NEW)
     public TYPE convert(final Long from) {
         return loadReadonly(from);
     }
-
-// --------------------- Interface GenericManager ---------------------
 
     @Override public TYPE createObject() {
         return lookupContructor(getDataClass()).createInstance();
@@ -73,7 +65,6 @@ public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends Exte
         final PartResult<TYPE> result = executeCallback(new HibernateCallback() {
             @Override public Object doInHibernate(final Session session) throws HibernateException, SQLException {
                 final PartResult<TYPE> partResult = loadAll(session, filter, start, max, sort, asc, dataClass);
-
 
                 final List<TYPE> result = loadAllHandleList(partResult.getItems(), session);
                 return PartResult.createPartResult(partResult, result);
@@ -113,8 +104,6 @@ public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends Exte
         return (TYPE) getHibernateTemplate().merge(object);
     }
 
-// --------------------- Interface LockManager ---------------------
-
     @Override public LockState createLock(final TYPE object) {
         return lockManager.createLock(object);
     }
@@ -126,8 +115,6 @@ public abstract class GenericManagerImpl<TYPE extends LongIdObject> extends Exte
     @Override public LockState updateLock(final LockState object) {
         return lockManager.updateLock(object);
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     protected abstract Class<? extends TYPE> getDataClass();
 

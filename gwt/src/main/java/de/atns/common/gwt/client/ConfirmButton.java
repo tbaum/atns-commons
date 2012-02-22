@@ -14,11 +14,8 @@ import com.google.gwt.user.client.ui.Label;
  * @since 11.03.2010 17:31:11
  */
 public class ConfirmButton extends Button {
-// ------------------------------ FIELDS ------------------------------
 
     private final Button delButton;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public ConfirmButton(final String buttonText, final String cancelText, final String message, final String title) {
         super(buttonText);
@@ -35,7 +32,6 @@ public class ConfirmButton extends Button {
                 w.getElement().getStyle().setPadding(15, Style.Unit.PX);
                 flowPanel.add(w);
 
-
                 final Button cancelButton = new Button(cancelText);
                 cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
 
@@ -44,7 +40,6 @@ public class ConfirmButton extends Button {
                         dialogBox.hide();
                     }
                 };
-
 
                 delButton.addClickHandler(clickHandler);
                 cancelButton.addClickHandler(clickHandler);
@@ -64,11 +59,6 @@ public class ConfirmButton extends Button {
             }
         });
     }
-
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface HasClickHandlers ---------------------
 
     @Override public HandlerRegistration addClickHandler(final ClickHandler handler) {
         return delButton.addClickHandler(handler);

@@ -6,7 +6,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class StatusListener extends Thread {
-// ------------------------------ FIELDS ------------------------------
 
 //    private PrinterEnvironment env;
 
@@ -14,26 +13,16 @@ public class StatusListener extends Thread {
 
     private final ServerSocket socket;
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
     public StatusListener(final ServerSocket socket, @SuppressWarnings("unused") final PrinterEnvironment env) {
 //        this.env = env;
         this.socket = socket;
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public void setListen(final boolean listen) {
         this.listen = listen;
     }
 
-// ------------------------ INTERFACE METHODS ------------------------
-
-
-// --------------------- Interface Runnable ---------------------
-
-    @Override
-    public void run() {
+    @Override public void run() {
         while (this.listen) {
             try {
                 final Socket clientSocket = this.socket.accept();

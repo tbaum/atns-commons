@@ -12,8 +12,6 @@ import static java.lang.String.format;
 public enum NumberPeriood {
     NONE, YEAR, MONTH, DAY;
 
-// -------------------------- OTHER METHODS --------------------------
-
     public String currentPrefix(final Object... data) {
         final Calendar c = Calendar.getInstance();
         if (data.length > 0) {

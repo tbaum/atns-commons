@@ -25,13 +25,10 @@ import de.atns.printing.document.TextElement;
  * @author Steffen Schoenwiese
  */
 public class LagerEtikett2 {
-// ------------------------------ FIELDS ------------------------------
 
     private final String address = "10.1.1.19";
 
     private final int port = 9100;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public LagerEtikett2() throws Exception {
         final String[] pr = {
@@ -373,8 +370,6 @@ public class LagerEtikett2 {
         return label;
     }
 
-// -------------------------- OTHER METHODS --------------------------
-
     private DocumentElement createLabel(final String s) {
         final DocumentElement label = new DocumentElement(51, 25, Mode.TT);
         label.addElement(new TextElement(s, 10, 8, 18));
@@ -390,8 +385,6 @@ public class LagerEtikett2 {
         final Device f = new ZPLNetworkPrinterDevice(address, port, 300);
         f.renderDocument(label);
     }
-
-// --------------------------- main() method ---------------------------
 
     public static void main(final String[] args) throws Exception {
         new LagerEtikett2();

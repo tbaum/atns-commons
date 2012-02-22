@@ -5,9 +5,7 @@ import com.google.inject.ImplementedBy;
 import java.util.HashMap;
 import java.util.Map;
 
-@ImplementedBy(MailUtilImpl.class)
-public interface MailUtil {
-// -------------------------- OTHER METHODS --------------------------
+@ImplementedBy(MailUtilImpl.class) public interface MailUtil {
 
     EmailMessage sendMail(String recipient, String recipientName,
                           MailTemplate template, HashMap<String, Object> context,

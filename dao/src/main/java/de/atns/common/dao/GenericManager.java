@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.Map;
 
 public interface GenericManager<TYPE extends LongIdObject> extends LockManager<TYPE>, Converter<Long, TYPE> {
-// -------------------------- OTHER METHODS --------------------------
 
     TYPE createObject();
 

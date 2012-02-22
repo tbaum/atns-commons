@@ -20,17 +20,12 @@ import static de.atns.common.security.client.event.ServerStatusEvent.ServerStatu
  */
 @Singleton
 public class ApplicationState {
-// ------------------------------ FIELDS ------------------------------
 
     private UserPresentation user = UserPresentation.invalidUser();
 
-// --------------------------- CONSTRUCTORS ---------------------------
-
-    @Inject
-    public ApplicationState(final EventBus eventBus, DispatchAsync dispatcher) {
+    @Inject public ApplicationState(final EventBus eventBus, DispatchAsync dispatcher) {
         eventBus.addHandler(ServerStatusEventHandler.TYPE, new ServerStatusEventHandler() {
-            @Override
-            public void onServerStatusChange(final ServerStatusEvent event) {
+            @Override public void onServerStatusChange(final ServerStatusEvent event) {
                 final ServerStatusEvent.ServerStatus status = event.getStatus();
                 if (status == LOGGED_IN) {
                     user = event.getUser();
@@ -40,12 +35,10 @@ public class ApplicationState {
             }
         });
         dispatcher.execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
-            @Override
-            public void onFailure(final Throwable caught) {
+            @Override public void onFailure(final Throwable caught) {
             }
 
-            @Override
-            public void onSuccess(final UserPresentation user) {
+            @Override public void onSuccess(final UserPresentation user) {
                 update(user);
             }
         });
@@ -55,13 +48,9 @@ public class ApplicationState {
         this.user = result;
     }
 
-// --------------------- GETTER / SETTER METHODS ---------------------
-
     public UserPresentation getUser() {
         return user;
     }
-
-// -------------------------- OTHER METHODS --------------------------
 
     public String getAuthToken() {
         return user.getAuthToken();

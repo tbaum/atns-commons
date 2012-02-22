@@ -22,13 +22,10 @@ import java.io.IOException;
  * @author Steffen Schoenwiese
  */
 public class ImageElement extends AbstractElement {
-// ------------------------------ FIELDS ------------------------------
 
     private Image image;
 
     private double scale;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     protected ImageElement(final double x, final double y, final double scale) {
         super(x, y);
@@ -43,8 +40,6 @@ public class ImageElement extends AbstractElement {
     public ImageElement(final String fileName, final double x, final double y, final double zoom) throws IOException {
         this(ImageIO.read(new File(fileName)), x, y, zoom);
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public Image getImage() {
         return this.image;
@@ -61,8 +56,6 @@ public class ImageElement extends AbstractElement {
     public void setScale(final double scale) {
         this.scale = scale;
     }
-
-// ------------------------ CANONICAL METHODS ------------------------
 
     @Override public String toString() {
         return "ImageElement{image=" + image.getGraphics().getClipBounds() + ", " + super.toString() + "}";

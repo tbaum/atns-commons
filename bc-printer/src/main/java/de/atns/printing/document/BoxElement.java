@@ -17,14 +17,11 @@ package de.atns.printing.document;
  * @author Steffen Schoenwiese
  */
 public class BoxElement extends AbstractElement {
-// ------------------------------ FIELDS ------------------------------
 
     private final int size;
 
     private final double x2;
     private final double y2;
-
-// --------------------------- CONSTRUCTORS ---------------------------
 
     public BoxElement(final double x1, final double y1, final double x2, final double y2, final int size) {
         super(x1, y1);
@@ -32,8 +29,6 @@ public class BoxElement extends AbstractElement {
         this.y2 = y2 - y1;
         this.size = size;
     }
-
-// --------------------- GETTER / SETTER METHODS ---------------------
 
     public int getSize() {
         return this.size;
@@ -46,8 +41,6 @@ public class BoxElement extends AbstractElement {
     public double getY2() {
         return y2;
     }
-
-// ------------------------ CANONICAL METHODS ------------------------
 
     @Override public String toString() {
         return "BoxElement{size=" + size + ", x2=" + x2 + ", y2=" + y2 + ", " + super.toString() + "}";
