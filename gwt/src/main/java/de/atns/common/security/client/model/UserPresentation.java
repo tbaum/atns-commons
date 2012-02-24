@@ -29,15 +29,18 @@ public class UserPresentation implements Result, Serializable {
         return new UserPresentation();
     }
 
-    public static UserPresentation nameToken(String token, String login,
-                                             Set<SecurityRolePresentation> roles) {
-        final UserPresentation userPresentation = new UserPresentation(null, login, null, null, null, roles, null,
-                null);
-        userPresentation.setAuthToken(token);
-        return userPresentation;
+    public static UserPresentation nameToken(String token, String login, Set<SecurityRolePresentation> roles) {
+        final UserPresentation user = new UserPresentation(null, login, null, null, null, roles, null, null);
+        user.setAuthToken(token);
+        return user;
     }
 
     public UserPresentation() {
+    }
+
+    public UserPresentation(UserPresentation other) {
+        this(other.id, other.login, other.name, other.passwort, other.email, other.roles, other.lastLogin,
+                other.lastAccess);
     }
 
     public UserPresentation(Long id, String login, String name, String passwort, String email,
@@ -66,6 +69,14 @@ public class UserPresentation implements Result, Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public Date getLastAccess() {
+        return lastAccess;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
     }
 
     public String getLogin() {
@@ -103,13 +114,5 @@ public class UserPresentation implements Result, Serializable {
 
     public boolean isValid() {
         return authToken != null;
-    }
-
-    public Date getLastLogin() {
-        return lastLogin;
-    }
-
-    public Date getLastAccess() {
-        return lastAccess;
     }
 }
