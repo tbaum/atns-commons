@@ -23,5 +23,7 @@ public abstract class AbstractLoadUserDetailHandler<A extends LoadUserDetail<R>,
         return loadUserDetail(securityUser);
     }
 
+    @Override protected abstract Class<A> getActionClass();
+
     protected abstract R loadUserDetail(SecurityUser securityUser);
 }

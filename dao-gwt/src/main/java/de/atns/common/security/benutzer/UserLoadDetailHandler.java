@@ -26,6 +26,10 @@ public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDet
         this.em = em;
     }
 
+    @Override protected Class<UserDetail> getActionClass() {
+        return UserDetail.class;
+    }
+
     @Override @Transactional
     protected UserPresentation loadUserDetail(SecurityUser securityUser) {
         final Benutzer benutzer = this.em.get().find(Benutzer.class, securityUser.getLogin());

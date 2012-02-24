@@ -17,16 +17,19 @@ public abstract class DefaultActionHandler<A extends Action<R>, R extends Result
     private final Class<A> clazz;
 
     public DefaultActionHandler() {
-        //noinspection unchecked
         this.clazz = getActionClass();
     }
 
-    private Class getActionClass() {
+    protected Class<A> getActionClass() {
         for (Method method : getClass().getDeclaredMethods()) {
             if (method.getName().equals("executeInternal")) {
                 final Class<?>[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes.length == 1) {
-                    return parameterTypes[0];
+                    final Class<?> parameterType = parameterTypes[0];
+                    if (!parameterType.equals(Action.class)) {
+                        //noinspection unchecked
+                        return (Class<A>) parameterType;
+                    }
                 }
             }
         }
