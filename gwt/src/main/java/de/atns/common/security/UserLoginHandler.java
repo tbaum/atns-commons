@@ -23,7 +23,6 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
 
     @Inject public UserLoginHandler(final SecurityFilter securityFilter, CheckSessionHandler checkSessionHandler,
                                     UserService userService, SecurityService securityService) {
-        super();
         this.securityFilter = securityFilter;
         this.checkSessionHandler = checkSessionHandler;
         this.userService = userService;
