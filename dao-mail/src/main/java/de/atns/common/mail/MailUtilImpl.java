@@ -35,7 +35,6 @@ public class MailUtilImpl extends ExtendedHibernateDaoSupport implements MailUti
         this.templateRenderer = templateRenderer;
     }
 
-
     @Override @Transactional(propagation = Propagation.REQUIRED)
     public MessagePreparator sendMail(final String recipient, final String recipientName,
                                       final MailTemplate template, final Map<String, Object> context,

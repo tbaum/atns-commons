@@ -51,7 +51,6 @@ public class LockStateImpl<TYPE extends LongIdObject> implements Serializable, L
         return (int) (id ^ (id >>> 32));
     }
 
-
     @Override public boolean isTimeout() {
 //        if (LOG.isDebugEnabled()) {
 //            LOG.debug("isTimeout " + (System.currentTimeMillis() - lastSeen) + " > " + timeoutTime);

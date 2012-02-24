@@ -20,7 +20,6 @@ public class MailUtilImpl implements MailUtil {
         this.em = em;
     }
 
-
     @Override @Transactional
     public EmailMessage sendMail(final String recipient, final String recipientName,
                                  final MailTemplate template, final HashMap<String, Object> context,

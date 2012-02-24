@@ -23,7 +23,6 @@ public final class ClientAuthFilter extends ClientFilter {
         this.resource = resource;
     }
 
-
     @Override public ClientResponse handle(final ClientRequest cr) throws ClientHandlerException {
         addAuthHeader(cr);
         ClientResponse handle = getNext().handle(cr);

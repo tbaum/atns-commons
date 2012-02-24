@@ -24,7 +24,6 @@ public class ActionRedirectInterceptor implements MethodInterceptor {
         this.forwarder = forwarder;
     }
 
-
     @Override public Object invoke(final MethodInvocation invocation) throws Throwable {
         final Object result = invocation.proceed();
 

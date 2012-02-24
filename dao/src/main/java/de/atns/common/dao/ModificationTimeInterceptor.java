@@ -35,7 +35,6 @@ public class ModificationTimeInterceptor extends EmptyInterceptor {
 //        this.jspUpdateService = jspUpdateService;
 //    }
 
-
     @Override public boolean onLoad(final Object entity,
                                     final Serializable id,
                                     final Object[] state,

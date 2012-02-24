@@ -20,7 +20,6 @@ public class SecurityManagerWorkaroundResolver extends FOURIResolver {
 
     private static final Log LOG = LogFactory.getLog(SecurityManagerWorkaroundResolver.class);
 
-
     // TODO Remove me!
     // This is a workaround for the security manager problem under windows.
     // While the webstart app has all-permissions an exception is thrown

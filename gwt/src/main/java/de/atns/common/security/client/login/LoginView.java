@@ -81,7 +81,6 @@ public class LoginView extends DefaultDialogBoxDisplay implements KeyPressHandle
         login.setEnabled(username.getText().length() > 0 && password.getText().length() > 0);
     }
 
-
     @Override public HandlerRegistration addLoginClick(final ClickHandler clickHandler) {
         return login.addClickHandler(clickHandler);
     }

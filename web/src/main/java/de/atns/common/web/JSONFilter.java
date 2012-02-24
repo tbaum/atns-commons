@@ -26,7 +26,6 @@ import java.io.PrintWriter;
         this.result = result;
     }
 
-
     @Override public void init(final FilterConfig filterConfig) throws ServletException {
     }
 
