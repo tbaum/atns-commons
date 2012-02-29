@@ -201,6 +201,14 @@ public class GwtUtil {
         }
     }
 
+    public static void setEditStyle(final Widget widget, final boolean editable) {
+        if (editable) {
+            widget.removeStyleName("hide");
+        } else {
+            widget.addStyleName("hide");
+        }
+    }
+
     public enum DivBoxColor {
 
         WEISS, BLAU, ROT
