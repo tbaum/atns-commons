@@ -167,7 +167,16 @@ public class NumberBox extends Composite
 
     public Integer toInteger(Integer defaultValue) {
         Number value = getValue();
-        return value != null ? new Integer(value.intValue()) : defaultValue;
+        return value != null ? value.intValue() : defaultValue;
+    }
+
+    public Double toDouble() {
+        return toDouble(0d);
+    }
+
+    public Double toDouble(Double defaultValue) {
+        Number value = getValue();
+        return value != null ? value.doubleValue() : defaultValue;
     }
 
     public static class DefaultFormat implements NumberBox.Format {
