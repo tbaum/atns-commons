@@ -48,7 +48,7 @@ public class DebugUnitOfWorkInterceptor implements MethodInterceptor {
                         LOG.error(r);
                     }
                 }
-            }, 30000);
+            }, 60000);
         }
         try {
             return methodInvocation.proceed();
