@@ -161,6 +161,15 @@ public class NumberBox extends Composite
         return parseNumber(true);
     }
 
+    public Integer toInteger() {
+        return toInteger(0);
+    }
+
+    public Integer toInteger(Integer defaultValue) {
+        Number value = getValue();
+        return value != null ? new Integer(value.intValue()) : defaultValue;
+    }
+
     public static class DefaultFormat implements NumberBox.Format {
 
         private final NumberFormat numberFormat;
