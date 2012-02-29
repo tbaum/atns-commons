@@ -16,7 +16,6 @@ import java.math.BigDecimal;
  */
 public class NumberBox extends Composite
         implements HasValue<Number>, ValueChangeHandler<Number>, Focusable, HasEnabled {
-
     public static final String DEFAULT_STYLENAME = "gwt-NumberBox";
 
     private static final String NUMBER_BOX_FORMAT_ERROR = "numberBoxFormatError";
@@ -24,6 +23,7 @@ public class NumberBox extends Composite
     private Number numberValue = null;
     private final TextBox box = new TextBox();
     private NumberBox.Format format;
+    private boolean error = false;
 
     public NumberBox() {
         this(null, DEFAULT_FORMAT);
@@ -132,6 +132,10 @@ public class NumberBox extends Composite
         return box.addBlurHandler(handler);
     }
 
+    public HandlerRegistration addChangeHandler(final ChangeHandler handler) {
+        return box.addChangeHandler(handler);
+    }
+
     public HandlerRegistration addFocusHandler(FocusHandler handler) {
         return box.addFocusHandler(handler);
     }
@@ -148,6 +152,19 @@ public class NumberBox extends Composite
         return box.addKeyUpHandler(handler);
     }
 
+    public boolean hasErrors() {
+        return error;
+    }
+
+    private void setError(boolean b) {
+        error = b;
+        if (b) {
+            addStyleName(NUMBER_BOX_FORMAT_ERROR);
+        } else {
+            removeStyleName(NUMBER_BOX_FORMAT_ERROR);
+        }
+    }
+
     public BigDecimal toBigDecimal() {
         return toBigDecimal(BigDecimal.ZERO);
     }
@@ -161,15 +178,6 @@ public class NumberBox extends Composite
         return parseNumber(true);
     }
 
-    public Integer toInteger() {
-        return toInteger(0);
-    }
-
-    public Integer toInteger(Integer defaultValue) {
-        Number value = getValue();
-        return value != null ? value.intValue() : defaultValue;
-    }
-
     public Double toDouble() {
         return toDouble(0d);
     }
@@ -179,8 +187,16 @@ public class NumberBox extends Composite
         return value != null ? value.doubleValue() : defaultValue;
     }
 
-    public static class DefaultFormat implements NumberBox.Format {
+    public Integer toInteger() {
+        return toInteger(0);
+    }
 
+    public Integer toInteger(Integer defaultValue) {
+        Number value = getValue();
+        return value != null ? value.intValue() : defaultValue;
+    }
+
+    public static class DefaultFormat implements NumberBox.Format {
         private final NumberFormat numberFormat;
 
         public DefaultFormat() {
@@ -215,7 +231,7 @@ public class NumberBox extends Composite
                     number = new BigDecimal(numberText);
                 } catch (IllegalArgumentException e) {
                     if (reportError) {
-                        numberBox.addStyleName(NUMBER_BOX_FORMAT_ERROR);
+                        numberBox.setError(true);
                     }
                     return null;
                 }
@@ -224,12 +240,11 @@ public class NumberBox extends Composite
         }
 
         @Override public void reset(final NumberBox numberBox, final boolean abandon) {
-            numberBox.removeStyleName(NUMBER_BOX_FORMAT_ERROR);
+            numberBox.setError(false);
         }
     }
 
     public interface Format {
-
         String format(NumberBox numberBox, Number number);
 
         Number parse(NumberBox numberBox, String text, boolean reportError);
