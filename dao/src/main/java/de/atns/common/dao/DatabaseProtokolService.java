@@ -52,27 +52,32 @@ import static de.atns.common.dao.LogEntry.Action.*;
         try {
             String daten = dumpClass(object, object.getClass(), ", ", true, ignoreFilter).toString();
             String login = getCurrentUser();
-            em.get().persist(new LogEntry(login, action,
-                    simplifyName(object.getClass()),
-                    dumpAnnotatedFields(object, new AnnotatedFieldFilter(Id.class)),
-                    dumpAnnotatedFields(object, new AnnotatedFieldFilter(Version.class)),
-                    daten));
+            if (!login.isEmpty()) {
+                em.get().persist(new LogEntry(login, action,
+                        simplifyName(object.getClass()),
+                        dumpAnnotatedFields(object, new AnnotatedFieldFilter(Id.class)),
+                        dumpAnnotatedFields(object, new AnnotatedFieldFilter(Version.class)),
+                        daten));
+            }
         } catch (Exception e) {
             LOG.error(e, e);
         }
     }
 
     private String getCurrentUser() {
-        String login = null;
         try {
             SecurityUser securityUser = securityService.currentUser();
             if (securityUser == null) {
-                return "None";
+                return "";
             }
-            login = securityUser.getLogin();
+            String login = securityUser.getLogin();
+            if (login == null) {
+                return "";
+            }
+            return login.trim();
         } catch (OutOfScopeException ignored) {
         }
-        return login;
+        return "";
     }
 
     private String simplifyName(Class aClass) {
@@ -184,13 +189,11 @@ import static de.atns.common.dao.LogEntry.Action.*;
         }
     }
 
-    @Inject(optional = true)
-    public void setIgnoreFilter(@Named("ignoreLogClass") Class ignoreClass) {
+    @Inject(optional = true) public void setIgnoreFilter(@Named("ignoreLogClass") Class ignoreClass) {
         this.ignoreFilter = new DeclaringClassFieldFilter(ignoreClass);
     }
 
-    @Inject(optional = true)
-    public void setMyPackage(@Named("shortLogPackageName") Package myPackage) {
+    @Inject(optional = true) public void setMyPackage(@Named("shortLogPackageName") Package myPackage) {
         this.myPackage = myPackage.getName();
     }
 }
