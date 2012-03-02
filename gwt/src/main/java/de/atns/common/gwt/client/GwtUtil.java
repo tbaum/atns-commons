@@ -3,10 +3,15 @@ package de.atns.common.gwt.client;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.*;
@@ -23,6 +28,8 @@ public class GwtUtil {
         @Override public void execute() {
         }
     };
+    private static final DateTimeFormat dateFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
+    private static final NumberFormat numberFormat = NumberFormat.getCurrencyFormat("EUR");
 
     public static FlowPanel flowPanel(final IsWidget... w) {
         final FlowPanel fp = new FlowPanel();
@@ -207,6 +214,14 @@ public class GwtUtil {
         } else {
             widget.addStyleName("hide");
         }
+    }
+
+    public static String format(Date date) {
+        return date != null ? dateFormat.format(date) : "";
+    }
+
+    public static String format(BigDecimal value) {
+        return value != null ? numberFormat.format(value) : "";
     }
 
     public enum DivBoxColor {
