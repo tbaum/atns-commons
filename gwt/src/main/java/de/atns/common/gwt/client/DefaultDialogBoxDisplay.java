@@ -71,7 +71,11 @@ public abstract class DefaultDialogBoxDisplay extends DefaultWidgetDisplay
     }
 
     @Override public void showDialogBox() {
-        dialogBox.center();
+        center();
         dialogBox.show();
+    }
+
+    public void center() {
+        dialogBox.center();
     }
 }
