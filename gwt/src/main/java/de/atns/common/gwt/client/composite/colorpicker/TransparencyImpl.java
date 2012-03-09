@@ -219,32 +219,23 @@ public class TransparencyImpl {
 
             // Cache existing filters on the image, then re-apply everything with our Alpha filter
             // stacked on the end.
-            if (map.containsKey(elem)) {
-                if (alpha == 100) {
-                    DOM.setStyleAttribute(elem, "filter", map.get(elem) + "");
-                } else {
-                    DOM.setStyleAttribute(elem, "filter", map.get(elem) +
-                            ", progid:DXImageTransform.Microsoft.Alpha(opacity=" + alpha + ");");
-                }
-            } else {
+            if (!map.containsKey(elem)) {
                 map.put(elem, DOM.getStyleAttribute(elem, "filter"));
 
-                if (alpha == 100) {
-                    DOM.setStyleAttribute(elem, "filter", map.get(elem) + "");
-                } else {
-                    DOM.setStyleAttribute(elem, "filter", map.get(elem) +
-                            ", progid:DXImageTransform.Microsoft.Alpha(opacity=" + alpha + ");");
-                }
             }
+            DOM.setStyleAttribute(elem, "filter",
+                    alpha == 100
+                            ? map.get(elem)
+                            : map.get(elem) + ", progid:DXImageTransform.Microsoft.Alpha(opacity=" + alpha + ");");
         }
         // If IE 7 (or better)
         else if (ieVersion >= 7.0) {
             DOM.setStyleAttribute(elem, "filter", "alpha(opacity=" + alpha + ")");
         } else // Everyone else
         {
-            setMozOpacity(elem, (new Integer(alpha).floatValue() / 100) + "");
+            setMozOpacity(elem, String.valueOf(alpha / 100.0));
             //DOM.setStyleAttribute(elem, "-moz-opacity", ""+(new Integer(alpha).floatValue() / 100)+"");
-            DOM.setStyleAttribute(elem, "opacity", "" + (new Integer(alpha).floatValue() / 100) + "");
+            DOM.setStyleAttribute(elem, "opacity", String.valueOf(alpha / 100.0));
         }
     }
 
