@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 import de.atns.common.security.AbstractLoadUserDetailHandler;
+import de.atns.common.security.BenutzerRepository;
 import de.atns.common.security.SecurityService;
 import de.atns.common.security.SecurityUser;
 import de.atns.common.security.benutzer.client.action.UserDetail;
@@ -20,10 +21,13 @@ import javax.persistence.EntityManager;
 public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDetail, UserPresentation> {
 
     private Provider<EntityManager> em;
+    private final BenutzerRepository benutzerRepository;
 
-    @Inject public UserLoadDetailHandler(final SecurityService securityService, final Provider<EntityManager> em) {
+    @Inject public UserLoadDetailHandler(final SecurityService securityService, final Provider<EntityManager> em,
+                                         BenutzerRepository benutzerRepository) {
         super(securityService);
         this.em = em;
+        this.benutzerRepository = benutzerRepository;
     }
 
     @Override protected Class<UserDetail> getActionClass() {
@@ -32,7 +36,7 @@ public class UserLoadDetailHandler extends AbstractLoadUserDetailHandler<UserDet
 
     @Override @Transactional
     protected UserPresentation loadUserDetail(SecurityUser securityUser) {
-        final Benutzer benutzer = this.em.get().find(Benutzer.class, securityUser.getLogin());
+        final Benutzer benutzer = benutzerRepository.benutzerByLogin(securityUser.getLogin());
 
         return new UserPresentation(benutzer.getId(), benutzer.getLogin(), benutzer.getName(), benutzer.getPasswort(),
                 benutzer.getEmail(), RoleServerConverter.convert(benutzer.getRoles()), benutzer.getLastLogin(),
