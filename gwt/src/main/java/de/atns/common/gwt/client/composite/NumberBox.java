@@ -10,6 +10,9 @@ import com.google.gwt.user.client.ui.*;
 
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.ZERO;
+import static java.math.BigDecimal.valueOf;
+
 /**
  * @author tbaum
  * @since 08.09.2010
@@ -166,12 +169,12 @@ public class NumberBox extends Composite
     }
 
     public BigDecimal toBigDecimal() {
-        return toBigDecimal(BigDecimal.ZERO);
+        return toBigDecimal(ZERO);
     }
 
     public BigDecimal toBigDecimal(BigDecimal defaultValue) {
         Number value = getValue();
-        return value != null ? new BigDecimal(value.doubleValue()) : defaultValue;
+        return value != null ? valueOf(value.doubleValue()) : defaultValue;
     }
 
     @Override public Number getValue() {
