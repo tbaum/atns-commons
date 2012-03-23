@@ -120,6 +120,9 @@ public class Table extends ComplexPanel {
     }
 
     public static class Row extends ComplexPanel {
+
+        private int columnCount = 0;
+
         @Override public void add(final Widget w) {
             add(w, getElement());
         }
@@ -139,12 +142,13 @@ public class Table extends ComplexPanel {
 
                 if (tc.getStyle() == null) {
                     tc.addStyleName("cell");
-                    tc.addStyleName("cell" + i);
+                    tc.addStyleName("cell" + columnCount);
                 } else {
                     tc.addStyleName(tc.getStyle());
                 }
 
                 add(tc);
+                columnCount++;
             }
         }
 
