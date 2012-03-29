@@ -12,11 +12,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import de.atns.common.gwt.client.Util;
-import org.gwttime.time.DateMidnight;
 import org.gwttime.time.Interval;
 
 import java.util.Date;
 
+import static de.atns.common.gwt.datefilter.client.DateUtils.toDateMidnight;
 import static de.atns.common.gwt.datefilter.client.TimeSearch.*;
 
 /**
@@ -69,12 +69,7 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Tim
     }
 
     public TimeRange getRange() {
-        final Date startDate = startDateBox.getValue();
-        final Date finshDate = finishDateBox.getValue();
-
-        return new TimeRange(
-                startDate == null ? null : new DateMidnight(startDate),
-                finshDate == null ? null : new DateMidnight(finshDate));
+        return new TimeRange(toDateMidnight(startDateBox.getValue()), toDateMidnight(finishDateBox.getValue()));
     }
 
     public DateBox getFinishDateBox() {

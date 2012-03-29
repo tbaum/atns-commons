@@ -3,6 +3,8 @@ package de.atns.common.gwt.datefilter.client;
 import org.gwttime.time.DateMidnight;
 import org.gwttime.time.DateTime;
 
+import java.util.Date;
+
 import static org.gwttime.time.DateTimeConstants.SUNDAY;
 
 /**
@@ -42,5 +44,9 @@ public class DateUtils {
 
     public static DateMidnight getFirstDayOfWeek(DateMidnight date) {
         return getLastDayOfWeek(date).minusDays(6);
+    }
+
+    public static DateMidnight toDateMidnight(Date startDate) {
+        return startDate != null ? new DateMidnight(startDate.getTime() - startDate.getTimezoneOffset() * 60000) : null;
     }
 }
