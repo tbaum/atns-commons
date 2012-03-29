@@ -9,9 +9,9 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
+import org.gwttime.time.DateMidnight;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 import static com.google.gwt.dom.client.Style.Display.*;
@@ -216,11 +216,11 @@ public class GwtUtil {
         }
     }
 
-    public static String format(Date date) {
-        return date != null ? dateFormat.format(date) : "";
+    public static String formatDate(DateMidnight date) {
+        return date != null ? dateFormat.format(date.toDate()) : "";
     }
 
-    public static String format(BigDecimal value) {
+    public static String formatBigDecimal(BigDecimal value) {
         return value != null ? numberFormat.format(value) : "";
     }
 
