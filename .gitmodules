@@ -1,0 +1,3 @@
+[submodule "gwt-time"]
+	path = gwt-time
+	url = git://github.com/tbaum/gwt-time.git
