@@ -18,14 +18,12 @@ import org.gwttime.time.Interval;
 import java.util.Date;
 
 import static de.atns.common.gwt.datefilter.client.TimeSearch.*;
-import static java.lang.Long.MAX_VALUE;
-import static org.gwttime.time.DateTimeUtils.getInstantMillis;
 
 /**
  * @author mwolter
  * @since 04.08.2010 17:35:53
  */
-public class DateFilterView extends Widget implements HasValueChangeHandlers<Interval> {
+public class DateFilterView extends Widget implements HasValueChangeHandlers<TimeRange> {
 
     private static final DateTimeFormat timeFormat = DateTimeFormat.getFormat("dd.MM.yyyy");
     private final DateBox startDateBox = new DateBox(new DatePicker(), null, new DateBox.DefaultFormat(timeFormat));
@@ -53,7 +51,7 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Int
                     startDateBox.setValue(range.getStart().toDate());
                     finishDateBox.setValue(range.getEnd().toDate());
                 }
-                fireEvent(new ValueChangeEvent<Interval>(getRange()) {
+                fireEvent(new ValueChangeEvent<TimeRange>(getRange()) {
                 });
             }
         });
@@ -62,7 +60,7 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Int
 
             @Override public void onValueChange(ValueChangeEvent<Date> dateValueChangeEvent) {
                 rangeBox.setSelectedIndex(0);
-                fireEvent(new ValueChangeEvent<Interval>(getRange()) {
+                fireEvent(new ValueChangeEvent<TimeRange>(getRange()) {
                 });
             }
         };
@@ -70,13 +68,13 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Int
         finishDateBox.addValueChangeHandler(changeHandler);
     }
 
-    public Interval getRange() {
+    public TimeRange getRange() {
         final Date startDate = startDateBox.getValue();
         final Date finshDate = finishDateBox.getValue();
 
-        return new Interval(
-                startDate == null ? 0 : getInstantMillis(new DateMidnight(startDate)),
-                finshDate == null ? MAX_VALUE : getInstantMillis(new DateMidnight(finshDate)));
+        return new TimeRange(
+                startDate == null ? null : new DateMidnight(startDate),
+                finshDate == null ? null : new DateMidnight(finshDate));
     }
 
     public DateBox getFinishDateBox() {
@@ -92,7 +90,7 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Int
     }
 
     @Override
-    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Interval> handler) {
+    public HandlerRegistration addValueChangeHandler(ValueChangeHandler<TimeRange> handler) {
         return addHandler(handler, ValueChangeEvent.getType());
     }
 
