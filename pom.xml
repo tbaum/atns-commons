@@ -14,7 +14,6 @@
     </parent>
 
     <modules>
-        <module>gwt-time</module>
         <module>bc-printer</module>
         <module>cache</module>
         <module>classutils</module>
