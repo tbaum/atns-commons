@@ -66,6 +66,9 @@ public class DateFilterView extends Widget implements HasValueChangeHandlers<Tim
         };
         startDateBox.addValueChangeHandler(changeHandler);
         finishDateBox.addValueChangeHandler(changeHandler);
+
+        startDateBox.setWidth("70px");
+        finishDateBox.setWidth("70px");
     }
 
     public TimeRange getRange() {
