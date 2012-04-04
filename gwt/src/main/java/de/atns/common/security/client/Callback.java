@@ -52,7 +52,12 @@ public abstract class Callback<T> implements AsyncCallback<T> {
             display.stopProcessing();
         } else {
             LOG.log(WARNING, "check session in callback ", originalCaught);
-            display.showError(originalCaught.getMessage());
+            final String message = originalCaught.getMessage();
+            if (message != null) {
+                display.showError(message);
+            } else {
+                display.showError(originalCaught.toString());
+            }
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
                 @Override public void onFailure(final Throwable caught) {
                     LOG.log(WARNING, "failed-checksession", caught);
