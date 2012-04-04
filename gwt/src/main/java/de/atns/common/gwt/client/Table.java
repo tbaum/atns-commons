@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @since 20.10.10
  */
 public class Table extends ComplexPanel {
+
     public static Table table(final Row... w) {
         final Table fp = new Table();
         fp.add(w);
@@ -125,6 +126,11 @@ public class Table extends ComplexPanel {
 
         @Override public void add(final Widget w) {
             add(w, getElement());
+        }
+
+        @Override public void clear() {
+            super.clear();
+            columnCount = 0;
         }
 
         public void add(final Object... w) {
