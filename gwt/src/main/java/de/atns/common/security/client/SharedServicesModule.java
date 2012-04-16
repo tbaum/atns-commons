@@ -11,6 +11,7 @@ import de.atns.common.gwt.client.gin.SharedServicesAware;
 import de.atns.common.gwt.client.window.MasterWindowEventBus;
 import de.atns.common.gwt.client.window.PopupWindowEventBus;
 import de.atns.common.security.RoleConverter;
+import de.atns.common.security.shared.ApplicationState;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 /**
@@ -21,6 +22,10 @@ public class SharedServicesModule extends AbstractPresenterModule {
 
     @Provides public AppShell appshell(final SharedServices sharedServices) {
         return sharedServices.appShell();
+    }
+
+    @Provides public ApplicationState applicationState(final SharedServices sharedServices) {
+        return sharedServices.applicationState();
     }
 
     @Override protected void configure() {

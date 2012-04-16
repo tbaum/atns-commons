@@ -20,6 +20,7 @@ import de.atns.common.gwt.client.window.PopupWindowEventBus;
 import de.atns.common.gwt.client.window.TransportAware;
 import de.atns.common.security.RoleConverter;
 import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.shared.ApplicationState;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;
 
@@ -98,10 +99,15 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
 
     @Provides @Singleton SharedServices getSharedServices(final DispatchAsync dispatcher, final EventBus eventbus,
                                                           final ApplicationShell appShell,
-                                                          final RoleConverter roleConverter) {
+                                                          final RoleConverter roleConverter,
+                                                          final ApplicationState applicationState) {
         return new SharedServices() {
             @Override public DispatchAsync dispatcher() {
                 return dispatcher;
+            }
+
+            @Override public ApplicationState applicationState() {
+                return applicationState;
             }
 
             @Override public EventBus eventBus() {

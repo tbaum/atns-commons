@@ -47,9 +47,15 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     @Override public void onFailure(final Throwable originalCaught) {
         if (originalCaught instanceof SecurityException) {
-            LOG.log(WARNING, "check session in callback '" + originalCaught.getMessage() + "'");
+            final String message = originalCaught.getMessage();
+            LOG.log(WARNING, "check session in callback '" + message + "'");
             eventBus.get().fireEvent(toServerStatus(originalCaught));
             display.stopProcessing();
+            if (message != null) {
+                display.showError(message);
+            } else {
+                display.showError(originalCaught.toString());
+            }
         } else {
             LOG.log(WARNING, "check session in callback ", originalCaught);
             final String message = originalCaught.getMessage();

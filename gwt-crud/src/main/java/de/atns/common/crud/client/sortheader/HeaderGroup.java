@@ -75,6 +75,14 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         return widget;
     }
 
+
+    public void clear() {
+        headerRow.clear();
+        handlers.clear();
+        headers.clear();
+        sortColumn = new SortColumn<FIELD>(null, null);
+    }
+
     @Override public void setValue(final SortColumn<FIELD> sortColumn, final boolean b) {
         final boolean shouldFire = this.sortColumn == null || !this.sortColumn.equals(sortColumn);
 
