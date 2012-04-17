@@ -92,8 +92,21 @@ public class UserPresentation implements Result, Serializable {
         return passwort;
     }
 
+    public Set<String> getRoleNames() {
+        Set<String> roleNames = new HashSet<String>();
+        for (SecurityRolePresentation presentation : roles) {
+            roleNames.add(presentation.getRoleName());
+        }
+        return roleNames;
+    }
+
     public Set<SecurityRolePresentation> getRoles() {
         return roles;
+    }
+
+    public boolean inRole(Class<? extends SecurityRole> required) {
+        //noinspection unchecked
+        return inRole(new Class[]{required});
     }
 
     public boolean inRole(Class<? extends SecurityRole>... required) {
@@ -115,13 +128,5 @@ public class UserPresentation implements Result, Serializable {
 
     public boolean isValid() {
         return authToken != null;
-    }
-
-    public Set<String> getRoleNames() {
-        Set<String> roleNames = new HashSet<String>();
-        for (SecurityRolePresentation presentation : roles) {
-            roleNames.add(presentation.getRoleName());
-        }
-        return roleNames;
     }
 }
