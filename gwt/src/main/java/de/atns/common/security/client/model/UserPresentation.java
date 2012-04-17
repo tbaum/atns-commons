@@ -6,6 +6,7 @@ import net.customware.gwt.dispatch.shared.Result;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -114,5 +115,13 @@ public class UserPresentation implements Result, Serializable {
 
     public boolean isValid() {
         return authToken != null;
+    }
+
+    public Set<String> getRoleNames() {
+        Set<String> roleNames = new HashSet<String>();
+        for (SecurityRolePresentation presentation : roles) {
+            roleNames.add(presentation.getRoleName());
+        }
+        return roleNames;
     }
 }
