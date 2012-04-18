@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.inject.Inject;
 import de.atns.common.crud.client.event.LoadListEvent;
 import de.atns.common.crud.client.event.LoadListEventHandler;
+import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.gwt.client.WidgetPresenter;
 import de.atns.common.gwt.client.model.ListPresentation;
 import de.atns.common.security.client.Callback;
@@ -81,7 +82,7 @@ public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerial
     protected abstract Action createLoadAction();
 
     protected Callback<ListPresentation<T>> loadCallback() {
-        return new Callback<ListPresentation<T>>(ListPresenter.this.getDisplay()) {
+        return new Callback<ListPresentation<T>>(getErrorDisplay()) {
             @Override public void callback(final ListPresentation<T> result) {
                 LoadListEvent.fireEvent(result, _listEvent(), ListPresenter.this);
             }
@@ -89,6 +90,10 @@ public abstract class ListPresenter<D extends ListDisplay<T>, T extends IsSerial
     }
 
     @Override public D getDisplay() {
+        return super.getDisplay();
+    }
+
+    public WidgetDisplay getErrorDisplay() {
         return super.getDisplay();
     }
 
