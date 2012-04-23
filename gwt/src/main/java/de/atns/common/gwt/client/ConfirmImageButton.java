@@ -4,25 +4,30 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.*;
+
+import static com.google.gwt.dom.client.Style.Cursor.POINTER;
 
 /**
  * @author mwolter
  * @since 11.03.2010 17:31:11
  */
-public class ConfirmButton extends Button {
+public class ConfirmImageButton extends Image {
 
     private final Button delButton;
 
-    public ConfirmButton(final String buttonText, final String cancelText, final String message, final String title) {
-        super(buttonText);
-        delButton = new Button(buttonText);
-        delButton.getElement().getStyle().setProperty("margin", "0 10px 0 0");
-        super.addClickHandler(new ClickHandler() {
+    public ConfirmImageButton(final ImageResource imageResource, final String altText, final String cancelText,
+                              final String message, final String title) {
+        super(imageResource);
+        setTitle(altText);
+        getElement().getStyle().setCursor(POINTER);
+        getElement().getStyle().setProperty("margin", "5px 0 0 11px");
 
+        delButton = new Button("Löschen!");
+        delButton.getElement().getStyle().setProperty("margin", "0 10px 0 0");
+
+        super.addClickHandler(new ClickHandler() {
             @Override public void onClick(final ClickEvent event) {
                 final DialogBox dialogBox = new DialogBox(false, true);
                 dialogBox.setText(title);
@@ -38,7 +43,6 @@ public class ConfirmButton extends Button {
                 cancelButton.getElement().getStyle().setPaddingLeft(10, Style.Unit.PX);
 
                 final ClickHandler clickHandler = new ClickHandler() {
-
                     @Override public void onClick(final ClickEvent event) {
                         dialogBox.hide();
                     }
