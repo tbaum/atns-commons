@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.*;
 
 import static com.google.gwt.dom.client.Style.Cursor.POINTER;
@@ -15,7 +16,10 @@ import static com.google.gwt.dom.client.Style.Cursor.POINTER;
  */
 public class ConfirmImageButton extends Image {
 
-    private final Button delButton;
+    private Button delButton;
+
+    @UiConstructor public ConfirmImageButton() {
+    }
 
     public ConfirmImageButton(final ImageResource imageResource, final String altText, final String cancelText,
                               final String message, final String title) {

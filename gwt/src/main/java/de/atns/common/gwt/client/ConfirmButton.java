@@ -4,6 +4,7 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -15,7 +16,10 @@ import com.google.gwt.user.client.ui.Label;
  */
 public class ConfirmButton extends Button {
 
-    private final Button delButton;
+    private Button delButton;
+
+    @UiConstructor public ConfirmButton() {
+    }
 
     public ConfirmButton(final String buttonText, final String cancelText, final String message, final String title) {
         super(buttonText);
