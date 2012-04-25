@@ -66,6 +66,7 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay implemen
                 new FieldSetPanel("Passwort ändern:", extendedFlowPanel()
                         .add("Passwort").widthPX(120).add(passwort1).newLine()
                         .add("weiderholen").widthPX(120).add(passwort2).newLine()
+                        .add(getErrorPanel())
                         .getPanel()
                 ), getErrorPanel(),
                 fp
@@ -75,7 +76,18 @@ public class BenutzerChangePasswordView extends DefaultDialogBoxDisplay implemen
     }
 
     private void updButton() {
-        speichern.setEnabled(passwort1.getValue().length() > 5 && passwort1.getValue().equals(passwort2.getValue()));
+        final boolean passwordLenght = passwort1.getValue().length() > 5;
+        final boolean passwordEquals = passwort1.getValue().equals(passwort2.getValue());
+
+        if (!passwordLenght) {
+            showError("Paswortlänge mindestens 6 Zeichen!");
+        } else if (!passwordEquals) {
+            showError("Passwörter stimmen nicht überein!");
+        } else {
+            resetErrors();
+        }
+
+        speichern.setEnabled(passwordLenght && passwordEquals);
     }
 
     @Override public void showDialogBox() {
