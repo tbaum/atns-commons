@@ -61,7 +61,7 @@ public class ApplicationState {
     }
 
     public boolean inRole(Class<? extends SecurityRole> required) {
-        return true;
+        return user.inRole(required);
     }
 
     public boolean isValidUser() {
