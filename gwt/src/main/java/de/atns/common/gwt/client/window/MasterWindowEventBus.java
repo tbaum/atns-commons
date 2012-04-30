@@ -26,7 +26,6 @@ import static java.lang.System.currentTimeMillis;
     private final EventBus simpleEventBus = new SimpleEventBus();
     private final EventSerializer serializer;
     private HashMap<String, JavaScriptObject> windows = new HashMap<String, JavaScriptObject>();
-    private final String id = String.valueOf(currentTimeMillis());
 
     public static String currentLocation() {
         String location = location();
@@ -73,6 +72,7 @@ import static java.lang.System.currentTimeMillis;
     }-*/;
 
     @Override public void openWindow(String url, String name, String args) {
+        final String id = String.valueOf(currentTimeMillis());
         JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args);
         windows.put(id, wnd);
     }
