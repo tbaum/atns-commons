@@ -115,6 +115,15 @@ public class Table extends ComplexPanel {
             getElement().setAttribute("colspan", String.valueOf(i));
         }
 
+        public Cell rowspan(final int i) {
+            setRowspan(i);
+            return this;
+        }
+
+        public void setRowspan(int i) {
+            getElement().setAttribute("rowspan", String.valueOf(i));
+        }
+
         public String getStyle() {
             return style;
         }
