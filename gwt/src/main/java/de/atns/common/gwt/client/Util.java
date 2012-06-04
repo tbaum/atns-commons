@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
+import static com.google.gwt.i18n.client.NumberFormat.getCurrencyFormat;
+
 /**
  * @author tbaum
  * @since 13.06.2010
@@ -107,5 +109,9 @@ public class Util {
 
     public static DateBox dateBox(String pattern) {
         return new DateBox(new DatePicker(), null, new DateBox.DefaultFormat(DateTimeFormat.getFormat(pattern)));
+    }
+
+    public static String parseEur(Number value) {
+        return getCurrencyFormat("EUR").format(value);
     }
 }
