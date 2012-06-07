@@ -25,6 +25,7 @@ public abstract class FileUtil {
 
     public static File[] findFiles(final File dir, final String fileRegexp) {
         final File[] files = dir.listFiles(new FileFilter() {
+
             @Override public boolean accept(final File file) {
                 return file.getName().matches(fileRegexp);
             }
@@ -46,6 +47,12 @@ public abstract class FileUtil {
         }
 
         return p.toByteArray();
+    }
+
+    public static void writeFile(File file, byte[] data) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(data);
+        fileOutputStream.close();
     }
 
     public static Properties loadProperties(final File propertyFile) {
