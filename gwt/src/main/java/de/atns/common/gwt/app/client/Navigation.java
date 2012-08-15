@@ -3,14 +3,14 @@ package de.atns.common.gwt.app.client;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.inject.Inject;
+import de.atns.common.gwt.client.DefaultWidgetDisplay;
 
 /**
  * @author tbaum
  * @since 22.11.10
  */
-public abstract class Navigation extends Composite {
+public abstract class Navigation extends DefaultWidgetDisplay {
 
     @Inject private static PlaceController placeController;
 
