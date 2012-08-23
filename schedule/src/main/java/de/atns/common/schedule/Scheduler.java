@@ -21,6 +21,9 @@ import java.util.TimerTask;
 
     @Inject public Scheduler(final Set<ScheduledTask> tasks, final Injector injector) {
         LOG.debug("start scheduler");
+        for (ScheduledTask task : tasks) {
+            LOG.debug("... schedule: " + task);
+        }
         timer = new Timer(true);
         for (final ScheduledTask task : tasks) {
             final TimerTask timerTask = new TimerTask() {

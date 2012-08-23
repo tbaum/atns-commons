@@ -51,4 +51,8 @@ public class ScheduledTask {
     public ScheduledTask to(final Class<? extends Runnable> targetClass) {
         return new ScheduledTask(delay, period, targetClass);
     }
+
+    @Override public String toString() {
+        return "ScheduledTask{" + targetClass + ", delay=" + delay + ", period=" + period + "}";
+    }
 }
