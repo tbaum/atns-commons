@@ -13,4 +13,7 @@ public interface EmailRepository {
 
     @Finder(query = "from EmailMessage where sent is null AND error is null", returnAs = ArrayList.class)
     List<EmailMessage> getAllUnsentMails();
+
+    @Finder(query = "from EmailMessage where sent is not null AND error is null", returnAs = ArrayList.class)
+    List<EmailMessage> getAllSentMails();
 }
