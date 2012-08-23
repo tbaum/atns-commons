@@ -26,7 +26,6 @@ import java.util.TimerTask;
             final TimerTask timerTask = new TimerTask() {
                 @Override public void run() {
                     try {
-                        LOG.debug("starting " + task.getTargetClass());
                         injector.getInstance(task.getTargetClass()).run();
                     } catch (Exception e) {
                         LOG.error("exception for " + task.getTargetClass());
