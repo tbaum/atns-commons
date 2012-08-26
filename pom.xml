@@ -4,7 +4,7 @@
     <groupId>de.atns.common</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.2-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}:${project.packaging}:${project.version}</name>
 
     <parent>
@@ -12,6 +12,10 @@
         <artifactId>defaults</artifactId>
         <version>1.9.9-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <gwtVersion>2.5.0-rc1</gwtVersion>
+    </properties>
 
     <modules>
         <module>bc-printer</module>
@@ -35,6 +39,8 @@
         <module>web</module>
         <module>mail</module>
         <module>template</module>
+        <module>gwt-dispatch</module>
+        <module>gwt-presenter</module>
     </modules>
 
     <scm>
@@ -51,8 +57,41 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <version>${gwtVersion}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>net.customware.gwt.dispatch</groupId>
+                <artifactId>gwt-dispatch</artifactId>
+                <version>1.2.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.customware.gwt.presenter</groupId>
+                <artifactId>gwt-presenter</artifactId>
+                <version>1.1.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-servlet</artifactId>
+                <version>${gwtVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${gwtVersion}</version>
+            </dependency>
+
             <dependency>
                 <groupId>de.atns.common</groupId>
                 <artifactId>cache</artifactId>
