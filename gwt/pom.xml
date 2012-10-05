@@ -51,7 +51,7 @@
         </dependency>
 
         <dependency>
-            <groupId>net.customware.gwt.dispatch</groupId>
+            <groupId>de.atns.common.3rdparty.net.customware.gwt.dispatch</groupId>
             <artifactId>gwt-dispatch</artifactId>
         </dependency>
         <dependency>
