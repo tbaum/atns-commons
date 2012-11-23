@@ -22,7 +22,7 @@ public abstract class DefaultActionHandler<A extends Action<R>, R extends Result
 
     protected Class<A> getActionClass() {
         for (Method method : getClass().getDeclaredMethods()) {
-            if (method.getName().equals("executeInternal")) {
+            if (method.getName().equals("executeInternal") || method.getName().equals("executeInternal2")) {
                 final Class<?>[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes.length == 1) {
                     final Class<?> parameterType = parameterTypes[0];
