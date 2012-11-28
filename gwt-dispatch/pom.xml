@@ -2,7 +2,7 @@
     <parent>
         <groupId>de.atns.common</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.5-SNAPSHOT</version>
+        <version>2.0.6-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -10,9 +10,8 @@
     <artifactId>gwt-dispatch</artifactId>
     <packaging>jar</packaging>
     <version>2.0.6-SNAPSHOT</version>
-    <name>GWT Dispatch</name>
+    <name>${project.groupId}:${project.artifactId}:${project.packaging}:${project.version}</name>
     <url>http://code.google.com/p/gwt-dispatch</url>
-
 
     <properties>
         <gwtVersion>2.5.0</gwtVersion>
@@ -25,14 +24,12 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
-            <version>${gwtVersion}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
-            <version>${gwtVersion}</version>
             <scope>provided</scope>
         </dependency>
 
