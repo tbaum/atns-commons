@@ -12,9 +12,17 @@ import de.atns.common.gwt.client.Table;
 import java.util.ArrayList;
 
 public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColumn<FIELD>> {
+    private final SortColumn<FIELD> defaultOrder;
+
+    public HeaderGroup(SortColumn<FIELD> defaultOrder) {
+        this.defaultOrder = defaultOrder;
+        sortColumn = defaultOrder;
+    }
 
     private final ArrayList<SortHeading> headers = new ArrayList<SortHeading>();
-    private SortColumn<FIELD> sortColumn = new SortColumn<FIELD>(null, null);
+    private SortColumn<FIELD> sortColumn;
+
+
     private final ArrayList<ValueChangeHandler<SortColumn<FIELD>>> handlers =
             new ArrayList<ValueChangeHandler<SortColumn<FIELD>>>();
     private final Table.Row headerRow = Table.head();
@@ -63,10 +71,10 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         widget.addValueChangeHandler(new ValueChangeHandler<OrderField.Sort>() {
             @Override public void onValueChange(final ValueChangeEvent<OrderField.Sort> sortValueChangeEvent) {
                 for (final SortHeading sortHeading : headers) {
-                    if (sortHeading != widget)
+                    if (sortHeading != widget) {
                         sortHeading.setSort(OrderField.Sort.NONE);
+                    }
                 }
-
                 setValue(new SortColumn<FIELD>(field, sortValueChangeEvent.getValue()), true);
             }
         });
@@ -80,7 +88,7 @@ public class HeaderGroup<FIELD extends OrderField> implements HasValue<SortColum
         headerRow.clear();
         handlers.clear();
         headers.clear();
-        sortColumn = new SortColumn<FIELD>(null, null);
+        sortColumn = defaultOrder;
     }
 
     @Override public void setValue(final SortColumn<FIELD> sortColumn, final boolean b) {

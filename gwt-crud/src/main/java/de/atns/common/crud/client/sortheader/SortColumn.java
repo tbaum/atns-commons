@@ -5,7 +5,7 @@ public class SortColumn<FIELD extends OrderField> {
     public final FIELD field;
     public final OrderField.Sort value;
 
-    SortColumn(final FIELD field, final OrderField.Sort value) {
+    public SortColumn(final FIELD field, final OrderField.Sort value) {
         this.field = field;
         this.value = value;
     }
