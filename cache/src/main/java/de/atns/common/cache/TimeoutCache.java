@@ -60,11 +60,15 @@ public class TimeoutCache<K, V> {
 
     public void removeValue(final V v) {
         synchronized (this) {
+            Set<K> toRemove = new HashSet<K>();
             for (final Map.Entry<K, V> kvEntry : cache.entrySet()) {
                 if (kvEntry.getValue().equals(v)) {
-                    cache.remove(kvEntry.getKey());
-                    removeAccess(kvEntry.getKey());
+                    toRemove.add(kvEntry.getKey());
                 }
+            }
+            for (K k : toRemove) {
+                cache.remove(k);
+                removeAccess(k);
             }
             flushCache();
         }
