@@ -6,6 +6,7 @@ import org.gwttime.time.DateTime;
 import java.util.Date;
 
 import static org.gwttime.time.DateTimeConstants.SUNDAY;
+import static org.gwttime.time.DateTimeUtils.getInstantMillis;
 
 /**
  * @author mwolter
@@ -48,5 +49,13 @@ public class DateUtils {
 
     public static DateMidnight toDateMidnight(Date startDate) {
         return startDate != null ? new DateMidnight(startDate.getTime() - startDate.getTimezoneOffset() * 60000) : null;
+    }
+
+    public static DateMidnight longAsDateMidnight(Long aLong) {
+        return aLong != null ? new DateMidnight(aLong) : null;
+    }
+
+    public static Long dateMidnightAsLong(DateMidnight dateMidnight) {
+        return dateMidnight != null ? getInstantMillis(dateMidnight) : null;
     }
 }
