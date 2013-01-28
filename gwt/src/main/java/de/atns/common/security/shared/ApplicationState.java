@@ -8,6 +8,7 @@ import de.atns.common.security.SecurityRole;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.event.ServerStatusEventHandler;
+import de.atns.common.security.client.event.UserUpdateEvent;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -40,6 +41,7 @@ public class ApplicationState {
 
             @Override public void onSuccess(final UserPresentation user) {
                 update(user);
+                eventBus.fireEvent(new UserUpdateEvent(user));
             }
         });
     }
