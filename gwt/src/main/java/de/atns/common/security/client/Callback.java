@@ -45,6 +45,14 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         this.display.startProcessing();
     }
 
+    private native static void reload() /*-{
+        $wnd.location.reload();
+    }-*/;
+
+    private native static void forcedReload() /*-{
+        $wnd.location.reload(true);
+    }-*/;
+
     @Override public void onFailure(final Throwable originalCaught) {
         if (originalCaught instanceof SecurityException) {
             final String message = originalCaught.getMessage();
@@ -57,12 +65,19 @@ public abstract class Callback<T> implements AsyncCallback<T> {
                 display.showError(originalCaught.toString());
             }
         } else {
-            LOG.log(WARNING, "check session in callback ", originalCaught);
-            final String message = originalCaught.getMessage();
-            if (message != null) {
-                display.showError(message);
-            } else {
-                display.showError(originalCaught.toString());
+            LOG.log(WARNING, "check session in callback 1", originalCaught);
+            String message = originalCaught.getMessage();
+            if (message == null) {
+                message = originalCaught.toString();
+            }
+            display.showError(message);
+            if ((message != null && message.startsWith("505")) || originalCaught.toString().startsWith("505")) {
+                LOG.log(WARNING, "Trigger refresh");
+                try {
+                    forcedReload();
+                } catch (Exception ignored) {
+                }
+                reload();
             }
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
                 @Override public void onFailure(final Throwable caught) {
