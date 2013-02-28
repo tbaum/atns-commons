@@ -2,7 +2,7 @@ package de.atns.common.security.benutzer;
 
 import ch.lambdaj.Lambda;
 import ch.lambdaj.function.convert.Converter;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 import de.atns.common.security.benutzer.server.RoleServerConverter;
 import de.atns.common.security.client.model.UserPresentation;
 import de.atns.common.security.model.Benutzer;

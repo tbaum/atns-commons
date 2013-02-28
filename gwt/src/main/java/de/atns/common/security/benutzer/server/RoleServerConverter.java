@@ -3,7 +3,7 @@ package de.atns.common.security.benutzer.server;
 import ch.lambdaj.Lambda;
 import ch.lambdaj.function.convert.Converter;
 import de.atns.common.security.SecurityRole;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 
 import java.util.HashMap;
 import java.util.HashSet;

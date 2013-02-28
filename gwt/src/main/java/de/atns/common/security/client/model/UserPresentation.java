@@ -1,14 +1,13 @@
 package de.atns.common.security.client.model;
 
-import de.atns.common.security.SecurityRole;
-import de.atns.common.security.SecurityRolePresentation;
-import net.customware.gwt.dispatch.shared.Result;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+
+import de.atns.common.security.SecurityRole;
+import net.customware.gwt.dispatch.shared.Result;
 
 /**
  * @author tbaum

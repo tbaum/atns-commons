@@ -19,7 +19,7 @@ import de.atns.common.gwt.client.window.MasterWindowEventBus;
 import de.atns.common.gwt.client.window.PopupWindowEventBus;
 import de.atns.common.gwt.client.window.TransportAware;
 import de.atns.common.security.RoleConverter;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 import de.atns.common.security.shared.ApplicationState;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.client.gin.StandardDispatchModule;

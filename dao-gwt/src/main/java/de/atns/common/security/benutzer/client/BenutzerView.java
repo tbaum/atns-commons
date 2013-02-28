@@ -11,7 +11,7 @@ import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.Table;
 import de.atns.common.gwt.client.model.StandardFilter;
 import de.atns.common.security.RoleConverter;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 import de.atns.common.security.client.model.UserPresentation;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;

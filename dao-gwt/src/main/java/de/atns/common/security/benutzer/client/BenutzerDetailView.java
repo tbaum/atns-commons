@@ -12,7 +12,7 @@ import de.atns.common.gwt.client.ExtendedFlexTable;
 import de.atns.common.gwt.client.FieldSetPanel;
 import de.atns.common.security.RoleConverter;
 import de.atns.common.security.SecurityRole;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 import de.atns.common.security.client.model.UserPresentation;
 
 import java.util.HashMap;

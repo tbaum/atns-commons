@@ -7,7 +7,7 @@ import com.google.inject.persist.Transactional;
 import de.atns.common.gwt.server.DefaultActionHandler;
 import de.atns.common.security.Secured;
 import de.atns.common.security.SecurityRole;
-import de.atns.common.security.SecurityRolePresentation;
+import de.atns.common.security.client.model.SecurityRolePresentation;
 import de.atns.common.security.benutzer.client.action.BenutzerUpdate;
 import de.atns.common.security.client.model.UserAdminRole;
 import de.atns.common.security.client.model.UserPresentation;
