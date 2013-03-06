@@ -1,16 +1,22 @@
 package de.atns.common.security;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
+import java.io.IOException;
+import java.util.UUID;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.UUID;
 
 import static java.util.UUID.fromString;
 
@@ -43,12 +49,14 @@ import static java.util.UUID.fromString;
     @Override public void doFilter(final ServletRequest request, final ServletResponse response,
                                    final FilterChain chain) throws IOException, ServletException {
         securityScope.enter();
+        UUID basicAuth = null;
         try {
             if (request instanceof HttpServletRequest) {
                 currentRequest.set((HttpServletRequest) request);
                 currentResponse.set((HttpServletResponse) response);
                 try {
                     authFromHeader((HttpServletRequest) request);
+                    basicAuth = authBasicHeader((HttpServletRequest) request);
                     authFromParameter((HttpServletRequest) request);
                     authFromSession();
                 } catch (IllegalArgumentException e) {
@@ -73,6 +81,9 @@ import static java.util.UUID.fromString;
                 } else throw new ServletException(e);
             }
         } finally {
+            if (basicAuth != null) {
+                securityService.logout();
+            }
             currentRequest.remove();
             currentResponse.remove();
             securityScope.exit();
@@ -87,6 +98,15 @@ import static java.util.UUID.fromString;
         if (uuid != null && !uuid.isEmpty()) {
             securityService.authenticate(fromString(uuid.replaceAll("[^0-9a-z-]", "")));
         }
+    }
+
+    private UUID authBasicHeader(final HttpServletRequest request) {
+        final String auth = request.getHeader("Authorization");
+        if (auth != null && auth.toLowerCase().indexOf("basic ") == 0) {
+            String[] u = new String(DatatypeConverter.parseBase64Binary(auth.substring(6))).split(":");
+            return securityService.login(u[0], u[1]);
+        }
+        return null;
     }
 
     private void authFromParameter(final HttpServletRequest request) {
