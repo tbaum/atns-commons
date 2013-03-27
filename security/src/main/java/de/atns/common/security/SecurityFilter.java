@@ -1,22 +1,17 @@
 package de.atns.common.security;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.util.UUID;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import static java.util.UUID.fromString;
 
@@ -27,20 +22,20 @@ import static java.util.UUID.fromString;
 @Singleton public class SecurityFilter implements Filter {
 
     public static final String HEADER_NAME = "X-Authorization";
-
     private static final Log LOG = LogFactory.getLog(SecurityFilter.class);
     private static final String SESSION_UUID = "_SECURITY_UUID";
     private static final String PARAMETER_NAME = "_SECURITY_UUID";
-
     private final ThreadLocal<HttpServletRequest> currentRequest = new ThreadLocal<HttpServletRequest>();
     private final ThreadLocal<HttpServletResponse> currentResponse = new ThreadLocal<HttpServletResponse>();
-
     private final SecurityScope securityScope;
     private final SecurityService securityService;
+    private final RoleConverter roleConverter;
 
-    @Inject public SecurityFilter(final SecurityScope securityScope, final SecurityService securityService) {
+    @Inject
+    public SecurityFilter(final SecurityScope securityScope, SecurityService securityService, RoleConverter roleConverter) {
         this.securityScope = securityScope;
         this.securityService = securityService;
+        this.roleConverter = roleConverter;
     }
 
     @Override public void init(final FilterConfig filterConfig) throws ServletException {
@@ -59,6 +54,13 @@ import static java.util.UUID.fromString;
                     basicAuth = authBasicHeader((HttpServletRequest) request);
                     authFromParameter((HttpServletRequest) request);
                     authFromSession();
+                    SecurityUser currentUser = securityService.currentUser();
+                    if (currentUser != null) {
+                        ((HttpServletResponse) response).addHeader("X-Authorized-User", currentUser.getLogin());
+                        for (Class<? extends SecurityRole> role : currentUser.getRoles()) {
+                            ((HttpServletResponse) response).addHeader("X-Authorized-Role", roleConverter.toString(role));
+                        }
+                    }
                 } catch (IllegalArgumentException e) {
                     ((HttpServletResponse) response).setStatus(401);
                     return;
