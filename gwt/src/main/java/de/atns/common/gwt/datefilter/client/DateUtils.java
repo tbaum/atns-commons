@@ -36,11 +36,7 @@ public class DateUtils {
     }
 
     public static DateMidnight getLastDayOfWeek(DateMidnight date) {
-        return date.getDayOfWeek() == SUNDAY ? date : getNextDayInWeek(date, SUNDAY);
-    }
-
-    public static DateMidnight getNextDayInWeek(DateMidnight start, int weekday) {
-        return start.plusDays(((weekday - start.getDayOfWeek() + 6) % 7) + 1);
+        return date.plusDays(SUNDAY - date.getDayOfWeek());  // MONDAY == 1 .. SUNDAY == 7
     }
 
     public static DateMidnight getFirstDayOfWeek(DateMidnight date) {
