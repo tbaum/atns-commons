@@ -72,8 +72,8 @@ import static java.lang.System.currentTimeMillis;
     }-*/;
 
     @Override public void openWindow(String url, String name, String args) {
-        String id = (name + "_" + currentTimeMillis()).replaceAll("[^a-zA-Z0-9_]+", "_");
-        JavaScriptObject wnd = open(this, currentLocation() + url, id, args);
+        final String id = String.valueOf(currentTimeMillis());
+        JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args);
         windows.put(id, wnd);
     }
 
@@ -122,9 +122,10 @@ import static java.lang.System.currentTimeMillis;
         //        }
     }
 
-    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String args) /*-{
+    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
+                                         String args) /*-{
         var newWindow = $wnd.open(url, name, args)
-        newWindow._myid = name;
+        newWindow._myid = myid;
 
         try {
 //            netscape.security.PrivilegeManager.enablePrivilege('UniversalBrowserWrite');
