@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.4/distro-source/core/src/gwt-module.dtd">
+<module>
+    <inherits name='com.google.gwt.inject.Inject'/>
+    <inherits name="net.customware.gwt.dispatch.Dispatch"/>
+    <inherits name="com.google.gwt.activity.Activity"/>
+    <inherits name="com.google.web.bindery.requestfactory.RequestFactory"/>
+    <inherits name="com.google.gwt.resources.Resources"/>
+    <inherits name="org.gwttime.Time"/>
+    <inherits name="de.atns.common.security.Security"/>
+    <!--<inherits name="com.google.gwt.user.theme.clean.Clean"/>-->
+    <!--<stylesheet src="atns-gwt.css"/>-->
+    <inherits name="de.atns.common.gwt.Base64"/>
+
+    <source path="client"/>
+</module>

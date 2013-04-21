@@ -1,0 +1,47 @@
+.benutzer table, .benutzer .pagination {
+    width: 961px;
+}
+
+.benutzer .cell0 {
+    width: 75px;
+}
+
+.benutzer .cell1 {
+    width: 230px;
+}
+
+.benutzer .cell2 {
+    width: 150px;
+}
+
+.benutzer .cell3 {
+    width: 200px;
+}
+
+.benutzer .cell4 {
+    width: 100px;
+}
+
+.benutzer .cell5 {
+    width: 100px;
+}
+
+.benutzer .cell6 {
+    width: 75px;
+}
+
+.benutzer .suche .cell0 {
+    width: 40px;
+}
+
+.benutzer .suche .cell1 {
+    width: 160px;
+}
+
+.benutzer .suche .cell2 {
+    width: 425px;
+    border-left: none;
+    float: none;
+    padding: 0;
+    text-align: left;
+}

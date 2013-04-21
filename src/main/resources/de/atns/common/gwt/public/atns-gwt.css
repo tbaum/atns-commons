@@ -1,0 +1,19 @@
+.gwt-Button {
+    padding: 0 6px;
+}
+
+.gwt-MenuBar-horizontal {
+    background-position: 0 -2077px;
+    /*url("gwt/clean/images/hborder.png") repeat-x scroll 0 -2077px transparent;
+    */
+}
+
+.gwt-MenuBar-horizontal .gwt-MenuItem {
+    padding: 0 10px;
+}
+
+.gwt-TextBox, .gwt-DateBox, .gwt-ListBox {
+    padding: 2px;
+    font-size: small;
+    font-family: sans-serif;
+}
