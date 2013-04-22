@@ -33,7 +33,7 @@ import static de.atns.common.security.client.event.ServerStatusEvent.loggedin;
 @Singleton
 public class ApplicationPresenter extends WidgetPresenter<ApplicationPresenter.Display> {
 
-    private static final int CHECK_INTERVAL = 15000;
+    private static final int CHECK_INTERVAL = 60000;
     private final Place defaultPlace;
     private final Logger LOG = Logger.getLogger("ApplicationPresenter");
 

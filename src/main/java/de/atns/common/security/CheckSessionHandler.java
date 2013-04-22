@@ -1,6 +1,7 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
+import com.google.inject.extensions.security.SecurityFilter;
 import com.google.inject.extensions.security.SecurityService;
 import com.google.inject.extensions.security.SecurityUser;
 import de.atns.common.gwt.server.DefaultActionHandler;
@@ -18,9 +19,11 @@ import static de.atns.common.security.client.model.UserPresentation.nameToken;
 public class CheckSessionHandler extends DefaultActionHandler<CheckSession, UserPresentation> {
 
     private final SecurityService securityService;
+    private final SecurityFilter securityFilter;
 
-    @Inject public CheckSessionHandler(SecurityService securityService) {
+    @Inject public CheckSessionHandler(SecurityService securityService, SecurityFilter securityFilter) {
         this.securityService = securityService;
+        this.securityFilter = securityFilter;
     }
 
     @Override public final UserPresentation executeInternal(final CheckSession action) {
@@ -29,7 +32,11 @@ public class CheckSessionHandler extends DefaultActionHandler<CheckSession, User
 
     public UserPresentation checkSession() {
         final SecurityUser user = securityService.currentUser();
-        return user == null ? invalidUser() : nameToken(user.getToken(), user.getLogin(), convert(user.getRoles()));
+
+        if (user == null) return invalidUser();
+
+        securityFilter.setSessionToken(user.getToken());
+        return nameToken(user.getToken(), user.getLogin(), convert(user.getRoles()));
     }
 }
 

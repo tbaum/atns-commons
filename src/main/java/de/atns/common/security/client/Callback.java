@@ -1,6 +1,7 @@
 package de.atns.common.security.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.extensions.security.SecurityException;
@@ -8,12 +9,14 @@ import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.WidgetDisplay;
 import de.atns.common.security.client.action.CheckSession;
+import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static de.atns.common.security.client.event.ServerStatusEvent.loggedout;
 import static de.atns.common.security.client.event.ServerStatusEvent.toServerStatus;
 import static java.util.logging.Level.WARNING;
 
@@ -51,16 +54,18 @@ public abstract class Callback<T> implements AsyncCallback<T> {
     }-*/;
 
     @Override public void onFailure(final Throwable originalCaught) {
-        if (originalCaught instanceof SecurityException) {
-            final String message = originalCaught.getMessage();
-            LOG.log(WARNING, "check session in callback '" + message + "'");
-            eventBus.get().fireEvent(toServerStatus(originalCaught));
-            display.stopProcessing();
-            if (message != null) {
-                display.showError(message);
+        if (originalCaught instanceof StatusCodeException) {
+            StatusCodeException caught = (StatusCodeException) originalCaught;
+            int statusCode = caught.getStatusCode();
+            if (statusCode == 401 || statusCode == 403) {
+                authFailure(originalCaught, loggedout(), originalCaught.getMessage());
+            } else if (statusCode == 505) {
+                triggerRefresh();
             } else {
-                display.showError(originalCaught.toString());
+                display.showError(originalCaught.getMessage());
             }
+        } else if (originalCaught instanceof SecurityException) {
+            authFailure(originalCaught, toServerStatus(originalCaught), originalCaught.getMessage());
         } else {
             LOG.log(WARNING, "check session in callback 1", originalCaught);
             String message = originalCaught.getMessage();
@@ -69,12 +74,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
             }
             display.showError(message);
             if ((message != null && message.startsWith("505")) || originalCaught.toString().startsWith("505")) {
-                LOG.log(WARNING, "Trigger refresh");
-                try {
-                    forcedReload();
-                } catch (Exception ignored) {
-                }
-                reload();
+                triggerRefresh();
             }
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
                 @Override public void onFailure(final Throwable caught) {
@@ -88,6 +88,26 @@ public abstract class Callback<T> implements AsyncCallback<T> {
                     display.stopProcessing();
                 }
             });
+        }
+    }
+
+    private void triggerRefresh() {
+        LOG.log(WARNING, "Trigger refresh");
+        try {
+            forcedReload();
+        } catch (Exception ignored) {
+        }
+        reload();
+    }
+
+    private void authFailure(Throwable originalCaught, ServerStatusEvent serverStatusEvent, String message) {
+        LOG.log(WARNING, "check session in callback '" + message + "'");
+        eventBus.get().fireEvent(serverStatusEvent);
+        display.stopProcessing();
+        if (message != null) {
+            display.showError(message);
+        } else {
+            display.showError(originalCaught.toString());
         }
     }
 
