@@ -1,6 +1,7 @@
 package de.atns.common.security;
 
 import com.google.inject.Inject;
+import com.google.inject.extensions.security.SecurityFilter;
 import com.google.inject.extensions.security.SecurityService;
 import com.google.inject.extensions.security.SecurityUser;
 import com.google.inject.extensions.security.UserService;
@@ -20,12 +21,14 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
     private final CheckSessionHandler checkSessionHandler;
     private final SecurityService securityService;
     private final UserService userService;
+    private final SecurityFilter securityFilter;
 
     @Inject public UserLoginHandler(CheckSessionHandler checkSessionHandler, SecurityService securityService,
-                                    UserService userService) {
+                                    UserService userService, SecurityFilter securityFilter) {
         this.checkSessionHandler = checkSessionHandler;
         this.securityService = securityService;
         this.userService = userService;
+        this.securityFilter = securityFilter;
     }
 
     @Override public final UserPresentation executeInternal(final UserLogin action) {
@@ -36,7 +39,7 @@ public class UserLoginHandler extends DefaultActionHandler<UserLogin, UserPresen
         if (token == null) {
             throw new RuntimeException("invalid login");
         }
-
+        securityFilter.setSessionToken(token);
         return checkSessionHandler.checkSession();
     }
 }
