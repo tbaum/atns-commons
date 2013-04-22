@@ -4,13 +4,13 @@ import com.google.inject.extensions.security.Secured;
 import com.google.inject.extensions.security.SecurityRole;
 import com.google.inject.extensions.security.SecurityUser;
 import de.atns.common.dao.BaseObject;
-import de.atns.common.security.benutzer.server.RoleServerConverter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.google.inject.extensions.security.ClassHelper.resolveAll;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.InheritanceType.JOINED;
 
@@ -104,7 +104,7 @@ public class Benutzer extends BaseObject implements SecurityUser {
 
         for (final Class<? extends SecurityRole> myRole : roles) {
             for (final Class<? extends SecurityRole> s : required) {
-                if (RoleServerConverter.resolveAll(myRole).contains(s)) {
+                if (resolveAll(myRole).contains(s)) {
                     return true;
                 }
             }
