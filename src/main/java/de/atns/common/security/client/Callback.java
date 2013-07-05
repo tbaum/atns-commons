@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.extensions.security.NotLogginException;
 import com.google.inject.extensions.security.SecurityException;
 import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
@@ -12,6 +13,7 @@ import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
 import net.customware.gwt.dispatch.client.DispatchAsync;
+import net.customware.gwt.dispatch.shared.ServiceException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +69,13 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         } else if (originalCaught instanceof SecurityException) {
             authFailure(originalCaught, toServerStatus(originalCaught), originalCaught.getMessage());
         } else {
+            if (originalCaught instanceof ServiceException) {
+                ServiceException caught = (ServiceException) originalCaught;
+                if (caught.getCauseClassname().equals(NotLogginException.class.getName())) {
+                    authFailure(originalCaught, loggedout(), caught.getMessage());
+                    return;
+                }
+            }
             LOG.log(WARNING, "check session in callback 1", originalCaught);
             String message = originalCaught.getMessage();
             if (message == null) {
