@@ -39,7 +39,7 @@ public abstract class ApplicationActivityMapper implements ActivityMapper, Modul
         if (getLoadedCount() == moduleLoaders.size()) {
             handlerRegistration.removeHandler();
             LOG.info("fire ApplicationReadyEvent()");
-            sharedServices.eventBus().fireEvent(new ApplicationReadyEvent());
+            sharedServices.eventBus().fireEvent(new ApplicationModulLoadedEvent());
         }
     }
 
