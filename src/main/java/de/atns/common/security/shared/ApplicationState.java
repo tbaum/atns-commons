@@ -30,6 +30,7 @@ public class ApplicationState {
                 final ServerStatusEvent.ServerStatus status = event.getStatus();
                 if (status == LOGGED_IN) {
                     user = event.getUser();
+                    eventBus.fireEvent(new UserUpdateEvent(user));
                 } else if (status == LOGGED_OUT) {
                     user = null;
                 }

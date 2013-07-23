@@ -40,7 +40,7 @@ public class BenutzerView extends DefaultWidgetDisplay implements BenutzerPresen
         this.roleConverter = roleConverter;
 
         final FlowPanel panel = extendedFlowPanel(5)
-                .add(getErrorPanel()).add(getLoader()).newLine()
+                .add(getErrorPanel()).newLine()
                 .add("Benutzer:").addStyle("heading").newLine()
                 .add(neu).newLine()
                 .add(flowPanel("benutzer",

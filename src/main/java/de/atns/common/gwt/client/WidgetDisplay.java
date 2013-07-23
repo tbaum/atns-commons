@@ -15,8 +15,4 @@ public interface WidgetDisplay extends IsWidget {
     void setErrorVisible(boolean visible);
 
     void showError(String text);
-
-    void startProcessing();
-
-    void stopProcessing();
 }

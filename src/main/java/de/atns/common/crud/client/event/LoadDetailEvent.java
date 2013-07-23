@@ -33,7 +33,6 @@ public class LoadDetailEvent<E extends IsSerializable> extends GwtEvent<LoadDeta
                                                             final Type<LoadDetailEventHandler<T>> type,
                                                             final Object source) {
         eventBus.get().fireEvent(new LoadDetailEvent<T>(result, type, source));
-        display.stopProcessing();
     }
 
     public LoadDetailEvent(final E result, final Type<LoadDetailEventHandler<E>> type, final Object source) {

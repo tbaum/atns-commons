@@ -33,7 +33,6 @@ public class LoadCreateEvent<E extends IsSerializable> extends GwtEvent<LoadCrea
                                                             final Type<LoadCreateEventHandler<T>> type,
                                                             final Object source) {
         eventBus.get().fireEvent(new LoadCreateEvent<T>(result, type, source));
-        display.stopProcessing();
     }
 
     public LoadCreateEvent(final E result, final Type<LoadCreateEventHandler<E>> type, final Object source) {

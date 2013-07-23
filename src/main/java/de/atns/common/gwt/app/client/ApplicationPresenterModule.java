@@ -12,6 +12,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.extensions.security.RoleConverter;
 import com.google.web.bindery.event.shared.EventBus;
+import de.atns.common.gwt.client.Loader;
 import de.atns.common.gwt.client.gin.AbstractPresenterModule;
 import de.atns.common.gwt.client.gin.AppShell;
 import de.atns.common.gwt.client.gin.SharedServices;
@@ -100,6 +101,7 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
     @Provides @Singleton SharedServices getSharedServices(final DispatchAsync dispatcher, final EventBus eventbus,
                                                           final ApplicationShell appShell,
                                                           final RoleConverter roleConverter,
+                                                          final Loader loader,
                                                           final ApplicationState applicationState) {
         return new SharedServices() {
             @Override public DispatchAsync dispatcher() {
@@ -116,6 +118,10 @@ public abstract class ApplicationPresenterModule extends AbstractPresenterModule
 
             @Override public AppShell appShell() {
                 return appShell;
+            }
+
+            @Override public Loader loader() {
+                return loader;
             }
 
             @Override public RoleConverter roleConverter() {

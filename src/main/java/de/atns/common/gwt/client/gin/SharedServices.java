@@ -2,6 +2,7 @@ package de.atns.common.gwt.client.gin;
 
 import com.google.inject.extensions.security.RoleConverter;
 import com.google.web.bindery.event.shared.EventBus;
+import de.atns.common.gwt.client.Loader;
 import de.atns.common.security.shared.ApplicationState;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -12,6 +13,8 @@ import net.customware.gwt.dispatch.client.DispatchAsync;
 public interface SharedServices {
 
     AppShell appShell();
+
+    Loader loader();
 
     DispatchAsync dispatcher();
 

@@ -11,6 +11,10 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
 import de.atns.common.gwt.client.DialogBoxDisplay;
 import de.atns.common.gwt.client.DialogBoxPresenter;
+import de.atns.common.gwt.client.event.StartLoadingEvent;
+import de.atns.common.gwt.client.event.StartLoadingEventHandler;
+import de.atns.common.gwt.client.event.StopLoadingEvent;
+import de.atns.common.gwt.client.event.StopLoadingEventHandler;
 import de.atns.common.gwt.client.gin.PlacePresenter;
 import de.atns.common.security.client.Callback;
 import de.atns.common.security.client.CryptoUtil;
@@ -19,6 +23,7 @@ import de.atns.common.security.client.action.UserLogout;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
 
+import java.lang.Override;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +58,18 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
         registerHandler(display.addLoginClick(new ClickHandler() {
             @Override public void onClick(final ClickEvent clickEvent) {
                 doLogin(display.setUsername(), display.getPassword());
+            }
+        }));
+
+        registerHandler(eventBus.addHandler(StartLoadingEvent.TYPE, new StartLoadingEventHandler() {
+            @Override public void onStartLoading(StartLoadingEvent startLoadingEvent) {
+                display.startProcessing();
+            }
+        }));
+
+        registerHandler(eventBus.addHandler(StopLoadingEvent.TYPE, new StopLoadingEventHandler() {
+            @Override public void onStopLoading(StopLoadingEvent stopLoadingEvent) {
+                display.stopProcessing();
             }
         }));
 
@@ -108,5 +125,9 @@ public class LoginPresenter extends DialogBoxPresenter<LoginPresenter.Display> i
         String setUsername();
 
         void getUsername(String username);
+
+        void startProcessing();
+
+        void stopProcessing();
     }
 }

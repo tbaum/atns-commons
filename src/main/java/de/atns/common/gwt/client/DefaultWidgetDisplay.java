@@ -1,11 +1,11 @@
 package de.atns.common.gwt.client;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.*;
-
-import static com.google.gwt.dom.client.Style.BorderStyle.SOLID;
-import static com.google.gwt.dom.client.Style.Position.ABSOLUTE;
-import static com.google.gwt.dom.client.Style.Unit.PX;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 /**
  * @author tbaum
@@ -15,33 +15,15 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
 
     private final FlowPanel errorPanel = new FlowPanel();
     private final Label errorLabel = GwtUtil.createLabel("", "errorPanelText");
-    private final FlowPanel loader = GwtUtil.flowPanel(new Image("spinner.gif"));
 
     protected DefaultWidgetDisplay() {
-        final Style style = loader.getElement().getStyle();
-        style.setPosition(ABSOLUTE);
-        style.setTop(30, PX);
-        style.setRight(20, PX);
-        style.setBackgroundColor("#ffffff");
-        style.setBorderWidth(2, PX);
-        style.setBorderStyle(SOLID);
-        style.setBorderColor("black");
-        style.setPadding(4, PX);
-        loader.setVisible(false);
         errorPanel.addStyleName("textErrorBox");
-        // final Image w = new Image(IMAGES.error());
-        // w.getElement().getStyle().setProperty("display", "table-cell");
-        // errorPanel.add(w);
         errorPanel.add(errorLabel);
         errorPanel.setVisible(false);
     }
 
     public FlowPanel getErrorPanel() {
         return errorPanel;
-    }
-
-    public FlowPanel getLoader() {
-        return loader;
     }
 
     @Override public Widget asWidget() {
@@ -59,13 +41,5 @@ public abstract class DefaultWidgetDisplay extends Composite implements WidgetDi
     @Override public void showError(final String text) {
         setErrorVisible(true);
         errorLabel.setText(text);
-    }
-
-    @Override public void startProcessing() {
-        loader.setVisible(true);
-    }
-
-    @Override public void stopProcessing() {
-        loader.setVisible(false);
     }
 }

@@ -9,6 +9,7 @@ import com.google.inject.extensions.security.SecurityException;
 import com.google.web.bindery.event.shared.EventBus;
 import de.atns.common.gwt.client.DefaultWidgetDisplay;
 import de.atns.common.gwt.client.WidgetDisplay;
+import de.atns.common.gwt.client.gin.SharedServices;
 import de.atns.common.security.client.action.CheckSession;
 import de.atns.common.security.client.event.ServerStatusEvent;
 import de.atns.common.security.client.model.UserPresentation;
@@ -36,6 +37,8 @@ public abstract class Callback<T> implements AsyncCallback<T> {
     };
     @Inject private static Provider<DispatchAsync> dispatcher;
     @Inject private static Provider<EventBus> eventBus;
+    @Inject private static Provider<SharedServices> sharedServices;
+
     private final WidgetDisplay display;
 
     public Callback() {
@@ -44,7 +47,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
     public Callback(final WidgetDisplay display) {
         this.display = display;
-        this.display.startProcessing();
+        startProcessing();
     }
 
     private native static void reload() /*-{
@@ -55,7 +58,12 @@ public abstract class Callback<T> implements AsyncCallback<T> {
         $wnd.location.reload(true);
     }-*/;
 
+    private void startProcessing() {
+        sharedServices.get().loader().counter();
+    }
+
     @Override public void onFailure(final Throwable originalCaught) {
+        checkStopProcessing();
         if (originalCaught instanceof StatusCodeException) {
             StatusCodeException caught = (StatusCodeException) originalCaught;
             int statusCode = caught.getStatusCode();
@@ -85,19 +93,24 @@ public abstract class Callback<T> implements AsyncCallback<T> {
             if ((message != null && message.startsWith("505")) || originalCaught.toString().startsWith("505")) {
                 triggerRefresh();
             }
+            startProcessing();
             dispatcher.get().execute(new CheckSession(), new AsyncCallback<UserPresentation>() {
                 @Override public void onFailure(final Throwable caught) {
                     LOG.log(WARNING, "failed-checksession", caught);
                     eventBus.get().fireEvent(toServerStatus(caught));
-                    display.stopProcessing();
+                    checkStopProcessing();
                 }
 
                 @Override public void onSuccess(final UserPresentation result) {
                     LOG.log(Level.FINE, "success-checksession");
-                    display.stopProcessing();
+                    checkStopProcessing();
                 }
             });
         }
+    }
+
+    private void checkStopProcessing() {
+        sharedServices.get().loader().decounter();
     }
 
     private void triggerRefresh() {
@@ -112,7 +125,6 @@ public abstract class Callback<T> implements AsyncCallback<T> {
     private void authFailure(Throwable originalCaught, ServerStatusEvent serverStatusEvent, String message) {
         LOG.log(WARNING, "check session in callback '" + message + "'");
         eventBus.get().fireEvent(serverStatusEvent);
-        display.stopProcessing();
         if (message != null) {
             display.showError(message);
         } else {
@@ -126,7 +138,7 @@ public abstract class Callback<T> implements AsyncCallback<T> {
 
         callback(result);
         display.setErrorVisible(false);
-        display.stopProcessing();
+        checkStopProcessing();
     }
 
     public abstract void callback(T result);
