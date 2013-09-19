@@ -20,16 +20,18 @@ import java.util.TimerTask;
     private Timer timer;
 
     @Inject public Scheduler(final Set<ScheduledTask> tasks, final Injector injector) {
-        LOG.debug("start scheduler");
         for (ScheduledTask task : tasks) {
-            LOG.debug("... schedule: " + task);
+            LOG.debug("schedule {}", task);
         }
         timer = new Timer(true);
         for (final ScheduledTask task : tasks) {
             final TimerTask timerTask = new TimerTask() {
                 @Override public void run() {
+                    LOG.debug("start {}", task);
                     try {
                         injector.getInstance(task.getTargetClass()).run();
+                        LOG.debug("finsh {}", task);
+
                     } catch (Exception e) {
                         LOG.error("exception for " + task.getTargetClass());
                         LOG.error(e.getMessage(), e);
