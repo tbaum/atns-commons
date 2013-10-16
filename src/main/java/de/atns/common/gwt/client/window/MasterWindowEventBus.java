@@ -73,7 +73,8 @@ import static java.lang.System.currentTimeMillis;
 
     @Override public void openWindow(String url, String name, String args) {
         final String id = String.valueOf(currentTimeMillis());
-        JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args);
+        boolean isWindows = Window.Navigator.getUserAgent().toLowerCase().contains("msie");
+        JavaScriptObject wnd = open(this, currentLocation() + url, (name + "_" + id).replaceAll(":", "_"), id, args, isWindows);
         windows.put(id, wnd);
     }
 
@@ -122,9 +123,8 @@ import static java.lang.System.currentTimeMillis;
         //        }
     }
 
-    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid,
-                                         String args) /*-{
-        var newWindow = $wnd.open(url, name, args)
+    private native JavaScriptObject open(MasterWindowEventBus eventbus, String url, String name, String myid, String args, boolean isWindows) /*-{
+        var newWindow = $wnd.open(url, isWindows ? '' : name, args);
         newWindow._myid = myid;
 
         try {
