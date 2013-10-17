@@ -3,7 +3,7 @@
     <groupId>de.atns.common</groupId>
     <artifactId>atns-commons</artifactId>
     <packaging>jar</packaging>
-    <version>2.2.2-SNAPSHOT</version>
+    <version>2.2.2</version>
 
     <build>
         <plugins>
